@@ -1,15 +1,21 @@
 import React from "react";
 
 function Chat(props) {
+  function clearChat() {
+    // TODO
+    // for (let i = eventsBox.childNodes.length - 1; i >= 0; i--) {
+    //   eventsBox.removeChild(eventsBox.childNodes[0]);
+    // }
+  }
+
   if (props.gameMode) {
     return (
-      <div class="col" id="chat-wrapper" style={{ display: "none" }}>
-        <div class="card border-primary shadow">
-          <div class="card-body">
-            <div class="progress mb-2" style={{ height: "2.5em" }}>
+      <div className="col">
+        <div className="card border-primary shadow">
+          <div className="card-body">
+            <div className="progress mb-2" style={{ height: "2.5em" }}>
               <div
-                class="progress-bar bg-info text-dark"
-                id="progress-bar"
+                className="progress-bar bg-info text-dark"
                 role="progressbar"
                 style={{ width: "100%" }}
                 aria-valuenow="100"
@@ -19,28 +25,23 @@ function Chat(props) {
                 ⏱ 5:00
               </div>
             </div>
-            <div class="row g-0">
-              <div
-                id="chat-box"
-                class="chat-box card bg-light border-bottom-0 rounded-0 rounded-top pt-3"
-              >
-                <ul id="events" class="list"></ul>
+            <div className="row g-0">
+              <div className="chat-box card bg-light border-bottom-0 rounded-0 rounded-top pt-3">
+                <ul className="list"></ul>
               </div>
-              <form id="talk-form">
-                <div class="input-group">
+              <form>
+                <div className="input-group">
                   <input
                     type="text"
-                    id="chat-input"
-                    class="form-control border-rounded-bottom-left"
+                    className="form-control border-rounded-bottom-left"
                     placeholder="Message..."
-                    autocomplete="off"
+                    autoComplete="off"
                     required
-                    maxlength="64"
+                    maxLength="64"
                   />
                   <button
                     type="submit"
-                    id="chat-button"
-                    class="btn btn-primary border-rounded-bottom-right"
+                    className="btn btn-primary border-rounded-bottom-right"
                   >
                     ✉️ Send
                   </button>

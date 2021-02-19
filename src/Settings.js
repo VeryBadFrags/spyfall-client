@@ -1,4 +1,21 @@
 function Settings(props) {
+  function displayPeers(clients) {
+    // let peersList = document.getElementById("peers-list");
+    // peersList.innerHTML = "";
+    // clients
+    //   .map((client) => {
+    //     let newLine = document.createElement("li");
+    //     newLine.classList.add("clickable");
+    //     newLine.addEventListener("click", (event) =>
+    //       addRemoveClass(event.target, "strike")
+    //     );
+    //     let ready = client.ready ? " ✅" : "";
+    //     newLine.innerText = `${client.name}${ready}`;
+    //     return newLine;
+    //   })
+    //   .forEach((line) => peersList.appendChild(line));
+  }
+
   if (props.gameMode) {
     return (
       <div className="col">
@@ -8,16 +25,12 @@ function Settings(props) {
             {/* Lobby code */}
             <div className="row g-3 align-items-center mb-3">
               <div className="col-auto">
-                <label for="lobby-display" className="col-form-label">
+                <label htmlFor="lobby-display" className="col-form-label">
                   Lobby
                 </label>
               </div>
               <div className="col-auto">
-                <input
-                  type="text"
-                  className="form-control"
-                  readonly
-                />
+                <input type="text" className="form-control" readOnly />
               </div>
             </div>
 
@@ -35,9 +48,12 @@ function Settings(props) {
                   type="checkbox"
                   name="ready-check"
                   required
-                  autocomplete="off"
+                  autoComplete="off"
                 />
-                <label for="ready-check" className="clickable form-check-label">
+                <label
+                  htmlFor="ready-check"
+                  className="clickable form-check-label"
+                >
                   Ready
                 </label>
               </div>
@@ -50,8 +66,8 @@ function Settings(props) {
             <hr />
             <div className="d-grid">
               <button
-                type="submit"
                 className="btn btn-sm btn-outline-danger"
+                onClick={(e) => props.disconnectCallback()}
               >
                 ⬅️ Leave lobby
               </button>

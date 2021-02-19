@@ -26,7 +26,7 @@ function Rules(props) {
 function RulesDetails(props) {
   if (props.showRules) {
     return (
-      <div id="instructions" style={{ display: "block" }}>
+      <div style={{ display: "block" }}>
         <ul>
           <li>👥 3-10 Players</li>
           <li>⏱ 5 Minutes Rounds</li>
@@ -46,7 +46,7 @@ function RulesDetails(props) {
             another person
           </li>
         </ul>
-        <h6 id="when-the-timer-ends">When the timer ends</h6>
+        <h6>When the timer ends</h6>
         <ul>
           <li>
             Players vote to designate the spy
@@ -59,7 +59,7 @@ function RulesDetails(props) {
             </ul>
           </li>
         </ul>
-        <h6 id="at-any-time">At any time</h6>
+        <h6>At any time</h6>
         <ul>
           <li>The players can vote for a spy if they have a majority</li>
           <li>
