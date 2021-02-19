@@ -1,9 +1,6 @@
-function Error() {
-  function printError(content) {
-    // let errorBox = document.getElementById("error");
-    // errorBox.innerText = content;
-    // errorBox.style.display = "block";
-  }
+import { useState } from "react";
+
+function Error(props) {
 
   function resetErrors() {
     // let errorBox = document.getElementById("error");
@@ -11,9 +8,11 @@ function Error() {
     // errorBox.innerHTML = "";
   }
 
-  return (
-    <div className="alert alert-danger mb-3" style={{ display: "none" }}></div>
-  );
+  if (props.error) {
+    return <div className="alert alert-danger mb-3">{props.error}</div>;
+  } else {
+    return null;
+  }
 }
 
 export default Error;
