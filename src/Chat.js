@@ -1,11 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Chat(props) {
+  const [inputText, setInputText] = useState("");
+
   function clearChat() {
     // TODO
     // for (let i = eventsBox.childNodes.length - 1; i >= 0; i--) {
     //   eventsBox.removeChild(eventsBox.childNodes[0]);
     // }
+  }
+
+  // let newLine = document.createElement("li");
+  // if (author) {
+  //   let authorElem = document.createElement("b");
+  //   authorElem.innerText = `${author}: `;
+  //   newLine.appendChild(authorElem);
+  // }
+  // let textElem = document.createElement("span");
+  // textElem.innerText = text;
+  // newLine.appendChild(textElem);
+  // if (color) {
+  //   newLine.style.color = color;
+  // }
+  // eventsBox.appendChild(newLine);
+  // if (eventsBox.childNodes.length > 11) {
+  //   eventsBox.removeChild(eventsBox.childNodes[0]);
+  // }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    props.connectionManager.send("chat-event", { message: inputText });
+    setInputText("");
   }
 
   if (props.gameMode) {
@@ -27,9 +52,13 @@ function Chat(props) {
             </div>
             <div className="row g-0">
               <div className="chat-box card bg-light border-bottom-0 rounded-0 rounded-top pt-3">
-                <ul className="list"></ul>
+                <ul className="list">
+                  {props.chatContent.map((row, i) => (
+                    <li key={i}>{row.text}</li>
+                  ))}
+                </ul>
               </div>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="input-group">
                   <input
                     type="text"
@@ -38,6 +67,8 @@ function Chat(props) {
                     autoComplete="off"
                     required
                     maxLength="64"
+                    value={inputText}
+                    onChange={(e) => setInputText(e.target.value)}
                   />
                   <button
                     type="submit"

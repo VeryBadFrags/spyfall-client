@@ -11,7 +11,8 @@ function Connect(props) {
       playerName,
       lobbyID,
       props.onConnect,
-      props.onDisconnect
+      props.onDisconnect,
+      props.onMessage
     );
   };
 
@@ -41,6 +42,8 @@ function Connect(props) {
                   required
                   autoFocus
                   maxLength="16"
+                  value={playerName}
+                  onChange={(e) => setPlayerName(e.target.value)}
                 />
               </div>
               {/* Lobby input */}

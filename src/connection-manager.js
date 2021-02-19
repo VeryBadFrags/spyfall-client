@@ -1,16 +1,16 @@
 import io from "socket.io-client";
 
 export default class ConnectionManager {
-  constructor(messageCallback) {
+  constructor() {
     this.socket = null;
-    this.eventCallback = messageCallback;
   }
 
   connect = (
     playerName,
     sessionId,
     connectionEstablishedCallback,
-    connectionClosedCallback
+    connectionClosedCallback,
+    onMessageCallback
   ) => {
     if (window.location.hostname === "localhost") {
       this.socket = io("http://localhost:8081");
@@ -27,7 +27,7 @@ export default class ConnectionManager {
     });
 
     this.socket.on("message", (msg) => {
-      this.eventCallback(msg.type, msg);
+      onMessageCallback(msg.type, msg);
     });
   };
 

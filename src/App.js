@@ -9,30 +9,18 @@ import Footer from "./Footer";
 import ConnectionManager from "./connection-manager.js";
 import Locations from "./Locations";
 import Menu from "./Menu";
+import Error from "./Error";
 
-const connectionManager = new ConnectionManager(processMessage);
-
-function processMessage(type, data) {
-  if (type === "chat-event") {
-    // appendText(data.message, data.author, data.color);
-  } else if (type === "session-broadcast") {
-    // displayPeers(data.peers.clients);
-  } else if (type === "start-game") {
-    // startGame(data);
-  } else if (type === "session-created") {
-    // TODO replace window.location.hash with ?code=
-    // window.location.hash = data.sessionId;
-    // lobbyDisplay.value = data.sessionId;
-    // lobbyDisplay.style.width = `${lobbyDisplay.value.length + 2}rem`;
-  }
-}
+const connectionManager = new ConnectionManager();
 
 function App() {
   const [gameMode, setGameMode] = useState(false);
+  const [error, setError] = useState("");
+  const [chatContent, setChatContent] = useState([]);
 
   function onConnect() {
     setGameMode(true);
-    // resetErrors();
+    setError("");
     // showElement("connect-wrapper", false);
     // lobbyElements.forEach((elem) => showElement(elem, true));
     // lobbyDisplay.value = connectionManager.sessionId;
@@ -40,32 +28,34 @@ function App() {
   }
 
   function onDisconnect() {
-    //   resetAll();
-    // printError(`Connection to server closed`);
+    resetAll();
+    setError("Connection to server closed");
     setGameMode(false);
   }
 
+  function onMessage(type, data) {
+    if (type === "chat-event") {
+      console.log("chat-event", data);
+      appendText(data.message, data.author, data.color);
+    } else if (type === "session-broadcast") {
+      // displayPeers(data.peers.clients);
+    } else if (type === "start-game") {
+      // startGame(data);
+    } else if (type === "session-created") {
+      // TODO replace window.location.hash with ?code=
+      // window.location.hash = data.sessionId;
+      // lobbyDisplay.value = data.sessionId;
+      // lobbyDisplay.style.width = `${lobbyDisplay.value.length + 2}rem`;
+    }
+  }
+
   function appendText(text, author, color) {
-    // let newLine = document.createElement("li");
-    // if (author) {
-    //   let authorElem = document.createElement("b");
-    //   authorElem.innerText = `${author}: `;
-    //   newLine.appendChild(authorElem);
-    // }
-    // let textElem = document.createElement("span");
-    // textElem.innerText = text;
-    // newLine.appendChild(textElem);
-    // if (color) {
-    //   newLine.style.color = color;
-    // }
-    // eventsBox.appendChild(newLine);
-    // if (eventsBox.childNodes.length > 11) {
-    //   eventsBox.removeChild(eventsBox.childNodes[0]);
-    // }
+    let newRow = { text: text, author: author, color: color };
+    setChatContent((previousContent) => [...previousContent, newRow]);
   }
 
   function startGame(data) {
-    //   window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
     //   clearChat();
     //   readyCheck.checked = false;
     //   resetClickableElements();
@@ -89,10 +79,9 @@ function App() {
 
   const lobbyElements = ["chat-wrapper", "players-wrapper"];
   function resetAll() {
-    // resetErrors();
+    setError("");
+    //TODO simplify reset the states to default
     // clearChat();
-    // showElement("connect-wrapper", true);
-    // lobbyElements.forEach((elem) => showElement(elem, false));
     // readyCheck.checked = false;
     // resetClickableElements();
     // clearInterval(intervalId);
@@ -104,14 +93,20 @@ function App() {
       <Menu />
 
       <div className="container mb-5 pt-3">
+        <Error error={error} />
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 gy-4">
           <Connect
             gameMode={gameMode}
             connectionManager={connectionManager}
             onConnect={onConnect}
             onDisconnect={onDisconnect}
+            onMessage={onMessage}
           />
-          <Chat gameMode={gameMode} />
+          <Chat
+            gameMode={gameMode}
+            connectionManager={connectionManager}
+            chatContent={chatContent}
+          />
           <Settings
             gameMode={gameMode}
             disconnectCallback={() => connectionManager.disconnect()}
