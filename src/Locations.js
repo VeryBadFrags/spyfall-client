@@ -26,10 +26,10 @@ function Locations() {
   ];
 
   return (
-    <div class="col">
-      <div class="card shadow">
-        <div class="card-header">📍 Locations</div>
-        <ul class="list-group list-group-flush"></ul>
+    <div className="col">
+      <div className="card shadow">
+        <div className="card-header">📍 Locations</div>
+        <ul className="list-group list-group-flush"></ul>
       </div>
     </div>
   );
