@@ -2,12 +2,10 @@ import { useRef } from "react";
 
 function Settings(props) {
   const readyRef = useRef();
-  function displayPeers(clients) {
-    // TODO
-    //     newLine.addEventListener("click", (event) =>
-    //       addRemoveClass(event.target, "strike")
-    //     );
-  }
+  // TODO
+  //     newLine.addEventListener("click", (event) =>
+  //       addRemoveClass(event.target, "strike")
+  //     );
 
   // lobbyDisplay.style.width = `${lobbyDisplay.value.length}rem`;
 
