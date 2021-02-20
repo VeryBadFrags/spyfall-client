@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 
-function Chat(props) {
+export default function Chat(props) {
   const [inputText, setInputText] = useState("");
   const inputRef = useRef();
 
@@ -60,10 +60,10 @@ function Chat(props) {
 
 function ChatLine(props) {
   // TODO set color
-  // TODO remove author when empty
   return (
     <li key={props.i} style={{}}>
-      <b>{props.row.author}:</b> {props.row.text}
+      {props.row.author ? <b>{props.row.author}:</b> : null}{" "}
+      <span style={{color: props.row.color}}>{props.row.text}</span>
     </li>
   );
 }
@@ -115,5 +115,3 @@ function ProgressBar() {
 //   display.style = `width: ${progress}%;`;
 //   display.setAttribute("aria-valuenow", Math.round(progress));
 // }
-
-export default Chat;
