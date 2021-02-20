@@ -17,14 +17,12 @@ function App() {
   const [gameMode, setGameMode] = useState(false);
   const [error, setError] = useState("");
   const [chatContent, setChatContent] = useState([]);
+  const [lobbyID, setLobbyID] = useState("");
 
   function onConnect() {
     setGameMode(true);
     setError("");
-    // showElement("connect-wrapper", false);
-    // lobbyElements.forEach((elem) => showElement(elem, true));
-    // lobbyDisplay.value = connectionManager.sessionId;
-    // lobbyDisplay.style.width = `${lobbyDisplay.value.length}rem`;
+    setLobbyID(connectionManager.sessionId);
   }
 
   function onDisconnect() {
@@ -49,9 +47,22 @@ function App() {
     }
   }
 
+  const chatSize = 16;
   function appendText(text, author, color) {
     let newRow = { text: text, author: author, color: color };
-    setChatContent((previousContent) => [...previousContent, newRow]);
+    setChatContent((previousContent) => {
+      if (previousContent.length >= chatSize) {
+        return [
+          ...previousContent.splice(
+            previousContent.length - chatSize + 1,
+            previousContent.length
+          ),
+          newRow,
+        ];
+      } else {
+        return [...previousContent, newRow];
+      }
+    });
   }
 
   function startGame(data) {
