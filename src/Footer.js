@@ -15,7 +15,7 @@ function Footer() {
           </div>
           <div className="lead">
             <a
-              href="https://github.com/VeryBadFrags/online-spy"
+              href="https://github.com/VeryBadFrags/online-spy-client"
               target="_blank"
               rel="noopener noreferrer"
             >
