@@ -19,6 +19,7 @@ function App() {
   const [chatContent, setChatContent] = useState([]);
   const [readyCheck, setReadyCheck] = useState(false);
   const [lobbyStatus, setLobbyStatus] = useState();
+  const [locations, setLocations] = useState([]);
 
   const onDisconnect = () => {
     resetAll();
@@ -36,7 +37,7 @@ function App() {
       setGameMode(true);
       setError("");
       // TODO replace window.location.hash with ?code=
-      // window.location.hash = data.sessionId;
+      window.location.hash = data.sessionId;
     }
   }
 
@@ -62,34 +63,32 @@ function App() {
     window.scrollTo(0, 0);
     clearChat();
     setReadyCheck(false);
-    if(data.spy) {
-      
-    }
-    //   resetClickableElements();
+    setLocations(data.locations);
+    //  TODO resetClickableElements();
     //   startTimer(5 * 60, progressBar);
-    //   appendText("Game started");
-    //   if (data.spy) {
-    //     appendText(
-    //       `🕵️ You are the spy, try to guess the current location`,
-    //       null,
-    //       "red"
-    //     );
-    //   } else {
-    //     appendText(
-    //       `😇 You are not the spy, the location is ${data.location}`,
-    //       null,
-    //       "blue"
-    //     );
-    //   }
-    //   appendText(`First player: ${data.first}`);
+    appendText("Game started");
+    if (data.spy) {
+      appendText(
+        `🕵️ You are the spy, try to guess the current location`,
+        null,
+        "red"
+      );
+    } else {
+      appendText(
+        `😇 You are not the spy, the location is ${data.location}`,
+        null,
+        "blue"
+      );
+    }
+
+    appendText(`First player: ${data.first}`);
   }
 
   function resetAll() {
     setError("");
     setGameMode(false);
-    //TODO simplify reset the states to default
-    // readyCheck.checked = false;
-    // resetClickableElements();
+    setReadyCheck(false);
+    // TODO resetClickableElements();
     // clearInterval(intervalId);
     window.scrollTo(0, 0);
   }
@@ -116,6 +115,7 @@ function App() {
             connectionManager={connectionManager}
             chatContent={chatContent}
           />
+          <Locations locations={locations} />
           <Settings
             gameMode={gameMode}
             connectionManager={connectionManager}
@@ -124,7 +124,6 @@ function App() {
             setReadyCheck={setReadyCheck}
             lobbyStatus={lobbyStatus}
           />
-          <Locations />
           <Rules />
         </div>
       </div>
