@@ -1,20 +1,24 @@
+import { useRef } from "react";
+
 function Settings(props) {
+  const readyRef = useRef();
   function displayPeers(clients) {
-    // let peersList = document.getElementById("peers-list");
-    // peersList.innerHTML = "";
-    // clients
-    //   .map((client) => {
-    //     let newLine = document.createElement("li");
-    //     newLine.classList.add("clickable");
+    // TODO
     //     newLine.addEventListener("click", (event) =>
     //       addRemoveClass(event.target, "strike")
     //     );
-    //     let ready = client.ready ? " ✅" : "";
-    //     newLine.innerText = `${client.name}${ready}`;
-    //     return newLine;
-    //   })
-    //   .forEach((line) => peersList.appendChild(line));
   }
+
+  // lobbyDisplay.style.width = `${lobbyDisplay.value.length}rem`;
+
+  const handleStartGame = (event) => {
+    event.preventDefault();
+    if (readyRef.current.checked) {
+      props.connectionManager.send("start-game");
+    } else {
+      // TODO printError you are not ready
+    }
+  };
 
   if (props.gameMode) {
     return (
@@ -30,25 +34,48 @@ function Settings(props) {
                 </label>
               </div>
               <div className="col-auto">
-                <input type="text" className="form-control" readOnly />
+                <input
+                  id="lobby-display"
+                  type="text"
+                  className="form-control"
+                  readOnly
+                  value={props.lobbyStatus?.sessionId}
+                />
               </div>
             </div>
 
             {/* Players list */}
             <h6 className="card-title">👥 Players</h6>
-            <ul className="list"></ul>
+            <ul className="list">
+              {props.lobbyStatus?.peers.clients.map((client) => {
+                return (
+                  <li className="clickable" key={client.name}>
+                    {client.name}
+                    {client.ready ? " ✅" : ""}
+                  </li>
+                );
+              })}
+            </ul>
 
             <hr />
 
             <p className="card-title">🏁 New Game</p>
-            <form>
+            <form onSubmit={handleStartGame}>
               <div className="form-check form-switch mb-3">
                 <input
+                  id="ready-check"
                   className="form-check-input"
                   type="checkbox"
                   name="ready-check"
                   required
                   autoComplete="off"
+                  value={props.readyCheck}
+                  ref={readyRef}
+                  onChange={(event) =>
+                    props.connectionManager.send("player-ready", {
+                      ready: event.target.checked,
+                    })
+                  }
                 />
                 <label
                   htmlFor="ready-check"
@@ -67,7 +94,7 @@ function Settings(props) {
             <div className="d-grid">
               <button
                 className="btn btn-sm btn-outline-danger"
-                onClick={(e) => props.disconnectCallback()}
+                onClick={(e) => props.connectionManager.disconnect()}
               >
                 ⬅️ Leave lobby
               </button>

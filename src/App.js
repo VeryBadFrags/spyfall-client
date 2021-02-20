@@ -17,33 +17,26 @@ function App() {
   const [gameMode, setGameMode] = useState(false);
   const [error, setError] = useState("");
   const [chatContent, setChatContent] = useState([]);
-  const [lobbyID, setLobbyID] = useState("");
+  const [readyCheck, setReadyCheck] = useState(false);
+  const [lobbyStatus, setLobbyStatus] = useState();
 
-  function onConnect() {
-    setGameMode(true);
-    setError("");
-    setLobbyID(connectionManager.sessionId);
-  }
-
-  function onDisconnect() {
+  const onDisconnect = () => {
     resetAll();
     setError("Connection to server closed");
-    setGameMode(false);
-  }
+  };
 
-  function onMessage(type, data) {
+  function onMessageCallback(type, data) {
     if (type === "chat-event") {
-      console.log("chat-event", data);
       appendText(data.message, data.author, data.color);
     } else if (type === "session-broadcast") {
-      // displayPeers(data.peers.clients);
+      setLobbyStatus(data);
     } else if (type === "start-game") {
-      // startGame(data);
+      startGame(data);
     } else if (type === "session-created") {
+      setGameMode(true);
+      setError("");
       // TODO replace window.location.hash with ?code=
       // window.location.hash = data.sessionId;
-      // lobbyDisplay.value = data.sessionId;
-      // lobbyDisplay.style.width = `${lobbyDisplay.value.length + 2}rem`;
     }
   }
 
@@ -67,8 +60,11 @@ function App() {
 
   function startGame(data) {
     window.scrollTo(0, 0);
-    //   clearChat();
-    //   readyCheck.checked = false;
+    clearChat();
+    setReadyCheck(false);
+    if(data.spy) {
+      
+    }
     //   resetClickableElements();
     //   startTimer(5 * 60, progressBar);
     //   appendText("Game started");
@@ -88,15 +84,18 @@ function App() {
     //   appendText(`First player: ${data.first}`);
   }
 
-  const lobbyElements = ["chat-wrapper", "players-wrapper"];
   function resetAll() {
     setError("");
+    setGameMode(false);
     //TODO simplify reset the states to default
-    // clearChat();
     // readyCheck.checked = false;
     // resetClickableElements();
     // clearInterval(intervalId);
-    // window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
+  }
+
+  function clearChat() {
+    setChatContent([]);
   }
 
   return (
@@ -109,9 +108,8 @@ function App() {
           <Connect
             gameMode={gameMode}
             connectionManager={connectionManager}
-            onConnect={onConnect}
             onDisconnect={onDisconnect}
-            onMessage={onMessage}
+            onMessageCallback={onMessageCallback}
           />
           <Chat
             gameMode={gameMode}
@@ -120,7 +118,11 @@ function App() {
           />
           <Settings
             gameMode={gameMode}
+            connectionManager={connectionManager}
             disconnectCallback={() => connectionManager.disconnect()}
+            readyCheck={readyCheck}
+            setReadyCheck={setReadyCheck}
+            lobbyStatus={lobbyStatus}
           />
           <Locations />
           <Rules />

@@ -8,7 +8,6 @@ export default class ConnectionManager {
   connect = (
     playerName,
     sessionId,
-    connectionEstablishedCallback,
     connectionClosedCallback,
     onMessageCallback
   ) => {
@@ -19,10 +18,8 @@ export default class ConnectionManager {
     }
 
     this.initSession(playerName, sessionId);
-    connectionEstablishedCallback();
 
     this.socket.on("disconnect", () => {
-      console.log("Connection closed");
       connectionClosedCallback();
     });
 

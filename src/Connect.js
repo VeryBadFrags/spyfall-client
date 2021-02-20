@@ -10,9 +10,8 @@ function Connect(props) {
     props.connectionManager.connect(
       playerName,
       lobbyID,
-      props.onConnect,
       props.onDisconnect,
-      props.onMessage
+      props.onMessageCallback
     );
   };
 
@@ -37,6 +36,7 @@ function Connect(props) {
                   👤 Name
                 </label>
                 <input
+                  id="name-input"
                   type="text"
                   className="form-control"
                   required
@@ -52,6 +52,7 @@ function Connect(props) {
                   🎲 Lobby code
                 </label>
                 <input
+                  id="lobby-input"
                   type="text"
                   className="form-control"
                   pattern="[A-Za-z0-9]*"

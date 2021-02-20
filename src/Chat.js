@@ -1,31 +1,8 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 function Chat(props) {
   const [inputText, setInputText] = useState("");
-
-  function clearChat() {
-    // TODO
-    // for (let i = eventsBox.childNodes.length - 1; i >= 0; i--) {
-    //   eventsBox.removeChild(eventsBox.childNodes[0]);
-    // }
-  }
-
-  // let newLine = document.createElement("li");
-  // if (author) {
-  //   let authorElem = document.createElement("b");
-  //   authorElem.innerText = `${author}: `;
-  //   newLine.appendChild(authorElem);
-  // }
-  // let textElem = document.createElement("span");
-  // textElem.innerText = text;
-  // newLine.appendChild(textElem);
-  // if (color) {
-  //   newLine.style.color = color;
-  // }
-  // eventsBox.appendChild(newLine);
-  // if (eventsBox.childNodes.length > 11) {
-  //   eventsBox.removeChild(eventsBox.childNodes[0]);
-  // }
+  const inputRef = useRef();
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -38,23 +15,15 @@ function Chat(props) {
       <div className="col">
         <div className="card border-primary shadow">
           <div className="card-body">
-            <div className="progress mb-2" style={{ height: "2.5em" }}>
-              <div
-                className="progress-bar bg-info text-dark"
-                role="progressbar"
-                style={{ width: "100%" }}
-                aria-valuenow="100"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              >
-                ⏱ 5:00
-              </div>
-            </div>
+            <ProgressBar />
             <div className="row g-0">
-              <div className="chat-box card bg-light border-bottom-0 rounded-0 rounded-top pt-3">
+              <div
+                className="chat-box card bg-light border-bottom-0 rounded-0 rounded-top pt-3"
+                onClick={() => inputRef.current.focus()}
+              >
                 <ul className="list">
                   {props.chatContent.map((row, i) => (
-                    <li key={i}>{row.text}</li>
+                    <ChatLine row={row} i={i} />
                   ))}
                 </ul>
               </div>
@@ -69,6 +38,7 @@ function Chat(props) {
                     maxLength="64"
                     value={inputText}
                     onChange={(e) => setInputText(e.target.value)}
+                    ref={inputRef}
                   />
                   <button
                     type="submit"
@@ -87,5 +57,63 @@ function Chat(props) {
     return null;
   }
 }
+
+function ChatLine(props) {
+  // TODO set color
+  // TODO remove author when empty
+  return (
+    <li key={props.i} style={{}}>
+      <b>{props.row.author}:</b> {props.row.text}
+    </li>
+  );
+}
+
+function ProgressBar() {
+  return (
+    <div className="progress mb-2" style={{ height: "2.5em" }}>
+      <div
+        className="progress-bar bg-info text-dark"
+        role="progressbar"
+        style={{ width: "100%" }}
+        aria-valuenow="100"
+        aria-valuemin="0"
+        aria-valuemax="100"
+      >
+        ⏱ 5:00
+      </div>
+    </div>
+  );
+}
+
+// TODO
+// const progressBar = document.getElementById("progress-bar");
+// function startTimer(duration, display) {
+//   clearInterval(intervalId);
+//   var timer = duration;
+//   setTimerDisplay(timer, duration, display);
+//   intervalId = setInterval(function () {
+//     timer--;
+//     setTimerDisplay(timer, duration, display);
+//     if (timer <= 0) {
+//       display.textContent = "🔔 Time's up! Who is the Spy?";
+//       display.setAttribute("aria-valuenow", 0);
+//       display.style = `width: 100%;`;
+//       clearInterval(intervalId);
+//     }
+//   }, 1000);
+// }
+
+// function setTimerDisplay(timer, totalDuration, display) {
+//   let minutes = parseInt(timer / 60, 10);
+//   let seconds = parseInt(timer % 60, 10);
+
+//   minutes = minutes < 10 ? "0" + minutes : minutes;
+//   seconds = seconds < 10 ? "0" + seconds : seconds;
+
+//   display.textContent = `⏱ ${minutes}:${seconds}`;
+//   let progress = (timer / totalDuration) * 100;
+//   display.style = `width: ${progress}%;`;
+//   display.setAttribute("aria-valuenow", Math.round(progress));
+// }
 
 export default Chat;
