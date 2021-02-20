@@ -1,38 +1,22 @@
-function Locations() {
-  const locationsList = [
-    "✈️💺 Airport",
-    "🏦💰 Bank",
-    "🎰💵 Casino",
-    "🎞🍿 Cinema",
-    "🦸🦹 Cosplay Convention",
-    "🛳🌊 Cruise Ship",
-    "⚽️🏟 Football Stadium",
-    "🌳🏕 Forest Camp",
-    "🏪🛒 Grocery Store",
-    "🏥🧑‍⚕️ Hospital",
-    "🏨🛏 Hotel",
-    "🌕🧑‍🚀 Moon Colony",
-    "🏛🖼 Museum",
-    "🏟🎸 Rock Concert",
-    "🚄🛤 Train Station",
-    "🏫🎓 University",
-  ];
-
-  const extendedLocationsList = [
-    "🏝🥥 Desert Island",
-    "⛰🥾 Mountain Hike",
-    "🏤📮 Post Office",
-    "🍽👩‍🍳 Restaurant",
-  ];
-
-  return (
-    <div className="col">
-      <div className="card shadow">
-        <div className="card-header">📍 Locations</div>
-        <ul className="list-group list-group-flush"></ul>
+export default function Locations({ locations }) {
+  if (locations && locations.length > 0) {
+    return (
+      <div className="col">
+        <div className="card shadow">
+          <div className="card-header">📍 Locations</div>
+          <ul className="list-group list-group-flush">
+            {locations.map((loc, i) => {
+              return (
+                <li key={i} className="clickable list-group-item py-1">
+                  {loc}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return null;
+  }
 }
-
-export default Locations;
