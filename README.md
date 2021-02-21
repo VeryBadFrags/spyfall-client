@@ -1,4 +1,4 @@
-# Offline-Spy - Client
+# Online Spy - Client
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/9533fa3b-785d-4ddb-ab13-366089f5d10b/deploy-status)](https://app.netlify.com/sites/heuristic-bartik-850df8/deploys)
 
