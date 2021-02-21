@@ -1,13 +1,43 @@
 import React, { useRef, useState } from "react";
 
+let intervalId;
+
 export default function Chat(props) {
   const [inputText, setInputText] = useState("");
+  const [timer, setTimer] = useState(300);
   const inputRef = useRef();
 
   function handleSubmit(event) {
     event.preventDefault();
     props.connectionManager.send("chat-event", { message: inputText });
     setInputText("");
+  }
+
+  function startTimer(duration) {
+    clearInterval(intervalId);
+    let timer = duration;
+    setTimerDisplay(timer, duration);
+    intervalId = setInterval(function () {
+      //     timer--;
+      //     setTimerDisplay(timer, duration, display);
+      //     if (timer <= 0) {
+      //       display.textContent = "🔔 Time's up! Who is the Spy?";
+      //       display.setAttribute("aria-valuenow", 0);
+      //       display.style = `width: 100%;`;
+      //       clearInterval(intervalId);
+      //     }
+    }, 1000);
+  }
+
+  function setTimerDisplay(timer, totalDuration) {
+    let minutes = parseInt(timer / 60, 10);
+    let seconds = parseInt(timer % 60, 10);
+    //   minutes = minutes < 10 ? "0" + minutes : minutes;
+    //   seconds = seconds < 10 ? "0" + seconds : seconds;
+    //   display.textContent = `⏱ ${minutes}:${seconds}`;
+    //   let progress = (timer / totalDuration) * 100;
+    //   display.style = `width: ${progress}%;`;
+    //   display.setAttribute("aria-valuenow", Math.round(progress));
   }
 
   if (props.gameMode) {
@@ -44,7 +74,7 @@ export default function Chat(props) {
                     type="submit"
                     className="btn btn-primary border-rounded-bottom-right"
                   >
-                    ✉️ Send
+                    <i class="fas fa-paper-plane"></i> Send
                   </button>
                 </div>
               </form>
@@ -59,11 +89,10 @@ export default function Chat(props) {
 }
 
 function ChatLine(props) {
-  // TODO set color
   return (
-    <li key={props.i} style={{}}>
+    <li key={props.i}>
       {props.row.author ? <b>{props.row.author}:</b> : null}{" "}
-      <span style={{color: props.row.color}}>{props.row.text}</span>
+      <span style={{ color: props.row.color }}>{props.row.text}</span>
     </li>
   );
 }
@@ -79,39 +108,8 @@ function ProgressBar() {
         aria-valuemin="0"
         aria-valuemax="100"
       >
-        ⏱ 5:00
+        <span><i class="far fa-clock"></i> 5:00</span>
       </div>
     </div>
   );
 }
-
-// TODO
-// const progressBar = document.getElementById("progress-bar");
-// function startTimer(duration, display) {
-//   clearInterval(intervalId);
-//   var timer = duration;
-//   setTimerDisplay(timer, duration, display);
-//   intervalId = setInterval(function () {
-//     timer--;
-//     setTimerDisplay(timer, duration, display);
-//     if (timer <= 0) {
-//       display.textContent = "🔔 Time's up! Who is the Spy?";
-//       display.setAttribute("aria-valuenow", 0);
-//       display.style = `width: 100%;`;
-//       clearInterval(intervalId);
-//     }
-//   }, 1000);
-// }
-
-// function setTimerDisplay(timer, totalDuration, display) {
-//   let minutes = parseInt(timer / 60, 10);
-//   let seconds = parseInt(timer % 60, 10);
-
-//   minutes = minutes < 10 ? "0" + minutes : minutes;
-//   seconds = seconds < 10 ? "0" + seconds : seconds;
-
-//   display.textContent = `⏱ ${minutes}:${seconds}`;
-//   let progress = (timer / totalDuration) * 100;
-//   display.style = `width: ${progress}%;`;
-//   display.setAttribute("aria-valuenow", Math.round(progress));
-// }
