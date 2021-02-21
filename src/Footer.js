@@ -14,12 +14,21 @@ function Footer() {
             <a href="mailto:spy@verybadfrags.com">spy@verybadfrags.com</a>
           </div>
           <div className="lead">
+            💾 Source code on GitHub{" "}
             <a
               href="https://github.com/VeryBadFrags/online-spy-client"
               target="_blank"
               rel="noopener noreferrer"
             >
-              💾 Source code on GitHub
+              Client
+            </a>{" "}
+            ·{" "}
+            <a
+              href="https://github.com/VeryBadFrags/online-spy-server"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Server
             </a>
           </div>
           <div className="lead">
