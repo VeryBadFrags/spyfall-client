@@ -16,13 +16,15 @@ function Settings(props) {
     return (
       <div className="col">
         <div className="card border-secondary shadow">
-          <div className="card-header">⚙️ Settings</div>
+          <div className="card-header">
+            <i class="fas fa-cog"></i> Settings
+          </div>
           <div className="card-body">
             {/* Lobby code */}
             <div className="row g-3 align-items-center mb-3">
               <div className="col-auto">
                 <label htmlFor="lobby-display" className="col-form-label">
-                  Lobby
+                  <i class="fas fa-building"></i> Lobby
                 </label>
               </div>
               <div className="col-auto">
@@ -37,7 +39,9 @@ function Settings(props) {
             </div>
 
             {/* Players list */}
-            <h6 className="card-title">👥 Players</h6>
+            <h6 className="card-title">
+              <i class="fas fa-users"></i> Players
+            </h6>
             <ul className="list">
               {props.lobbyStatus?.peers.clients.map((client) => {
                 return (
@@ -59,7 +63,9 @@ function Settings(props) {
 
             <hr />
 
-            <p className="card-title">🏁 New Game</p>
+            <p className="card-title">
+              <i class="fas fa-flag-checkered"></i> New Game
+            </p>
             <form onSubmit={handleStartGame}>
               <div className="form-check form-switch mb-3">
                 <input
@@ -69,13 +75,14 @@ function Settings(props) {
                   name="ready-check"
                   required
                   autoComplete="off"
-                  value={props.readyCheck}
+                  checked={props.readyCheck}
                   ref={readyRef}
-                  onChange={(event) =>
+                  onClick={(event) => {
                     props.connectionManager.send("player-ready", {
                       ready: event.target.checked,
-                    })
-                  }
+                    });
+                    props.setReadyCheck(event.target.checked);
+                  }}
                 />
                 <label
                   htmlFor="ready-check"
@@ -86,7 +93,7 @@ function Settings(props) {
               </div>
               <div className="d-grid">
                 <button type="submit" className="btn btn-primary">
-                  🚦 Start new round
+                  <i class="fas fa-traffic-light"></i> Start new round
                 </button>
               </div>
             </form>
@@ -96,7 +103,7 @@ function Settings(props) {
                 className="btn btn-sm btn-outline-danger"
                 onClick={(e) => props.connectionManager.disconnect()}
               >
-                ⬅️ Leave lobby
+                <i class="fas fa-sign-out-alt"></i> Leave lobby
               </button>
             </div>
           </div>

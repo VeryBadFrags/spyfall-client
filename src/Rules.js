@@ -6,14 +6,16 @@ function Rules(props) {
   return (
     <div className="col">
       <div className="card shadow">
-        <div className="card-header">📖 Rules</div>
+        <div className="card-header">
+          <i class="fas fa-book"></i> Rules
+        </div>
         <div className="card-body">
           <div className="d-grid">
             <button
               className="btn btn-outline-primary"
               onClick={(event) => setShowRules(!showRules)}
             >
-              👓 Show/Hide
+              <i class="fas fa-eye"></i> Show/Hide
             </button>
             <RulesDetails showRules={showRules} />
           </div>

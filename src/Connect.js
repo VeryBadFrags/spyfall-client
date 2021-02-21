@@ -44,7 +44,7 @@ function Connect(props) {
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label htmlFor="name-input" className="form-label">
-                  👤 Name
+                  <i class="fas fa-user"></i> Name
                 </label>
                 <input
                   id="name-input"
@@ -60,7 +60,7 @@ function Connect(props) {
               {/* Lobby input */}
               <div className="mb-3">
                 <label htmlFor="lobby-input" className="form-label">
-                  🎲 Lobby code
+                  <i class="fas fa-dice"></i> Lobby code
                 </label>
                 <input
                   id="lobby-input"
