@@ -1,4 +1,3 @@
-// import logo from "./logo.svg";
 import "./App.css";
 import Connect from "./Connect";
 import Chat from "./Chat";
@@ -41,6 +40,12 @@ function App() {
     }
   }
 
+  function resetClickableElements() {
+    document
+      .querySelectorAll(".strike")
+      .forEach((elem) => elem.classList.remove("strike"));
+  }
+
   const chatSize = 16;
   function appendText(text, author, color) {
     let newRow = { text: text, author: author, color: color };
@@ -64,8 +69,8 @@ function App() {
     clearChat();
     setReadyCheck(false);
     setLocations(data.locations);
-    //  TODO resetClickableElements();
-    //   startTimer(5 * 60, progressBar);
+    resetClickableElements();
+    //  TODO startTimer(5 * 60, progressBar);
     appendText("Game started");
     if (data.spy) {
       appendText(
@@ -88,7 +93,7 @@ function App() {
     setError("");
     setGameMode(false);
     setReadyCheck(false);
-    // TODO resetClickableElements();
+    resetClickableElements();
     // clearInterval(intervalId);
     window.scrollTo(0, 0);
   }

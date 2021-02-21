@@ -7,7 +7,15 @@ export default function Locations({ locations }) {
           <ul className="list-group list-group-flush">
             {locations.map((loc, i) => {
               return (
-                <li key={i} className="clickable list-group-item py-1">
+                <li
+                  key={i}
+                  className="clickable list-group-item py-1"
+                  onClick={(e) => {
+                    e.target.classList.contains("strike")
+                      ? e.target.classList.remove("strike")
+                      : e.target.classList.add("strike");
+                  }}
+                >
                   {loc}
                 </li>
               );

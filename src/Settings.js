@@ -2,12 +2,6 @@ import { useRef } from "react";
 
 function Settings(props) {
   const readyRef = useRef();
-  // TODO
-  //     newLine.addEventListener("click", (event) =>
-  //       addRemoveClass(event.target, "strike")
-  //     );
-
-  // lobbyDisplay.style.width = `${lobbyDisplay.value.length}rem`;
 
   const handleStartGame = (event) => {
     event.preventDefault();
@@ -47,7 +41,15 @@ function Settings(props) {
             <ul className="list">
               {props.lobbyStatus?.peers.clients.map((client) => {
                 return (
-                  <li className="clickable" key={client.name}>
+                  <li
+                    className="clickable"
+                    key={client.name}
+                    onClick={(e) => {
+                      e.target.classList.contains("strike")
+                        ? e.target.classList.remove("strike")
+                        : e.target.classList.add("strike");
+                    }}
+                  >
                     {client.name}
                     {client.ready ? " ✅" : ""}
                   </li>
