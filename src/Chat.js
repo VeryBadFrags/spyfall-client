@@ -1,11 +1,23 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-let intervalId;
+const gameDuration = 300;
 
 export default function Chat(props) {
   const [inputText, setInputText] = useState("");
-  const [timer, setTimer] = useState(300);
+  const [timer, setTimer] = useState(gameDuration);
   const inputRef = useRef();
+
+  useEffect(() => {
+    let interval = null;
+    if (props.isActive) {
+      interval = setInterval(() => {
+        setTimer((seconds) => seconds - 1);
+      }, 1000);
+    } else if (!props.isActive && timer !== 0) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [props.isActive, timer]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -14,30 +26,13 @@ export default function Chat(props) {
   }
 
   function startTimer(duration) {
-    clearInterval(intervalId);
-    let timer = duration;
-    setTimerDisplay(timer, duration);
-    intervalId = setInterval(function () {
-      //     timer--;
-      //     setTimerDisplay(timer, duration, display);
+    clearInterval(props.intervalId);
       //     if (timer <= 0) {
       //       display.textContent = "🔔 Time's up! Who is the Spy?";
       //       display.setAttribute("aria-valuenow", 0);
       //       display.style = `width: 100%;`;
       //       clearInterval(intervalId);
       //     }
-    }, 1000);
-  }
-
-  function setTimerDisplay(timer, totalDuration) {
-    let minutes = parseInt(timer / 60, 10);
-    let seconds = parseInt(timer % 60, 10);
-    //   minutes = minutes < 10 ? "0" + minutes : minutes;
-    //   seconds = seconds < 10 ? "0" + seconds : seconds;
-    //   display.textContent = `⏱ ${minutes}:${seconds}`;
-    //   let progress = (timer / totalDuration) * 100;
-    //   display.style = `width: ${progress}%;`;
-    //   display.setAttribute("aria-valuenow", Math.round(progress));
   }
 
   if (props.gameMode) {
@@ -45,7 +40,7 @@ export default function Chat(props) {
       <div className="col">
         <div className="card border-primary shadow">
           <div className="card-body">
-            <ProgressBar />
+            <ProgressBar timer={timer} />
             <div className="row g-0">
               <div
                 className="chat-box card bg-light border-bottom-0 rounded-0 rounded-top pt-3"
@@ -97,18 +92,27 @@ function ChatLine(props) {
   );
 }
 
-function ProgressBar() {
+function ProgressBar({ timer }) {
+  let minutes = parseInt(timer / 60, 10);
+  let seconds = parseInt(timer % 60, 10);
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+  seconds = seconds < 10 ? "0" + seconds : seconds;
+  let progress = (timer / gameDuration) * 100;
+  //   display.setAttribute("aria-valuenow", Math.round(progress));
+
   return (
     <div className="progress mb-2" style={{ height: "2.5em" }}>
       <div
         className="progress-bar bg-info text-dark"
         role="progressbar"
-        style={{ width: "100%" }}
-        aria-valuenow="100"
+        style={{ width: `${progress}%` }}
+        aria-valuenow={Math.round(progress)}
         aria-valuemin="0"
         aria-valuemax="100"
       >
-        <span><i class="far fa-clock"></i> 5:00</span>
+        <span>
+          <i class="fas fa-stopwatch"></i> {minutes}:{seconds}
+        </span>
       </div>
     </div>
   );

@@ -19,6 +19,7 @@ function App() {
   const [readyCheck, setReadyCheck] = useState(false);
   const [lobbyStatus, setLobbyStatus] = useState();
   const [locations, setLocations] = useState([]);
+  const [isTimerActive, setIsTimerActive] = useState(false);
 
   const onDisconnect = () => {
     resetAll();
@@ -66,11 +67,11 @@ function App() {
 
   function startGame(data) {
     window.scrollTo(0, 0);
-    clearChat();
+    setChatContent([]);
     setReadyCheck(false);
     setLocations(data.locations);
     resetClickableElements();
-    //  TODO startTimer(5 * 60, progressBar);
+    setIsTimerActive(true);
     appendText("Game started");
     if (data.spy) {
       appendText(
@@ -93,13 +94,10 @@ function App() {
     setError("");
     setGameMode(false);
     setReadyCheck(false);
+    setLobbyStatus();
     resetClickableElements();
-    // clearInterval(intervalId);
+    setIsTimerActive(false);
     window.scrollTo(0, 0);
-  }
-
-  function clearChat() {
-    setChatContent([]);
   }
 
   return (
@@ -111,6 +109,7 @@ function App() {
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 gy-4">
           <Connect
             gameMode={gameMode}
+            setGameMode={setGameMode}
             connectionManager={connectionManager}
             onDisconnect={onDisconnect}
             onMessageCallback={onMessageCallback}
@@ -119,6 +118,7 @@ function App() {
             gameMode={gameMode}
             connectionManager={connectionManager}
             chatContent={chatContent}
+            isActive={isTimerActive}
           />
           <Locations locations={locations} />
           <Settings
