@@ -4,9 +4,13 @@ function Footer() {
       <div className="container">
         <div className="row gy-2">
           <div className="lead">
-            <i className="fas fa-tree"></i> No internet? Play
-            <a href="https://offline-spy.verybadfrags.com" target="_blank" rel="noopener noreferrer">
-              📵🕵️ Offline Spyfall
+            <i className="fas fa-tree"></i> No internet? Play{" "}
+            <a
+              href="https://offline-spy.verybadfrags.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              📵🕵️&nbsp;Offline&nbsp;Spyfall
             </a>
           </div>
           <div className="lead">
@@ -20,7 +24,7 @@ function Footer() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <i className="fas fa-mobile-alt"></i> Client
+              <i className="fas fa-mobile-alt"></i>&nbsp;Client
             </a>{" "}
             ·{" "}
             <a
@@ -28,18 +32,21 @@ function Footer() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <i className="fas fa-server"></i> Server
+              <i className="fas fa-server"></i>&nbsp;Server
             </a>
           </div>
           <div className="lead">
-            <i className="far fa-heart"></i> Like this game?
+            <i className="far fa-heart"></i> Like this game?{" "}
             <a
               href="https://www.buymeacoffee.com/verybadfrags"
               target="_blank"
               rel="noopener noreferrer"
             >
-              {" "}
-              Support VeryBadFrags
+              <img
+                src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png"
+                alt="Buy Me A Coffee"
+                style={{ height: "1.7em" }}
+              />
             </a>
           </div>
         </div>
