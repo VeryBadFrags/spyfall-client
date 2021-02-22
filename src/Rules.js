@@ -28,12 +28,19 @@ function Rules(props) {
 function RulesDetails(props) {
   if (props.showRules) {
     return (
-      <div style={{ display: "block" }}>
-        <ul>
-          <li>👥 3-10 Players</li>
-          <li>⏱ 5 Minutes Rounds</li>
-          <li>📱 1 Device per player</li>
+      <div>
+        <ul className="mt-3">
+          <li>
+            <i className="fas fa-users"></i> 3-10 Players
+          </li>
+          <li>
+            <i className="fas fa-stopwatch"></i> 5 Minutes Rounds
+          </li>
+          <li>
+            <i className="fas fa-mobile-alt"></i> 1 Device per player
+          </li>
         </ul>
+        <hr />
         <ul>
           <li>All players are in the same location</li>
           <li>The spy has to guess the current location</li>
@@ -48,7 +55,9 @@ function RulesDetails(props) {
             another person
           </li>
         </ul>
-        <h6>When the timer ends</h6>
+        <h6>
+          <i className="fas fa-hourglass-end"></i> When the timer ends
+        </h6>
         <ul>
           <li>
             Players vote to designate the spy
@@ -61,7 +70,7 @@ function RulesDetails(props) {
             </ul>
           </li>
         </ul>
-        <h6>At any time</h6>
+        <h6><i className="fas fa-hand-point-right"></i> At any time</h6>
         <ul>
           <li>The players can vote for a spy if they have a majority</li>
           <li>
