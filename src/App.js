@@ -54,7 +54,7 @@ function App() {
       .forEach((elem) => elem.classList.remove("strike"));
   }
 
-  const chatSize = 16;
+  const chatSize = 11;
   function appendText(text, author, color) {
     let newRow = { text: text, author: author, color: color };
     setChatContent((previousContent) => {
