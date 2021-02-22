@@ -32,6 +32,8 @@ export default function Chat({
     event.preventDefault();
     connectionManager.send("chat-event", { message: inputText });
     setInputText("");
+    window.scrollTo(0, 0);
+    event.target.focus();
   }
 
   if (gameMode) {
@@ -42,14 +44,14 @@ export default function Chat({
             <ProgressBar timer={timer} gameDuration={gameDuration} />
             <div className="row g-0">
               <div
-                className="chat-box card bg-light border-bottom-0 rounded-0 rounded-top pt-3"
+                className="chat-box card border-bottom-0 rounded-0 rounded-top"
                 onClick={() => inputRef.current.focus()}
               >
-                <ul className="list">
+                <div class="list-group list-group-flush">
                   {chatContent.map((row, i) => (
                     <ChatLine row={row} i={i} />
                   ))}
-                </ul>
+                </div>
               </div>
               <form onSubmit={handleSubmit}>
                 <div className="input-group">
@@ -59,7 +61,7 @@ export default function Chat({
                     placeholder="Message..."
                     autoComplete="off"
                     required
-                    maxLength="64"
+                    maxLength="32"
                     value={inputText}
                     onChange={(e) => setInputText(e.target.value)}
                     ref={inputRef}
@@ -82,12 +84,12 @@ export default function Chat({
   }
 }
 
-function ChatLine(props) {
+function ChatLine({row}) {
   return (
-    <li key={props.i}>
-      {props.row.author ? <b>{props.row.author}:</b> : null}{" "}
-      <span style={{ color: props.row.color }}>{props.row.text}</span>
-    </li>
+    <span class="list-group-item">
+      {row.author ? <b>{row.author}:</b> : null}{" "}
+      <span style={{ color: row.color }}>{row.text}</span>
+    </span>
   );
 }
 
