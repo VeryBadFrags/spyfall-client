@@ -1,53 +1,51 @@
 import React, { useEffect, useRef, useState } from "react";
 
-const gameDuration = 300;
-
-export default function Chat(props) {
+export default function Chat({
+  gameMode,
+  connectionManager,
+  chatContent,
+  gameDuration,
+  timer,
+  setTimer,
+  isActive,
+}) {
   const [inputText, setInputText] = useState("");
-  const [timer, setTimer] = useState(gameDuration);
   const inputRef = useRef();
 
   useEffect(() => {
     let interval = null;
-    if (props.isActive) {
+    if (isActive) {
       interval = setInterval(() => {
         setTimer((seconds) => seconds - 1);
+        if (timer <= 0) {
+          clearInterval(interval);
+        }
       }, 1000);
-    } else if (!props.isActive && timer !== 0) {
+    } else if (!isActive) {
       clearInterval(interval);
     }
     return () => clearInterval(interval);
-  }, [props.isActive, timer]);
+  }, [timer, setTimer, isActive]);
 
   function handleSubmit(event) {
     event.preventDefault();
-    props.connectionManager.send("chat-event", { message: inputText });
+    connectionManager.send("chat-event", { message: inputText });
     setInputText("");
   }
 
-  function startTimer(duration) {
-    clearInterval(props.intervalId);
-      //     if (timer <= 0) {
-      //       display.textContent = "🔔 Time's up! Who is the Spy?";
-      //       display.setAttribute("aria-valuenow", 0);
-      //       display.style = `width: 100%;`;
-      //       clearInterval(intervalId);
-      //     }
-  }
-
-  if (props.gameMode) {
+  if (gameMode) {
     return (
       <div className="col">
         <div className="card border-primary shadow">
           <div className="card-body">
-            <ProgressBar timer={timer} />
+            <ProgressBar timer={timer} gameDuration={gameDuration} />
             <div className="row g-0">
               <div
                 className="chat-box card bg-light border-bottom-0 rounded-0 rounded-top pt-3"
                 onClick={() => inputRef.current.focus()}
               >
                 <ul className="list">
-                  {props.chatContent.map((row, i) => (
+                  {chatContent.map((row, i) => (
                     <ChatLine row={row} i={i} />
                   ))}
                 </ul>
@@ -92,28 +90,42 @@ function ChatLine(props) {
   );
 }
 
-function ProgressBar({ timer }) {
-  let minutes = parseInt(timer / 60, 10);
-  let seconds = parseInt(timer % 60, 10);
-  minutes = minutes < 10 ? "0" + minutes : minutes;
-  seconds = seconds < 10 ? "0" + seconds : seconds;
+function ProgressBar({ timer, gameDuration }) {
   let progress = (timer / gameDuration) * 100;
-  //   display.setAttribute("aria-valuenow", Math.round(progress));
 
   return (
     <div className="progress mb-2" style={{ height: "2.5em" }}>
       <div
         className="progress-bar bg-info text-dark"
         role="progressbar"
-        style={{ width: `${progress}%` }}
+        style={{ width: timer >= 0 ? `${progress}%` : "100%" }}
         aria-valuenow={Math.round(progress)}
         aria-valuemin="0"
         aria-valuemax="100"
       >
-        <span>
-          <i class="fas fa-stopwatch"></i> {minutes}:{seconds}
-        </span>
+        <ProgressBarDisplay timer={timer} />
       </div>
     </div>
   );
+}
+
+function ProgressBarDisplay({ timer }) {
+  let minutes = parseInt(timer / 60, 10);
+  let seconds = parseInt(timer % 60, 10);
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+  seconds = seconds < 10 ? "0" + seconds : seconds;
+
+  if (timer >= 0) {
+    return (
+      <span>
+        <i class="fas fa-stopwatch"></i> {minutes}:{seconds}
+      </span>
+    );
+  } else {
+    return (
+      <span>
+        <i class="fas fa-bell"></i> Time's up! Who is the Spy?
+      </span>
+    );
+  }
 }

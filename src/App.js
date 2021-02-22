@@ -11,6 +11,7 @@ import Menu from "./Menu";
 import Error from "./Error";
 
 const connectionManager = new ConnectionManager();
+const gameDuration = 300;
 
 function App() {
   const [gameMode, setGameMode] = useState(false);
@@ -20,6 +21,7 @@ function App() {
   const [lobbyStatus, setLobbyStatus] = useState();
   const [locations, setLocations] = useState([]);
   const [isTimerActive, setIsTimerActive] = useState(false);
+  const [timer, setTimer] = useState(gameDuration);
 
   const onDisconnect = () => {
     resetAll();
@@ -119,6 +121,9 @@ function App() {
             connectionManager={connectionManager}
             chatContent={chatContent}
             isActive={isTimerActive}
+            timer={timer}
+            setTimer={setTimer}
+            gameDuration={gameDuration}
           />
           <Locations locations={locations} />
           <Settings
