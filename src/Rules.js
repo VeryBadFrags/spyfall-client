@@ -7,7 +7,7 @@ function Rules(props) {
     <div className="col">
       <div className="card shadow">
         <div className="card-header">
-          <i class="fas fa-book"></i> Rules
+          <i className="fas fa-book"></i> Rules
         </div>
         <div className="card-body">
           <div className="d-grid">
@@ -15,7 +15,7 @@ function Rules(props) {
               className="btn btn-outline-primary"
               onClick={(event) => setShowRules(!showRules)}
             >
-              <i class="fas fa-eye"></i> Show/Hide
+              <i className="fas fa-eye"></i> Show/Hide
             </button>
             <RulesDetails showRules={showRules} />
           </div>

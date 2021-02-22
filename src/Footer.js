@@ -4,23 +4,23 @@ function Footer() {
       <div className="container">
         <div className="row gy-2">
           <div className="lead">
-            <i class="fas fa-tree"></i> No internet? Play
+            <i className="fas fa-tree"></i> No internet? Play
             <a href="https://offline-spy.verybadfrags.com" target="_blank">
               📵🕵️ Offline Spyfall
             </a>
           </div>
           <div className="lead">
-            <i class="far fa-comments"></i> Suggestions, Feedback?{" "}
+            <i className="far fa-comments"></i> Suggestions, Feedback?{" "}
             <a href="mailto:spy@verybadfrags.com">spy@verybadfrags.com</a>
           </div>
           <div className="lead">
-            <i class="fas fa-code"></i> Source code on GitHub{" "}
+            <i className="fas fa-code"></i> Source code on GitHub{" "}
             <a
               href="https://github.com/VeryBadFrags/online-spy-client"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <i class="fas fa-mobile-alt"></i> Client
+              <i className="fas fa-mobile-alt"></i> Client
             </a>{" "}
             ·{" "}
             <a
@@ -28,11 +28,11 @@ function Footer() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <i class="fas fa-server"></i> Server
+              <i className="fas fa-server"></i> Server
             </a>
           </div>
           <div className="lead">
-            <i class="far fa-heart"></i> Like this game?
+            <i className="far fa-heart"></i> Like this game?
             <a
               href="https://www.buymeacoffee.com/verybadfrags"
               target="_blank"

@@ -67,7 +67,7 @@ export default function Chat({
                     type="submit"
                     className="btn btn-primary border-rounded-bottom-right"
                   >
-                    <i class="fas fa-paper-plane"></i> Send
+                    <i className="fas fa-paper-plane"></i> Send
                   </button>
                 </div>
               </form>
@@ -118,13 +118,13 @@ function ProgressBarDisplay({ timer }) {
   if (timer >= 0) {
     return (
       <span>
-        <i class="fas fa-stopwatch"></i> {minutes}:{seconds}
+        <i className="fas fa-stopwatch"></i> {minutes}:{seconds}
       </span>
     );
   } else {
     return (
       <span>
-        <i class="fas fa-bell"></i> Time's up! Who is the Spy?
+        <i className="fas fa-bell"></i> Time's up! Who is the Spy?
       </span>
     );
   }

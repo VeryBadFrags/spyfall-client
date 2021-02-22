@@ -17,30 +17,15 @@ function Settings(props) {
       <div className="col">
         <div className="card border-secondary shadow">
           <div className="card-header">
-            <i class="fas fa-cog"></i> Settings
+            <i className="fas fa-cog"></i> Settings
           </div>
           <div className="card-body">
             {/* Lobby code */}
-            <div className="row g-3 align-items-center mb-3">
-              <div className="col-auto">
-                <label htmlFor="lobby-display" className="col-form-label">
-                  <i class="fas fa-building"></i> Lobby
-                </label>
-              </div>
-              <div className="col-auto">
-                <input
-                  id="lobby-display"
-                  type="text"
-                  className="form-control"
-                  readOnly
-                  value={props.lobbyStatus?.sessionId}
-                />
-              </div>
-            </div>
+            <LobbyCode lobbyStatus={props.lobbyStatus} />
 
             {/* Players list */}
             <h6 className="card-title">
-              <i class="fas fa-users"></i> Players
+              <i className="fas fa-users"></i> Players
             </h6>
             <ul className="list">
               {props.lobbyStatus?.peers.clients.map((client) => {
@@ -64,7 +49,7 @@ function Settings(props) {
             <hr />
 
             <p className="card-title">
-              <i class="fas fa-flag-checkered"></i> New Game
+              <i className="fas fa-flag-checkered"></i> New Game
             </p>
             <form onSubmit={handleStartGame}>
               <div className="form-check form-switch mb-3">
@@ -77,6 +62,7 @@ function Settings(props) {
                   autoComplete="off"
                   checked={props.readyCheck}
                   ref={readyRef}
+                  defaultChecked
                   onClick={(event) => {
                     props.connectionManager?.send("player-ready", {
                       ready: event.target.checked,
@@ -93,7 +79,7 @@ function Settings(props) {
               </div>
               <div className="d-grid">
                 <button type="submit" className="btn btn-primary">
-                  <i class="fas fa-traffic-light"></i> Start new round
+                  <i className="fas fa-traffic-light"></i> Start new round
                 </button>
               </div>
             </form>
@@ -101,9 +87,9 @@ function Settings(props) {
             <div className="d-grid">
               <button
                 className="btn btn-sm btn-outline-danger"
-                onClick={(e) => props.connectionManager.disconnect()}
+                onClick={(e) => props.disconnectCallback()}
               >
-                <i class="fas fa-sign-out-alt"></i> Leave lobby
+                <i className="fas fa-sign-out-alt"></i> Leave lobby
               </button>
             </div>
           </div>
@@ -113,6 +99,25 @@ function Settings(props) {
   } else {
     return null;
   }
+}
+
+function LobbyCode({lobbyStatus}) {
+  return (<div className="row g-3 align-items-center mb-3">
+  <div className="col-auto">
+    <label htmlFor="lobby-display" className="col-form-label">
+      <i className="fas fa-building"></i> Lobby
+    </label>
+  </div>
+  <div className="col-auto">
+    <input
+      id="lobby-display"
+      type="text"
+      className="form-control"
+      readOnly
+      value={lobbyStatus?.sessionId}
+    />
+  </div>
+</div>);
 }
 
 export default Settings;
