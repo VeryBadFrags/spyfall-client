@@ -5,7 +5,7 @@ function Footer() {
         <div className="row gy-2">
           <div className="lead">
             <i className="fas fa-tree"></i> No internet? Play
-            <a href="https://offline-spy.verybadfrags.com" target="_blank">
+            <a href="https://offline-spy.verybadfrags.com" target="_blank" rel="noopener noreferrer">
               📵🕵️ Offline Spyfall
             </a>
           </div>
