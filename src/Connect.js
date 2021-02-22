@@ -7,6 +7,7 @@ function Connect(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    props.setGameMode(true);
     props.connectionManager.connect(
       playerName,
       lobbyID,
@@ -15,7 +16,7 @@ function Connect(props) {
     );
   };
 
-  const editCode = (event) => {
+  const onChangeLobbyCode = (event) => {
     let value = event.target.value;
     if (event.target.value) {
       setButtonText("🔌 Join Lobby");
@@ -71,7 +72,7 @@ function Connect(props) {
                   maxLength="8"
                   autoComplete="off"
                   value={lobbyID}
-                  onChange={editCode}
+                  onChange={onChangeLobbyCode}
                 />
               </div>
               <div className="d-grid">
