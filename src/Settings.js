@@ -104,7 +104,7 @@ function NewGameForm({ readyCheck, setReadyCheck, connectionManager }) {
             autoComplete="off"
             checked={readyCheck}
             ref={readyRef}
-            defaultChecked
+            onChange={() => {}}
             onClick={(event) => {
               connectionManager?.send("player-ready", {
                 ready: event.target.checked,
