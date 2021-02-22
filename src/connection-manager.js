@@ -2,7 +2,11 @@ import io from "socket.io-client";
 
 export default class ConnectionManager {
   constructor() {
-    this.socket = null;
+    if (window.location.hostname === "localhost") {
+      this.socket = io("http://localhost:8081");
+    } else {
+      this.socket = io("https://limitless-temple-26784.herokuapp.com");
+    }
   }
 
   connect = (
@@ -11,12 +15,6 @@ export default class ConnectionManager {
     connectionClosedCallback,
     onMessageCallback
   ) => {
-    if (window.location.hostname === "localhost") {
-      this.socket = io("http://localhost:8081");
-    } else {
-      this.socket = io("https://limitless-temple-26784.herokuapp.com");
-    }
-
     this.initSession(playerName, sessionId);
 
     this.socket.on("disconnect", () => {
