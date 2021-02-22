@@ -11,7 +11,6 @@ function Settings(props) {
           <div className="card-body">
             <LobbyCode lobbyStatus={props.lobbyStatus} />
             <PlayersList lobbyStatus={props.lobbyStatus} />
-            <hr />
             <NewGameForm
               readyCheck={props.readyCheck}
               setReadyCheck={props.setReadyCheck}
@@ -98,6 +97,7 @@ function NewGameForm({ readyCheck, setReadyCheck, connectionManager }) {
           <input
             id="ready-check"
             className="form-check-input"
+            style={{cursor: "pointer"}}
             type="checkbox"
             name="ready-check"
             required

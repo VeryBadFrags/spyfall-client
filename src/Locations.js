@@ -9,7 +9,7 @@ export default function Locations({ locations }) {
               return (
                 <li
                   key={i}
-                  className="clickable list-group-item py-1"
+                  className="list-group-item list-group-item-action text-dark py-1"
                   onClick={(e) => {
                     e.target.classList.contains("strike")
                       ? e.target.classList.remove("strike")
