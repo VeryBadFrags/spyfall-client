@@ -78,7 +78,7 @@ function Settings(props) {
                   checked={props.readyCheck}
                   ref={readyRef}
                   onClick={(event) => {
-                    props.connectionManager.send("player-ready", {
+                    props.connectionManager?.send("player-ready", {
                       ready: event.target.checked,
                     });
                     props.setReadyCheck(event.target.checked);
