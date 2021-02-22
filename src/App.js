@@ -1,13 +1,13 @@
 import "./App.css";
 import Connect from "./Connect";
-import Chat from "./Chat";
+import Chat from "./Chat/Chat";
 import { useState } from "react";
 import Rules from "./Rules";
 import Settings from "./Settings";
 import Footer from "./Footer";
 import ConnectionManager from "./connection-manager.js";
 import Locations from "./Locations";
-import Menu from "./Menu";
+import Menu from "./Menu/Menu";
 import Error from "./Error";
 
 const connectionManager = new ConnectionManager();
