@@ -23,6 +23,11 @@ function App() {
   const [isTimerActive, setIsTimerActive] = useState(false);
   const [timer, setTimer] = useState(gameDuration);
 
+  function disconnect() {
+    resetAll();
+    connectionManager.disconnect();
+  }
+
   const onDisconnect = () => {
     resetAll();
     setError("Connection to server closed");
@@ -53,6 +58,7 @@ function App() {
   function appendText(text, author, color) {
     let newRow = { text: text, author: author, color: color };
     setChatContent((previousContent) => {
+      // Trim the chat if it's too long
       if (previousContent.length >= chatSize) {
         return [
           ...previousContent.splice(
@@ -129,7 +135,7 @@ function App() {
           <Settings
             gameMode={gameMode}
             connectionManager={connectionManager}
-            disconnectCallback={() => connectionManager.disconnect()}
+            disconnectCallback={disconnect}
             readyCheck={readyCheck}
             setReadyCheck={setReadyCheck}
             lobbyStatus={lobbyStatus}
