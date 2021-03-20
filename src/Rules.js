@@ -1,6 +1,7 @@
+import React from 'react';
 import { useState } from "react";
 
-function Rules(props) {
+function Rules() {
   const [showRules, setShowRules] = useState(false);
 
   return (
@@ -13,7 +14,7 @@ function Rules(props) {
           <div className="d-grid">
             <button
               className="btn btn-outline-primary"
-              onClick={(event) => setShowRules(!showRules)}
+              onClick={() => setShowRules(!showRules)}
             >
               <i className="fas fa-eye"></i> Show/Hide
             </button>

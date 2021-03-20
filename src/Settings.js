@@ -1,3 +1,4 @@
+import React from 'react';
 import { useRef } from "react";
 
 function Settings(props) {
@@ -131,7 +132,7 @@ function DisconnectButton({ disconnectCallback }) {
     <div className="d-grid">
       <button
         className="btn btn-sm btn-outline-danger"
-        onClick={(e) => disconnectCallback()}
+        onClick={() => disconnectCallback()}
       >
         <i className="fas fa-sign-out-alt"></i> Leave lobby
       </button>

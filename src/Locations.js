@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default function Locations({ locations }) {
   if (locations && locations.length > 0) {
     return (

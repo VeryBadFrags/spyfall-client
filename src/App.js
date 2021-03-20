@@ -1,3 +1,4 @@
+import React from 'react';
 import "./App.css";
 import Connect from "./Connect";
 import Chat from "./Chat/Chat";

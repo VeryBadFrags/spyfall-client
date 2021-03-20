@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect, useState } from "react";
 
 function Connect(props) {
@@ -16,7 +17,7 @@ function Connect(props) {
     );
   };
 
-  const onChangeLobbyCode = (event) => {
+  const handleLobbyCodeChange = (event) => {
     let value = event.target.value;
     if (event.target.value) {
       setButtonText("🔌 Join Lobby");
@@ -72,7 +73,7 @@ function Connect(props) {
                   maxLength="8"
                   autoComplete="off"
                   value={lobbyID}
-                  onChange={onChangeLobbyCode}
+                  onChange={handleLobbyCodeChange}
                 />
               </div>
               <div className="d-grid">

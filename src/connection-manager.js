@@ -6,7 +6,7 @@ export default class ConnectionManager {
     this.initSocket();
   }
 
-  initSocket = () => {
+  initSocket() {
     if (!this.socket) {
       if (window.location.hostname === "localhost") {
         this.socket = io("http://localhost:8081");
@@ -16,14 +16,9 @@ export default class ConnectionManager {
     } else {
       this.socket.connect();
     }
-  };
+  }
 
-  connect = (
-    playerName,
-    sessionId,
-    connectionClosedCallback,
-    onMessageCallback
-  ) => {
+  connect(playerName, sessionId, connectionClosedCallback, onMessageCallback) {
     this.initSocket();
     this.send("join-session", {
       sessionId: sessionId,
@@ -39,12 +34,12 @@ export default class ConnectionManager {
     this.socket.on("message", (msg) => {
       onMessageCallback(msg.type, msg);
     });
-  };
+  }
 
-  disconnect = () => {
+  disconnect() {
     this.socket.disconnect();
     this.socket = null;
-  };
+  }
 
   send(type, data) {
     this.socket.emit(type, data);

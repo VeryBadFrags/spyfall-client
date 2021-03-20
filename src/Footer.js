@@ -1,3 +1,5 @@
+import React from 'react';
+
 function Footer() {
   return (
     <footer className="navbar navbar-light bg-light border-dark border-top rounded-0 pt-3 pb-4">
@@ -36,7 +38,7 @@ function Footer() {
             </a>
           </div>
           <div className="lead">
-            <i className="far fa-heart"></i> Like this game?{" "}
+            <i className="far fa-heart" /> Like this game?{" "}
             <a
               href="https://www.buymeacoffee.com/verybadfrags"
               target="_blank"

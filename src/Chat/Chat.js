@@ -47,9 +47,9 @@ export default function Chat({
                 className="chat-box card border-bottom-0 rounded-0 rounded-top"
                 onClick={() => inputRef.current.focus()}
               >
-                <div class="list-group list-group-flush">
+                <div className="list-group list-group-flush">
                   {chatContent.map((row, i) => (
-                    <ChatLine row={row} i={i} />
+                    <ChatLine row={row} key={i} />
                   ))}
                 </div>
               </div>
@@ -86,7 +86,7 @@ export default function Chat({
 
 function ChatLine({row}) {
   return (
-    <span class="list-group-item">
+    <span className="list-group-item">
       {row.author ? <b>{row.author}:</b> : null}{" "}
       <span style={{ color: row.color }}>{row.text}</span>
     </span>
@@ -127,7 +127,7 @@ function ProgressBarDisplay({ timer }) {
   } else {
     return (
       <span>
-        <i className="fas fa-bell"></i> Time's up! Who is the Spy?
+        <i className="fas fa-bell"></i> Time&apos;s up! Who is the Spy?
       </span>
     );
   }
