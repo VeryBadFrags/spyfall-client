@@ -3,7 +3,7 @@ import "./App.css";
 import Connect from "./Connect";
 import Chat from "./Chat/Chat";
 import Rules from "./Rules";
-import Settings from "./GameSettings/GameSettings";
+import GameSettings from "./GameSettings/GameSettings";
 import Footer from "./Footer";
 import ConnectionManager from "./connection-manager.js";
 import Locations from "./Locations";
@@ -115,31 +115,33 @@ function App() {
       <div className="container mb-5 pt-3">
         <Error error={error} />
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 gy-4">
-          <Connect
-            gameMode={gameMode}
-            setGameMode={setGameMode}
-            connectionManager={connectionManager}
-            onDisconnect={onDisconnect}
-            onMessageCallback={onMessageCallback}
-          />
-          <Chat
-            gameMode={gameMode}
-            connectionManager={connectionManager}
-            chatContent={chatContent}
-            isActive={isTimerActive}
-            timer={timer}
-            setTimer={setTimer}
-            gameDuration={gameDuration}
-          />
-          <Locations locations={locations} />
-          <Settings
-            gameMode={gameMode}
-            connectionManager={connectionManager}
-            disconnectCallback={disconnect}
-            readyCheck={readyCheck}
-            setReadyCheck={setReadyCheck}
-            lobbyStatus={lobbyStatus}
-          />
+          {gameMode ? (
+            <>
+              <Chat
+                connectionManager={connectionManager}
+                chatContent={chatContent}
+                isActive={isTimerActive}
+                timer={timer}
+                setTimer={setTimer}
+                gameDuration={gameDuration}
+              />
+              <Locations locations={locations} />
+              <GameSettings
+                connectionManager={connectionManager}
+                disconnectCallback={disconnect}
+                readyCheck={readyCheck}
+                setReadyCheck={setReadyCheck}
+                lobbyStatus={lobbyStatus}
+              />
+            </>
+          ) : (
+            <Connect
+              setGameMode={setGameMode}
+              connectionManager={connectionManager}
+              onDisconnect={onDisconnect}
+              onMessageCallback={onMessageCallback}
+            />
+          )}
           <Rules />
         </div>
       </div>

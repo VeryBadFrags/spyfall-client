@@ -4,27 +4,23 @@ import LobbyCode from "./LobbyCode";
 import NewGameForm from "./NewGameForm";
 import PlayersList from "./PlayersList";
 
-function Settings(props) {
-  if (props.gameMode) {
-    return (
-      <Card
-        className="border-secondary"
-        header='<i class="fas fa-cog"></i> Settings'
-      >
-        <LobbyCode lobbyStatus={props.lobbyStatus} />
-        <PlayersList lobbyStatus={props.lobbyStatus} />
-        <NewGameForm
-          readyCheck={props.readyCheck}
-          setReadyCheck={props.setReadyCheck}
-          connectionManager={props.connectionManager}
-        />
-        <hr />
-        <DisconnectButton disconnectCallback={props.disconnectCallback} />
-      </Card>
-    );
-  } else {
-    return null;
-  }
+export default function GameSettings(props) {
+  return (
+    <Card
+      className="border-secondary"
+      header='<i class="fas fa-cog"></i> Settings'
+    >
+      <LobbyCode lobbyStatus={props.lobbyStatus} />
+      <PlayersList lobbyStatus={props.lobbyStatus} />
+      <NewGameForm
+        readyCheck={props.readyCheck}
+        setReadyCheck={props.setReadyCheck}
+        connectionManager={props.connectionManager}
+      />
+      <hr />
+      <DisconnectButton disconnectCallback={props.disconnectCallback} />
+    </Card>
+  );
 }
 
 function DisconnectButton({ disconnectCallback }) {
@@ -39,5 +35,3 @@ function DisconnectButton({ disconnectCallback }) {
     </div>
   );
 }
-
-export default Settings;

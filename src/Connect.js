@@ -39,51 +39,47 @@ export default function Connect(props) {
     }
   }, []);
 
-  if (!props.gameMode) {
-    return (
-      <Card className="text-dark bg-light border-primary">
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="name-input" className="form-label">
-              <i className="fas fa-user"></i> Name
-            </label>
-            <input
-              id="name-input"
-              type="text"
-              className="form-control"
-              required
-              autoFocus
-              maxLength="16"
-              value={playerName}
-              onChange={(e) => setPlayerName(e.target.value)}
-            />
-          </div>
-          {/* Lobby input */}
-          <div className="mb-3">
-            <label htmlFor="lobby-input" className="form-label">
-              <i className="fas fa-dice"></i> Lobby code
-            </label>
-            <input
-              id="lobby-input"
-              type="text"
-              className="form-control"
-              pattern="[A-Za-z0-9]*"
-              title="Lobby Code"
-              maxLength="8"
-              autoComplete="off"
-              value={lobbyID}
-              onChange={handleLobbyCodeChange}
-            />
-          </div>
-          <div className="d-grid">
-            <button type=" submit" className="btn btn-primary">
-              {buttonText}
-            </button>
-          </div>
-        </form>
-      </Card>
-    );
-  } else {
-    return null;
-  }
+  return (
+    <Card className="text-dark bg-light border-primary">
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label htmlFor="name-input" className="form-label">
+            <i className="fas fa-user"></i> Name
+          </label>
+          <input
+            id="name-input"
+            type="text"
+            className="form-control"
+            required
+            autoFocus
+            maxLength="16"
+            value={playerName}
+            onChange={(e) => setPlayerName(e.target.value)}
+          />
+        </div>
+        {/* Lobby input */}
+        <div className="mb-3">
+          <label htmlFor="lobby-input" className="form-label">
+            <i className="fas fa-dice"></i> Lobby code
+          </label>
+          <input
+            id="lobby-input"
+            type="text"
+            className="form-control"
+            pattern="[A-Za-z0-9]*"
+            title="Lobby Code"
+            maxLength="8"
+            autoComplete="off"
+            value={lobbyID}
+            onChange={handleLobbyCodeChange}
+          />
+        </div>
+        <div className="d-grid">
+          <button type=" submit" className="btn btn-primary">
+            {buttonText}
+          </button>
+        </div>
+      </form>
+    </Card>
+  );
 }
