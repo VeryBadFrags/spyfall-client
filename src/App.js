@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState } from "react";
 import "./App.css";
 import Connect from "./Connect";
 import Chat from "./Chat/Chat";
-import { useState } from "react";
 import Rules from "./Rules";
-import Settings from "./Settings";
+import Settings from "./GameSettings/GameSettings";
 import Footer from "./Footer";
 import ConnectionManager from "./connection-manager.js";
 import Locations from "./Locations";
