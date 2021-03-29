@@ -1,28 +1,22 @@
-import React from 'react';
+import React from "react";
 import { useState } from "react";
+import Card from "./Card";
 
-function Rules() {
+export default function Rules() {
   const [showRules, setShowRules] = useState(false);
 
   return (
-    <div className="col">
-      <div className="card shadow">
-        <div className="card-header">
-          <i className="fas fa-book"></i> Rules
-        </div>
-        <div className="card-body">
-          <div className="d-grid">
-            <button
-              className="btn btn-outline-primary"
-              onClick={() => setShowRules(!showRules)}
-            >
-              <i className="fas fa-eye"></i> Show/Hide
-            </button>
-            <RulesDetails showRules={showRules} />
-          </div>
-        </div>
+    <Card header='<i class="fas fa-book"></i> Rules'>
+      <div className="d-grid">
+        <button
+          className="btn btn-outline-primary"
+          onClick={() => setShowRules(!showRules)}
+        >
+          <i className="fas fa-eye"></i> Show/Hide
+        </button>
+        <RulesDetails showRules={showRules} />
       </div>
-    </div>
+    </Card>
   );
 }
 
@@ -71,7 +65,9 @@ function RulesDetails(props) {
             </ul>
           </li>
         </ul>
-        <h6><i className="fas fa-hand-point-right"></i> At any time</h6>
+        <h6>
+          <i className="fas fa-hand-point-right"></i> At any time
+        </h6>
         <ul>
           <li>The players can vote for a spy if they have a majority</li>
           <li>
@@ -85,5 +81,3 @@ function RulesDetails(props) {
     return null;
   }
 }
-
-export default Rules;

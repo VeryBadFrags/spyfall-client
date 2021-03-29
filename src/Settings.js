@@ -1,27 +1,24 @@
-import React from 'react';
+import React from "react";
 import { useRef } from "react";
+import Card from "./Card";
 
 function Settings(props) {
   if (props.gameMode) {
     return (
-      <div className="col">
-        <div className="card border-secondary shadow">
-          <div className="card-header">
-            <i className="fas fa-cog"></i> Settings
-          </div>
-          <div className="card-body">
-            <LobbyCode lobbyStatus={props.lobbyStatus} />
-            <PlayersList lobbyStatus={props.lobbyStatus} />
-            <NewGameForm
-              readyCheck={props.readyCheck}
-              setReadyCheck={props.setReadyCheck}
-              connectionManager={props.connectionManager}
-            />
-            <hr />
-            <DisconnectButton disconnectCallback={props.disconnectCallback} />
-          </div>
-        </div>
-      </div>
+      <Card
+        className="border-secondary"
+        header='<i class="fas fa-cog"></i> Settings'
+      >
+        <LobbyCode lobbyStatus={props.lobbyStatus} />
+        <PlayersList lobbyStatus={props.lobbyStatus} />
+        <NewGameForm
+          readyCheck={props.readyCheck}
+          setReadyCheck={props.setReadyCheck}
+          connectionManager={props.connectionManager}
+        />
+        <hr />
+        <DisconnectButton disconnectCallback={props.disconnectCallback} />
+      </Card>
     );
   } else {
     return null;
@@ -98,7 +95,7 @@ function NewGameForm({ readyCheck, setReadyCheck, connectionManager }) {
           <input
             id="ready-check"
             className="form-check-input"
-            style={{cursor: "pointer"}}
+            style={{ cursor: "pointer" }}
             type="checkbox"
             name="ready-check"
             required

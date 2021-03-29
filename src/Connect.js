@@ -1,7 +1,8 @@
-import React from 'react';
+import React from "react";
 import { useEffect, useState } from "react";
+import Card from "./Card";
 
-function Connect(props) {
+export default function Connect(props) {
   const [playerName, setPlayerName] = useState("");
   const [lobbyID, setLobbyID] = useState("");
   const [buttonText, setButtonText] = useState("🏠 Create Lobby");
@@ -40,55 +41,49 @@ function Connect(props) {
 
   if (!props.gameMode) {
     return (
-      <div className="col">
-        <div className="card text-dark bg-light border-primary shadow">
-          <div className="card-body">
-            <form onSubmit={handleSubmit}>
-              <div className="mb-3">
-                <label htmlFor="name-input" className="form-label">
-                  <i className="fas fa-user"></i> Name
-                </label>
-                <input
-                  id="name-input"
-                  type="text"
-                  className="form-control"
-                  required
-                  autoFocus
-                  maxLength="16"
-                  value={playerName}
-                  onChange={(e) => setPlayerName(e.target.value)}
-                />
-              </div>
-              {/* Lobby input */}
-              <div className="mb-3">
-                <label htmlFor="lobby-input" className="form-label">
-                  <i className="fas fa-dice"></i> Lobby code
-                </label>
-                <input
-                  id="lobby-input"
-                  type="text"
-                  className="form-control"
-                  pattern="[A-Za-z0-9]*"
-                  title="Lobby Code"
-                  maxLength="8"
-                  autoComplete="off"
-                  value={lobbyID}
-                  onChange={handleLobbyCodeChange}
-                />
-              </div>
-              <div className="d-grid">
-                <button type=" submit" className="btn btn-primary">
-                  {buttonText}
-                </button>
-              </div>
-            </form>
+      <Card className="text-dark bg-light border-primary">
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="name-input" className="form-label">
+              <i className="fas fa-user"></i> Name
+            </label>
+            <input
+              id="name-input"
+              type="text"
+              className="form-control"
+              required
+              autoFocus
+              maxLength="16"
+              value={playerName}
+              onChange={(e) => setPlayerName(e.target.value)}
+            />
           </div>
-        </div>
-      </div>
+          {/* Lobby input */}
+          <div className="mb-3">
+            <label htmlFor="lobby-input" className="form-label">
+              <i className="fas fa-dice"></i> Lobby code
+            </label>
+            <input
+              id="lobby-input"
+              type="text"
+              className="form-control"
+              pattern="[A-Za-z0-9]*"
+              title="Lobby Code"
+              maxLength="8"
+              autoComplete="off"
+              value={lobbyID}
+              onChange={handleLobbyCodeChange}
+            />
+          </div>
+          <div className="d-grid">
+            <button type=" submit" className="btn btn-primary">
+              {buttonText}
+            </button>
+          </div>
+        </form>
+      </Card>
     );
   } else {
     return null;
   }
 }
-
-export default Connect;
