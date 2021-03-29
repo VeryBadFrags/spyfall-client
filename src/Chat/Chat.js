@@ -1,6 +1,7 @@
 import "./Chat.css";
 import React, { useEffect, useRef, useState } from "react";
 import Card from "../Card";
+import ProgressBar from "./ProgressBar";
 
 export default function Chat({
   connectionManager,
@@ -83,44 +84,4 @@ function ChatLine({ row }) {
       <span style={{ color: row.color }}>{row.text}</span>
     </span>
   );
-}
-
-function ProgressBar({ timer, gameDuration }) {
-  let progress = (timer / gameDuration) * 100;
-
-  return (
-    <div className="progress mb-2" style={{ height: "2.5em" }}>
-      <div
-        className="progress-bar bg-info text-dark"
-        role="progressbar"
-        style={{ width: timer >= 0 ? `${progress}%` : "100%" }}
-        aria-valuenow={Math.round(progress)}
-        aria-valuemin="0"
-        aria-valuemax="100"
-      >
-        <ProgressBarDisplay timer={timer} />
-      </div>
-    </div>
-  );
-}
-
-function ProgressBarDisplay({ timer }) {
-  let minutes = parseInt(timer / 60, 10);
-  let seconds = parseInt(timer % 60, 10);
-  minutes = minutes < 10 ? "0" + minutes : minutes;
-  seconds = seconds < 10 ? "0" + seconds : seconds;
-
-  if (timer >= 0) {
-    return (
-      <span>
-        <i className="fas fa-stopwatch"></i> {minutes}:{seconds}
-      </span>
-    );
-  } else {
-    return (
-      <span>
-        <i className="fas fa-bell"></i> Time&apos;s up! Who is the Spy?
-      </span>
-    );
-  }
 }
