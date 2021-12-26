@@ -6,6 +6,6 @@
 
 A multiplayer social deduction game inspired by [Spyfall](https://hwint.ru/portfolio-item/spyfall/). Built with React and [socket.io](https://socket.io).
 
-View the server code [here](https://github.com/VeryBadFrags/online-spy-server).
+View the server code [here](https://github.com/VeryBadFrags/spyfall-server).
 
 [▶️ Play the game](https://spy.verybadfrags.com)
