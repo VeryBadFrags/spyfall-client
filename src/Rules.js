@@ -1,38 +1,37 @@
-import React from "react";
-import { useState } from "react";
-import Card from "./Card";
+import React, { useState } from 'react'
+import Card from './Card'
 
-export default function Rules() {
-  const [showRules, setShowRules] = useState(false);
+export default function Rules () {
+  const [showRules, setShowRules] = useState(false)
 
   return (
     <Card header='<i class="fas fa-book"></i> Rules'>
-      <div className="d-grid">
+      <div className='d-grid'>
         <button
-          className="btn btn-outline-primary"
+          className='btn btn-outline-primary'
           onClick={() => setShowRules(!showRules)}
         >
-          <i className="fas fa-eye"></i> Show/Hide
+          <i className='fas fa-eye' /> Show/Hide
         </button>
         <RulesDetails showRules={showRules} />
       </div>
     </Card>
-  );
+  )
 }
 
-function RulesDetails(props) {
+function RulesDetails (props) {
   if (props.showRules) {
     return (
       <div>
-        <ul className="mt-3">
+        <ul className='mt-3'>
           <li>
-            <i className="fas fa-users"></i> 3-10 Players
+            <i className='fas fa-users' /> 3-10 Players
           </li>
           <li>
-            <i className="fas fa-stopwatch"></i> 5 Minutes Rounds
+            <i className='fas fa-stopwatch' /> 5 Minutes Rounds
           </li>
           <li>
-            <i className="fas fa-mobile-alt"></i> 1 Device per player
+            <i className='fas fa-mobile-alt' /> 1 Device per player
           </li>
         </ul>
         <hr />
@@ -51,7 +50,7 @@ function RulesDetails(props) {
           </li>
         </ul>
         <h6>
-          <i className="fas fa-hourglass-end"></i> When the timer ends
+          <i className='fas fa-hourglass-end' /> When the timer ends
         </h6>
         <ul>
           <li>
@@ -66,7 +65,7 @@ function RulesDetails(props) {
           </li>
         </ul>
         <h6>
-          <i className="fas fa-hand-point-right"></i> At any time
+          <i className='fas fa-hand-point-right' /> At any time
         </h6>
         <ul>
           <li>The players can vote for a spy if they have a majority</li>
@@ -76,8 +75,8 @@ function RulesDetails(props) {
           </li>
         </ul>
       </div>
-    );
+    )
   } else {
-    return null;
+    return null
   }
 }

@@ -1,13 +1,13 @@
-import React from "react";
-import Card from "../Card";
-import LobbyCode from "./LobbyCode";
-import NewGameForm from "./NewGameForm";
-import PlayersList from "./PlayersList";
+import React from 'react'
+import Card from '../Card'
+import LobbyCode from './LobbyCode'
+import NewGameForm from './NewGameForm'
+import PlayersList from './PlayersList'
 
-export default function GameSettings(props) {
+export default function GameSettings (props) {
   return (
     <Card
-      className="border-secondary"
+      className='border-secondary'
       header='<i class="fas fa-cog"></i> Settings'
     >
       <LobbyCode lobbyStatus={props.lobbyStatus} />
@@ -20,18 +20,18 @@ export default function GameSettings(props) {
       <hr />
       <DisconnectButton disconnectCallback={props.disconnectCallback} />
     </Card>
-  );
+  )
 }
 
-function DisconnectButton({ disconnectCallback }) {
+function DisconnectButton ({ disconnectCallback }) {
   return (
-    <div className="d-grid">
+    <div className='d-grid'>
       <button
-        className="btn btn-sm btn-outline-danger"
+        className='btn btn-sm btn-outline-danger'
         onClick={() => disconnectCallback()}
       >
-        <i className="fas fa-sign-out-alt"></i> Leave lobby
+        <i className='fas fa-sign-out-alt' /> Leave lobby
       </button>
     </div>
-  );
+  )
 }
