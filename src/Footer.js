@@ -22,7 +22,7 @@ function Footer () {
           <div className='lead'>
             <i className='fas fa-code' /> Source code on GitHub{' '}
             <a
-              href='https://github.com/VeryBadFrags/online-spy-client'
+              href='https://github.com/VeryBadFrags/spyfall-client'
               target='_blank'
               rel='noopener noreferrer'
             >
@@ -30,7 +30,7 @@ function Footer () {
             </a>{' '}
             ·{' '}
             <a
-              href='https://github.com/VeryBadFrags/online-spy-server'
+              href='https://github.com/VeryBadFrags/spyfall-server'
               target='_blank'
               rel='noopener noreferrer'
             >
