@@ -11,7 +11,7 @@ export default class ConnectionManager {
       if (window.location.hostname === 'localhost') {
         this.socket = io('http://localhost:8081')
       } else {
-        this.socket = io('https://limitless-temple-26784.herokuapp.com')
+        this.socket = io('https://spyfall-server.onrender.com')
       }
     } else {
       this.socket.connect()
