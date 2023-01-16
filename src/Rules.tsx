@@ -19,7 +19,11 @@ export default function Rules () {
   )
 }
 
-function RulesDetails (props: any) {
+interface RulesDetailsProps {
+  showRules: boolean;
+}
+
+function RulesDetails (props: RulesDetailsProps) {
   if (props.showRules) {
     return (
       <div>

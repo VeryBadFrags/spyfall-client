@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
+import { SocketPayload } from "./Types";
+import ConnectionManager from "./utils/connection-manager";
 
 interface ConnectProps {
-  setGameMode: any;
-  connectionManager: any;
-  onDisconnect: any;
-  onMessageCallback: any;
+  setGameMode: React.Dispatch<React.SetStateAction<boolean>>;
+  connectionManager: ConnectionManager;
+  onDisconnect: () => void;
+  onMessageCallback: (type: string, data: SocketPayload) => void;
 }
 
 export default function Connect(props: ConnectProps) {
@@ -13,8 +15,8 @@ export default function Connect(props: ConnectProps) {
   const [lobbyID, setLobbyID] = useState("");
   const [buttonText, setButtonText] = useState("🏠 Create Lobby");
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     props.setGameMode(true);
     props.connectionManager.connect(
       playerName,
@@ -24,9 +26,10 @@ export default function Connect(props: ConnectProps) {
     );
   };
 
-  const handleLobbyCodeChange = (event: any) => {
-    const value = event.target.value;
-    if (event.target.value) {
+  const handleLobbyCodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const target = event.target as HTMLInputElement;
+    const value = target.value;
+    if (target.value) {
       setButtonText("🔌 Join Lobby");
       setLobbyID(value.toUpperCase());
     } else {

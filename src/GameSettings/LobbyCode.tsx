@@ -1,6 +1,11 @@
 import React from 'react'
+import { LobbyStatusType } from '../Types'
 
-export default function LobbyCode ({ lobbyStatus }) {
+interface LobbyCodeProps {
+  lobbyStatus: LobbyStatusType;
+}
+
+export default function LobbyCode ({ lobbyStatus }: LobbyCodeProps) {
   return (
     <div className='row g-3 align-items-center mb-3'>
       <div className='col-auto'>
@@ -14,7 +19,7 @@ export default function LobbyCode ({ lobbyStatus }) {
           type='text'
           className='form-control'
           readOnly
-          value={lobbyStatus?.sessionId}
+          value={lobbyStatus?.sessionId ? lobbyStatus.sessionId as string : ''}
         />
       </div>
     </div>

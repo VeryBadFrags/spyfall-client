@@ -9,7 +9,7 @@ import ConnectionManager from "./utils/connection-manager.js";
 import Locations from "./Locations";
 import Menu from "./Menu/Menu";
 import Error from "./Error";
-import { ChatRowType, LobbyStatusType } from "./Types";
+import { ChatRowType, LobbyStatusType, SocketPayload } from "./Types";
 
 const connectionManager = new ConnectionManager();
 const gameDuration = 300;
@@ -20,7 +20,7 @@ function App() {
   const [chatContent, setChatContent] = useState([] as Array<ChatRowType>);
   const [readyCheck, setReadyCheck] = useState(false);
   const [lobbyStatus, setLobbyStatus] = useState({} as LobbyStatusType);
-  const [locations, setLocations] = useState([]);
+  const [locations, setLocations] = useState([] as Array<string>);
   const [isTimerActive, setIsTimerActive] = useState(false);
   const [timer, setTimer] = useState(gameDuration);
 
@@ -34,9 +34,13 @@ function App() {
     setError("Connection to server closed");
   };
 
-  function onMessageCallback(type: string, data: any) {
+  function onMessageCallback(type: string, data: SocketPayload) {
     if (type === "chat-event") {
-      appendText({text: data.message, author: data.author, color: data.color});
+      appendText({
+        text: data.message,
+        author: data.author,
+        color: data.color,
+      });
     } else if (type === "session-broadcast") {
       setLobbyStatus(data);
     } else if (type === "start-game") {
@@ -73,27 +77,27 @@ function App() {
     });
   }
 
-  function startGame(data: any) {
+  function startGame(data: SocketPayload) {
     window.scrollTo(0, 0);
     setChatContent([]);
     setReadyCheck(false);
     setLocations(data.locations);
     resetClickableElements();
     setIsTimerActive(true);
-    appendText({text: "Game started"});
+    appendText({ text: "Game started" });
     if (data.spy) {
-      appendText(
-        {text: "🕵️ You are the spy, try to guess the current location",
-        color: "red"}
-      );
+      appendText({
+        text: "🕵️ You are the spy, try to guess the current location",
+        color: "red",
+      });
     } else {
-      appendText(
-        {text: `😇 You are not the spy, the location is ${data.location}`,
-        color: "blue"}
-      );
+      appendText({
+        text: `😇 You are not the spy, the location is ${data.location}`,
+        color: "blue",
+      });
     }
 
-    appendText({text:`First player: ${data.first}`});
+    appendText({ text: `First player: ${data.first}` });
   }
 
   function resetAll() {

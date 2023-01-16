@@ -3,14 +3,15 @@ import React, { useEffect, useRef, useState } from "react";
 import Card from "../Card";
 import ProgressBar from "./ProgressBar";
 import { ChatRowType } from "../Types";
+import ConnectionManager from "../utils/connection-manager";
 
 interface ChatProps {
-  connectionManager: any;
+  connectionManager: ConnectionManager;
   chatContent: Array<ChatRowType>;
   gameDuration: number;
-  timer: any;
-  setTimer: any;
-  isActive: any;
+  timer: number;
+  setTimer: React.Dispatch<React.SetStateAction<number>>;
+  isActive: boolean;
 }
 
 export default function Chat({
@@ -40,12 +41,12 @@ export default function Chat({
     return () => clearInterval(interval);
   }, [timer, setTimer, isActive]);
 
-  function handleSubmit(event: any) {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     connectionManager.send("chat-event", { message: inputText });
     setInputText("");
     window.scrollTo(0, 0);
-    event.target.focus();
+    (event.target as HTMLInputElement).focus();
   }
 
   return (
