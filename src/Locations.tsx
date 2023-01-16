@@ -1,7 +1,11 @@
 import React from 'react'
 import Card from './Card'
 
-export default function Locations ({ locations }) {
+interface LocationsProps {
+  locations: Array<string>;
+}
+
+export default function Locations ({ locations }: LocationsProps) {
   if (locations && locations.length > 0) {
     return (
       <Card header='📍 Locations' hasBody={false}>
@@ -12,9 +16,10 @@ export default function Locations ({ locations }) {
                 key={i}
                 className='list-group-item list-group-item-action text-dark py-1'
                 onClick={(e) => {
-                  e.target.classList.contains('strike')
-                    ? e.target.classList.remove('strike')
-                    : e.target.classList.add('strike')
+                  const target = e.target as HTMLElement;
+                  target.classList.contains('strike')
+                    ? target.classList.remove('strike')
+                    : target.classList.add('strike')
                 }}
               >
                 {loc}

@@ -1,11 +1,11 @@
 import React from "react";
 import { LobbyStatusType } from "../Types";
 
-interface LobbyStatusWrapper {
+interface PlayersListProps {
   lobbyStatus: LobbyStatusType;
 }
 
-export default function PlayersList({ lobbyStatus }: LobbyStatusWrapper) {
+export default function PlayersList({ lobbyStatus }: PlayersListProps) {
   return (
     <div>
       <h6 className="card-title">
@@ -18,7 +18,7 @@ export default function PlayersList({ lobbyStatus }: LobbyStatusWrapper) {
               className="list-group-item clickable"
               key={client.name}
               onClick={(e) => {
-                let target = e.target as HTMLElement;
+                const target = e.target as HTMLElement;
                 target.classList.contains("strike")
                   ? target.classList.remove("strike")
                   : target.classList.add("strike");

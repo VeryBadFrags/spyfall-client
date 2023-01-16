@@ -1,6 +1,10 @@
 import React from 'react'
 
-function Error ({ error }) {
+interface ErrorProps {
+  error?: string;
+}
+
+function Error ({ error }: ErrorProps) {
   if (error) {
     return <div className='alert alert-danger mb-3'>{error}</div>
   } else {
