@@ -30,7 +30,7 @@ interface ProgressBarDisplayProps {
 
 function ProgressBarDisplay({ timer }: ProgressBarDisplayProps) {
   const minutes = Math.floor(timer / 60);
-  const seconds = Math.floor(timer % 60);
+  const seconds = timer % 60;
   const minutesStr = minutes < 10 ? "0" + minutes : minutes.toString;
   const secondsStr = seconds < 10 ? "0" + seconds : seconds.toString;
 
