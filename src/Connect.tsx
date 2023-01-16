@@ -26,7 +26,9 @@ export default function Connect(props: ConnectProps) {
     );
   };
 
-  const handleLobbyCodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleLobbyCodeChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const target = event.target as HTMLInputElement;
     const value = target.value;
     if (target.value) {
