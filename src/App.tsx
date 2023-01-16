@@ -9,22 +9,17 @@ import ConnectionManager from "./connection-manager.js";
 import Locations from "./Locations";
 import Menu from "./Menu/Menu";
 import Error from "./Error";
+import { ChatRowType, LobbyStatusType } from "./Types";
 
 const connectionManager = new ConnectionManager();
 const gameDuration = 300;
-
-type ChatRowType = {
-  text: string;
-  author?: string;
-  color?: string;
-}
 
 function App() {
   const [gameMode, setGameMode] = useState(false);
   const [error, setError] = useState("");
   const [chatContent, setChatContent] = useState([] as Array<ChatRowType>);
   const [readyCheck, setReadyCheck] = useState(false);
-  const [lobbyStatus, setLobbyStatus] = useState({sessionId: ''});
+  const [lobbyStatus, setLobbyStatus] = useState({} as LobbyStatusType);
   const [locations, setLocations] = useState([]);
   const [isTimerActive, setIsTimerActive] = useState(false);
   const [timer, setTimer] = useState(gameDuration);
@@ -105,7 +100,7 @@ function App() {
     setError("");
     setGameMode(false);
     setReadyCheck(false);
-    setLobbyStatus({sessionId: ''});
+    setLobbyStatus({});
     resetClickableElements();
     setIsTimerActive(false);
     window.scrollTo(0, 0);
