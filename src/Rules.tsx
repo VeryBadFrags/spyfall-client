@@ -19,7 +19,7 @@ export default function Rules () {
   )
 }
 
-function RulesDetails (props) {
+function RulesDetails (props: any) {
   if (props.showRules) {
     return (
       <div>

@@ -1,7 +1,14 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import parse from 'html-react-parser'
 
-export default function Card ({ header, hasBody = true, className, children }) {
+interface CardProps {
+  header: string;
+  hasBody?: boolean;
+  className?: string;
+  children: ReactNode;
+}
+
+export default function Card ({ header, hasBody = true, className, children }: CardProps) {
   return (
     <div className='col'>
       <div className={'card shadow ' + className}>
