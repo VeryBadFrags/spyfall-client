@@ -5,7 +5,7 @@ import Chat from "./Chat/Chat";
 import Rules from "./Rules";
 import GameSettings from "./GameSettings/GameSettings";
 import Footer from "./Footer";
-import ConnectionManager from "./utils/connection-manager.js";
+import ConnectionManager from "./utils/connection-manager";
 import Locations from "./Locations";
 import Menu from "./Menu/Menu";
 import Error from "./Error";
