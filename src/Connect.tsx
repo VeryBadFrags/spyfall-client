@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
 
-export default function Connect(props) {
+interface ConnectProps {
+  setGameMode: any;
+  connectionManager: any;
+  onDisconnect: any;
+  onMessageCallback: any;
+}
+
+export default function Connect(props: ConnectProps) {
   const [playerName, setPlayerName] = useState("");
   const [lobbyID, setLobbyID] = useState("");
   const [buttonText, setButtonText] = useState("🏠 Create Lobby");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     props.setGameMode(true);
     props.connectionManager.connect(
@@ -17,7 +24,7 @@ export default function Connect(props) {
     );
   };
 
-  const handleLobbyCodeChange = (event) => {
+  const handleLobbyCodeChange = (event: any) => {
     const value = event.target.value;
     if (event.target.value) {
       setButtonText("🔌 Join Lobby");
@@ -52,7 +59,7 @@ export default function Connect(props) {
             className="form-control"
             required
             autoFocus
-            maxLength="16"
+            maxLength={16}
             value={playerName}
             onChange={(e) => setPlayerName(e.target.value)}
           />
@@ -68,14 +75,14 @@ export default function Connect(props) {
             className="form-control"
             pattern="[A-Za-z0-9]*"
             title="Lobby Code"
-            maxLength="8"
+            maxLength={8}
             autoComplete="off"
             value={lobbyID}
             onChange={handleLobbyCodeChange}
           />
         </div>
         <div className="d-grid">
-          <button type=" submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary">
             {buttonText}
           </button>
         </div>

@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react'
 import parse from 'html-react-parser'
 
 interface CardProps {
-  header: string;
+  header?: string;
   hasBody?: boolean;
   className?: string;
   children: ReactNode;
