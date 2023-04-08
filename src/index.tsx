@@ -5,6 +5,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+import Plausible from "plausible-tracker";
+const plausible = Plausible({
+  domain: "spy.verybadfrags.com",
+  apiHost: "https://stats.verybadfrags.com",
+});
+plausible.trackPageview();
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

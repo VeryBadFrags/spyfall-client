@@ -38,6 +38,7 @@
     "@types/react-dom": "^18.0.10",
     "bootstrap": "^5.0.0-beta2",
     "html-react-parser": "^1.2.4",
+    "plausible-tracker": "^0.3.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
