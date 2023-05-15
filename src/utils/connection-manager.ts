@@ -6,28 +6,37 @@ export default class ConnectionManager {
 
   constructor() {
     this.socket = null;
-    this.initSocket();
+    // this.initSocket();
   }
 
-  initSocket() {
+  initSocket(setConnectedToServer: (connected: boolean) => void) {
     if (!this.socket) {
       if (window.location.hostname === "localhost") {
         this.socket = io("http://localhost:8081");
       } else {
         this.socket = io("https://spyfall-server.onrender.com");
       }
-    } else {
-      this.socket.connect();
     }
+
+    this.socket.on("connect", () => {
+      setConnectedToServer(this.socket.connected);
+    });
+    this.socket.on("disconnect", () => {
+      // TODO show error instead
+      // setConnectedToServer(this.socket.connected);
+    });
+
+    this.socket.connect();
   }
 
-  connect(
+  joinLobby(
     playerName: string,
     sessionId: string,
     connectionClosedCallback: () => void,
-    onMessageCallback: (type: string, data: SocketPayload) => void
+    onMessageCallback: (type: string, data: SocketPayload) => void,
+    setConnectedToServer: (connected: boolean) => void
   ) {
-    this.initSocket();
+    this.initSocket(setConnectedToServer);
     this.send("join-session", {
       sessionId: sessionId,
       playerName: playerName,

@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Connect from "./Connect";
 import Chat from "./Chat/Chat";
 import Rules from "./Rules";
@@ -10,11 +10,13 @@ import Locations from "./Locations";
 import Menu from "./Menu/Menu";
 import Error from "./Error";
 import { ChatRowType, LobbyStatusType, SocketPayload } from "./Types";
+import ConnectStatus from "./ConnectStatus";
 
 const connectionManager = new ConnectionManager();
 const gameDuration = 300;
 
 function App() {
+  const [connectedToServer, setConnectedToServer] = useState(false);
   const [gameMode, setGameMode] = useState(false);
   const [error, setError] = useState("");
   const [chatContent, setChatContent] = useState([] as Array<ChatRowType>);
@@ -24,6 +26,10 @@ function App() {
   const [isTimerActive, setIsTimerActive] = useState(false);
   const [timer, setTimer] = useState(gameDuration);
 
+  useEffect(() => {
+    connectionManager.initSocket(setConnectedToServer);
+  }, []);
+
   function disconnect() {
     resetAll();
     connectionManager.disconnect();
@@ -31,7 +37,7 @@ function App() {
 
   const onDisconnect = () => {
     resetAll();
-    setError("Connection to server closed");
+    setError("Disconnected from Lobby");
   };
 
   function onMessageCallback(type: string, data: SocketPayload) {
@@ -115,7 +121,10 @@ function App() {
       <Menu />
 
       <div className="container mb-5 pt-3">
+        <ConnectStatus connected={connectedToServer} />
+
         <Error error={error} />
+
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 gy-4">
           {gameMode ? (
             <>
@@ -142,6 +151,7 @@ function App() {
               connectionManager={connectionManager}
               onDisconnect={onDisconnect}
               onMessageCallback={onMessageCallback}
+              setConnectedToServer={setConnectedToServer}
             />
           )}
           <Rules />

@@ -8,6 +8,7 @@ interface ConnectProps {
   connectionManager: ConnectionManager;
   onDisconnect: () => void;
   onMessageCallback: (type: string, data: SocketPayload) => void;
+  setConnectedToServer: (connected: boolean) => void
 }
 
 export default function Connect(props: ConnectProps) {
@@ -18,11 +19,12 @@ export default function Connect(props: ConnectProps) {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     props.setGameMode(true);
-    props.connectionManager.connect(
+    props.connectionManager.joinLobby(
       playerName,
       lobbyID,
       props.onDisconnect,
-      props.onMessageCallback
+      props.onMessageCallback,
+      props.setConnectedToServer
     );
   };
 
