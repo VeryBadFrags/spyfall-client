@@ -14,7 +14,7 @@ function ConnectStatus({ connected }: ErrorProps) {
         >
           <span className="sr-only">Connecting to server</span>
         </div>{" "}
-        Connecting to server, please wait
+        Connecting to server, please wait (~3min for a cold start)
       </div>
     );
   } else {
