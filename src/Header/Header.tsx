@@ -1,7 +1,7 @@
 import React from "react";
-import "./Menu.css";
+import "./Header.css";
 
-function Menu() {
+function Header() {
   return (
     <nav className="navbar navbar-expand navbar-dark bg-primary shadow-sm">
       <div className="container-fluid">
@@ -22,4 +22,4 @@ function Menu() {
   );
 }
 
-export default Menu;
+export default Header;

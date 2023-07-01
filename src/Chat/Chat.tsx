@@ -1,45 +1,18 @@
 import "./Chat.css";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import Card from "../Card";
-import ProgressBar from "./ProgressBar";
+import ProgressBar from "../ProgressBar/ProgressBar";
 import { ChatRowType } from "../Types";
 import ConnectionManager from "../utils/connection-manager";
 
 interface ChatProps {
   connectionManager: ConnectionManager;
   chatContent: Array<ChatRowType>;
-  gameDuration: number;
-  timer: number;
-  setTimer: React.Dispatch<React.SetStateAction<number>>;
-  isActive: boolean;
 }
 
-export default function Chat({
-  connectionManager,
-  chatContent,
-  gameDuration,
-  timer,
-  setTimer,
-  isActive,
-}: ChatProps) {
+export default function Chat({ connectionManager, chatContent }: ChatProps) {
   const [inputText, setInputText] = useState("");
   const inputRef: any = useRef();
-
-  useEffect(() => {
-    let interval: NodeJS.Timer;
-    if (isActive) {
-      interval = setInterval(() => {
-        setTimer((seconds: number) => seconds - 1);
-        if (timer <= 0) {
-          clearInterval(interval);
-        }
-      }, 1000);
-    }
-    // else if (!isActive) {
-    //   clearInterval(interval);
-    // }
-    return () => clearInterval(interval);
-  }, [timer, setTimer, isActive]);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -51,7 +24,7 @@ export default function Chat({
 
   return (
     <Card className="border-primary">
-      <ProgressBar timer={timer} gameDuration={gameDuration} />
+      <ProgressBar />
       <div className="row g-0">
         <div
           className="chat-box card border-bottom-0 rounded-0 rounded-top"

@@ -1,5 +1,6 @@
 import React from "react";
 import { LobbyStatusType } from "../Types";
+import Card from "../Card";
 
 interface PlayersListProps {
   lobbyStatus: LobbyStatusType;
@@ -7,10 +8,7 @@ interface PlayersListProps {
 
 export default function PlayersList({ lobbyStatus }: PlayersListProps) {
   return (
-    <div>
-      <h6 className="card-title">
-        <i className="fas fa-users" /> Players
-      </h6>
+    <Card header="👤 Players" hasBody={false}>
       <ul className="list-group list-group-flush">
         {lobbyStatus?.peers?.map((client) => {
           return (
@@ -29,6 +27,6 @@ export default function PlayersList({ lobbyStatus }: PlayersListProps) {
           );
         })}
       </ul>
-    </div>
+    </Card>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import ConnectionManager from "../utils/connection-manager";
+import "./NewGameForm.css";
 
 interface NewGameFormProps {
   readyCheck: boolean;
@@ -30,7 +31,6 @@ export default function NewGameForm({
           <input
             id="ready-check"
             className="form-check-input"
-            style={{ cursor: "pointer" }}
             type="checkbox"
             name="ready-check"
             required
@@ -50,9 +50,9 @@ export default function NewGameForm({
             Ready
           </label>
         </div>
-          <button type="submit" className="btn btn-primary">
-            <i className="fas fa-traffic-light" /> Start new round
-          </button>
+        <button type="submit" className="btn btn-primary">
+          <i className="fas fa-traffic-light" /> Start new round
+        </button>
       </form>
     </div>
   );

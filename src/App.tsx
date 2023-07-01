@@ -7,13 +7,13 @@ import GameSettings from "./GameSettings/GameSettings";
 import Footer from "./Footer";
 import ConnectionManager from "./utils/connection-manager";
 import Locations from "./Locations";
-import Menu from "./Menu/Menu";
+import Header from "./Header/Header";
 import Error from "./Error";
 import { ChatRowType, LobbyStatusType, SocketPayload } from "./Types";
 import ConnectStatus from "./ConnectStatus";
+import PlayersList from "./PlayersList/PlayersList";
 
 const connectionManager = new ConnectionManager();
-const gameDuration = 300;
 
 function App() {
   const [connectedToServer, setConnectedToServer] = useState(false);
@@ -23,11 +23,10 @@ function App() {
   const [readyCheck, setReadyCheck] = useState(false);
   const [lobbyStatus, setLobbyStatus] = useState({} as LobbyStatusType);
   const [locations, setLocations] = useState([] as Array<string>);
-  const [isTimerActive, setIsTimerActive] = useState(false);
-  const [timer, setTimer] = useState(gameDuration);
 
   useEffect(() => {
     connectionManager.initSocket(setConnectedToServer);
+    console.log("connect");
   }, []);
 
   function disconnect() {
@@ -89,7 +88,6 @@ function App() {
     setReadyCheck(false);
     setLocations(data.locations);
     resetClickableElements();
-    setIsTimerActive(true);
     appendText({ text: "Game started" });
     if (data.spy) {
       appendText({
@@ -112,14 +110,25 @@ function App() {
     setReadyCheck(false);
     setLobbyStatus({});
     resetClickableElements();
-    setIsTimerActive(false);
     window.scrollTo(0, 0);
   }
 
   return (
     <div className="app">
-      <Menu />
+      <Header />
 
+      <Main />
+
+      <Footer />
+    </div>
+  );
+
+  function Main() {
+    useEffect(() => {
+      console.log("paint main");
+    }, []);
+
+    return (
       <main className="main container mb-5 pt-3">
         <ConnectStatus connected={connectedToServer} />
 
@@ -131,12 +140,9 @@ function App() {
               <Chat
                 connectionManager={connectionManager}
                 chatContent={chatContent}
-                isActive={isTimerActive}
-                timer={timer}
-                setTimer={setTimer}
-                gameDuration={gameDuration}
               />
               <Locations locations={locations} />
+              <PlayersList lobbyStatus={lobbyStatus} />
               <GameSettings
                 connectionManager={connectionManager}
                 disconnectCallback={disconnect}
@@ -157,10 +163,8 @@ function App() {
           <Rules />
         </div>
       </main>
-
-      <Footer />
-    </div>
-  );
+    );
+  }
 }
 
 export default App;

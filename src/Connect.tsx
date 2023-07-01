@@ -8,7 +8,7 @@ interface ConnectProps {
   connectionManager: ConnectionManager;
   onDisconnect: () => void;
   onMessageCallback: (type: string, data: SocketPayload) => void;
-  setConnectedToServer: (connected: boolean) => void
+  setConnectedToServer: (connected: boolean) => void;
 }
 
 export default function Connect(props: ConnectProps) {
