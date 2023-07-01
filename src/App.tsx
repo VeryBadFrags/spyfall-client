@@ -4,7 +4,7 @@ import Connect from "./Connect";
 import Chat from "./Chat/Chat";
 import Rules from "./Rules";
 import GameSettings from "./GameSettings/GameSettings";
-import Footer from "./Footer";
+import Footer from "./Footer/Footer";
 import ConnectionManager from "./utils/connection-manager";
 import Locations from "./Locations";
 import Header from "./Header/Header";

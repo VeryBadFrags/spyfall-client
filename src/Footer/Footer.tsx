@@ -1,4 +1,5 @@
 import React from "react";
+import "./Footer.css";
 
 function Footer() {
   return (
@@ -47,9 +48,9 @@ function Footer() {
               rel="noopener noreferrer"
             >
               <img
+                className="coffee"
                 src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png"
                 alt="Buy Me A Coffee"
-                style={{ height: "1.7em" }}
               />
             </a>
           </div>
