@@ -25,10 +25,7 @@ export default function NewGameForm({
 
   return (
     <div>
-      <p className="card-title">
-        <i className="fas fa-flag-checkered" /> New Game
-      </p>
-      <form onSubmit={handleStartGame}>
+      <form className="form-inline" onSubmit={handleStartGame}>
         <div className="form-check form-switch mb-3">
           <input
             id="ready-check"
@@ -53,11 +50,9 @@ export default function NewGameForm({
             Ready
           </label>
         </div>
-        <div className="d-grid">
           <button type="submit" className="btn btn-primary">
             <i className="fas fa-traffic-light" /> Start new round
           </button>
-        </div>
       </form>
     </div>
   );

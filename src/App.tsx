@@ -117,10 +117,10 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="app">
       <Menu />
 
-      <div className="container mb-5 pt-3">
+      <main className="main container mb-5 pt-3">
         <ConnectStatus connected={connectedToServer} />
 
         <Error error={error} />
@@ -156,7 +156,7 @@ function App() {
           )}
           <Rules />
         </div>
-      </div>
+      </main>
 
       <Footer />
     </div>
