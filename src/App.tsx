@@ -26,7 +26,6 @@ function App() {
 
   useEffect(() => {
     connectionManager.initSocket(setConnectedToServer);
-    console.log("connect");
   }, []);
 
   function disconnect() {
@@ -124,10 +123,6 @@ function App() {
   );
 
   function Main() {
-    useEffect(() => {
-      console.log("paint main");
-    }, []);
-
     return (
       <main className="main container mb-5 pt-3">
         <ConnectStatus connected={connectedToServer} />
