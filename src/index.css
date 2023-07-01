@@ -29,8 +29,8 @@ a:hover {
 
 .clickable {
   cursor: pointer;
-  user-select: none;
   -webkit-user-select: none;
+  user-select: none;
 }
 
 .clickable:hover {
