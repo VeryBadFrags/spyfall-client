@@ -8,7 +8,7 @@ import reportWebVitals from "./reportWebVitals";
 import Plausible from "plausible-tracker";
 const plausible = Plausible({
   domain: "spy.verybadfrags.com",
-  apiHost: "/ps/api/event",
+  apiHost: "/ps",
   hashMode: false,
 });
 plausible.trackPageview();
