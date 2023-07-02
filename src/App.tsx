@@ -23,6 +23,7 @@ function App() {
   const [readyCheck, setReadyCheck] = useState(false);
   const [lobbyStatus, setLobbyStatus] = useState({} as LobbyStatusType);
   const [locations, setLocations] = useState([] as Array<string>);
+  const [currentLocation, setCurrentLocation] = useState("");
   const [gameStarted, setGameStarted] = useState(false);
 
   useEffect(() => {
@@ -87,6 +88,7 @@ function App() {
     setChatContent([]);
     setReadyCheck(false);
     setLocations(data.locations);
+    setCurrentLocation(data.location);
     resetClickableElements();
     appendText({ text: "Game started" });
     setGameStarted(true);
@@ -142,7 +144,7 @@ function App() {
                 chatContent={chatContent}
                 gameStarted={gameStarted}
               />
-              <Locations locations={locations} />
+              <Locations locations={locations} currentLocation={currentLocation} />
               <PlayersList lobbyStatus={lobbyStatus} />
               <GameSettings
                 connectionManager={connectionManager}
