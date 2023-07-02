@@ -20,7 +20,7 @@ function Footer() {
             <i className="far fa-comments" /> Suggestions, Feedback?{" "}
             <a href="mailto:spy@verybadfrags.com">spy@verybadfrags.com</a>
           </div>
-          <div className="lead">
+          {/* <div className="lead">
             <i className="fas fa-code" /> Source code on GitHub{" "}
             <a
               href="https://github.com/VeryBadFrags/spyfall-client"
@@ -39,7 +39,7 @@ function Footer() {
               <i className="fas fa-server" />
               &nbsp;Server
             </a>
-          </div>
+          </div> */}
           <div className="lead">
             <i className="far fa-heart" /> Like this game?{" "}
             <a
