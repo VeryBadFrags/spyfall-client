@@ -23,6 +23,7 @@ function App() {
   const [readyCheck, setReadyCheck] = useState(false);
   const [lobbyStatus, setLobbyStatus] = useState({} as LobbyStatusType);
   const [locations, setLocations] = useState([] as Array<string>);
+  const [gameStarted, setGameStarted] = useState(false);
 
   useEffect(() => {
     connectionManager.initSocket(setConnectedToServer);
@@ -88,6 +89,8 @@ function App() {
     setLocations(data.locations);
     resetClickableElements();
     appendText({ text: "Game started" });
+    setGameStarted(true);
+
     if (data.spy) {
       appendText({
         text: "🕵️ You are the spy, try to guess the current location",
@@ -105,9 +108,11 @@ function App() {
 
   function resetAll() {
     setError("");
+    setChatContent([]);
     setGameMode(false);
     setReadyCheck(false);
     setLobbyStatus({});
+    setGameStarted(false);
     resetClickableElements();
     window.scrollTo(0, 0);
   }
@@ -135,6 +140,7 @@ function App() {
               <Chat
                 connectionManager={connectionManager}
                 chatContent={chatContent}
+                gameStarted={gameStarted}
               />
               <Locations locations={locations} />
               <PlayersList lobbyStatus={lobbyStatus} />

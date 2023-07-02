@@ -8,9 +8,10 @@ import ConnectionManager from "../utils/connection-manager";
 interface ChatProps {
   connectionManager: ConnectionManager;
   chatContent: Array<ChatRowType>;
+  gameStarted: boolean;
 }
 
-export default function Chat({ connectionManager, chatContent }: ChatProps) {
+export default function Chat({ connectionManager, chatContent, gameStarted }: ChatProps) {
   const [inputText, setInputText] = useState("");
   const inputRef: any = useRef();
 
@@ -24,7 +25,7 @@ export default function Chat({ connectionManager, chatContent }: ChatProps) {
 
   return (
     <Card className="border-primary">
-      <ProgressBar />
+      {gameStarted ? <ProgressBar /> : null}
       <div className="row g-0">
         <div
           className="chat-box card border-bottom-0 rounded-0 rounded-top"
