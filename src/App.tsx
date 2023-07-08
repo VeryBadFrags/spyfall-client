@@ -59,6 +59,10 @@ function App() {
     }
   }
 
+  function sendChatCallBack(eventType: string, message: string): void {
+    connectionManager.send(eventType, { message: message });
+  }
+
   function resetClickableElements() {
     document
       .querySelectorAll(".strike")
@@ -140,11 +144,14 @@ function App() {
           {gameMode ? (
             <>
               <Chat
-                connectionManager={connectionManager}
+                sendChatCallBack={sendChatCallBack}
                 chatContent={chatContent}
                 gameStarted={gameStarted}
               />
-              <Locations locations={locations} currentLocation={currentLocation} />
+              <Locations
+                locations={locations}
+                currentLocation={currentLocation}
+              />
               <PlayersList lobbyStatus={lobbyStatus} />
               <GameSettings
                 connectionManager={connectionManager}

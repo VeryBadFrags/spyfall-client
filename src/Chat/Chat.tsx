@@ -3,21 +3,21 @@ import React, { useRef, useState } from "react";
 import Card from "../Card";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import { ChatRowType } from "../Types";
-import ConnectionManager from "../utils/connection-manager";
 
 interface ChatProps {
-  connectionManager: ConnectionManager;
+  sendChatCallBack: (eventType: string, message: string) => void;
   chatContent: Array<ChatRowType>;
   gameStarted: boolean;
 }
 
-export default function Chat({ connectionManager, chatContent, gameStarted }: ChatProps) {
+export default function Chat({ sendChatCallBack, chatContent, gameStarted }: ChatProps) {
   const [inputText, setInputText] = useState("");
   const inputRef: any = useRef();
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    connectionManager.send("chat-event", { message: inputText });
+    sendChatCallBack("chat-event", inputText);
+    // connectionManager.send("chat-event", { message: inputText });
     setInputText("");
     window.scrollTo(0, 0);
     (event.target as HTMLInputElement).focus();
