@@ -48,8 +48,20 @@ export default class ConnectionManager {
       connectionClosedCallback();
     });
 
-    this.socket.on("message", (msg: any) => {
-      onMessageCallback(msg.type, msg);
+    this.socket.on("start-game", (msg: any) => {
+      onMessageCallback("start-game", msg);
+    });
+
+    this.socket.on("session-broadcast", (msg: any) => {
+      onMessageCallback("session-broadcast", msg);
+    });
+
+    this.socket.on("session-created", (msg: any) => {
+      onMessageCallback("session-created", msg);
+    });
+
+    this.socket.on("chat-event", (msg: any) => {
+      onMessageCallback("chat-event", msg);
     });
   }
 
