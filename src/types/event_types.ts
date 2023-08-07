@@ -8,6 +8,7 @@ export enum EventTypes {
   StartGame = "start-game",
   // Client
   ClientJoinSession = "join-session",
+  ClientReady = "player-ready",
   // Both
   ChatEvent = "chat-event",
 }

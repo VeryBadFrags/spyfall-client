@@ -41,7 +41,7 @@ export default function NewGameForm({
             onChange={() => {}}
             onClick={(event) => {
               const target = event.target as HTMLInputElement;
-              connectionManager?.send("player-ready", {
+              connectionManager?.send(EventTypes.ClientReady, {
                 ready: target.checked,
               });
               setReadyCheck(target.checked);
