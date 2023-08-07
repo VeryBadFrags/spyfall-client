@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
-import { SocketPayload } from "./Types";
-import ConnectionManager from "./utils/connection-manager";
+import ConnectionManager from "./utils/connection_manager";
+import { SocketPayload } from "./interfaces/socket_payload.interface";
 
 interface ConnectProps {
   setGameMode: React.Dispatch<React.SetStateAction<boolean>>;

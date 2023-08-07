@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
-import ConnectionManager from "../utils/connection-manager";
+import ConnectionManager from "../utils/connection_manager";
 import "./NewGameForm.css";
+import { EventTypes } from "../types/event_types";
 
 interface NewGameFormProps {
   readyCheck: boolean;
@@ -18,7 +19,7 @@ export default function NewGameForm({
   const handleStartGame = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (readyRef.current.checked) {
-      connectionManager.send("start-game");
+      connectionManager.send(EventTypes.StartGame);
     } else {
       // TODO printError you are not ready
     }

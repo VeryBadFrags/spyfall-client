@@ -2,7 +2,8 @@ import "./Chat.css";
 import React, { useRef, useState } from "react";
 import Card from "../Card";
 import ProgressBar from "../ProgressBar/ProgressBar";
-import { ChatRowType } from "../Types";
+import { ChatRowType } from "../types/chat_row.type";
+import { EventTypes } from "../types/event_types";
 
 interface ChatProps {
   sendChatCallBack: (eventType: string, message: string) => void;
@@ -16,8 +17,8 @@ export default function Chat({ sendChatCallBack, chatContent, gameStarted }: Cha
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    sendChatCallBack("chat-event", inputText);
-    // connectionManager.send("chat-event", { message: inputText });
+    sendChatCallBack(EventTypes.ChatEvent, inputText);
+    // connectionManager.send(EventTypes.ChatEvent, { message: inputText });
     setInputText("");
     window.scrollTo(0, 0);
     (event.target as HTMLInputElement).focus();

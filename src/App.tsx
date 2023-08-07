@@ -5,13 +5,16 @@ import Chat from "./Chat/Chat";
 import Rules from "./Rules";
 import GameSettings from "./GameSettings/GameSettings";
 import Footer from "./Footer/Footer";
-import ConnectionManager from "./utils/connection-manager";
+import ConnectionManager from "./utils/connection_manager";
 import Locations from "./Locations";
 import Header from "./Header/Header";
 import Error from "./Error";
-import { ChatRowType, LobbyStatusType, SocketPayload } from "./Types";
 import ConnectStatus from "./ConnectStatus";
 import PlayersList from "./PlayersList/PlayersList";
+import { ChatRowType } from "./types/chat_row.type";
+import { SocketPayload } from "./interfaces/socket_payload.interface";
+import { LobbyStatusType } from "./types/lobby_status.type";
+import { EventTypes } from "./types/event_types";
 
 const connectionManager = new ConnectionManager();
 
@@ -40,18 +43,19 @@ function App() {
     setError("Disconnected from Lobby");
   };
 
-  function onMessageCallback(type: string, data: SocketPayload) {
-    if (type === "chat-event") {
+  function onMessageCallback(type: string, data: any) {
+    // TODO use a switch
+    if (type === EventTypes.ChatEvent) {
       appendText({
         text: data.message,
         author: data.author,
         color: data.color,
       });
-    } else if (type === "session-broadcast") {
+    } else if (type === EventTypes.SessionBroadcast) {
       setLobbyStatus(data);
-    } else if (type === "start-game") {
+    } else if (type === EventTypes.StartGame) {
       startGame(data);
-    } else if (type === "session-created") {
+    } else if (type === EventTypes.SessionCreated) {
       setGameMode(true);
       setError("");
       // TODO replace window.location.hash with ?code=
