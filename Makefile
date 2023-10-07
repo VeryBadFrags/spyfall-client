@@ -3,27 +3,26 @@
 # Define your default target (the one that runs when you just type "make" without arguments)
 default: dev
 
-# Define targets and their respective commands
-dev: node_modules
-	pnpm run dev
-
+# Targets and their respective commands
 build: node_modules
 	pnpm run build
 
-node_modules: pnpm-lock.yaml
-	pnpm i
+dev: node_modules
+	pnpm run dev
 
-# Define a clean target to remove build artifacts or other generated files
 clean:
 	pnpm run clean
 
-# Define a help target to display a list of available targets
 help:
 	@echo "Available targets:"
-	@echo "  make build   - Run 'pnpm run build'"
-	@echo "  make dev     - Run 'pnpm run dev'"
-	@echo "  make clean   - Clean up project (if needed)"
+	@echo "  make build   - Run build"
+	@echo "  make dev     - Run dev"
+	@echo "  make clean   - Clean up project"
 	@echo "  make help    - Display this help message"
 
 # Ensure that 'make' knows these targets are not associated with files
 .PHONY: build dev clean help
+
+# Install dependencies if 'node_modules' is missing
+node_modules: pnpm-lock.yaml
+	pnpm install
