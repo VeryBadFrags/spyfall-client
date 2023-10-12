@@ -6,7 +6,10 @@ interface LocationsProps {
   currentLocation: string;
 }
 
-export default function Locations({ locations, currentLocation }: LocationsProps) {
+export default function Locations({
+  locations,
+  currentLocation,
+}: LocationsProps) {
   if (locations && locations.length > 0) {
     return (
       <Card header="📍 Locations" hasBody={false}>
@@ -15,8 +18,10 @@ export default function Locations({ locations, currentLocation }: LocationsProps
             return (
               <li
                 key={i}
-                className={"list-group-item list-group-item-action text-dark py-1 "
-                + (currentLocation === loc ? "bg-info" : null)}
+                className={
+                  "list-group-item list-group-item-action text-dark py-1 " +
+                  (currentLocation === loc ? "bg-info" : null)
+                }
                 onClick={(e) => {
                   const target = e.target as HTMLElement;
                   target.classList.contains("strike")

@@ -11,7 +11,11 @@ interface ChatProps {
   gameStarted: boolean;
 }
 
-export default function Chat({ sendChatCallBack, chatContent, gameStarted }: ChatProps) {
+export default function Chat({
+  sendChatCallBack,
+  chatContent,
+  gameStarted,
+}: ChatProps) {
   const [inputText, setInputText] = useState("");
   const inputRef: any = useRef();
 
