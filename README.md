@@ -12,3 +12,10 @@ Built with React, Bootstrap, and [socket.io](https://socket.io).
 ---
 
 View the server code [here](https://github.com/VeryBadFrags/spyfall-server).
+
+## Link to Netlify
+
+```shell
+pnpm install netlify-cli -g
+netlify link
+```
