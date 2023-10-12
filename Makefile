@@ -1,18 +1,8 @@
 # Makefile for Node.js project
 
-# Define your default target (the one that runs when you just type "make" without arguments)
-default: dev
+.DEFAULT_GOAL := help
 
-# Targets and their respective commands
-build: node_modules
-	pnpm run build
-
-dev: node_modules
-	pnpm run dev
-
-clean:
-	pnpm run clean
-
+.PHONY: help
 help:
 	@echo "Available targets:"
 	@echo "  make build   - Run build"
@@ -20,8 +10,17 @@ help:
 	@echo "  make clean   - Clean up project"
 	@echo "  make help    - Display this help message"
 
-# Ensure that 'make' knows these targets are not associated with files
-.PHONY: build dev clean help
+.PHONY: build
+build: node_modules
+	pnpm run build
+
+.PHONY: dev
+dev: node_modules
+	pnpm run dev
+
+.PHONY: clean
+clean:
+	pnpm run clean
 
 # Install dependencies if 'node_modules' is missing
 node_modules: pnpm-lock.yaml
