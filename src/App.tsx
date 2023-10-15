@@ -81,7 +81,7 @@ function App() {
         return [
           ...previousContent.splice(
             previousContent.length - chatSize + 1,
-            previousContent.length
+            previousContent.length,
           ),
           newRow,
         ];

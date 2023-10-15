@@ -24,12 +24,12 @@ export default function Connect(props: ConnectProps) {
       lobbyID,
       props.onDisconnect,
       props.onMessageCallback,
-      props.setConnectedToServer
+      props.setConnectedToServer,
     );
   };
 
   const handleLobbyCodeChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const target = event.target as HTMLInputElement;
     const value = target.value;

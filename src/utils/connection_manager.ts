@@ -36,7 +36,7 @@ export default class ConnectionManager {
     sessionId: string,
     connectionClosedCallback: () => void,
     onMessageCallback: (type: string, data: any) => void,
-    setConnectedToServer: (connected: boolean) => void
+    setConnectedToServer: (connected: boolean) => void,
   ) {
     this.initSocket(setConnectedToServer);
     this.send(EventTypes.ClientJoinSession, {
