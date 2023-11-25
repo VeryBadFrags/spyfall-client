@@ -5,8 +5,8 @@
 .PHONY: help
 help:
 	@echo "Available targets:"
-	@echo "  make build   - Run build"
 	@echo "  make dev     - Run dev"
+	@echo "  make build   - Run build"
 	@echo "  make format  - Format code using Prettier"
 	@echo "  make clean   - Clean up project"
 	@echo "  make help    - Display this help message"
