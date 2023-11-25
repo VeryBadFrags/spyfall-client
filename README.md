@@ -15,6 +15,8 @@ View the server code [here](https://github.com/VeryBadFrags/spyfall-server).
 
 ## Run locally
 
+You'll also need to run the server locally. See <https://github.com/VeryBadFrags/spyfall-server#run-locally>.
+
 ### With [pnpm](https://pnpm.io)
 
 ```sh
