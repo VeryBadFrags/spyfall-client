@@ -6,7 +6,7 @@ import Rules from "./Rules";
 import GameSettings from "./GameSettings/GameSettings";
 import Footer from "./Footer/Footer";
 import ConnectionManager from "./utils/connection_manager";
-import Locations from "./Locations";
+import Locations from "./Locations/Locations";
 import Header from "./Header/Header";
 import Error from "./Error";
 import ConnectStatus from "./ConnectStatus";

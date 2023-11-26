@@ -12,8 +12,9 @@ export default function PlayersList({ lobbyStatus }: PlayersListProps) {
       <ul className="list-group list-group-flush">
         {lobbyStatus?.peers?.map((client) => {
           return (
-            <li
-              className="list-group-item clickable"
+            <button
+              type="button"
+              className="list-group-item list-group-item-action"
               key={client.name}
               onClick={(e) => {
                 const target = e.target as HTMLElement;
@@ -23,7 +24,7 @@ export default function PlayersList({ lobbyStatus }: PlayersListProps) {
               }}
             >
               {client.name} {client.ready ? " ✅" : ""}
-            </li>
+            </button>
           );
         })}
       </ul>

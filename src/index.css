@@ -38,15 +38,6 @@ a:hover {
 }
 
 .strike {
-  text-decoration: line-through;
-  opacity: 0.6;
-}
-
-.strike:hover {
-  text-decoration: line-through underline;
-}
-
-/* Override Bootstrap */
-.list-group-item-action {
-  cursor: pointer;
+  text-decoration: line-through !important;
+  opacity: 0.6 !important;
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "./Card";
+import Card from "../Card";
 
 interface LocationsProps {
   locations: Array<string>;
@@ -16,7 +16,8 @@ export default function Locations({
         <ul className="list-group list-group-flush">
           {locations.map((loc, i) => {
             return (
-              <li
+              <button
+                type="button"
                 key={i}
                 className={
                   "list-group-item list-group-item-action text-dark py-1 " +
@@ -30,7 +31,7 @@ export default function Locations({
                 }}
               >
                 {loc}
-              </li>
+              </button>
             );
           })}
         </ul>
