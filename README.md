@@ -7,6 +7,8 @@ A multiplayer social deduction game inspired by [Spyfall](https://hwint.ru/portf
 
 [▶️ Play the game](https://spy.verybadfrags.com)
 
+![Example of a game](docs/spyfall-example-01.png)
+
 ---
 
 Built with [React](https://react.dev), [Bootstrap](https://getbootstrap.com), and [socket.io](https://socket.io).
