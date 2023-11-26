@@ -13,7 +13,7 @@ export default function Locations({
   if (locations && locations.length > 0) {
     return (
       <Card header="📍 Locations" hasBody={false}>
-        <ul className="list-group list-group-flush">
+        <div className="list-group list-group-flush">
           {locations.map((loc, i) => {
             return (
               <button
@@ -34,7 +34,7 @@ export default function Locations({
               </button>
             );
           })}
-        </ul>
+        </div>
       </Card>
     );
   } else {

@@ -9,7 +9,7 @@ interface PlayersListProps {
 export default function PlayersList({ lobbyStatus }: PlayersListProps) {
   return (
     <Card header="👤 Players" hasBody={false}>
-      <ul className="list-group list-group-flush">
+      <div className="list-group list-group-flush">
         {lobbyStatus?.peers?.map((client) => {
           return (
             <button
@@ -27,7 +27,7 @@ export default function PlayersList({ lobbyStatus }: PlayersListProps) {
             </button>
           );
         })}
-      </ul>
+      </div>
     </Card>
   );
 }
