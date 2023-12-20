@@ -9,7 +9,7 @@ A multiplayer social deduction game inspired by [Spyfall](https://hwint.ru/portf
 
 <details>
 <summary>🖥️ Game screenshot</summary>
-<img src="docs/spyfall-example-01.png"/>
+<img alt="Game screenshot" src="docs/spyfall-example-01.png"/>
 </details>
 
 ---
