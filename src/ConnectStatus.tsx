@@ -4,7 +4,7 @@ interface ErrorProps {
   connected: boolean;
 }
 
-function ConnectStatus({ connected }: ErrorProps) {
+export default function ConnectStatus({ connected }: ErrorProps) {
   if (!connected) {
     return (
       <div id="connect-info" className="alert alert-info mb-3">
@@ -21,5 +21,3 @@ function ConnectStatus({ connected }: ErrorProps) {
     return null;
   }
 }
-
-export default ConnectStatus;

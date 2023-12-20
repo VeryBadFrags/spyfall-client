@@ -11,17 +11,13 @@ interface ChatProps {
   gameStarted: boolean;
 }
 
-export default function Chat({
-  sendChatCallBack,
-  chatContent,
-  gameStarted,
-}: ChatProps) {
+export default function Chat(props: ChatProps) {
   const [inputText, setInputText] = useState("");
   const inputRef: any = useRef();
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    sendChatCallBack(EventTypes.ChatEvent, inputText);
+    props.sendChatCallBack(EventTypes.ChatEvent, inputText);
     // connectionManager.send(EventTypes.ChatEvent, { message: inputText });
     setInputText("");
     window.scrollTo(0, 0);
@@ -30,14 +26,14 @@ export default function Chat({
 
   return (
     <Card className="border-primary">
-      {gameStarted ? <ProgressBar /> : null}
+      {props.gameStarted ? <ProgressBar /> : null}
       <div className="row g-0">
         <div
           className="chat-box card border-bottom-0 rounded-0 rounded-top"
           onClick={() => inputRef.current?.focus()}
         >
           <div className="list-group list-group-flush">
-            {chatContent.map((row, i) => (
+            {props.chatContent.map((row, i) => (
               <ChatLine row={row} key={i} />
             ))}
           </div>

@@ -18,7 +18,7 @@ import { GamePayload } from "./types/socketPayload.type";
 
 const connectionManager = new ConnectionManager();
 
-function App() {
+export default function App() {
   const [connectedToServer, setConnectedToServer] = useState(false);
   const [gameMode, setGameMode] = useState(false);
   const [error, setError] = useState("");
@@ -180,5 +180,3 @@ function App() {
     );
   }
 }
-
-export default App;

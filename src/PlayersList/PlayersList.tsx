@@ -6,15 +6,18 @@ interface PlayersListProps {
   lobbyStatus: LobbyStatusPayload;
 }
 
-export default function PlayersList({ lobbyStatus }: PlayersListProps) {
+export default function PlayersList(props: PlayersListProps) {
   return (
     <Card header="👤 Players" hasBody={false}>
       <div className="list-group list-group-flush">
-        {lobbyStatus?.peers?.map((client) => {
+        {props.lobbyStatus?.peers?.map((client) => {
           return (
             <button
               type="button"
-              className="list-group-item list-group-item-action"
+              className={
+                "list-group-item list-group-item-action " +
+                (client.crossed ? "strike" : null)
+              }
               key={client.name}
               onClick={(e) => {
                 const target = e.target as HTMLElement;
