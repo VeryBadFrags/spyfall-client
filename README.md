@@ -14,7 +14,9 @@ A multiplayer social deduction game inspired by [Spyfall](https://hwint.ru/portf
 
 ---
 
-🛠️ Built with [React](https://react.dev), [Bootstrap](https://getbootstrap.com), and [socket.io](https://socket.io).
+🛠️ Built with [React](https://react.dev),
+[Bootstrap](https://getbootstrap.com),
+and [socket.io](https://socket.io).
 
 💾 View the server code [here](https://github.com/VeryBadFrags/spyfall-server).
 
