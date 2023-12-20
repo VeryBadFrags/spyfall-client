@@ -1,9 +1,9 @@
 import React from "react";
 import Card from "../Card";
-import { LobbyStatusType } from "../types/lobbyStatus.type";
+import { LobbyStatusPayload } from "../types/lobbyStatus.type";
 
 interface PlayersListProps {
-  lobbyStatus: LobbyStatusType;
+  lobbyStatus: LobbyStatusPayload;
 }
 
 export default function PlayersList({ lobbyStatus }: PlayersListProps) {

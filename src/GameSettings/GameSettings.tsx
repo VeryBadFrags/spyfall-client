@@ -1,12 +1,12 @@
 import React from "react";
 import Card from "../Card";
-import ConnectionManager from "../utils/connection_manager";
+import ConnectionManager from "../utils/connectionManager";
 import LobbyCode from "./LobbyCode";
 import NewGameForm from "./NewGameForm";
-import { LobbyStatusType } from "../types/lobbyStatus.type";
+import { LobbyStatusPayload } from "../types/lobbyStatus.type";
 
 interface GameSettingsProps {
-  lobbyStatus: LobbyStatusType;
+  lobbyStatus: LobbyStatusPayload;
   readyCheck: boolean;
   setReadyCheck: React.Dispatch<React.SetStateAction<boolean>>;
   connectionManager: ConnectionManager;

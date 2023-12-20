@@ -1,4 +1,4 @@
-export type ClientType = {
+export type ClientData = {
   avatar: string;
   name: string;
   ready: boolean;

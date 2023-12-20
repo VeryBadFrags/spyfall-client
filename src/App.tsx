@@ -5,16 +5,16 @@ import Chat from "./Chat/Chat";
 import Rules from "./Rules";
 import GameSettings from "./GameSettings/GameSettings";
 import Footer from "./Footer/Footer";
-import ConnectionManager from "./utils/connection_manager";
+import ConnectionManager from "./utils/connectionManager";
 import Locations from "./Locations/Locations";
 import Header from "./Header/Header";
 import Error from "./Error";
 import ConnectStatus from "./ConnectStatus";
 import PlayersList from "./PlayersList/PlayersList";
-import { SocketPayload } from "./interfaces/socket_payload.interface";
-import { LobbyStatusType } from "./types/lobbyStatus.type";
+import { LobbyStatusPayload } from "./types/lobbyStatus.type";
 import { EventTypes } from "./types/eventTypes";
 import { ChatPayload } from "./types/chatPayload.type";
+import { GamePayload } from "./types/socketPayload.type";
 
 const connectionManager = new ConnectionManager();
 
@@ -24,7 +24,7 @@ function App() {
   const [error, setError] = useState("");
   const [chatContent, setChatContent] = useState([] as Array<ChatPayload>);
   const [readyCheck, setReadyCheck] = useState(false);
-  const [lobbyStatus, setLobbyStatus] = useState({} as LobbyStatusType);
+  const [lobbyStatus, setLobbyStatus] = useState({} as LobbyStatusPayload);
   const [locations, setLocations] = useState([] as Array<string>);
   const [currentLocation, setCurrentLocation] = useState("");
   const [gameStarted, setGameStarted] = useState(false);
@@ -76,8 +76,8 @@ function App() {
   const chatSize = 11;
   function appendText(newRow: ChatPayload) {
     setChatContent((previousContent) => {
-      // Trim the chat if it's too long
       if (previousContent.length >= chatSize) {
+        // Trim the chat if it's too long
         return [
           ...previousContent.splice(
             previousContent.length - chatSize + 1,
@@ -91,7 +91,7 @@ function App() {
     });
   }
 
-  function startGame(data: SocketPayload) {
+  function startGame(data: GamePayload) {
     window.scrollTo(0, 0);
     setChatContent([]);
     setReadyCheck(false);
@@ -121,7 +121,7 @@ function App() {
     setChatContent([]);
     setGameMode(false);
     setReadyCheck(false);
-    setLobbyStatus({});
+    setLobbyStatus({ sessionId: "" });
     setGameStarted(false);
     resetClickableElements();
     window.scrollTo(0, 0);

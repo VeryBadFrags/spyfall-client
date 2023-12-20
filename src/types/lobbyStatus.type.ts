@@ -1,7 +1,7 @@
-import { ClientType } from "./client.type";
+import { ClientData } from "./clientData.type";
 
-export type LobbyStatusType = {
-  sessionId?: String;
+export type LobbyStatusPayload = {
+  sessionId: string;
   /** List of other players */
-  peers?: Array<ClientType>;
+  peers?: Array<ClientData>;
 };

@@ -1,7 +1,8 @@
 import io from "socket.io-client";
-import { SocketPayload } from "../interfaces/socket_payload.interface";
 import { EventTypes } from "../types/eventTypes";
-import { LobbyStatusType } from "../types/lobbyStatus.type";
+import { LobbyStatusPayload } from "../types/lobbyStatus.type";
+import { ChatPayload } from "../types/chatPayload.type";
+import { GamePayload } from "../types/socketPayload.type";
 
 export default class ConnectionManager {
   socket: any;
@@ -16,7 +17,7 @@ export default class ConnectionManager {
       if (window.location.hostname === "localhost") {
         this.socket = io("http://localhost:8081");
       } else {
-        this.socket = io("https://spyfall-server.onrender.com");
+        this.socket = io("https://spyfall-server.onrender.com"); // TODO move to configuration
       }
     }
 
@@ -50,19 +51,19 @@ export default class ConnectionManager {
       connectionClosedCallback();
     });
 
-    this.socket.on(EventTypes.StartGame, (msg: SocketPayload) => {
+    this.socket.on(EventTypes.StartGame, (msg: GamePayload) => {
       onMessageCallback(EventTypes.StartGame, msg);
     });
 
-    this.socket.on(EventTypes.SessionBroadcast, (msg: LobbyStatusType) => {
+    this.socket.on(EventTypes.SessionBroadcast, (msg: LobbyStatusPayload) => {
       onMessageCallback(EventTypes.SessionBroadcast, msg);
     });
 
-    this.socket.on(EventTypes.SessionCreated, (msg: any) => {
+    this.socket.on(EventTypes.SessionCreated, (msg: LobbyStatusPayload) => {
       onMessageCallback(EventTypes.SessionCreated, msg);
     });
 
-    this.socket.on(EventTypes.ChatEvent, (msg: any) => {
+    this.socket.on(EventTypes.ChatEvent, (msg: ChatPayload) => {
       onMessageCallback(EventTypes.ChatEvent, msg);
     });
   }

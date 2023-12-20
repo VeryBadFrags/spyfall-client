@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import ConnectionManager from "../utils/connection_manager";
+import ConnectionManager from "../utils/connectionManager";
 import "./NewGameForm.css";
 import { EventTypes } from "../types/eventTypes";
 

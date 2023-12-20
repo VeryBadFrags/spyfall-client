@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
-import ConnectionManager from "./utils/connection_manager";
-import { SocketPayload } from "./interfaces/socket_payload.interface";
+import ConnectionManager from "./utils/connectionManager";
+import { GamePayload } from "./types/socketPayload.type";
 
 interface ConnectProps {
   setGameMode: React.Dispatch<React.SetStateAction<boolean>>;
   connectionManager: ConnectionManager;
   onDisconnect: () => void;
-  onMessageCallback: (type: string, data: SocketPayload) => void;
+  onMessageCallback: (type: string, data: GamePayload) => void;
   setConnectedToServer: (connected: boolean) => void;
 }
 

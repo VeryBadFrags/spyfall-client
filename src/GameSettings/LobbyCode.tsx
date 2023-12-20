@@ -1,8 +1,8 @@
 import React from "react";
-import { LobbyStatusType } from "../types/lobbyStatus.type";
+import { LobbyStatusPayload } from "../types/lobbyStatus.type";
 
 interface LobbyCodeProps {
-  lobbyStatus: LobbyStatusType;
+  lobbyStatus: LobbyStatusPayload;
 }
 
 export default function LobbyCode({ lobbyStatus }: LobbyCodeProps) {
