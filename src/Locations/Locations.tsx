@@ -1,9 +1,11 @@
 import React from "react";
 import Card from "../Card";
+import { LocationData } from "../types/locationData.type";
 
 interface LocationsProps {
-  locations: Array<string>;
+  locations: Array<LocationData>;
   currentLocation: string;
+  crossLocation: (index: number) => void;
 }
 
 export default function Locations(props: LocationsProps) {
@@ -18,16 +20,12 @@ export default function Locations(props: LocationsProps) {
                 key={i}
                 className={
                   "list-group-item list-group-item-action text-dark py-1 " +
-                  (props.currentLocation === loc ? "bg-info" : null)
+                  (props.currentLocation === loc.name ? " bg-info" : '') +
+                  (loc.crossed ? " strike" : '')
                 }
-                onClick={(e) => {
-                  const target = e.target as HTMLElement;
-                  target.classList.contains("strike")
-                    ? target.classList.remove("strike")
-                    : target.classList.add("strike");
-                }}
+                onClick={() => props.crossLocation(i)}
               >
-                {loc}
+                {loc.name}
               </button>
             );
           })}

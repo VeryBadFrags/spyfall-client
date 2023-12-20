@@ -15,6 +15,7 @@ import { LobbyStatusPayload } from "./types/lobbyStatus.type";
 import { EventTypes } from "./types/eventTypes";
 import { ChatPayload } from "./types/chatPayload.type";
 import { GamePayload } from "./types/socketPayload.type";
+import { LocationData } from "./types/locationData.type";
 
 const connectionManager = new ConnectionManager();
 
@@ -25,7 +26,7 @@ export default function App() {
   const [chatContent, setChatContent] = useState([] as Array<ChatPayload>);
   const [readyCheck, setReadyCheck] = useState(false);
   const [lobbyStatus, setLobbyStatus] = useState({} as LobbyStatusPayload);
-  const [locations, setLocations] = useState([] as Array<string>);
+  const [locations, setLocations] = useState([] as Array<LocationData>);
   const [currentLocation, setCurrentLocation] = useState("");
   const [gameStarted, setGameStarted] = useState(false);
 
@@ -95,7 +96,7 @@ export default function App() {
     window.scrollTo(0, 0);
     setChatContent([]);
     setReadyCheck(false);
-    setLocations(data.locations);
+    setLocations(data.locations.map((loc) => ({ name: loc })));
     setCurrentLocation(data.location);
     resetClickableElements();
     appendText({ message: "Game started" });
@@ -155,8 +156,31 @@ export default function App() {
               <Locations
                 locations={locations}
                 currentLocation={currentLocation}
+                crossLocation={(index: number) => {
+                  setLocations(
+                    locations.map((loc, i) => {
+                      if (i === index) {
+                        loc.crossed = !loc.crossed;
+                      }
+                      return loc;
+                    }),
+                  );
+                }}
               />
-              <PlayersList lobbyStatus={lobbyStatus} />
+              <PlayersList
+                lobbyStatus={lobbyStatus}
+                crossPeer={(index: number) =>
+                  setLobbyStatus({
+                    sessionId: lobbyStatus.sessionId,
+                    peers: lobbyStatus.peers?.map((peer, i) => {
+                      if (i === index) {
+                        peer.crossed = !peer.crossed;
+                      }
+                      return peer;
+                    }),
+                  })
+                }
+              />
               <GameSettings
                 connectionManager={connectionManager}
                 disconnectCallback={disconnect}

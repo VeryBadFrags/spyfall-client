@@ -4,29 +4,25 @@ import { LobbyStatusPayload } from "../types/lobbyStatus.type";
 
 interface PlayersListProps {
   lobbyStatus: LobbyStatusPayload;
+  crossPeer: (index: number) => void;
 }
 
 export default function PlayersList(props: PlayersListProps) {
   return (
     <Card header="👤 Players" hasBody={false}>
       <div className="list-group list-group-flush">
-        {props.lobbyStatus?.peers?.map((client) => {
+        {props.lobbyStatus?.peers?.map((client, index) => {
           return (
             <button
               type="button"
               className={
-                "list-group-item list-group-item-action " +
-                (client.crossed ? "strike" : null)
+                "list-group-item list-group-item-action" +
+                (client.crossed ? " strike" : '')
               }
               key={client.name}
-              onClick={(e) => {
-                const target = e.target as HTMLElement;
-                target.classList.contains("strike")
-                  ? target.classList.remove("strike")
-                  : target.classList.add("strike");
-              }}
+              onClick={() => props.crossPeer(index)}
             >
-              {client.name} {client.ready ? " ✅" : ""}
+              {client.name} {client.ready ? " ✅" : null}
             </button>
           );
         })}
