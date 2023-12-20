@@ -3,7 +3,7 @@ import Card from "../Card";
 import ConnectionManager from "../utils/connection_manager";
 import LobbyCode from "./LobbyCode";
 import NewGameForm from "./NewGameForm";
-import { LobbyStatusType } from "../types/lobby_status.type";
+import { LobbyStatusType } from "../types/lobbyStatus.type";
 
 interface GameSettingsProps {
   lobbyStatus: LobbyStatusType;

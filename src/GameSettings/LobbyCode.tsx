@@ -1,5 +1,5 @@
 import React from "react";
-import { LobbyStatusType } from "../types/lobby_status.type";
+import { LobbyStatusType } from "../types/lobbyStatus.type";
 
 interface LobbyCodeProps {
   lobbyStatus: LobbyStatusType;

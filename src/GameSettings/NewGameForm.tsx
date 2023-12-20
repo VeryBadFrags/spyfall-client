@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import ConnectionManager from "../utils/connection_manager";
 import "./NewGameForm.css";
-import { EventTypes } from "../types/event_types";
+import { EventTypes } from "../types/eventTypes";
 
 interface NewGameFormProps {
   readyCheck: boolean;

@@ -11,10 +11,10 @@ import Header from "./Header/Header";
 import Error from "./Error";
 import ConnectStatus from "./ConnectStatus";
 import PlayersList from "./PlayersList/PlayersList";
-import { ChatRowType } from "./types/chat_row.type";
 import { SocketPayload } from "./interfaces/socket_payload.interface";
-import { LobbyStatusType } from "./types/lobby_status.type";
-import { EventTypes } from "./types/event_types";
+import { LobbyStatusType } from "./types/lobbyStatus.type";
+import { EventTypes } from "./types/eventTypes";
+import { ChatPayload } from "./types/chatPayload.type";
 
 const connectionManager = new ConnectionManager();
 
@@ -22,7 +22,7 @@ function App() {
   const [connectedToServer, setConnectedToServer] = useState(false);
   const [gameMode, setGameMode] = useState(false);
   const [error, setError] = useState("");
-  const [chatContent, setChatContent] = useState([] as Array<ChatRowType>);
+  const [chatContent, setChatContent] = useState([] as Array<ChatPayload>);
   const [readyCheck, setReadyCheck] = useState(false);
   const [lobbyStatus, setLobbyStatus] = useState({} as LobbyStatusType);
   const [locations, setLocations] = useState([] as Array<string>);
@@ -44,22 +44,22 @@ function App() {
   };
 
   function onMessageCallback(type: string, data: any) {
-    // TODO use a switch
-    if (type === EventTypes.ChatEvent) {
-      appendText({
-        text: data.message,
-        author: data.author,
-        color: data.color,
-      });
-    } else if (type === EventTypes.SessionBroadcast) {
-      setLobbyStatus(data);
-    } else if (type === EventTypes.StartGame) {
-      startGame(data);
-    } else if (type === EventTypes.SessionCreated) {
-      setGameMode(true);
-      setError("");
-      // TODO replace window.location.hash with ?code=
-      window.location.hash = data.sessionId;
+    switch (type) {
+      case EventTypes.ChatEvent:
+        appendText(data);
+        break;
+      case EventTypes.SessionBroadcast:
+        setLobbyStatus(data);
+        break;
+      case EventTypes.StartGame:
+        startGame(data);
+        break;
+      case EventTypes.SessionCreated:
+        setGameMode(true);
+        setError("");
+        // TODO replace window.location.hash with ?code=
+        window.location.hash = data.sessionId;
+        break;
     }
   }
 
@@ -74,7 +74,7 @@ function App() {
   }
 
   const chatSize = 11;
-  function appendText(newRow: ChatRowType) {
+  function appendText(newRow: ChatPayload) {
     setChatContent((previousContent) => {
       // Trim the chat if it's too long
       if (previousContent.length >= chatSize) {
@@ -98,22 +98,22 @@ function App() {
     setLocations(data.locations);
     setCurrentLocation(data.location);
     resetClickableElements();
-    appendText({ text: "Game started" });
+    appendText({ message: "Game started" });
     setGameStarted(true);
 
     if (data.spy) {
       appendText({
-        text: "🕵️ You are the spy, try to guess the current location",
+        message: "🕵️ You are the spy, try to guess the current location",
         color: "red",
       });
     } else {
       appendText({
-        text: `😇 You are not the spy, the location is ${data.location}`,
+        message: `😇 You are not the spy, the location is ${data.location}`,
         color: "blue",
       });
     }
 
-    appendText({ text: `First player: ${data.first}` });
+    appendText({ message: `First player: ${data.first}` });
   }
 
   function resetAll() {

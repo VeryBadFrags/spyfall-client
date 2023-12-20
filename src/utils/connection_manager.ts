@@ -1,7 +1,7 @@
 import io from "socket.io-client";
 import { SocketPayload } from "../interfaces/socket_payload.interface";
-import { EventTypes } from "../types/event_types";
-import { LobbyStatusType } from "../types/lobby_status.type";
+import { EventTypes } from "../types/eventTypes";
+import { LobbyStatusType } from "../types/lobbyStatus.type";
 
 export default class ConnectionManager {
   socket: any;

@@ -2,12 +2,12 @@ import "./Chat.css";
 import React, { useRef, useState } from "react";
 import Card from "../Card";
 import ProgressBar from "../ProgressBar/ProgressBar";
-import { ChatRowType } from "../types/chat_row.type";
-import { EventTypes } from "../types/event_types";
+import { EventTypes } from "../types/eventTypes";
+import { ChatPayload } from "../types/chatPayload.type";
 
 interface ChatProps {
   sendChatCallBack: (eventType: string, message: string) => void;
-  chatContent: Array<ChatRowType>;
+  chatContent: Array<ChatPayload>;
   gameStarted: boolean;
 }
 
@@ -69,14 +69,14 @@ export default function Chat({
 }
 
 interface ChatLineProps {
-  row: ChatRowType;
+  row: ChatPayload;
 }
 
 function ChatLine({ row }: ChatLineProps) {
   return (
     <span className="list-group-item">
       {row.author ? <b>{row.author}:</b> : null}{" "}
-      <span style={{ color: row.color }}>{row.text}</span>
+      <span style={{ color: row.color }}>{row.message}</span>
     </span>
   );
 }
