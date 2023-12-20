@@ -17,7 +17,7 @@ build: node_modules
 
 .PHONY: dev
 dev: node_modules
-	pnpm run dev
+	pnpm run dev -- --open
 
 .PHONY: format
 format:
