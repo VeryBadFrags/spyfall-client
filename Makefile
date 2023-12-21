@@ -7,6 +7,7 @@ help:
 	@echo "Available targets:"
 	@echo "  make dev     - Run dev"
 	@echo "  make build   - Run build"
+	@echo "  make lint    - Run eslint"
 	@echo "  make format  - Format code using Prettier"
 	@echo "  make clean   - Clean up project"
 	@echo "  make help    - Display this help message"
@@ -18,6 +19,10 @@ build: node_modules
 .PHONY: dev
 dev: node_modules
 	pnpm run dev -- --open
+
+.PHONY: lint
+lint:
+	pnpm run lint
 
 .PHONY: format
 format:

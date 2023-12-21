@@ -44,22 +44,22 @@ export default function App() {
     setError("Disconnected from Lobby");
   };
 
-  function onMessageCallback(type: string, data: any) {
+  function onMessageCallback(type: string, data: unknown) {
     switch (type) {
       case EventTypes.ChatEvent:
-        appendText(data);
+        appendText(data as ChatPayload);
         break;
       case EventTypes.SessionBroadcast:
-        setLobbyStatus(data);
+        setLobbyStatus(data as LobbyStatusPayload);
         break;
       case EventTypes.StartGame:
-        startGame(data);
+        startGame(data as GamePayload);
         break;
       case EventTypes.SessionCreated:
         setGameMode(true);
         setError("");
         // TODO replace window.location.hash with ?code=
-        window.location.hash = data.sessionId;
+        window.location.hash = (data as LobbyStatusPayload).sessionId;
         break;
     }
   }

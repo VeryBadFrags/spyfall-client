@@ -13,7 +13,7 @@ interface ChatProps {
 
 export default function Chat(props: ChatProps) {
   const [inputText, setInputText] = useState("");
-  const inputRef: any = useRef();
+  const inputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();

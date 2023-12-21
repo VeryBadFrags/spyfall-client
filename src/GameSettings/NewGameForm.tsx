@@ -14,7 +14,7 @@ export default function NewGameForm({
   setReadyCheck,
   connectionManager,
 }: NewGameFormProps) {
-  const readyRef: any = useRef();
+  const readyRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
   const handleStartGame = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

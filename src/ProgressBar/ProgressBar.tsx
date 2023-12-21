@@ -7,7 +7,7 @@ export default function ProgressBar() {
   const [timer, setTimer] = useState(gameDuration);
 
   useEffect(() => {
-    let interval = setInterval(() => {
+    const interval = setInterval(() => {
       setTimer((seconds: number) => seconds - 1);
       if (timer <= 0) {
         clearInterval(interval);
