@@ -20,8 +20,8 @@ export default function Locations(props: LocationsProps) {
                 key={i}
                 className={
                   "list-group-item list-group-item-action text-dark py-1 " +
-                  (props.currentLocation === loc.name ? " bg-info" : '') +
-                  (loc.crossed ? " strike" : '')
+                  (props.currentLocation === loc.name ? " bg-info" : "") +
+                  (loc.crossed ? " strike" : "")
                 }
                 onClick={() => props.crossLocation(i)}
               >

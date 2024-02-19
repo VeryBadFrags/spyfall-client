@@ -9,11 +9,7 @@ function Header() {
           <i className="fas fa-user-secret" /> Spyfall
         </span>
         <div className="navbar-nav me-auto mb-2 mb-lg-0">
-          <a
-            href="https://games.verybadfrags.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href="https://games.verybadfrags.com" target="_blank">
             <i className="fas fa-gamepad" /> More games
           </a>
         </div>

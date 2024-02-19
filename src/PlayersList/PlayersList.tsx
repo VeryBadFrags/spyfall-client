@@ -17,7 +17,7 @@ export default function PlayersList(props: PlayersListProps) {
               type="button"
               className={
                 "list-group-item list-group-item-action" +
-                (client.crossed ? " strike" : '')
+                (client.crossed ? " strike" : "")
               }
               key={client.name}
               onClick={() => props.crossPeer(index)}

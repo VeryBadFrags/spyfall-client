@@ -8,11 +8,7 @@ function Footer() {
         <div className="row gy-2">
           <div className="lead">
             <i className="fas fa-tree" /> No internet? Play{" "}
-            <a
-              href="https://offline-spy.verybadfrags.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href="https://offline-spy.verybadfrags.com" target="_blank">
               📵🕵️&nbsp;Offline&nbsp;Spyfall
             </a>
           </div>
@@ -25,7 +21,6 @@ function Footer() {
             <a
               href="https://github.com/VeryBadFrags/spyfall-client"
               target="_blank"
-              rel="noopener noreferrer"
             >
               <i className="fas fa-mobile-alt" />
               &nbsp;Client
@@ -34,7 +29,6 @@ function Footer() {
             <a
               href="https://github.com/VeryBadFrags/spyfall-server"
               target="_blank"
-              rel="noopener noreferrer"
             >
               <i className="fas fa-server" />
               &nbsp;Server
@@ -42,11 +36,7 @@ function Footer() {
           </div> */}
           <div className="lead">
             <i className="far fa-heart" /> Like this game?{" "}
-            <a
-              href="https://www.buymeacoffee.com/verybadfrags"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href="https://www.buymeacoffee.com/verybadfrags" target="_blank">
               <img
                 className="coffee"
                 src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png"
