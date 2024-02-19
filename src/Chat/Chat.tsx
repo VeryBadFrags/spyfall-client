@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import Card from "../Card";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import { EventTypes } from "../types/eventTypes";
-import { ChatPayload } from "../types/chatPayload.type";
+import type { ChatPayload } from "../types/chatPayload.type";
 
 interface ChatProps {
   sendChatCallBack: (eventType: string, message: string) => void;
