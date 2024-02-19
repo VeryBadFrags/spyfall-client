@@ -11,11 +11,11 @@ import Header from "./Header/Header";
 import Error from "./Error";
 import ConnectStatus from "./ConnectStatus";
 import PlayersList from "./PlayersList/PlayersList";
-import { LobbyStatusPayload } from "./types/lobbyStatus.type";
+import type { LobbyStatusPayload } from "./types/lobbyStatus.type";
 import { EventTypes } from "./types/eventTypes";
-import { ChatPayload } from "./types/chatPayload.type";
-import { GamePayload } from "./types/socketPayload.type";
-import { LocationData } from "./types/locationData.type";
+import type { ChatPayload } from "./types/chatPayload.type";
+import type { GamePayload } from "./types/socketPayload.type";
+import type { LocationData } from "./types/locationData.type";
 
 const connectionManager = new ConnectionManager();
 
