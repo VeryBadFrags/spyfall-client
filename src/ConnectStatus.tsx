@@ -12,7 +12,7 @@ export default function ConnectStatus({ connected }: ErrorProps) {
           className="spinner-border spinner-border-sm text-primary"
           role="status"
         >
-          <span className="sr-only">Connecting to server</span>
+          <span className="sr-only">Loading...</span>
         </div>{" "}
         Connecting to server, please wait (~3min for a cold start)
       </div>
