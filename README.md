@@ -40,6 +40,14 @@ npm run dev
 
 ## Misc
 
+### Font Awesome
+
+Add a `.env` file to specify your Font Awesome Kit url:
+
+```.env
+REACT_APP_FONTAWESOME_KIT_URL="https://kit.fontawesome.com/your_unique_code.js"
+```
+
 ### Link to Netlify
 
 ```sh
