@@ -1,8 +1,8 @@
 import io, { Socket } from "socket.io-client";
 import { EventTypes } from "../types/eventTypes";
-import { LobbyStatusPayload } from "../types/lobbyStatus.type";
-import { ChatPayload } from "../types/chatPayload.type";
-import { GamePayload } from "../types/socketPayload.type";
+import type { LobbyStatusPayload } from "../types/lobbyStatus.type";
+import type { ChatPayload } from "../types/chatPayload.type";
+import type { GamePayload } from "../types/socketPayload.type";
 
 export default class ConnectionManager {
   socket: Socket | null;
