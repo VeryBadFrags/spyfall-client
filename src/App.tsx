@@ -19,7 +19,7 @@ import type { LocationData } from "./types/locationData.type";
 
 const connectionManager = new ConnectionManager();
 
-export default function App() {
+function App() {
   const [connectedToServer, setConnectedToServer] = useState(false);
   const [gameMode, setGameMode] = useState(false);
   const [error, setError] = useState("");
@@ -204,3 +204,5 @@ export default function App() {
     );
   }
 }
+
+export default App;

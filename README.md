@@ -38,14 +38,22 @@ Run `make` to view all available commands.
 npm run dev
 ```
 
+## Deploy to production
+
+Create a `.env.production` file to specify the Prod API url:
+
+```.env.production
+VITE_API_URL=https://your-api-url.foo
+```
+
 ## Misc
 
 ### Font Awesome
 
-Add a `.env` file to specify your Font Awesome Kit url:
+Add a `.env.local` file to specify your Font Awesome Kit url:
 
 ```.env
-REACT_APP_FONTAWESOME_KIT_URL="https://kit.fontawesome.com/your_unique_code.js"
+VITE_FONTAWESOME_KIT_URL="https://kit.fontawesome.com/your_unique_code.js"
 ```
 
 ### Link to Netlify
