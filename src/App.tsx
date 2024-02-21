@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Connect from "./Connect";
 import Chat from "./Chat/Chat";
 import Rules from "./Rules";

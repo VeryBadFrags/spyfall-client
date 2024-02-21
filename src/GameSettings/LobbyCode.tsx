@@ -1,4 +1,3 @@
-import React from "react";
 import { LobbyStatusPayload } from "../types/lobbyStatus.type";
 
 interface LobbyCodeProps {
