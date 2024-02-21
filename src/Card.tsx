@@ -1,5 +1,5 @@
-import React, { ReactNode } from "react";
-import parse from "html-react-parser";
+import { ReactNode } from "react";
+import parse from "html-react-parser"; // TODO try to not use html-react-parser
 
 interface CardProps {
   header?: string;

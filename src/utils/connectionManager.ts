@@ -14,11 +14,7 @@ export default class ConnectionManager {
 
   initSocket(setConnectedToServer: (connected: boolean) => void) {
     if (!this.socket) {
-      if (window.location.hostname === "localhost") {
-        this.socket = io("http://localhost:8081");
-      } else {
-        this.socket = io("https://spyfall-server.onrender.com"); // TODO move to configuration
-      }
+      this.socket = io(import.meta.env.VITE_API_URL);
     }
 
     this.socket.on(EventTypes.Connect, () => {
