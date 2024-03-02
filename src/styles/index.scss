@@ -1,10 +1,10 @@
-@import "styles/catppuccin";
+@import "bootstrap";
 
 body {
   font-family: "Atkinson Hyperlegible", sans-serif;
 
-  background-color: #415e74;
-  background-image: linear-gradient(to bottom right, #09203f 20%, #415e74 100%);
+  background-color: $overlay2;
+  // background-image: linear-gradient(to bottom, $teal 20%, $base 100%);
   background-size: cover;
   background-repeat: none;
 }
@@ -22,4 +22,13 @@ body {
 .strike {
   text-decoration: line-through !important;
   opacity: 0.6 !important;
+}
+
+.card,
+.card-body {
+  background-color: $mantle;
+}
+
+.card-header {
+  background-color: $crust;
 }

@@ -1,0 +1,21 @@
+@import "../styles/catppuccin";
+
+.navbar-dark {
+  background-color: $text;
+  color: $base;
+}
+
+.navbar-brand {
+  color: $base !important;
+  font-weight: 700 !important;
+  text-shadow: 1px 1px 2px #000;
+}
+
+.navbar-dark a,
+.navbar-dark a:visited {
+  color: $mantle !important;
+}
+
+.navbar-dark a:hover {
+  color: $crust !important;
+}

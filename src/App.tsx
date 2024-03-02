@@ -1,4 +1,3 @@
-import "./App.css";
 import { useState, useEffect } from "react";
 import Connect from "./Connect";
 import Chat from "./Chat/Chat";
@@ -74,7 +73,7 @@ function App() {
       .forEach((elem) => elem.classList.remove("strike"));
   }
 
-  const chatSize = 11;
+  const chatSize = 8;
   function appendText(newRow: ChatPayload) {
     setChatContent((previousContent) => {
       if (previousContent.length >= chatSize) {
@@ -129,18 +128,18 @@ function App() {
   }
 
   return (
-    <div className="app">
+    <>
       <Header />
 
       <Main />
 
       <Footer />
-    </div>
+    </>
   );
 
   function Main() {
     return (
-      <main className="main container mb-5 pt-3">
+      <main className="container h-100 pt-3">
         <ConnectStatus connected={connectedToServer} />
 
         <Error error={error} />

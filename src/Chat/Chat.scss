@@ -1,0 +1,18 @@
+@import "../styles/catppuccin";
+
+.chat-box {
+  background-color: $base !important;
+  min-height: 14em;
+}
+
+.chat-box > .list-group > .list-group-item {
+  background-color: $base !important;
+}
+
+.border-rounded-bottom-left {
+  border-radius: 0 0 0 4px !important;
+}
+
+.border-rounded-bottom-right {
+  border-radius: 0 0 4px 0 !important;
+}

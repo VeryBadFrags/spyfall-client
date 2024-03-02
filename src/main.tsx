@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 
-import "./index.scss";
+import "./styles/index.scss";
 import "@fontsource/atkinson-hyperlegible";
 import "@fontsource/atkinson-hyperlegible/700.css";
 
