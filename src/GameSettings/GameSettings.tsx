@@ -15,7 +15,7 @@ interface GameSettingsProps {
 
 export default function GameSettings(props: GameSettingsProps) {
   return (
-    <Card className="border-secondary" header="⚙️ Settings">
+    <Card header="⚙️ Settings">
       <LobbyCode lobbyStatus={props.lobbyStatus} />
       <NewGameForm
         readyCheck={props.readyCheck}

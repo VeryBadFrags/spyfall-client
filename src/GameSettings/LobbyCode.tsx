@@ -6,13 +6,10 @@ interface LobbyCodeProps {
 
 export default function LobbyCode({ lobbyStatus }: LobbyCodeProps) {
   return (
-    <div className="row g-3 align-items-center mb-3">
-      <div className="col-auto">
-        <label htmlFor="lobby-display" className="col-form-label">
+    <div className="mb-3">
+        <label htmlFor="lobby-display" className="form-label">
           <i className="fas fa-building" /> Lobby
         </label>
-      </div>
-      <div className="col-auto">
         <input
           id="lobby-display"
           type="text"
@@ -22,7 +19,6 @@ export default function LobbyCode({ lobbyStatus }: LobbyCodeProps) {
             lobbyStatus?.sessionId ? (lobbyStatus.sessionId as string) : ""
           }
         />
-      </div>
     </div>
   );
 }
