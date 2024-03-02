@@ -54,7 +54,7 @@ export default function Connect(props: ConnectProps) {
   }, []);
 
   return (
-    <Card className="text-dark bg-light border-primary">
+    <Card>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="name-input" className="form-label">

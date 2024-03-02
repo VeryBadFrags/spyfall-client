@@ -1,4 +1,4 @@
-import "./Chat.css";
+import "./Chat.scss";
 import React, { useRef, useState } from "react";
 import Card from "../Card";
 import ProgressBar from "../ProgressBar/ProgressBar";
@@ -25,7 +25,7 @@ export default function Chat(props: ChatProps) {
   }
 
   return (
-    <Card className="border-primary">
+    <Card>
       {props.gameStarted ? <ProgressBar /> : null}
       <div className="row g-0">
         <div
@@ -70,7 +70,7 @@ interface ChatLineProps {
 
 function ChatLine({ row }: ChatLineProps) {
   return (
-    <span className="list-group-item">
+    <span className="list-group-item border-0">
       {row.author ? <b>{row.author}:</b> : null}{" "}
       <span style={{ color: row.color }}>{row.message}</span>
     </span>
