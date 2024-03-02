@@ -1,0 +1,55 @@
+@import "/node_modules/@catppuccin/palette/scss/latte";
+// https://catppuccin.ryanccn.dev/palette
+
+// Bootstrap override
+$primary: $blue;
+$secondary: $overlay1;
+$tertiary: $overlay2;
+$success: $green;
+$danger: $red;
+$warning: $yellow;
+$info: $sky;
+$light: $base;
+$dark: $text;
+
+$body-bg: $base;
+$body-color: $text;
+$text-muted: $subtext1;
+$heading-color: $text;
+$border-color: $surface0;
+
+$card-cap-color: $text;
+$card-cap-bg: $mantle;
+$card-bg: $mantle;
+$card-color: $text;
+$card-border-color: $border-color;
+
+$component-active-bg: $overlay0;
+$list-group-color: $blue;
+$list-group-bg: $card-cap-bg;
+$list-group-action-hover-color: $lavender;
+$list-group-hover-bg: $base;
+
+// set changes
+@import "/node_modules/bootstrap/scss/bootstrap";
+
+body {
+  background-color: $base;
+  color: $text;
+}
+
+a {
+  color: $blue;
+}
+
+a:hover {
+  color: $lavender !important;
+}
+
+a:visited {
+  color: $mauve;
+}
+
+.list-group-item {
+  border-color: $border-color;
+}
