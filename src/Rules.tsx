@@ -5,7 +5,7 @@ export default function Rules() {
   const [showRules, setShowRules] = useState(false);
 
   return (
-    <Card header='<i class="fas fa-book"></i> Rules'>
+    <Card header="📚 Rules">
       <div className="d-grid">
         <button
           className="btn btn-outline-primary"

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./ProgressBar.css";
 
 export default function ProgressBar() {
   const gameDuration = 300;
@@ -19,14 +18,14 @@ export default function ProgressBar() {
     return () => clearInterval(interval);
   }, [timer]);
 
-  const progress = (timer / gameDuration) * 100;
-
   return (
     <div className="progress mb-2">
       <div
         className="progress-bar bg-info text-dark"
         role="progressbar"
-        style={{ width: timer >= 0 ? `${progress}%` : "100%" }}
+        style={{
+          width: timer >= 0 ? `${(timer / gameDuration) * 100}%` : "100%",
+        }}
         aria-label="Game timer"
       >
         <ProgressBarDisplay timer={timer} />

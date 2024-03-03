@@ -31,7 +31,9 @@ export default function NewGameForm({
         <div className="form-check form-switch mb-3">
           <input
             id="ready-check"
-            className="form-check-input"
+            className={
+              "form-check-input " + (readyCheck ? " bg-success" : null)
+            }
             type="checkbox"
             name="ready-check"
             required

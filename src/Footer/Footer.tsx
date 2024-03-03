@@ -21,7 +21,7 @@ function Footer() {
               <a href="mailto:spy@verybadfrags.com">spy@verybadfrags.com</a>
             </div>
             <div className="lead">
-            <i className="fas fa-code" /> MIT License{" "}
+              <i className="fas fa-code" /> MIT License{" "}
               <a href="https://github.com/VeryBadFrags/spyfall" target="_blank">
                 <i className="fab fa-github" /> Source code on GitHub
               </a>

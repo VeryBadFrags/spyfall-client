@@ -25,7 +25,7 @@ export default function Chat(props: ChatProps) {
   }
 
   return (
-    <Card header='💬 Chat'>
+    <Card header="💬 Chat">
       {props.gameStarted ? <ProgressBar /> : null}
       <div className="row g-0">
         <div

@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import parse from "html-react-parser"; // TODO try to not use html-react-parser
 
 interface CardProps {
   header?: string;
@@ -16,8 +15,8 @@ export default function Card({
 }: CardProps) {
   return (
     <div className="col">
-      <div className={"card shadow " + className}>
-        {header ? <div className="card-header">{parse(header)}</div> : null}
+      <div className={"card shadow " + (className ? className : null)}>
+        {header ? <div className="card-header">{header}</div> : null}
         {hasBody ? <div className="card-body">{children}</div> : children}
       </div>
     </div>
