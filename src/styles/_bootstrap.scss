@@ -29,24 +29,15 @@ $list-group-bg: $card-cap-bg;
 $list-group-action-hover-color: $lavender;
 $list-group-hover-bg: $base;
 
+$link-color: $blue;
+$link-hover-color: $lavender;
+
 // set changes
 @import "/node_modules/bootstrap/scss/bootstrap";
 
 body {
   background-color: $base;
   color: $text;
-}
-
-a {
-  color: $blue;
-}
-
-a:hover {
-  color: $lavender !important;
-}
-
-a:visited {
-  color: $mauve;
 }
 
 .list-group-item {
