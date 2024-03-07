@@ -3,6 +3,16 @@ import ConnectionManager from "../utils/connectionManager";
 import "./NewGameForm.css";
 import { EventTypes } from "../types/eventTypes";
 
+// Font Awesome
+import Parser from "html-react-parser";
+import { library, icon } from "@fortawesome/fontawesome-svg-core";
+import { faTrafficLight } from "@fortawesome/free-solid-svg-icons";
+library.add(faTrafficLight);
+const trafficLightIcon = icon({
+  prefix: "fas",
+  iconName: faTrafficLight.iconName,
+});
+
 interface NewGameFormProps {
   readyCheck: boolean;
   setReadyCheck: React.Dispatch<React.SetStateAction<boolean>>;
@@ -54,7 +64,7 @@ export default function NewGameForm({
           </label>
         </div>
         <button type="submit" className="btn btn-primary">
-          <i className="fas fa-traffic-light" /> Start new round
+          {Parser(trafficLightIcon.html.toString())} Start new round
         </button>
       </form>
     </div>

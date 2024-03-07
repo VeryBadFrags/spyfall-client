@@ -48,14 +48,6 @@ VITE_API_URL=https://your-api-url.foo
 
 ## Misc
 
-### Font Awesome
-
-Add a `.env.local` file to specify your Font Awesome Kit url:
-
-```.env
-VITE_FONTAWESOME_KIT_URL="https://kit.fontawesome.com/your_unique_code.js"
-```
-
 ### Link to Netlify
 
 ```sh

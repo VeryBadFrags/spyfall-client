@@ -3,6 +3,14 @@ import Card from "./Card";
 import ConnectionManager from "./utils/connectionManager";
 import { GamePayload } from "./types/socketPayload.type";
 
+// Font Awesome
+import Parser from "html-react-parser";
+import { library, icon } from "@fortawesome/fontawesome-svg-core";
+import { faUser, faDice } from "@fortawesome/free-solid-svg-icons";
+library.add(faUser, faDice);
+const userIcon = icon({ prefix: "fas", iconName: faUser.iconName });
+const diceIcon = icon({ prefix: "fas", iconName: faDice.iconName });
+
 interface ConnectProps {
   setGameMode: React.Dispatch<React.SetStateAction<boolean>>;
   connectionManager: ConnectionManager;
@@ -58,7 +66,7 @@ export default function Connect(props: ConnectProps) {
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="name-input" className="form-label">
-            <i className="fas fa-user" /> Name
+            {Parser(userIcon.html.toString())} Name
           </label>
           <input
             id="name-input"
@@ -74,7 +82,7 @@ export default function Connect(props: ConnectProps) {
         {/* Lobby input */}
         <div className="mb-3">
           <label htmlFor="lobby-input" className="form-label">
-            <i className="fas fa-dice" /> Lobby code
+            {Parser(diceIcon.html.toString())} Lobby code
           </label>
           <input
             id="lobby-input"

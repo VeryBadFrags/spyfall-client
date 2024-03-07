@@ -5,6 +5,13 @@ import ProgressBar from "../ProgressBar/ProgressBar";
 import { EventTypes } from "../types/eventTypes";
 import type { ChatPayload } from "../types/chatPayload.type";
 
+// Font Awesome
+import Parser from "html-react-parser";
+import { library, icon } from "@fortawesome/fontawesome-svg-core";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+library.add(faPaperPlane);
+const paperPlaneIcon = icon({ prefix: "fas", iconName: faPaperPlane.iconName });
+
 interface ChatProps {
   sendChatCallBack: (eventType: string, message: string) => void;
   chatContent: Array<ChatPayload>;
@@ -55,7 +62,7 @@ export default function Chat(props: ChatProps) {
               type="submit"
               className="btn btn-primary border-rounded-bottom-right"
             >
-              <i className="fas fa-paper-plane" /> Send
+              {Parser(paperPlaneIcon.html.toString())} Send
             </button>
           </div>
         </form>
