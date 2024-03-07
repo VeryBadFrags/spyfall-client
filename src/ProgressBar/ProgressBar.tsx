@@ -1,5 +1,13 @@
 import { useEffect, useState } from "react";
 
+// Font Awesome
+import Parser from "html-react-parser";
+import { library, icon } from "@fortawesome/fontawesome-svg-core";
+import { faStopwatch, faBell } from "@fortawesome/free-solid-svg-icons";
+library.add(faStopwatch, faBell);
+const stopwatchIcon = icon({ prefix: "fas", iconName: faStopwatch.iconName });
+const bellIcon = icon({ prefix: "fas", iconName: faBell.iconName });
+
 export default function ProgressBar() {
   const gameDuration = 300;
 
@@ -43,7 +51,7 @@ function ProgressBarDisplay({ timer }: ProgressBarDisplayProps) {
     return (
       <div>
         <>
-          <i className="fas fa-stopwatch" /> {getMinutes(timer)}:
+          {Parser(stopwatchIcon.html.toString())} {getMinutes(timer)}:
           {getSeconds(timer)}
         </>
       </div>
@@ -51,7 +59,7 @@ function ProgressBarDisplay({ timer }: ProgressBarDisplayProps) {
   } else {
     return (
       <span>
-        <i className="fas fa-bell" /> Time&apos;s up! Who is the Spy?
+        {Parser(bellIcon.html.toString())} Time&apos;s up! Who is the Spy?
       </span>
     );
   }

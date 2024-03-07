@@ -1,6 +1,38 @@
 import { useState } from "react";
 import Card from "./Card";
 
+// Font Awesome
+import Parser from "html-react-parser";
+import { library, icon } from "@fortawesome/fontawesome-svg-core";
+import {
+  faEye,
+  faUsers,
+  faStopwatch,
+  faMobileAlt,
+  faHourglassEnd,
+  faHandPointRight,
+} from "@fortawesome/free-solid-svg-icons";
+library.add(
+  faEye,
+  faUsers,
+  faStopwatch,
+  faMobileAlt,
+  faHourglassEnd,
+  faHandPointRight,
+);
+const eyeIcon = icon({ prefix: "fas", iconName: faEye.iconName });
+const usersIcon = icon({ prefix: "fas", iconName: faUsers.iconName });
+const stopwatchIcon = icon({ prefix: "fas", iconName: faStopwatch.iconName });
+const mobileIcon = icon({ prefix: "fas", iconName: faMobileAlt.iconName });
+const hourglassIcon = icon({
+  prefix: "fas",
+  iconName: faHourglassEnd.iconName,
+});
+const handRightIcon = icon({
+  prefix: "fas",
+  iconName: faHandPointRight.iconName,
+});
+
 export default function Rules() {
   const [showRules, setShowRules] = useState(false);
 
@@ -11,7 +43,7 @@ export default function Rules() {
           className="btn btn-outline-primary"
           onClick={() => setShowRules(!showRules)}
         >
-          <i className="fas fa-eye" /> Show/Hide
+          {Parser(eyeIcon.html.toString())} Show/Hide
         </button>
         <RulesDetails showRules={showRules} />
       </div>
@@ -28,15 +60,9 @@ function RulesDetails(props: RulesDetailsProps) {
     return (
       <div>
         <ul className="mt-3">
-          <li>
-            <i className="fas fa-users" /> 3-10 Players
-          </li>
-          <li>
-            <i className="fas fa-stopwatch" /> 5 Minutes Rounds
-          </li>
-          <li>
-            <i className="fas fa-mobile-alt" /> 1 Device per player
-          </li>
+          <li>{Parser(usersIcon.html.toString())} 3-10 Players</li>
+          <li>{Parser(stopwatchIcon.html.toString())} 5 Minutes Rounds</li>
+          <li>{Parser(mobileIcon.html.toString())} 1 Device per player</li>
         </ul>
         <hr />
         <ul>
@@ -53,9 +79,7 @@ function RulesDetails(props: RulesDetailsProps) {
             another person
           </li>
         </ul>
-        <h6>
-          <i className="fas fa-hourglass-end" /> When the timer ends
-        </h6>
+        <h6>{Parser(hourglassIcon.html.toString())} When the timer ends</h6>
         <ul>
           <li>
             Players vote to designate the spy
@@ -68,9 +92,7 @@ function RulesDetails(props: RulesDetailsProps) {
             </ul>
           </li>
         </ul>
-        <h6>
-          <i className="fas fa-hand-point-right" /> At any time
-        </h6>
+        <h6>{Parser(handRightIcon.html.toString())} At any time</h6>
         <ul>
           <li>The players can vote for a spy if they have a majority</li>
           <li>
