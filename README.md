@@ -20,9 +20,9 @@ and [socket.io](https://socket.io).
 
 - [💾 View the server code](https://github.com/VeryBadFrags/spyfall-server)
 
-## Run locally
+## Development
 
-You'll need to run the server locally. See <https://github.com/VeryBadFrags/spyfall-server#run-locally>.
+You'll need to run the server locally too. See <https://github.com/VeryBadFrags/spyfall-server#run-locally>.
 
 ### With [pnpm](https://pnpm.io)
 
