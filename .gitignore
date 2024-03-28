@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 # pnpm
-.pnpm-store
+.pnpm-store/
