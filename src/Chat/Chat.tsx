@@ -1,7 +1,7 @@
 import "./Chat.scss";
 import React, { useRef, useState } from "react";
 import Card from "../Card";
-import ProgressBar from "../ProgressBar/ProgressBar";
+import ProgressBar from "./ProgressBar";
 import { EventTypes } from "../types/eventTypes";
 import type { ChatPayload } from "../types/chatPayload.type";
 
