@@ -12,7 +12,7 @@ export default function ConnectStatus({ connected }: ErrorProps) {
         >
           <span className="sr-only">Loading...</span>
         </div>{" "}
-        Connecting to server, please wait (~3min for a cold start)
+        Connecting to server, please wait
       </div>
     );
   } else {
