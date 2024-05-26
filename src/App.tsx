@@ -10,11 +10,12 @@ import Header from "./Header/Header";
 import Error from "./Error";
 import ConnectStatus from "./ConnectStatus";
 import PlayersList from "./PlayersList/PlayersList";
-import type { LobbyStatusPayload } from "./types/lobbyStatus.type";
 import { EventTypes } from "./types/eventTypes";
+import type { LobbyStatusPayload } from "./types/lobbyStatus.type";
 import type { ChatPayload } from "./types/chatPayload.type";
 import type { GamePayload } from "./types/socketPayload.type";
 import type { LocationData } from "./types/locationData.type";
+import type { AnyPayload } from "./types/anyPayload.type";
 
 const connectionManager = new ConnectionManager();
 
@@ -43,7 +44,7 @@ function App() {
     setError("Disconnected from Lobby");
   };
 
-  function onMessageCallback(type: string, data: unknown) {
+  function onMessageCallback(type: string, data: AnyPayload) {
     switch (type) {
       case EventTypes.ChatEvent:
         appendText(data as ChatPayload);

@@ -3,6 +3,7 @@ import { EventTypes } from "../types/eventTypes";
 import type { LobbyStatusPayload } from "../types/lobbyStatus.type";
 import type { ChatPayload } from "../types/chatPayload.type";
 import type { GamePayload } from "../types/socketPayload.type";
+import type { AnyPayload } from "../types/anyPayload.type";
 
 export default class ConnectionManager {
   socket: Socket | null;
@@ -32,7 +33,7 @@ export default class ConnectionManager {
     playerName: string,
     sessionId: string,
     connectionClosedCallback: () => void,
-    onMessageCallback: (type: string, data: undefined) => void,
+    onMessageCallback: (type: string, data: AnyPayload) => void,
     setConnectedToServer: (connected: boolean) => void,
   ) {
     this.initSocket(setConnectedToServer);

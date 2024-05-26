@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import ConnectionManager from "./utils/connectionManager";
-import { GamePayload } from "./types/socketPayload.type";
+import type { AnyPayload } from "./types/anyPayload.type";
 
 // Font Awesome
 import Parser from "html-react-parser";
 import { library, icon } from "@fortawesome/fontawesome-svg-core";
 import { faUser, faDice } from "@fortawesome/free-solid-svg-icons";
+
 library.add(faUser, faDice);
 const userIcon = icon({ prefix: "fas", iconName: faUser.iconName });
 const diceIcon = icon({ prefix: "fas", iconName: faDice.iconName });
@@ -15,7 +16,7 @@ interface ConnectProps {
   setGameMode: React.Dispatch<React.SetStateAction<boolean>>;
   connectionManager: ConnectionManager;
   onDisconnect: () => void;
-  onMessageCallback: (type: string, data: GamePayload) => void;
+  onMessageCallback: (type: string, data: AnyPayload) => void;
   setConnectedToServer: (connected: boolean) => void;
 }
 
