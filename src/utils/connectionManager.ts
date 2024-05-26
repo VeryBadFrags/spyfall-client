@@ -32,7 +32,7 @@ export default class ConnectionManager {
     playerName: string,
     sessionId: string,
     connectionClosedCallback: () => void,
-    onMessageCallback: (type: string, data: any) => void,
+    onMessageCallback: (type: string, data: undefined) => void,
     setConnectedToServer: (connected: boolean) => void,
   ) {
     this.initSocket(setConnectedToServer);
