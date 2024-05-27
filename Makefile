@@ -5,12 +5,12 @@
 .PHONY: help
 help:
 	@echo "Available targets:"
-	@echo "  make dev     - Run dev"
-	@echo "  make build   - Run build"
-	@echo "  make lint    - Run eslint"
-	@echo "  make format  - Format code using Prettier"
-	@echo "  make clean   - Clean up project"
-	@echo "  make help    - Display this help message"
+	@echo "  dev     - Run dev"
+	@echo "  build   - Run build"
+	@echo "  format  - Format code using Prettier"
+	@echo "  lint    - Run eslint"
+	@echo "  clean   - Clean up project"
+	@echo "  help    - Display this help message"
 
 .PHONY: build
 build: node_modules
@@ -20,18 +20,19 @@ build: node_modules
 dev: node_modules
 	pnpm run dev -- --open
 
-.PHONY: lint
-lint:
-	pnpm run lint
-
 .PHONY: format
 format:
 	pnpm run format
+
+.PHONY: lint
+lint:
+	pnpm run lint
 
 .PHONY: clean
 clean:
 	pnpm run clean
 
 # Install dependencies if 'node_modules' is missing
-node_modules: pnpm-lock.yaml
+node_modules: pnpm-lock.yaml package.json
 	pnpm install
+	touch node_modules/
