@@ -8,7 +8,7 @@ import "@fontsource/atkinson-hyperlegible/700.css";
 
 import Plausible from "plausible-tracker";
 const plausible = Plausible({
-  domain: "spy.verybadfrags.com",
+  domain: "spyfall.verybadfrags.com",
   apiHost: "/ps",
   hashMode: false,
 });
