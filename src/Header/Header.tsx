@@ -20,7 +20,7 @@ function Header() {
             <li className="nav-item">
               <a
                 className="nav-link icon-link"
-                href="https://games.verybadfrags.com"
+                href="https://blog.verybadfrags.com/games/"
                 target="_blank"
               >
                 {Parser(gamePadIcon.html.toString())} More games
