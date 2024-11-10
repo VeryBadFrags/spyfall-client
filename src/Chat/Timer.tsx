@@ -1,17 +1,16 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 
 // Font Awesome
 import Parser from "html-react-parser";
 import { library, icon } from "@fortawesome/fontawesome-svg-core";
 import { faStopwatch, faBell } from "@fortawesome/free-solid-svg-icons";
+import { TimePayload } from "../types/timePayload.type";
 library.add(faStopwatch, faBell);
 const stopwatchIcon = icon({ prefix: "fas", iconName: faStopwatch.iconName });
 const bellIcon = icon({ prefix: "fas", iconName: faBell.iconName });
 
-export default function ProgressBar() {
-  const gameDuration = 300;
-
-  const [timer, setTimer] = useState(gameDuration);
+const Timer = memo(function Timer(props: { serverTime: TimePayload }) {
+  const [timer, setTimer] = useState(props.serverTime.timeLeftSec);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -20,9 +19,6 @@ export default function ProgressBar() {
         clearInterval(interval);
       }
     }, 1000);
-    // else if (!isActive) {
-    //   clearInterval(interval);
-    // }
     return () => clearInterval(interval);
   }, [timer]);
 
@@ -32,7 +28,10 @@ export default function ProgressBar() {
         className="progress-bar bg-info text-dark"
         role="progressbar"
         style={{
-          width: timer >= 0 ? `${(timer / gameDuration) * 100}%` : "100%",
+          width:
+            timer >= 0
+              ? `${(timer / props.serverTime.durationSec) * 100}%`
+              : "100%",
         }}
         aria-label="Game timer"
       >
@@ -40,14 +39,14 @@ export default function ProgressBar() {
       </div>
     </div>
   );
-}
+});
 
 interface ProgressBarDisplayProps {
   timer: number;
 }
 
 function ProgressBarDisplay({ timer }: ProgressBarDisplayProps) {
-  if (timer >= 0) {
+  if (timer > 0) {
     return (
       <div>
         <>
@@ -74,3 +73,5 @@ function getSeconds(timer: number): string {
   const seconds = timer % 60;
   return seconds < 10 ? "0" + seconds : seconds.toString();
 }
+
+export default Timer;

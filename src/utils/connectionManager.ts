@@ -2,8 +2,9 @@ import io, { Socket } from "socket.io-client";
 import { EventTypes } from "../types/eventTypes";
 import type { LobbyStatusPayload } from "../types/lobbyStatus.type";
 import type { ChatPayload } from "../types/chatPayload.type";
-import type { GamePayload } from "../types/socketPayload.type";
+import type { GamePayload } from "../types/gamePayload.type";
 import type { AnyPayload } from "../types/anyPayload.type";
+import { TimePayload } from "../types/timePayload.type";
 
 export default class ConnectionManager {
   socket: Socket | null;
@@ -62,6 +63,10 @@ export default class ConnectionManager {
 
     this.socket?.on(EventTypes.ChatEvent, (msg: ChatPayload) => {
       onMessageCallback(EventTypes.ChatEvent, msg);
+    });
+
+    this.socket?.on(EventTypes.Time, (msg: TimePayload) => {
+      onMessageCallback(EventTypes.Time, msg);
     });
   }
 

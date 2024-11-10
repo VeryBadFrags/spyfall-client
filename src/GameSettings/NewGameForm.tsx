@@ -19,7 +19,7 @@ interface NewGameFormProps {
   connectionManager: ConnectionManager;
 }
 
-export default function NewGameForm({
+function NewGameForm({
   readyCheck,
   setReadyCheck,
   connectionManager,
@@ -71,3 +71,5 @@ export default function NewGameForm({
     </div>
   );
 }
+
+export default NewGameForm;
