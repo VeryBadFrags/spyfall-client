@@ -56,6 +56,11 @@ function Footer() {
                 />
               </a>
             </div>
+            <div className="lead">
+              <a href="https://www.freepik.com/icon/security_10442065#fromView=search&page=1&position=45&uuid=8ed7406c-1370-434f-b9e1-b24bd1a00d40">
+                Icon by LAFS
+              </a>
+            </div>
           </div>
         </div>
       </div>
