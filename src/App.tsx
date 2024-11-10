@@ -30,7 +30,8 @@ function App() {
   const [locations, setLocations] = useState([] as Array<LocationData>);
   const [currentLocation, setCurrentLocation] = useState("");
   const [gameStarted, setGameStarted] = useState(false);
-  const [timer, setTimer] = useState({
+  const [crossedLocations, setCrossedLocations] = useState(new Set<number>());
+  const [serverTime, setServerTime] = useState({
     durationSec: 0,
     timeLeftSec: 0,
   } as TimePayload);
@@ -101,7 +102,7 @@ function App() {
   }
 
   function updateTime(serverTime: TimePayload) {
-    setTimer(serverTime);
+    setServerTime(serverTime);
   }
 
   function startGame(data: GamePayload) {
@@ -164,21 +165,13 @@ function App() {
                 sendChatCallBack={sendChatCallBack}
                 chatContent={chatContent}
                 gameStarted={gameStarted}
-                serverTime={timer}
+                serverTime={serverTime}
               />
               <Locations
                 locations={locations}
                 currentLocation={currentLocation}
-                crossLocation={(index: number) => {
-                  setLocations(
-                    locations.map((loc, i) => {
-                      if (i === index) {
-                        loc.crossed = !loc.crossed;
-                      }
-                      return loc;
-                    }),
-                  );
-                }}
+                crossedLocations={crossedLocations}
+                setCrossedLocations={setCrossedLocations}
               />
               <PlayersList
                 lobbyStatus={lobbyStatus}
