@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Card from "../Card";
 import { LobbyStatusPayload } from "../types/lobbyStatus.type";
 
@@ -6,7 +7,7 @@ interface PlayersListProps {
   crossPeer: (index: number) => void;
 }
 
-export default function PlayersList(props: PlayersListProps) {
+const PlayersList = memo(function PlayersList(props: PlayersListProps) {
   return (
     <Card header="👤 Players" hasBody={false}>
       <div className="list-group list-group-flush">
@@ -28,4 +29,6 @@ export default function PlayersList(props: PlayersListProps) {
       </div>
     </Card>
   );
-}
+});
+
+export default PlayersList;

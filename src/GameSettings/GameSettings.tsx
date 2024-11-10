@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import Card from "../Card";
 import ConnectionManager from "../utils/connectionManager";
 import LobbyCode from "./LobbyCode";
@@ -20,7 +20,7 @@ interface GameSettingsProps {
   disconnectCallback: () => void;
 }
 
-export default function GameSettings(props: GameSettingsProps) {
+const GameSettings = memo(function GameSettings(props: GameSettingsProps) {
   return (
     <Card header="⚙️ Game">
       <LobbyCode lobbyStatus={props.lobbyStatus} />
@@ -33,7 +33,7 @@ export default function GameSettings(props: GameSettingsProps) {
       <DisconnectButton disconnectCallback={props.disconnectCallback} />
     </Card>
   );
-}
+});
 
 interface DisconnectButtonProps {
   disconnectCallback: () => void;
@@ -51,3 +51,5 @@ function DisconnectButton({ disconnectCallback }: DisconnectButtonProps) {
     </div>
   );
 }
+
+export default GameSettings;

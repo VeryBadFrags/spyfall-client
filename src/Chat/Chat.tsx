@@ -1,7 +1,7 @@
 import "./Chat.scss";
-import React, { useRef, useState } from "react";
+import React, { memo, useRef, useState } from "react";
 import Card from "../Card";
-import ProgressBar from "./ProgressBar";
+import Timer from "./Timer";
 import { EventTypes } from "../types/eventTypes";
 import type { ChatPayload } from "../types/chatPayload.type";
 
@@ -18,7 +18,7 @@ interface ChatProps {
   gameStarted: boolean;
 }
 
-export default function Chat(props: ChatProps) {
+const Chat = memo(function Chat(props: ChatProps) {
   const [inputText, setInputText] = useState("");
   const inputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
@@ -33,7 +33,7 @@ export default function Chat(props: ChatProps) {
 
   return (
     <Card header="💬 Chat">
-      {props.gameStarted ? <ProgressBar /> : null}
+      {props.gameStarted ? <Timer /> : null}
       <div className="row g-0">
         <div
           className="chat-box card border-bottom-0 rounded-0 rounded-top"
@@ -69,7 +69,7 @@ export default function Chat(props: ChatProps) {
       </div>
     </Card>
   );
-}
+});
 
 interface ChatLineProps {
   row: ChatPayload;
@@ -83,3 +83,5 @@ function ChatLine({ row }: ChatLineProps) {
     </span>
   );
 }
+
+export default Chat;

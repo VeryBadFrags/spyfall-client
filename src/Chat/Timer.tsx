@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
+import { gameDuration } from "../Constants";
 
 // Font Awesome
 import Parser from "html-react-parser";
@@ -8,9 +9,7 @@ library.add(faStopwatch, faBell);
 const stopwatchIcon = icon({ prefix: "fas", iconName: faStopwatch.iconName });
 const bellIcon = icon({ prefix: "fas", iconName: faBell.iconName });
 
-export default function ProgressBar() {
-  const gameDuration = 300;
-
+const Timer = memo(function Timer() {
   const [timer, setTimer] = useState(gameDuration);
 
   useEffect(() => {
@@ -20,9 +19,6 @@ export default function ProgressBar() {
         clearInterval(interval);
       }
     }, 1000);
-    // else if (!isActive) {
-    //   clearInterval(interval);
-    // }
     return () => clearInterval(interval);
   }, [timer]);
 
@@ -40,7 +36,7 @@ export default function ProgressBar() {
       </div>
     </div>
   );
-}
+});
 
 interface ProgressBarDisplayProps {
   timer: number;
@@ -74,3 +70,5 @@ function getSeconds(timer: number): string {
   const seconds = timer % 60;
   return seconds < 10 ? "0" + seconds : seconds.toString();
 }
+
+export default Timer;
