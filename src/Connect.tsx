@@ -21,12 +21,17 @@ interface ConnectProps {
 }
 
 export default function Connect(props: ConnectProps) {
-  const [playerName, setPlayerName] = useState("");
+  const playerNameStorageKey = "playerName";
+
+  const [playerName, setPlayerName] = useState(
+    JSON.parse(localStorage.getItem(playerNameStorageKey) || '""'),
+  );
   const [lobbyID, setLobbyID] = useState("");
   const [buttonText, setButtonText] = useState("🏠 Create Lobby");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    localStorage.setItem(playerNameStorageKey, JSON.stringify(playerName));
     props.setGameMode(true);
     props.connectionManager.joinLobby(
       playerName,
