@@ -47,6 +47,7 @@ export default function Connect(props: ConnectProps) {
       setLobbyID(value.toUpperCase());
     } else {
       setButtonText("🏠 Create Lobby");
+      setLobbyID(value);
     }
   };
 
@@ -91,7 +92,8 @@ export default function Connect(props: ConnectProps) {
             type="text"
             className="form-control"
             pattern="[A-Za-z0-9]*"
-            title="Lobby Code"
+            title="Lobby Code (alphanumeric)"
+            minLength={0}
             maxLength={8}
             autoComplete="off"
             value={lobbyID}

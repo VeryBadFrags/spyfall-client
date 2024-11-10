@@ -4,11 +4,12 @@ import "./Header.scss";
 import Parser from "html-react-parser";
 import { library, icon } from "@fortawesome/fontawesome-svg-core";
 import { faUserSecret, faGamepad } from "@fortawesome/free-solid-svg-icons";
+import { memo } from "react";
 library.add(faUserSecret, faGamepad);
 const userSecretIcon = icon({ prefix: "fas", iconName: faUserSecret.iconName });
 const gamePadIcon = icon({ prefix: "fas", iconName: faGamepad.iconName });
 
-function Header() {
+const Header = memo(function Header() {
   return (
     <nav className="navbar navbar-expand navbar-dark shadow-sm">
       <div className="container-fluid">
@@ -31,6 +32,6 @@ function Header() {
       </div>
     </nav>
   );
-}
+});
 
 export default Header;

@@ -13,9 +13,10 @@ import PlayersList from "./PlayersList/PlayersList";
 import { EventTypes } from "./types/eventTypes";
 import type { LobbyStatusPayload } from "./types/lobbyStatus.type";
 import type { ChatPayload } from "./types/chatPayload.type";
-import type { GamePayload } from "./types/socketPayload.type";
+import type { GamePayload } from "./types/gamePayload.type";
 import type { LocationData } from "./types/locationData.type";
 import type { AnyPayload } from "./types/anyPayload.type";
+import { TimePayload } from "./types/timePayload.type";
 
 const connectionManager = new ConnectionManager();
 
@@ -29,6 +30,11 @@ function App() {
   const [locations, setLocations] = useState([] as Array<LocationData>);
   const [currentLocation, setCurrentLocation] = useState("");
   const [gameStarted, setGameStarted] = useState(false);
+  const [crossedLocations, setCrossedLocations] = useState(new Set<number>());
+  const [serverTime, setServerTime] = useState({
+    durationSec: 0,
+    timeLeftSec: 0,
+  } as TimePayload);
 
   useEffect(() => {
     connectionManager.initSocket(setConnectedToServer);
@@ -61,6 +67,9 @@ function App() {
         // TODO replace window.location.hash with ?code=
         window.location.hash = (data as LobbyStatusPayload).sessionId;
         break;
+      case EventTypes.Time:
+        updateTime(data as TimePayload);
+        break;
     }
   }
 
@@ -90,6 +99,10 @@ function App() {
         return [...previousContent, newRow];
       }
     });
+  }
+
+  function updateTime(serverTime: TimePayload) {
+    setServerTime(serverTime);
   }
 
   function startGame(data: GamePayload) {
@@ -150,20 +163,13 @@ function App() {
                 sendChatCallBack={sendChatCallBack}
                 chatContent={chatContent}
                 gameStarted={gameStarted}
+                serverTime={serverTime}
               />
               <Locations
                 locations={locations}
                 currentLocation={currentLocation}
-                crossLocation={(index: number) => {
-                  setLocations(
-                    locations.map((loc, i) => {
-                      if (i === index) {
-                        loc.crossed = !loc.crossed;
-                      }
-                      return loc;
-                    }),
-                  );
-                }}
+                crossedLocations={crossedLocations}
+                setCrossedLocations={setCrossedLocations}
               />
               <PlayersList
                 lobbyStatus={lobbyStatus}

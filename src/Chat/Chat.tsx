@@ -1,7 +1,7 @@
 import "./Chat.scss";
-import React, { useRef, useState } from "react";
+import React, { memo, useRef, useState } from "react";
 import Card from "../Card";
-import ProgressBar from "./ProgressBar";
+import Timer from "./Timer";
 import { EventTypes } from "../types/eventTypes";
 import type { ChatPayload } from "../types/chatPayload.type";
 
@@ -9,6 +9,7 @@ import type { ChatPayload } from "../types/chatPayload.type";
 import Parser from "html-react-parser";
 import { library, icon } from "@fortawesome/fontawesome-svg-core";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { TimePayload } from "../types/timePayload.type";
 library.add(faPaperPlane);
 const paperPlaneIcon = icon({ prefix: "fas", iconName: faPaperPlane.iconName });
 
@@ -16,9 +17,10 @@ interface ChatProps {
   sendChatCallBack: (eventType: string, message: string) => void;
   chatContent: Array<ChatPayload>;
   gameStarted: boolean;
+  serverTime: TimePayload;
 }
 
-export default function Chat(props: ChatProps) {
+const Chat = memo(function Chat(props: ChatProps) {
   const [inputText, setInputText] = useState("");
   const inputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
@@ -33,7 +35,7 @@ export default function Chat(props: ChatProps) {
 
   return (
     <Card header="💬 Chat">
-      {props.gameStarted ? <ProgressBar /> : null}
+      {props.gameStarted ? <Timer serverTime={props.serverTime} /> : null}
       <div className="row g-0">
         <div
           className="chat-box card border-bottom-0 rounded-0 rounded-top"
@@ -69,7 +71,7 @@ export default function Chat(props: ChatProps) {
       </div>
     </Card>
   );
-}
+});
 
 interface ChatLineProps {
   row: ChatPayload;
@@ -83,3 +85,5 @@ function ChatLine({ row }: ChatLineProps) {
     </span>
   );
 }
+
+export default Chat;
