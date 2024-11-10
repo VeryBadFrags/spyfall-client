@@ -160,12 +160,12 @@ function App() {
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gy-4">
           {gameMode ? (
             <>
-                <Chat
-                  sendChatCallBack={sendChatCallBack}
-                  chatContent={chatContent}
-                  gameStarted={gameStarted}
-                  serverTime={timer}
-                />
+              <Chat
+                sendChatCallBack={sendChatCallBack}
+                chatContent={chatContent}
+                gameStarted={gameStarted}
+                serverTime={timer}
+              />
               <Locations
                 locations={locations}
                 currentLocation={currentLocation}

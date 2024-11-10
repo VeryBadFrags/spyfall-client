@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 
 // Font Awesome
 import Parser from "html-react-parser";
@@ -9,9 +9,7 @@ library.add(faStopwatch, faBell);
 const stopwatchIcon = icon({ prefix: "fas", iconName: faStopwatch.iconName });
 const bellIcon = icon({ prefix: "fas", iconName: faBell.iconName });
 
-
-
-const Timer = function Timer(props: {serverTime: TimePayload}) {
+const Timer = memo(function Timer(props: { serverTime: TimePayload }) {
   const [timer, setTimer] = useState(props.serverTime.timeLeftSec);
 
   useEffect(() => {
@@ -31,7 +29,9 @@ const Timer = function Timer(props: {serverTime: TimePayload}) {
         role="progressbar"
         style={{
           width:
-            timer >= 0 ? `${(timer / props.serverTime.durationSec) * 100}%` : "100%",
+            timer >= 0
+              ? `${(timer / props.serverTime.durationSec) * 100}%`
+              : "100%",
         }}
         aria-label="Game timer"
       >
@@ -39,7 +39,7 @@ const Timer = function Timer(props: {serverTime: TimePayload}) {
       </div>
     </div>
   );
-};
+});
 
 interface ProgressBarDisplayProps {
   timer: number;
