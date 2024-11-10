@@ -5,6 +5,8 @@ export enum EventTypes {
 
   SessionBroadcast = "session-broadcast",
   SessionCreated = "session-created",
+  SessionDeleted = "session-deleted",
+  
   StartGame = "start-game",
   // Client
   ClientJoinSession = "join-session",
