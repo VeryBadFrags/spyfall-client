@@ -13,9 +13,10 @@ import PlayersList from "./PlayersList/PlayersList";
 import { EventTypes } from "./types/eventTypes";
 import type { LobbyStatusPayload } from "./types/lobbyStatus.type";
 import type { ChatPayload } from "./types/chatPayload.type";
-import type { GamePayload } from "./types/socketPayload.type";
+import type { GamePayload } from "./types/gamePayload.type";
 import type { LocationData } from "./types/locationData.type";
 import type { AnyPayload } from "./types/anyPayload.type";
+import { TimePayload } from "./types/timePayload.type";
 
 const connectionManager = new ConnectionManager();
 
@@ -29,6 +30,10 @@ function App() {
   const [locations, setLocations] = useState([] as Array<LocationData>);
   const [currentLocation, setCurrentLocation] = useState("");
   const [gameStarted, setGameStarted] = useState(false);
+  const [timer, setTimer] = useState({
+    durationSec: 0,
+    timeLeftSec: 0,
+  } as TimePayload);
 
   useEffect(() => {
     connectionManager.initSocket(setConnectedToServer);
@@ -61,6 +66,9 @@ function App() {
         // TODO replace window.location.hash with ?code=
         window.location.hash = (data as LobbyStatusPayload).sessionId;
         break;
+      case EventTypes.Time:
+        updateTime(data as TimePayload);
+        break;
     }
   }
 
@@ -90,6 +98,10 @@ function App() {
         return [...previousContent, newRow];
       }
     });
+  }
+
+  function updateTime(serverTime: TimePayload) {
+    setTimer(serverTime);
   }
 
   function startGame(data: GamePayload) {
@@ -148,11 +160,12 @@ function App() {
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gy-4">
           {gameMode ? (
             <>
-              <Chat
-                sendChatCallBack={sendChatCallBack}
-                chatContent={chatContent}
-                gameStarted={gameStarted}
-              />
+                <Chat
+                  sendChatCallBack={sendChatCallBack}
+                  chatContent={chatContent}
+                  gameStarted={gameStarted}
+                  serverTime={timer}
+                />
               <Locations
                 locations={locations}
                 currentLocation={currentLocation}

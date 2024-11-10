@@ -1,16 +1,18 @@
-import { memo, useEffect, useState } from "react";
-import { gameDuration } from "../Constants";
+import { useEffect, useState } from "react";
 
 // Font Awesome
 import Parser from "html-react-parser";
 import { library, icon } from "@fortawesome/fontawesome-svg-core";
 import { faStopwatch, faBell } from "@fortawesome/free-solid-svg-icons";
+import { TimePayload } from "../types/timePayload.type";
 library.add(faStopwatch, faBell);
 const stopwatchIcon = icon({ prefix: "fas", iconName: faStopwatch.iconName });
 const bellIcon = icon({ prefix: "fas", iconName: faBell.iconName });
 
-const Timer = memo(function Timer() {
-  const [timer, setTimer] = useState(gameDuration);
+
+
+const Timer = function Timer(props: {serverTime: TimePayload}) {
+  const [timer, setTimer] = useState(props.serverTime.timeLeftSec);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -28,7 +30,8 @@ const Timer = memo(function Timer() {
         className="progress-bar bg-info text-dark"
         role="progressbar"
         style={{
-          width: timer >= 0 ? `${(timer / gameDuration) * 100}%` : "100%",
+          width:
+            timer >= 0 ? `${(timer / props.serverTime.durationSec) * 100}%` : "100%",
         }}
         aria-label="Game timer"
       >
@@ -36,14 +39,14 @@ const Timer = memo(function Timer() {
       </div>
     </div>
   );
-});
+};
 
 interface ProgressBarDisplayProps {
   timer: number;
 }
 
 function ProgressBarDisplay({ timer }: ProgressBarDisplayProps) {
-  if (timer >= 0) {
+  if (timer > 0) {
     return (
       <div>
         <>
