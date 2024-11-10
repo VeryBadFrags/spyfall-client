@@ -66,15 +66,16 @@ export default function Connect(props: ConnectProps) {
     <Card>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label htmlFor="name-input" className="form-label">
+          <label htmlFor="player-name" className="form-label">
             {Parser(userIcon.html.toString())} Player name
           </label>
           <input
-            id="name-input"
+            id="player-name"
             type="text"
             className="form-control"
             required
             autoFocus
+            autoComplete="on"
             maxLength={16}
             value={playerName}
             onChange={(e) => setPlayerName(e.target.value)}
