@@ -19,11 +19,11 @@ const githubIcon = icon({ prefix: "fab", iconName: faGithub.iconName });
 
 function Footer() {
   return (
-    <footer>
-      <div className="card fixed-bottom d-inline-block rounded-0">
-        <div className="card-body p-3">
+    <footer className="pt-5">
+      <nav className="navbar navbar-expand-lg sticky-bottom">
+        <div className="card-body container-fluid p-3 fs-5">
           <div className="row row-cols-1 row-cols-lg-2 gy-2">
-            <div className="lead">
+            <div className="lead fs-6">
               {Parser(treeIcon.html.toString())} No internet? Play{" "}
               <a
                 className="icon-link link-offset-1"
@@ -33,17 +33,17 @@ function Footer() {
                 📵🕵️ Offline Spyfall
               </a>
             </div>
-            <div className="lead">
+            <div className="lead fs-6">
               {Parser(commentsIcon.html.toString())} Suggestions, Feedback?{" "}
               <a href="mailto:spy@verybadfrags.com">spy@verybadfrags.com</a>
             </div>
-            <div className="lead">
+            <div className="lead fs-6">
               {Parser(codeIcon.html.toString())} MIT License{" "}
               <a href="https://github.com/VeryBadFrags/spyfall" target="_blank">
                 {Parser(githubIcon.html.toString())} Source code on GitHub
               </a>
             </div>
-            <div className="lead">
+            <div className="lead fs-6">
               {Parser(heartIcon.html.toString())} Like this game?{" "}
               <a
                 href="https://www.buymeacoffee.com/verybadfrags"
@@ -56,14 +56,14 @@ function Footer() {
                 />
               </a>
             </div>
-            <div className="lead">
+            <div className="lead fs-6">
               <a href="https://www.freepik.com/icon/security_10442065#fromView=search&page=1&position=45&uuid=8ed7406c-1370-434f-b9e1-b24bd1a00d40">
                 Icon by LAFS
               </a>
             </div>
           </div>
         </div>
-      </div>
+      </nav>
     </footer>
   );
 }

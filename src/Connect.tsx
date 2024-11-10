@@ -67,7 +67,7 @@ export default function Connect(props: ConnectProps) {
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="name-input" className="form-label">
-            {Parser(userIcon.html.toString())} Name
+            {Parser(userIcon.html.toString())} Player name
           </label>
           <input
             id="name-input"
