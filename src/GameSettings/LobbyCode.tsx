@@ -14,16 +14,10 @@ interface LobbyCodeProps {
 export default function LobbyCode({ lobbyStatus }: LobbyCodeProps) {
   return (
     <div className="mb-3">
-      <label htmlFor="lobby-display" className="form-label">
-        {Parser(buildingIcon.html.toString())} Lobby
+      <label htmlFor="lobby-display mx-3" className="form-label">
+        {Parser(buildingIcon.html.toString())} Lobby:&nbsp;
       </label>
-      <input
-        id="lobby-display"
-        type="text"
-        className="form-control"
-        readOnly
-        value={lobbyStatus?.sessionId ? (lobbyStatus.sessionId as string) : ""}
-      />
+        <span className="badge rounded-pill bg-info fs-5">{lobbyStatus?.sessionId ? (lobbyStatus.sessionId as string) : ""}</span>
     </div>
   );
 }
