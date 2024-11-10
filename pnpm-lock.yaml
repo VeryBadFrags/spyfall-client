@@ -23,6 +23,9 @@ importers:
       '@fortawesome/free-solid-svg-icons':
         specifier: ^6.5.2
         version: 6.5.2
+      '@popperjs/core':
+        specifier: ^2.11.8
+        version: 2.11.8
       '@types/react':
         specifier: ^18.3.3
         version: 18.3.3
