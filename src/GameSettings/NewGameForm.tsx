@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import ConnectionManager from "../utils/connectionManager";
-import "./NewGameForm.css";
+import "./NewGameForm.scss";
 import { EventTypes } from "../types/eventTypes";
 
 // Font Awesome
@@ -38,13 +38,14 @@ export default function NewGameForm({
   return (
     <div>
       <form className="form-inline" onSubmit={handleStartGame}>
-        <div className="form-check form-switch mb-3">
+        <div className="form-check form-switch fs-5 mb-3">
           <input
             id="ready-check"
             className={
               "form-check-input " + (readyCheck ? " bg-success" : null)
             }
             type="checkbox"
+            role="switch"
             name="ready-check"
             required
             autoComplete="off"
@@ -63,7 +64,7 @@ export default function NewGameForm({
             Ready
           </label>
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary shadow">
           {Parser(trafficLightIcon.html.toString())} Start new round
         </button>
       </form>
