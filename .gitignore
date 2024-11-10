@@ -1,4 +1,5 @@
 .netlify/
+.env.production
 
 # Logs
 logs
