@@ -140,7 +140,7 @@ function App() {
 
   function Main() {
     return (
-      <main className="container h-100 pt-3">
+      <main className="container-fluid h-100 pt-3">
         <ConnectStatus connected={connectedToServer} />
 
         <Error error={error} />

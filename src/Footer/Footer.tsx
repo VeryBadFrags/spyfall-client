@@ -21,7 +21,7 @@ function Footer() {
   return (
     <footer className="pt-5">
       <nav className="navbar navbar-expand-lg sticky-bottom">
-        <div className="card-body container-fluid p-3 fs-5">
+        <div className="card rounded-0 container-fluid p-3 fs-5">
           <div className="row row-cols-1 row-cols-lg-2 gy-2">
             <div className="lead fs-6">
               {Parser(treeIcon.html.toString())} No internet? Play{" "}

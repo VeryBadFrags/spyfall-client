@@ -8,9 +8,9 @@ body {
   font-family: "Atkinson Hyperlegible", sans-serif;
 
   background-color: $overlay0;
-  // background-image: linear-gradient(to bottom, $teal 20%, $base 100%);
-  background-size: cover;
-  background-repeat: none;
+  //background-image: linear-gradient(to bottom, $teal 20%, $base 100%);
+  //background-size: cover;
+  //background-repeat: no-repeat;
 }
 
 .clickable {
@@ -28,8 +28,8 @@ body {
   opacity: 0.6 !important;
 }
 
-.card,
-.card-body {
+.card
+ {
   background-color: $mantle;
 }
 
