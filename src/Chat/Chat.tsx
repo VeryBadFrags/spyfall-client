@@ -30,8 +30,8 @@ const Chat = memo(function Chat(props: ChatProps) {
     props.sendChatCallBack(EventTypes.ChatEvent, inputText);
     // connectionManager.send(EventTypes.ChatEvent, { message: inputText });
     setInputText("");
-    // window.scrollTo(0, 0);
-    // (event.target as HTMLInputElement).focus();
+    document.getElementById("chat-container")?.scrollIntoView();
+    document.getElementById("chat-input")?.focus();
   }
 
   return (
@@ -42,7 +42,7 @@ const Chat = memo(function Chat(props: ChatProps) {
           className="chat-box card border-bottom-0 rounded-0 rounded-top"
           onClick={() => inputRef.current?.focus()}
         >
-          <div className="list-group list-group-flush">
+          <div className="list-group list-group-flush" id="chat-container">
             {props.chatContent.map((row, i) => (
               <ChatLine row={row} key={i} />
             ))}
@@ -50,8 +50,12 @@ const Chat = memo(function Chat(props: ChatProps) {
         </div>
         <form onSubmit={handleSubmit}>
           <div className="input-group">
+            <label htmlFor="chat-input" hidden={true}>
+              Send message
+            </label>
             <input
               type="text"
+              id="chat-input"
               className="form-control border-rounded-bottom-left"
               placeholder="Message..."
               autoComplete="off"
