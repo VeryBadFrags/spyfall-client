@@ -38,10 +38,7 @@ const Chat = memo(function Chat(props: ChatProps) {
     <Card header="💬 Chat">
       {props.gameStarted ? <Timer serverTime={props.serverTime} /> : null}
       <div className="row g-0">
-        <div
-          className="chat-box card border-bottom-0 rounded-0 rounded-top"
-          onClick={() => inputRef.current?.focus()}
-        >
+        <div className="chat-box card border-bottom-0 rounded-0 rounded-top">
           <div className="list-group list-group-flush" id="chat-container">
             {props.chatContent.map((row, i) => (
               <ChatLine row={row} key={i} />
