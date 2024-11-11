@@ -26,6 +26,7 @@ function App() {
   const [error, setError] = useState("");
   const [chatContent, setChatContent] = useState([] as Array<ChatPayload>);
   const [readyCheck, setReadyCheck] = useState(false);
+  const [identity, setIdentity] = useState("");
   const [lobbyStatus, setLobbyStatus] = useState({} as LobbyStatusPayload);
   const [locations, setLocations] = useState([] as Array<LocationData>);
   const [currentLocation, setCurrentLocation] = useState("");
@@ -55,7 +56,7 @@ function App() {
       case EventTypes.ChatEvent:
         appendText(data as ChatPayload);
         break;
-      case EventTypes.SessionBroadcast:
+      case EventTypes.SessionBroadcast: // TODO using a wrapper will simplify type casting
         setLobbyStatus(data as LobbyStatusPayload);
         break;
       case EventTypes.StartGame:
@@ -64,6 +65,7 @@ function App() {
       case EventTypes.SessionCreated:
         setGameMode(true);
         setError("");
+        setIdentity((data as LobbyStatusPayload).identity || "");
         // TODO replace window.location.hash with ?code=
         window.location.hash = (data as LobbyStatusPayload).sessionId;
         break;
@@ -164,6 +166,7 @@ function App() {
                 chatContent={chatContent}
                 gameStarted={gameStarted}
                 serverTime={serverTime}
+                identity={identity}
               />
               <Locations
                 locations={locations}

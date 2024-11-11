@@ -18,6 +18,7 @@ interface ChatProps {
   chatContent: Array<ChatPayload>;
   gameStarted: boolean;
   serverTime: TimePayload;
+  identity: string;
 }
 
 const Chat = memo(function Chat(props: ChatProps) {
@@ -29,8 +30,8 @@ const Chat = memo(function Chat(props: ChatProps) {
     props.sendChatCallBack(EventTypes.ChatEvent, inputText);
     // connectionManager.send(EventTypes.ChatEvent, { message: inputText });
     setInputText("");
-    window.scrollTo(0, 0);
-    (event.target as HTMLInputElement).focus();
+    // window.scrollTo(0, 0);
+    // (event.target as HTMLInputElement).focus();
   }
 
   return (
@@ -54,6 +55,11 @@ const Chat = memo(function Chat(props: ChatProps) {
               className="form-control border-rounded-bottom-left"
               placeholder="Message..."
               autoComplete="off"
+              autoFocus={
+                props.chatContent.length > 0 &&
+                props.chatContent[props.chatContent.length - 1].author
+                  ?.avatar == props.identity
+              }
               required
               maxLength={32}
               value={inputText}
@@ -73,15 +79,11 @@ const Chat = memo(function Chat(props: ChatProps) {
   );
 });
 
-interface ChatLineProps {
-  row: ChatPayload;
-}
-
-function ChatLine({ row }: ChatLineProps) {
+function ChatLine(props: { row: ChatPayload }) {
   return (
     <span className="list-group-item border-0">
-      {row.author ? <b>{row.author}:</b> : null}{" "}
-      <span style={{ color: row.color }}>{row.message}</span>
+      {props.row.author ? <b>{props.row.author.name}:</b> : null}{" "}
+      <span style={{ color: props.row.color }}>{props.row.message}</span>
     </span>
   );
 }
