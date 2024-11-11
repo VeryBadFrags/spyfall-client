@@ -55,11 +55,11 @@ const Chat = memo(function Chat(props: ChatProps) {
               className="form-control border-rounded-bottom-left"
               placeholder="Message..."
               autoComplete="off"
-              autoFocus={
-                props.chatContent.length > 0 &&
-                props.chatContent[props.chatContent.length - 1].author
-                  ?.avatar == props.identity
-              }
+              // autoFocus={
+              //   props.chatContent.length > 0 &&
+              //   props.chatContent[props.chatContent.length - 1].author
+              //     ?.avatar == props.identity
+              // }
               required
               maxLength={32}
               value={inputText}
