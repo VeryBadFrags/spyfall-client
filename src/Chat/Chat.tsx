@@ -62,7 +62,7 @@ const Chat = memo(function Chat(props: ChatProps) {
               // autoFocus={
               //   props.chatContent.length > 0 &&
               //   props.chatContent[props.chatContent.length - 1].author
-              //     ?.avatar == props.identity
+              //     ?.avatar === props.identity
               // }
               required
               maxLength={32}

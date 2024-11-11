@@ -11,27 +11,30 @@ import {
   faMobileAlt,
   faHourglassEnd,
   faHandPointRight,
+  faUserSecret,
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
   faEye,
-  faUsers,
-  faStopwatch,
-  faMobileAlt,
-  faHourglassEnd,
   faHandPointRight,
+  faHourglassEnd,
+  faMobileAlt,
+  faStopwatch,
+  faUserSecret,
+  faUsers,
 );
 const eyeIcon = icon({ prefix: "fas", iconName: faEye.iconName });
-const usersIcon = icon({ prefix: "fas", iconName: faUsers.iconName });
-const stopwatchIcon = icon({ prefix: "fas", iconName: faStopwatch.iconName });
-const mobileIcon = icon({ prefix: "fas", iconName: faMobileAlt.iconName });
-const hourglassIcon = icon({
-  prefix: "fas",
-  iconName: faHourglassEnd.iconName,
-});
 const handRightIcon = icon({
   prefix: "fas",
   iconName: faHandPointRight.iconName,
 });
+const hourglassIcon = icon({
+  prefix: "fas",
+  iconName: faHourglassEnd.iconName,
+});
+const mobileIcon = icon({ prefix: "fas", iconName: faMobileAlt.iconName });
+const spyIcon = icon({ prefix: "fas", iconName: faUserSecret.iconName });
+const stopwatchIcon = icon({ prefix: "fas", iconName: faStopwatch.iconName });
+const usersIcon = icon({ prefix: "fas", iconName: faUsers.iconName });
 
 export default function Rules() {
   const [showRules, setShowRules] = useState(false);
@@ -63,6 +66,10 @@ function RulesDetails(props: RulesDetailsProps) {
           <li>{Parser(usersIcon.html.toString())} 3-10 Players</li>
           <li>{Parser(stopwatchIcon.html.toString())} 5 Minutes Rounds</li>
           <li>{Parser(mobileIcon.html.toString())} 1 Device per player</li>
+          <li>
+            {Parser(spyIcon.html.toString())} There is a 1/1000 chance that
+            every player is a spy!
+          </li>
         </ul>
         <hr />
         <ul>
