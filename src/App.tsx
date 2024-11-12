@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Connect from "./Connect";
 import Chat from "./Chat/Chat";
 import Rules from "./Rules";
@@ -17,6 +17,7 @@ import type { GamePayload } from "./types/gamePayload.type";
 import type { LocationData } from "./types/locationData.type";
 import type { AnyPayload } from "./types/anyPayload.type";
 import { TimePayload } from "./types/timePayload.type";
+import { resetClickableElements } from "./utils/documentUtils.ts";
 
 const connectionManager = new ConnectionManager();
 
@@ -41,17 +42,28 @@ function App() {
     connectionManager.initSocket(setConnectedToServer);
   }, []);
 
-  function disconnect() {
-    resetAll();
-    connectionManager.disconnect();
+  function resetAll() {
+    setError("");
+    setChatContent([]);
+    setGameMode(false);
+    setReadyCheck(false);
+    setLobbyStatus({ sessionId: "" });
+    setGameStarted(false);
+    resetClickableElements();
+    window.scrollTo(0, 0);
   }
 
-  const onDisconnect = () => {
+  const disconnectCallback = useCallback(() => {
+    resetAll();
+    connectionManager.disconnect();
+  }, []);
+
+  const onDisconnectCallback = useCallback(() => {
     resetAll();
     setError("Disconnected from Lobby");
-  };
+  }, []);
 
-  function onMessageCallback(type: string, data: AnyPayload) {
+  const onMessageCallback = (type: string, data: AnyPayload) => {
     switch (type) {
       case EventTypes.ChatEvent:
         appendText(data as ChatPayload);
@@ -73,20 +85,14 @@ function App() {
         updateTime(data as TimePayload);
         break;
     }
-  }
+  };
 
-  function sendChatCallBack(eventType: string, message: string): void {
+  const sendChatCallBack = useCallback((eventType: string, message: string) => {
     connectionManager.send(eventType, { message: message });
-  }
-
-  function resetClickableElements() {
-    document
-      .querySelectorAll(".strike")
-      .forEach((elem) => elem.classList.remove("strike"));
-  }
+  }, []);
 
   const chatSize = 8;
-  function appendText(newRow: ChatPayload) {
+  const appendText = useCallback((newRow: ChatPayload) => {
     setChatContent((previousContent) => {
       if (previousContent.length >= chatSize) {
         // Trim the chat if it's too long
@@ -101,7 +107,7 @@ function App() {
         return [...previousContent, newRow];
       }
     });
-  }
+  }, []);
 
   function updateTime(serverTime: TimePayload) {
     setServerTime(serverTime);
@@ -130,17 +136,6 @@ function App() {
     }
 
     appendText({ message: `First player: ${data.first}` });
-  }
-
-  function resetAll() {
-    setError("");
-    setChatContent([]);
-    setGameMode(false);
-    setReadyCheck(false);
-    setLobbyStatus({ sessionId: "" });
-    setGameStarted(false);
-    resetClickableElements();
-    window.scrollTo(0, 0);
   }
 
   return (
@@ -190,7 +185,7 @@ function App() {
               />
               <GameSettings
                 connectionManager={connectionManager}
-                disconnectCallback={disconnect}
+                disconnectCallback={disconnectCallback}
                 readyCheck={readyCheck}
                 setReadyCheck={setReadyCheck}
                 lobbyStatus={lobbyStatus}
@@ -200,7 +195,7 @@ function App() {
             <Connect
               setGameMode={setGameMode}
               connectionManager={connectionManager}
-              onDisconnect={onDisconnect}
+              onDisconnect={onDisconnectCallback}
               onMessageCallback={onMessageCallback}
               setConnectedToServer={setConnectedToServer}
             />
