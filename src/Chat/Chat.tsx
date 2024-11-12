@@ -25,27 +25,26 @@ const Chat = memo(function Chat(props: ChatProps) {
   const [inputText, setInputText] = useState("");
   const inputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  function handleChatSend(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     props.sendChatCallBack(EventTypes.ChatEvent, inputText);
-    // connectionManager.send(EventTypes.ChatEvent, { message: inputText });
     setInputText("");
-    document.getElementById("chat-container")?.scrollIntoView();
+    // document.getElementById("chat-container")?.scrollIntoView();
     document.getElementById("chat-input")?.focus();
   }
 
   return (
     <Card header="💬 Chat">
       {props.gameStarted ? <Timer serverTime={props.serverTime} /> : null}
-      <div className="row g-0">
+      <div className="row g-0" id="chat-container">
         <div className="chat-box card border-bottom-0 rounded-0 rounded-top">
-          <div className="list-group list-group-flush" id="chat-container">
+          <div className="list-group list-group-flush">
             {props.chatContent.map((row, i) => (
               <ChatLine row={row} key={i} />
             ))}
           </div>
         </div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleChatSend}>
           <div className="input-group">
             <label htmlFor="chat-input" hidden={true}>
               Send message
@@ -80,13 +79,13 @@ const Chat = memo(function Chat(props: ChatProps) {
   );
 });
 
-function ChatLine(props: { row: ChatPayload }) {
+const ChatLine = memo(function ChatLine(props: { row: ChatPayload }) {
   return (
     <span className="list-group-item border-0">
       {props.row.author ? <b>{props.row.author.name}:</b> : null}{" "}
       <span style={{ color: props.row.color }}>{props.row.message}</span>
     </span>
   );
-}
+});
 
 export default Chat;
