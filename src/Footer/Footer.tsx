@@ -22,7 +22,7 @@ const Footer = memo(function Footer() {
             <div className="lead fs-6">
               <a
                 href="mailto:spy@verybadfrags.com"
-                className="link-dark link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                className="link-dark icon-link link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
               >
                 {Parser(commentsIcon.html.toString())} Feedback
               </a>
@@ -31,7 +31,7 @@ const Footer = memo(function Footer() {
               <a
                 href="https://github.com/VeryBadFrags/spyfall"
                 target="_blank"
-                className="link-dark link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                className="link-dark icon-link link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
               >
                 {Parser(githubIcon.html.toString())} MIT License
               </a>
@@ -51,7 +51,7 @@ const Footer = memo(function Footer() {
             <div className="lead fs-6">
               <a
                 href="https://www.freepik.com/icon/security_10442065#fromView=search&page=1&position=45&uuid=8ed7406c-1370-434f-b9e1-b24bd1a00d40"
-                className="link-dark link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                className="link-dark icon-link link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
               >
                 {Parser(iconsIcon.html.toString())} Favicon by LAFS
               </a>
