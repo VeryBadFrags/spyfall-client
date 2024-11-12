@@ -3,10 +3,8 @@ import Connect from "./Connect";
 import Chat from "./Chat/Chat";
 import Rules from "./Rules";
 import GameSettings from "./GameSettings/GameSettings";
-import Footer from "./Footer/Footer";
 import ConnectionManager from "./utils/connectionManager";
 import Locations from "./Locations/Locations";
-import Header from "./Header/Header";
 import Error from "./Error";
 import ConnectStatus from "./ConnectStatus";
 import PlayersList from "./PlayersList/PlayersList";
@@ -20,6 +18,7 @@ import { TimePayload } from "./types/timePayload.type";
 import { resetClickableElements } from "./utils/documentUtils.ts";
 
 const connectionManager = new ConnectionManager();
+const chatSize = 8;
 
 function App() {
   const [connectedToServer, setConnectedToServer] = useState(false);
@@ -42,16 +41,19 @@ function App() {
     connectionManager.initSocket(setConnectedToServer);
   }, []);
 
-  function resetAll() {
-    setError("");
-    setChatContent([]);
-    setGameMode(false);
-    setReadyCheck(false);
-    setLobbyStatus({ sessionId: "" });
-    setGameStarted(false);
-    resetClickableElements();
-    window.scrollTo(0, 0);
-  }
+  const crossPeerCallback = useCallback(
+    (index: number) =>
+      setLobbyStatus({
+        sessionId: lobbyStatus.sessionId,
+        peers: lobbyStatus.peers?.map((peer, i) => {
+          if (i === index) {
+            peer.crossed = !peer.crossed;
+          }
+          return peer;
+        }),
+      }),
+    [lobbyStatus],
+  );
 
   const disconnectCallback = useCallback(() => {
     resetAll();
@@ -63,35 +65,6 @@ function App() {
     setError("Disconnected from Lobby");
   }, []);
 
-  const onMessageCallback = (type: string, data: AnyPayload) => {
-    switch (type) {
-      case EventTypes.ChatEvent:
-        appendText(data as ChatPayload);
-        break;
-      case EventTypes.SessionBroadcast: // TODO using a wrapper will simplify type casting
-        setLobbyStatus(data as LobbyStatusPayload);
-        break;
-      case EventTypes.StartGame:
-        startGame(data as GamePayload);
-        break;
-      case EventTypes.SessionCreated:
-        setGameMode(true);
-        setError("");
-        setIdentity((data as LobbyStatusPayload).identity || "");
-        // TODO replace window.location.hash with ?code=
-        window.location.hash = (data as LobbyStatusPayload).sessionId;
-        break;
-      case EventTypes.Time:
-        updateTime(data as TimePayload);
-        break;
-    }
-  };
-
-  const sendChatCallBack = useCallback((eventType: string, message: string) => {
-    connectionManager.send(eventType, { message: message });
-  }, []);
-
-  const chatSize = 8;
   const appendText = useCallback((newRow: ChatPayload) => {
     setChatContent((previousContent) => {
       if (previousContent.length >= chatSize) {
@@ -109,102 +82,123 @@ function App() {
     });
   }, []);
 
-  function updateTime(serverTime: TimePayload) {
-    setServerTime(serverTime);
-  }
+  const startGame = useCallback(
+    (data: GamePayload) => {
+      window.scrollTo(0, 0);
+      setChatContent([]);
+      setReadyCheck(false);
+      setLocations(data.locations.map((loc) => ({ name: loc })));
+      setCurrentLocation(data.location);
+      resetClickableElements();
+      appendText({ message: "Game started" });
+      setGameStarted(true);
 
-  function startGame(data: GamePayload) {
-    window.scrollTo(0, 0);
+      if (data.spy) {
+        appendText({
+          message: "🕵️ You are the spy, try to guess the current location",
+          color: "red",
+        });
+      } else {
+        appendText({
+          message: `😇 You are not the spy, the location is ${data.location}`,
+          color: "blue",
+        });
+      }
+
+      appendText({ message: `First player: ${data.first}` });
+    },
+    [appendText],
+  );
+
+  const onMessageCallback = useCallback(
+    (type: string, data: AnyPayload) => {
+      switch (type) {
+        case EventTypes.ChatEvent:
+          appendText(data as ChatPayload);
+          break;
+        case EventTypes.SessionBroadcast: // TODO using a wrapper will simplify type casting
+          setLobbyStatus(data as LobbyStatusPayload);
+          break;
+        case EventTypes.StartGame:
+          startGame(data as GamePayload);
+          break;
+        case EventTypes.SessionCreated:
+          setGameMode(true);
+          setError("");
+          setIdentity((data as LobbyStatusPayload).identity || "");
+          // TODO replace window.location.hash with ?code=
+          window.location.hash = (data as LobbyStatusPayload).sessionId;
+          break;
+        case EventTypes.Time:
+          setServerTime(data as TimePayload);
+          break;
+      }
+    },
+    [appendText, startGame],
+  );
+
+  const sendChatCallBack = useCallback((eventType: string, message: string) => {
+    connectionManager.send(eventType, { message: message });
+  }, []);
+
+  function resetAll() {
+    setError("");
     setChatContent([]);
+    setGameMode(false);
     setReadyCheck(false);
-    setLocations(data.locations.map((loc) => ({ name: loc })));
-    setCurrentLocation(data.location);
+    setLobbyStatus({ sessionId: "" });
+    setGameStarted(false);
     resetClickableElements();
-    appendText({ message: "Game started" });
-    setGameStarted(true);
-
-    if (data.spy) {
-      appendText({
-        message: "🕵️ You are the spy, try to guess the current location",
-        color: "red",
-      });
-    } else {
-      appendText({
-        message: `😇 You are not the spy, the location is ${data.location}`,
-        color: "blue",
-      });
-    }
-
-    appendText({ message: `First player: ${data.first}` });
+    window.scrollTo(0, 0);
   }
 
   return (
-    <>
-      <Header />
-      <Main />
-      <Footer />
-    </>
-  );
+    <main className="container-fluid h-100 pt-3">
+      <ConnectStatus connected={connectedToServer} />
 
-  function Main() {
-    return (
-      <main className="container-fluid h-100 pt-3">
-        <ConnectStatus connected={connectedToServer} />
+      <Error error={error} />
 
-        <Error error={error} />
-
-        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gy-4">
-          {gameMode ? (
-            <>
-              <Chat
-                sendChatCallBack={sendChatCallBack}
-                chatContent={chatContent}
-                gameStarted={gameStarted}
-                serverTime={serverTime}
-                identity={identity}
-              />
-              <Locations
-                locations={locations}
-                currentLocation={currentLocation}
-                crossedLocations={crossedLocations}
-                setCrossedLocations={setCrossedLocations}
-              />
-              <PlayersList
-                lobbyStatus={lobbyStatus}
-                crossPeer={(index: number) =>
-                  setLobbyStatus({
-                    sessionId: lobbyStatus.sessionId,
-                    peers: lobbyStatus.peers?.map((peer, i) => {
-                      if (i === index) {
-                        peer.crossed = !peer.crossed;
-                      }
-                      return peer;
-                    }),
-                  })
-                }
-              />
-              <GameSettings
-                connectionManager={connectionManager}
-                disconnectCallback={disconnectCallback}
-                readyCheck={readyCheck}
-                setReadyCheck={setReadyCheck}
-                lobbyStatus={lobbyStatus}
-              />
-            </>
-          ) : (
-            <Connect
-              setGameMode={setGameMode}
-              connectionManager={connectionManager}
-              onDisconnect={onDisconnectCallback}
-              onMessageCallback={onMessageCallback}
-              setConnectedToServer={setConnectedToServer}
+      <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gy-4">
+        {gameMode ? (
+          <>
+            <Chat
+              sendChatCallBack={sendChatCallBack}
+              chatContent={chatContent}
+              gameStarted={gameStarted}
+              serverTime={serverTime}
+              identity={identity}
             />
-          )}
-          <Rules />
-        </div>
-      </main>
-    );
-  }
+            <Locations
+              locations={locations}
+              currentLocation={currentLocation}
+              crossedLocations={crossedLocations}
+              setCrossedLocations={setCrossedLocations}
+            />
+            <PlayersList
+              lobbyStatus={lobbyStatus}
+              crossPeer={crossPeerCallback}
+            />
+            <GameSettings
+              connectionManager={connectionManager}
+              disconnectCallback={disconnectCallback}
+              readyCheck={readyCheck}
+              setReadyCheck={setReadyCheck}
+              lobbyStatus={lobbyStatus}
+            />
+          </>
+        ) : (
+          <Connect
+            setGameMode={setGameMode}
+            connectionManager={connectionManager}
+            onDisconnect={onDisconnectCallback}
+            onMessageCallback={onMessageCallback}
+            setConnectedToServer={setConnectedToServer}
+          />
+        )}
+        <Rules />
+      </div>
+    </main>
+  );
 }
 
 export default App;

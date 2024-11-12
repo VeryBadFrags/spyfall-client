@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { memo, ReactNode } from "react";
 
 interface CardProps {
   header?: string;
@@ -7,7 +7,7 @@ interface CardProps {
   children: ReactNode;
 }
 
-export default function Card({
+const Card = memo(function Card({
   header,
   hasBody = true,
   className,
@@ -21,4 +21,6 @@ export default function Card({
       </div>
     </div>
   );
-}
+});
+
+export default Card;
