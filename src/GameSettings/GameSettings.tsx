@@ -4,13 +4,7 @@ import ConnectionManager from "../utils/connectionManager";
 import LobbyCode from "./LobbyCode";
 import NewGameForm from "./NewGameForm";
 import { LobbyStatusPayload } from "../types/lobbyStatus.type";
-
-// Font Awesome
-import Parser from "html-react-parser";
-import { library, icon } from "@fortawesome/fontawesome-svg-core";
-import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
-library.add(faSignOutAlt);
-const signOutAltIcon = icon({ prefix: "fas", iconName: faSignOutAlt.iconName });
+import DisconnectButton from "./DisconnectButton.tsx";
 
 interface GameSettingsProps {
   lobbyStatus: LobbyStatusPayload;
@@ -34,22 +28,5 @@ const GameSettings = memo(function GameSettings(props: GameSettingsProps) {
     </Card>
   );
 });
-
-interface DisconnectButtonProps {
-  disconnectCallback: () => void;
-}
-
-function DisconnectButton({ disconnectCallback }: DisconnectButtonProps) {
-  return (
-    <div className="d-grid">
-      <button
-        className="btn btn-sm btn-danger"
-        onClick={() => disconnectCallback()}
-      >
-        {Parser(signOutAltIcon.html.toString())} Leave lobby
-      </button>
-    </div>
-  );
-}
 
 export default GameSettings;

@@ -4,15 +4,12 @@ import { LobbyStatusPayload } from "../types/lobbyStatus.type";
 import Parser from "html-react-parser";
 import { library, icon } from "@fortawesome/fontawesome-svg-core";
 import { faBuilding } from "@fortawesome/free-solid-svg-icons";
-
 library.add(faBuilding);
 const buildingIcon = icon({ prefix: "fas", iconName: faBuilding.iconName });
 
-interface LobbyCodeProps {
+const LobbyCode = function LobbyCode(props: {
   lobbyStatus: LobbyStatusPayload;
-}
-
-export default function LobbyCode({ lobbyStatus }: LobbyCodeProps) {
+}) {
   return (
     <div className="mb-3">
       <label htmlFor="lobby-display mr-3" className="form-label">
@@ -26,11 +23,13 @@ export default function LobbyCode({ lobbyStatus }: LobbyCodeProps) {
         data-bs-content="Copy"
         onClick={(event) => {
           window?.getSelection()?.selectAllChildren(event.target as Node);
-          navigator.clipboard.writeText(lobbyStatus.sessionId).then();
+          navigator.clipboard.writeText(props.lobbyStatus.sessionId).then();
         }}
       >
-        {lobbyStatus?.sessionId ? lobbyStatus.sessionId : ""}
+        {props.lobbyStatus?.sessionId ? props.lobbyStatus.sessionId : ""}
       </span>
     </div>
   );
-}
+};
+
+export default LobbyCode;

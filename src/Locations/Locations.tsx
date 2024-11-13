@@ -2,25 +2,20 @@ import { memo } from "react";
 import Card from "../Card";
 import { LocationData } from "../types/locationData.type";
 
-interface LocationsProps {
+const Locations = memo(function Locations(props: {
   locations: Array<LocationData>;
   currentLocation: string;
   crossedLocations: Set<number>;
   setCrossedLocations: (crossedLocations: Set<number>) => void;
-  // crossLocation: (index: number) => void;
-}
-
-const Locations = memo(function Locations(props: LocationsProps) {
+}) {
   function crossLocation(indexToCross: number) {
+    const clonedSet = new Set(props.crossedLocations);
     if (props.crossedLocations.has(indexToCross)) {
-      const clonedSet = new Set(props.crossedLocations);
       clonedSet.delete(indexToCross);
-      props.setCrossedLocations(clonedSet);
     } else {
-      const clonedSet = new Set(props.crossedLocations);
       clonedSet.add(indexToCross);
-      props.setCrossedLocations(clonedSet);
     }
+    props.setCrossedLocations(clonedSet);
   }
 
   if (props.locations && props.locations.length > 0) {
