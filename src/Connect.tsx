@@ -20,7 +20,7 @@ interface ConnectProps {
   setConnectedToServer: (connected: boolean) => void;
 }
 
-export default function Connect(props: ConnectProps) {
+const Connect = function Connect(props: ConnectProps) {
   const playerNameStorageKey = "playerName";
 
   const [playerName, setPlayerName] = useState(
@@ -113,4 +113,6 @@ export default function Connect(props: ConnectProps) {
       </form>
     </Card>
   );
-}
+};
+
+export default Connect;

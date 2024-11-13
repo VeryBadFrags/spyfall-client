@@ -1,9 +1,9 @@
-interface ErrorProps {
-  connected: boolean;
-}
+import { memo } from "react";
 
-export default function ConnectStatus({ connected }: ErrorProps) {
-  if (!connected) {
+const ConnectStatus = memo(function ConnectStatus(props: {
+  connected: boolean;
+}) {
+  if (!props.connected) {
     return (
       <div id="connect-info" className="alert alert-info mb-3">
         <div
@@ -18,4 +18,6 @@ export default function ConnectStatus({ connected }: ErrorProps) {
   } else {
     return null;
   }
-}
+});
+
+export default ConnectStatus;
