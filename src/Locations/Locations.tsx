@@ -1,21 +1,21 @@
-import { memo, useState } from "react";
 import Card from "../Card";
 import { LocationData } from "../types/locationData.type";
 
-const Locations = memo(function Locations(props: {
+const Locations = (function Locations(props: {
   locations: Array<LocationData>;
   currentLocation: string;
+  crossedLocations: Set<number>;
+  setCrossedLocations: (crossedLocations: Set<number>) => void;
 }) {
-  const [crossedLocations, setCrossedLocations] = useState(new Set<number>());
 
   function crossLocation(indexToCross: number) {
-    const clonedSet = new Set(crossedLocations);
-    if (crossedLocations.has(indexToCross)) {
+    const clonedSet = new Set(props.crossedLocations);
+    if (props.crossedLocations.has(indexToCross)) {
       clonedSet.delete(indexToCross);
     } else {
       clonedSet.add(indexToCross);
     }
-    setCrossedLocations(clonedSet);
+    props.setCrossedLocations(clonedSet);
   }
 
   if (props.locations && props.locations.length > 0) {
@@ -26,13 +26,13 @@ const Locations = memo(function Locations(props: {
             return (
               <button
                 type="button"
-                key={`loc-${i}-${crossedLocations.has(i)}`}
+                key={`loc-${i}-${props.crossedLocations.has(i)}`}
                 className={
                   "list-group-item list-group-item-action text-dark py-1 " +
                   (props.currentLocation === currentLocation.name
                     ? " bg-info"
                     : "") +
-                  (crossedLocations.has(i) ? " strike" : "")
+                  (props.crossedLocations.has(i) ? " strike" : "")
                 }
                 onClick={() => crossLocation(i)}
               >

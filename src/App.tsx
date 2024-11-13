@@ -15,7 +15,6 @@ import type { GamePayload } from "./types/gamePayload.type";
 import type { LocationData } from "./types/locationData.type";
 import type { AnyPayload } from "./types/anyPayload.type";
 import { TimePayload } from "./types/timePayload.type";
-import { resetClickableElements } from "./utils/documentUtils.ts";
 
 const connectionManager = new ConnectionManager();
 const chatSize = 8;
@@ -31,6 +30,7 @@ function App() {
   const [locations, setLocations] = useState([] as Array<LocationData>);
   const [currentLocation, setCurrentLocation] = useState("");
   const [gameStarted, setGameStarted] = useState(false);
+  const [crossedLocations, setCrossedLocations] = useState(new Set<number>());
   const [serverTime, setServerTime] = useState({
     durationSec: 0,
     timeLeftSec: 0,
@@ -83,12 +83,13 @@ function App() {
 
   const startGame = useCallback(
     (data: GamePayload) => {
+      // TODO consolidate with resetAll
       window.scrollTo(0, 0);
       setChatContent([]);
       setReadyCheck(false);
       setLocations(data.locations.map((loc) => ({ name: loc })));
       setCurrentLocation(data.location);
-      resetClickableElements();
+      setCrossedLocations(new Set<number>);
       appendText({ message: "Game started" });
       setGameStarted(true);
 
@@ -146,8 +147,8 @@ function App() {
     setGameMode(false);
     setReadyCheck(false);
     setLobbyStatus({ sessionId: "" });
+    setCrossedLocations(new Set<number>);
     setGameStarted(false);
-    resetClickableElements();
     window.scrollTo(0, 0);
   }
 
@@ -170,6 +171,8 @@ function App() {
             <Locations
               locations={locations}
               currentLocation={currentLocation}
+              crossedLocations={crossedLocations}
+              setCrossedLocations={setCrossedLocations}
             />
             <PlayersList
               lobbyStatus={lobbyStatus}
