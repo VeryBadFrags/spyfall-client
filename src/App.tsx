@@ -31,7 +31,6 @@ function App() {
   const [locations, setLocations] = useState([] as Array<LocationData>);
   const [currentLocation, setCurrentLocation] = useState("");
   const [gameStarted, setGameStarted] = useState(false);
-  const [crossedLocations, setCrossedLocations] = useState(new Set<number>());
   const [serverTime, setServerTime] = useState({
     durationSec: 0,
     timeLeftSec: 0,
@@ -171,8 +170,6 @@ function App() {
             <Locations
               locations={locations}
               currentLocation={currentLocation}
-              crossedLocations={crossedLocations}
-              setCrossedLocations={setCrossedLocations}
             />
             <PlayersList
               lobbyStatus={lobbyStatus}

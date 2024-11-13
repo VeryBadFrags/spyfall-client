@@ -1,25 +1,24 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import Card from "../Card";
 import { LocationData } from "../types/locationData.type";
 
 interface LocationsProps {
   locations: Array<LocationData>;
   currentLocation: string;
-  crossedLocations: Set<number>;
-  setCrossedLocations: (crossedLocations: Set<number>) => void;
-  // crossLocation: (index: number) => void;
 }
 
 const Locations = memo(function Locations(props: LocationsProps) {
+  const [crossedLocations, setCrossedLocations] = useState(new Set<number>());
+
   function crossLocation(indexToCross: number) {
-    if (props.crossedLocations.has(indexToCross)) {
-      const clonedSet = new Set(props.crossedLocations);
+    if (crossedLocations.has(indexToCross)) {
+      const clonedSet = new Set(crossedLocations);
       clonedSet.delete(indexToCross);
-      props.setCrossedLocations(clonedSet);
+      setCrossedLocations(clonedSet);
     } else {
-      const clonedSet = new Set(props.crossedLocations);
+      const clonedSet = new Set(crossedLocations);
       clonedSet.add(indexToCross);
-      props.setCrossedLocations(clonedSet);
+      setCrossedLocations(clonedSet);
     }
   }
 
@@ -31,13 +30,13 @@ const Locations = memo(function Locations(props: LocationsProps) {
             return (
               <button
                 type="button"
-                key={`loc-${i}-${props.crossedLocations.has(i)}`}
+                key={`loc-${i}-${crossedLocations.has(i)}`}
                 className={
                   "list-group-item list-group-item-action text-dark py-1 " +
                   (props.currentLocation === currentLocation.name
                     ? " bg-info"
                     : "") +
-                  (props.crossedLocations.has(i) ? " strike" : "")
+                  (crossedLocations.has(i) ? " strike" : "")
                 }
                 onClick={() => crossLocation(i)}
               >

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useCallback, useRef } from "react";
 import ConnectionManager from "../utils/connectionManager";
 import "./NewGameForm.scss";
 import { EventTypes } from "../types/eventTypes";
@@ -19,21 +19,24 @@ interface NewGameFormProps {
   connectionManager: ConnectionManager;
 }
 
-function NewGameForm({
+const NewGameForm = function NewGameForm({
   readyCheck,
   setReadyCheck,
   connectionManager,
 }: NewGameFormProps) {
   const readyRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
-  const handleStartGame = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (readyRef.current.checked) {
-      connectionManager.send(EventTypes.StartGame);
-    } else {
-      // TODO printError you are not ready
-    }
-  };
+  const handleStartGame = useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      if (readyRef.current.checked) {
+        connectionManager.send(EventTypes.StartGame);
+      } else {
+        // TODO printError you are not ready
+      }
+    },
+    [connectionManager],
+  );
 
   return (
     <div>
@@ -70,6 +73,6 @@ function NewGameForm({
       </form>
     </div>
   );
-}
+};
 
 export default NewGameForm;
