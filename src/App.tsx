@@ -89,7 +89,7 @@ function App() {
       setReadyCheck(false);
       setLocations(data.locations.map((loc) => ({ name: loc })));
       setCurrentLocation(data.location);
-      setCrossedLocations(new Set<number>);
+      setCrossedLocations(new Set<number>());
       appendText({ message: "Game started" });
       setGameStarted(true);
 
@@ -147,7 +147,7 @@ function App() {
     setGameMode(false);
     setReadyCheck(false);
     setLobbyStatus({ sessionId: "" });
-    setCrossedLocations(new Set<number>);
+    setCrossedLocations(new Set<number>());
     setGameStarted(false);
     window.scrollTo(0, 0);
   }

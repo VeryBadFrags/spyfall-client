@@ -6,6 +6,10 @@ const Timer = memo(function Timer(props: { serverTime: TimePayload }) {
   const [timer, setTimer] = useState(props.serverTime.timeLeftSec);
 
   useEffect(() => {
+    setTimer(props.serverTime.timeLeftSec);
+  }, [props.serverTime]);
+
+  useEffect(() => {
     const interval = setInterval(() => {
       setTimer((seconds: number) => seconds - 1);
       if (timer <= 0) {

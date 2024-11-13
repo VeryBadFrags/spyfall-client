@@ -1,13 +1,13 @@
+import { memo } from "react";
 import Card from "../Card";
 import { LocationData } from "../types/locationData.type";
 
-const Locations = (function Locations(props: {
+const Locations = memo(function Locations(props: {
   locations: Array<LocationData>;
   currentLocation: string;
   crossedLocations: Set<number>;
   setCrossedLocations: (crossedLocations: Set<number>) => void;
 }) {
-
   function crossLocation(indexToCross: number) {
     const clonedSet = new Set(props.crossedLocations);
     if (props.crossedLocations.has(indexToCross)) {
