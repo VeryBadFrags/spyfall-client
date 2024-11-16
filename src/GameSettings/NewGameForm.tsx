@@ -1,12 +1,13 @@
 import React, { useCallback, useRef } from "react";
 import ConnectionManager from "../utils/connectionManager";
 import "./NewGameForm.scss";
-import { EventTypes } from "../types/eventTypes";
+import { ClientEvent } from "../types/clientEvent";
 
 // Font Awesome
 import Parser from "html-react-parser";
 import { library, icon } from "@fortawesome/fontawesome-svg-core";
 import { faTrafficLight } from "@fortawesome/free-solid-svg-icons";
+
 library.add(faTrafficLight);
 const trafficLightIcon = icon({
   prefix: "fas",
@@ -30,7 +31,7 @@ const NewGameForm = function NewGameForm({
     (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       if (readyRef.current.checked) {
-        connectionManager.send(EventTypes.StartGame);
+        connectionManager.send(ClientEvent.StartGame);
       } else {
         // TODO printError you are not ready
       }
@@ -57,7 +58,7 @@ const NewGameForm = function NewGameForm({
             onChange={() => {}}
             onClick={(event) => {
               const target = event.target as HTMLInputElement;
-              connectionManager?.send(EventTypes.ClientReady, {
+              connectionManager?.send(ClientEvent.ClientReady, {
                 ready: target.checked,
               });
               setReadyCheck(target.checked);

@@ -2,7 +2,6 @@ import "./Chat.scss";
 import React, { memo, useRef, useState } from "react";
 import Card from "../Card";
 import Timer from "./Timer";
-import { EventTypes } from "../types/eventTypes";
 import type { ChatPayload } from "../types/chatPayload.type";
 
 // Font Awesome
@@ -10,11 +9,12 @@ import Parser from "html-react-parser";
 import { library, icon } from "@fortawesome/fontawesome-svg-core";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { TimePayload } from "../types/timePayload.type";
+import { ClientEvent } from "../types/clientEvent";
 library.add(faPaperPlane);
 const paperPlaneIcon = icon({ prefix: "fas", iconName: faPaperPlane.iconName });
 
 interface ChatProps {
-  sendChatCallBack: (eventType: string, message: string) => void;
+  sendChatCallBack: (eventType: ClientEvent, message: string) => void;
   chatContent: Array<ChatPayload>;
   gameStarted: boolean;
   serverTime: TimePayload;
@@ -27,7 +27,7 @@ const Chat = memo(function Chat(props: ChatProps) {
 
   function handleChatSend(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    props.sendChatCallBack(EventTypes.ChatEvent, inputText);
+    props.sendChatCallBack(ClientEvent.ChatEvent, inputText);
     setInputText("");
     // document.getElementById("chat-container")?.scrollIntoView();
     document.getElementById("chat-input")?.focus();

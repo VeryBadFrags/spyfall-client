@@ -1,10 +1,11 @@
 import io, { Socket } from "socket.io-client";
-import { EventTypes } from "../types/eventTypes";
+import { ServerEvent } from "../types/serverEvent";
 import type { LobbyStatusPayload } from "../types/lobbyStatus.type";
 import type { ChatPayload } from "../types/chatPayload.type";
 import type { GamePayload } from "../types/gamePayload.type";
 import type { AnyPayload } from "../types/anyPayload.type";
 import { TimePayload } from "../types/timePayload.type";
+import { ClientEvent } from "../types/clientEvent";
 
 export default class ConnectionManager {
   socket: Socket | null;
@@ -19,10 +20,10 @@ export default class ConnectionManager {
       this.socket = io(import.meta.env.VITE_API_URL);
     }
 
-    this.socket.on(EventTypes.Connect, () => {
+    this.socket.on(ClientEvent.Connect, () => {
       setConnectedToServer(this.socket?.connected ?? false);
     });
-    this.socket.on(EventTypes.Disconnect, () => {
+    this.socket.on(ClientEvent.Disconnect, () => {
       // TODO show error instead
       // setConnectedToServer(this.socket.connected);
     });
@@ -38,35 +39,35 @@ export default class ConnectionManager {
     setConnectedToServer: (connected: boolean) => void,
   ) {
     this.initSocket(setConnectedToServer);
-    this.send(EventTypes.ClientJoinSession, {
+    this.send(ClientEvent.JoinSession, {
       sessionId: sessionId,
       playerName: playerName,
       game: "spy",
     });
 
-    this.socket?.on(EventTypes.Disconnect, () => {
+    this.socket?.on(ClientEvent.Disconnect, () => {
       // this.socket = null;
       connectionClosedCallback();
     });
 
-    this.socket?.on(EventTypes.StartGame, (msg: GamePayload) => {
-      onMessageCallback(EventTypes.StartGame, msg);
+    this.socket?.on(ServerEvent.StartGame, (msg: GamePayload) => {
+      onMessageCallback(ServerEvent.StartGame, msg);
     });
 
-    this.socket?.on(EventTypes.SessionBroadcast, (msg: LobbyStatusPayload) => {
-      onMessageCallback(EventTypes.SessionBroadcast, msg);
+    this.socket?.on(ServerEvent.SessionBroadcast, (msg: LobbyStatusPayload) => {
+      onMessageCallback(ServerEvent.SessionBroadcast, msg);
     });
 
-    this.socket?.on(EventTypes.SessionCreated, (msg: LobbyStatusPayload) => {
-      onMessageCallback(EventTypes.SessionCreated, msg);
+    this.socket?.on(ServerEvent.SessionCreated, (msg: LobbyStatusPayload) => {
+      onMessageCallback(ServerEvent.SessionCreated, msg);
     });
 
-    this.socket?.on(EventTypes.ChatEvent, (msg: ChatPayload) => {
-      onMessageCallback(EventTypes.ChatEvent, msg);
+    this.socket?.on(ServerEvent.ChatEvent, (msg: ChatPayload) => {
+      onMessageCallback(ServerEvent.ChatEvent, msg);
     });
 
-    this.socket?.on(EventTypes.Time, (msg: TimePayload) => {
-      onMessageCallback(EventTypes.Time, msg);
+    this.socket?.on(ServerEvent.Time, (msg: TimePayload) => {
+      onMessageCallback(ServerEvent.Time, msg);
     });
   }
 
@@ -75,7 +76,7 @@ export default class ConnectionManager {
     // this.socket = null;
   }
 
-  send(type: string, data?: unknown) {
+  send(type: ClientEvent, data?: unknown) {
     this.socket?.emit(type, data);
   }
 }

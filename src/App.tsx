@@ -8,13 +8,14 @@ import Locations from "./Locations/Locations";
 import Error from "./Error";
 import ConnectStatus from "./ConnectStatus";
 import PlayersList from "./PlayersList/PlayersList";
-import { EventTypes } from "./types/eventTypes";
+import { ServerEvent } from "./types/serverEvent";
 import type { LobbyStatusPayload } from "./types/lobbyStatus.type";
 import type { ChatPayload } from "./types/chatPayload.type";
 import type { GamePayload } from "./types/gamePayload.type";
 import type { LocationData } from "./types/locationData.type";
 import type { AnyPayload } from "./types/anyPayload.type";
 import { TimePayload } from "./types/timePayload.type";
+import { ClientEvent } from "./types/clientEvent";
 
 const connectionManager = new ConnectionManager();
 const chatSize = 8;
@@ -113,23 +114,23 @@ function App() {
   const onMessageCallback = useCallback(
     (type: string, data: AnyPayload) => {
       switch (type) {
-        case EventTypes.ChatEvent:
+        case ServerEvent.ChatEvent:
           appendText(data as ChatPayload);
           break;
-        case EventTypes.SessionBroadcast: // TODO using a wrapper will simplify type casting
+        case ServerEvent.SessionBroadcast: // TODO using a wrapper will simplify type casting
           setLobbyStatus(data as LobbyStatusPayload);
           break;
-        case EventTypes.StartGame:
+        case ServerEvent.StartGame:
           startGame(data as GamePayload);
           break;
-        case EventTypes.SessionCreated:
+        case ServerEvent.SessionCreated:
           setGameMode(true);
           setError("");
           setIdentity((data as LobbyStatusPayload).identity || "");
           // TODO replace window.location.hash with ?code=
           window.location.hash = (data as LobbyStatusPayload).sessionId;
           break;
-        case EventTypes.Time:
+        case ServerEvent.Time:
           setServerTime(data as TimePayload);
           break;
       }
@@ -137,7 +138,7 @@ function App() {
     [appendText, startGame],
   );
 
-  const sendChatCallBack = useCallback((eventType: string, message: string) => {
+  const sendChatCallBack = useCallback((eventType: ClientEvent, message: string) => {
     connectionManager.send(eventType, { message: message });
   }, []);
 
