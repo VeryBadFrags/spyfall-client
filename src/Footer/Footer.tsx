@@ -21,7 +21,8 @@ const Footer = memo(function Footer() {
           <div className="row row-cols-1 row-cols-lg-2 gy-2">
             <div className="lead fs-6">
               <a
-                href="mailto:spy@verybadfrags.com"
+                href="https://github.com/VeryBadFrags/spyfall/issues"
+                target="_blank"
                 className="link-dark icon-link link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
               >
                 {Parser(commentsIcon.html.toString())} Feedback
