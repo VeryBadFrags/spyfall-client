@@ -98,6 +98,7 @@ const Connect = function Connect(props: ConnectProps) {
             className="form-control"
             pattern="[A-Za-z0-9]*"
             title="Lobby Code (alphanumeric)"
+            placeholder="(Optional)"
             minLength={0}
             maxLength={8}
             autoComplete="off"
