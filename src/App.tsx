@@ -138,9 +138,12 @@ function App() {
     [appendText, startGame],
   );
 
-  const sendChatCallBack = useCallback((eventType: ClientEvent, message: string) => {
-    connectionManager.send(eventType, { message: message });
-  }, []);
+  const sendChatCallBack = useCallback(
+    (eventType: ClientEvent, message: string) => {
+      connectionManager.send(eventType, { message: message });
+    },
+    [],
+  );
 
   function resetAll() {
     setError("");
