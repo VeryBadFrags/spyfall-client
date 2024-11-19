@@ -15,7 +15,7 @@ const Card = memo(function Card({
 }: CardProps) {
   return (
     <div className="col">
-      <div className={"card shadow " + (className ? className : "")}>
+      <div className={"card shadow border border-dark " + (className ? className : "")}>
         {header ? <div className="card-header">{header}</div> : null}
         {hasBody ? <div className="card-body">{children}</div> : children}
       </div>

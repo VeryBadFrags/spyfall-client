@@ -52,7 +52,7 @@ const Chat = memo(function Chat(props: ChatProps) {
             <input
               type="text"
               id="chat-input"
-              className="form-control border-rounded-bottom-left"
+              className="form-control rounded rounded-top-0 rounded-end-0"
               placeholder="Message..."
               autoComplete="off"
               // autoFocus={
@@ -68,7 +68,7 @@ const Chat = memo(function Chat(props: ChatProps) {
             />
             <button
               type="submit"
-              className="btn btn-primary border-rounded-bottom-right"
+              className="btn btn-primary rounded rounded-top-0 rounded-start-0"
             >
               {Parser(paperPlaneIcon.html.toString())} Send
             </button>
