@@ -20,23 +20,24 @@ and [socket.io](https://socket.io).
 
 - [💾 View the server code](https://github.com/VeryBadFrags/spyfall-server)
 
+## Setup
+
+- Get Node: <https://nodejs.org/en/download>
+- Enable Corepack:
+
+```sh
+corepack enable
+```
+
 ## Development
 
 You'll need to run the server locally too. See <https://github.com/VeryBadFrags/spyfall-server#run-locally>.
-
-### With [pnpm](https://pnpm.io)
 
 ```sh
 make dev
 ```
 
 Run `make` to view all available commands.
-
-### With [npm](https://www.npmjs.com)
-
-```sh
-npm run dev
-```
 
 ## Deploy to production
 
