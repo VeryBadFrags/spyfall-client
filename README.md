@@ -29,7 +29,7 @@ and [socket.io](https://socket.io).
 corepack enable
 ```
 
-## Development
+## Local development
 
 You'll need to run the server locally too. See <https://github.com/VeryBadFrags/spyfall-server#run-locally>.
 
