@@ -22,8 +22,20 @@ and [socket.io](https://socket.io).
 
 ## Setup
 
-- Get Node: <https://nodejs.org/en/download>
-- Enable Corepack:
+### With [mise](https://mise.jdx.dev) (faster)
+
+```sh
+mise install
+```
+
+### With [nvm](https://github.com/nvm-sh/nvm)
+
+```sh
+nvm install
+corepack enable
+```
+
+### With [Node.js](https://nodejs.org/)
 
 ```sh
 corepack enable
@@ -45,13 +57,4 @@ Create a `.env.production` file to specify the Prod API url:
 
 ```.env.production
 VITE_API_URL=https://your-api-url.foo
-```
-
-## Misc
-
-### Link to Netlify
-
-```sh
-pnpm install netlify-cli -g
-netlify link
 ```
