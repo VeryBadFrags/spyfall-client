@@ -22,11 +22,13 @@ and [socket.io](https://socket.io).
 
 ## Setup
 
-### With [mise](https://mise.jdx.dev) (faster)
+### With [mise](https://mise.jdx.dev)
 
 ```sh
 mise install
 ```
+
+Run `mise doctor` to debug installation issues.
 
 ### With [nvm](https://github.com/nvm-sh/nvm)
 
