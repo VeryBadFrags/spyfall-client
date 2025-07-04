@@ -7,6 +7,12 @@ import type { AnyPayload } from "./types/anyPayload.type";
 import Parser from "html-react-parser";
 import { library, icon } from "@fortawesome/fontawesome-svg-core";
 import { faUser, faDice } from "@fortawesome/free-solid-svg-icons";
+import { retrieveCurrentLobby } from "./utils/lobbyHelper";
+import {
+  getLocalString,
+  playerNameStorageKey,
+  storeLocalString,
+} from "./utils/storage";
 
 library.add(faUser, faDice);
 const userIcon = icon({ prefix: "fas", iconName: faUser.iconName });
@@ -21,17 +27,16 @@ interface ConnectProps {
 }
 
 const Connect = function Connect(props: ConnectProps) {
-  const playerNameStorageKey = "playerName";
-
   const [playerName, setPlayerName] = useState(
-    JSON.parse(localStorage.getItem(playerNameStorageKey) || '""'),
+    // The replaceAll is used to remove quotes from the old storage format
+    getLocalString(playerNameStorageKey)?.replaceAll('"', "") || "",
   );
   const [lobbyID, setLobbyID] = useState("");
   const [buttonText, setButtonText] = useState("🏠 Create Lobby");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    localStorage.setItem(playerNameStorageKey, JSON.stringify(playerName));
+    storeLocalString(playerNameStorageKey, playerName);
     props.setGameMode(true);
     props.connectionManager.joinLobby(
       playerName,
@@ -58,13 +63,10 @@ const Connect = function Connect(props: ConnectProps) {
 
   // Add Lobby ID to URL
   useEffect(() => {
-    let windowHash = window.location.hash.split("#")[1];
-    if (windowHash) {
-      if (windowHash.length > 8) {
-        windowHash = windowHash.substring(0, 8);
-      }
+    const lobbyCode = retrieveCurrentLobby();
+    if (lobbyCode) {
       setButtonText("🔌 Join Lobby");
-      setLobbyID(windowHash.toUpperCase());
+      setLobbyID(lobbyCode);
     }
   }, []);
 

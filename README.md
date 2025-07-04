@@ -8,8 +8,8 @@ A multiplayer social deduction game inspired by [Spyfall](https://hwint.ru/portf
 [♟️ Play the game](https://spyfall.verybadfrags.com)
 
 <details>
-<summary>🖥️ Game screenshot</summary>
-<img alt="Game screenshot" src="docs/spyfall-example-01.png"/>
+    <summary>🖥️ Game screenshot</summary>
+    <img alt="Game screenshot" src="docs/spyfall-example-01.png"/>
 </details>
 
 ## Stack
