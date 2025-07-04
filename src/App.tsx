@@ -16,6 +16,7 @@ import type { LocationData } from "./types/locationData.type";
 import type { AnyPayload } from "./types/anyPayload.type";
 import { TimePayload } from "./types/timePayload.type";
 import { ClientEvent } from "./types/clientEvent";
+import { setCurrentLobby } from "./utils/lobbyHelper";
 
 const connectionManager = new ConnectionManager();
 const chatSize = 8;
@@ -127,8 +128,7 @@ function App() {
           setGameMode(true);
           setError("");
           setIdentity((data as LobbyStatusPayload).identity || "");
-          // TODO replace window.location.hash with ?code=
-          window.location.hash = (data as LobbyStatusPayload).sessionId;
+          setCurrentLobby((data as LobbyStatusPayload).sessionId);
           break;
         case ServerEvent.Time:
           setServerTime(data as TimePayload);
