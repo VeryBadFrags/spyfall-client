@@ -8,7 +8,11 @@ import Parser from "html-react-parser";
 import { library, icon } from "@fortawesome/fontawesome-svg-core";
 import { faUser, faDice } from "@fortawesome/free-solid-svg-icons";
 import { retrieveCurrentLobby } from "./utils/lobbyHelper";
-import { getLocalData, playerNameStorageKey, storeLocalData } from "./utils/storage";
+import {
+  getLocalString,
+  playerNameStorageKey,
+  storeLocalString,
+} from "./utils/storage";
 
 library.add(faUser, faDice);
 const userIcon = icon({ prefix: "fas", iconName: faUser.iconName });
@@ -24,26 +28,27 @@ interface ConnectProps {
 
 const Connect = function Connect(props: ConnectProps) {
   const [playerName, setPlayerName] = useState(
-    JSON.parse(getLocalData(playerNameStorageKey) || '""')
+    // The replaceAll is used to remove quotes from the old storage format
+    getLocalString(playerNameStorageKey)?.replaceAll('"', "") || "",
   );
   const [lobbyID, setLobbyID] = useState("");
   const [buttonText, setButtonText] = useState("🏠 Create Lobby");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    storeLocalData(playerNameStorageKey, JSON.stringify(playerName));
+    storeLocalString(playerNameStorageKey, playerName);
     props.setGameMode(true);
     props.connectionManager.joinLobby(
       playerName,
       lobbyID,
       props.onDisconnect,
       props.onMessageCallback,
-      props.setConnectedToServer
+      props.setConnectedToServer,
     );
   };
 
   const handleLobbyCodeChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const target = event.target as HTMLInputElement;
     const value = target.value;
