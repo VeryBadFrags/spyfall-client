@@ -1,5 +1,5 @@
 import "./Chat.scss";
-import React, { memo, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import Card from "../Card";
 import Timer from "./Timer";
 import type { ChatPayload } from "../types/chatPayload.type";
@@ -18,7 +18,7 @@ interface ChatProps {
   chatContent: Array<ChatPayload>;
 }
 
-const Chat = memo(function Chat(props: ChatProps) {
+const Chat = function Chat(props: ChatProps) {
   const [inputText, setInputText] = useState("");
   const inputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
   const gameStarted = useLobbyStore((state) => state.gameStarted);
@@ -75,15 +75,15 @@ const Chat = memo(function Chat(props: ChatProps) {
       </div>
     </Card>
   );
-});
+};
 
-const ChatLine = memo(function ChatLine(props: { row: ChatPayload }) {
+const ChatLine = function ChatLine(props: { row: ChatPayload }) {
   return (
     <span className="list-group-item border-0">
       {props.row.author ? <b>{props.row.author.name}:</b> : null}{" "}
       <span style={{ color: props.row.color }}>{props.row.message}</span>
     </span>
   );
-});
+};
 
 export default Chat;

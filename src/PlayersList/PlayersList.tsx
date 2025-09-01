@@ -1,8 +1,7 @@
-import { memo } from "react";
 import Card from "../Card";
 import { useLobbyStore } from "../utils/store";
 
-const PlayersList = memo(function PlayersList(props: {
+const PlayersList = function PlayersList(props: {
   crossPeer: (index: number) => void;
 }) {
   const peers = useLobbyStore((state) => state.peers);
@@ -27,6 +26,6 @@ const PlayersList = memo(function PlayersList(props: {
       </div>
     </Card>
   );
-});
+};
 
 export default PlayersList;

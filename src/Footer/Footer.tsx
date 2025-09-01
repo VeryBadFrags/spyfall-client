@@ -1,7 +1,5 @@
 import "./Footer.css";
 
-import { memo } from "react";
-
 // Font Awesome
 import Parser from "html-react-parser";
 import { library, icon } from "@fortawesome/fontawesome-svg-core";
@@ -13,7 +11,7 @@ const commentsIcon = icon({ prefix: "fas", iconName: faComments.iconName });
 const githubIcon = icon({ prefix: "fab", iconName: faGithub.iconName });
 const iconsIcon = icon({ prefix: "fas", iconName: faIcons.iconName });
 
-const Footer = memo(function Footer() {
+const Footer = function Footer() {
   return (
     <footer className="pt-5">
       <nav className="navbar navbar-expand-lg sticky-bottom">
@@ -63,6 +61,6 @@ const Footer = memo(function Footer() {
       </nav>
     </footer>
   );
-});
+};
 
 export default Footer;
