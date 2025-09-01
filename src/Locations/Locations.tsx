@@ -5,7 +5,9 @@ const Locations = function Locations() {
   const locations = useLobbyStore((state) => state.locations);
   const currentLocation = useLobbyStore((state) => state.currentLocation);
   const crossedLocations = useCrossedStore((state) => state.crossedLocations);
-  const setCrossedLocations = useCrossedStore((state) => state.setCrossedLocations);
+  const setCrossedLocations = useCrossedStore(
+    (state) => state.setCrossedLocations,
+  );
 
   function crossLocation(indexToCross: number) {
     const clonedSet = new Set(crossedLocations);
@@ -28,9 +30,7 @@ const Locations = function Locations() {
                 key={`loc-${i}-${crossedLocations.has(i)}`}
                 className={
                   "list-group-item list-group-item-action text-dark py-1 " +
-                  (currentLocation === loc.name
-                    ? " bg-info"
-                    : "") +
+                  (currentLocation === loc.name ? " bg-info" : "") +
                   (crossedLocations.has(i) ? " strike" : "")
                 }
                 onClick={() => crossLocation(i)}

@@ -13,9 +13,7 @@ const GameSettings = function GameSettings(props: GameSettingsProps) {
   return (
     <Card header="⚙️ Game">
       <LobbyCode />
-      <NewGameForm
-        connectionManager={props.connectionManager}
-      />
+      <NewGameForm connectionManager={props.connectionManager} />
       <hr />
       <DisconnectButton disconnectCallback={props.disconnectCallback} />
     </Card>

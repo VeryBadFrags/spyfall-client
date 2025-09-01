@@ -35,7 +35,7 @@ export const useChatStore = create<CrossedState>((set) => ({
         updatedChat = [
           ...state.chatContent.splice(
             state.chatContent.length - chatSize + 1,
-            state.chatContent.length
+            state.chatContent.length,
           ),
           newContent,
         ];

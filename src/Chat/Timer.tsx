@@ -20,7 +20,7 @@ export const useTimerStore = create<TimerState>((set) => ({
 }));
 
 const Timer = function Timer() {
-  const serverTime = useTimerStore((state) => state.serverTime)
+  const serverTime = useTimerStore((state) => state.serverTime);
   const [timer, setTimer] = useState(serverTime.timeLeftSec);
 
   useEffect(() => {
@@ -44,9 +44,7 @@ const Timer = function Timer() {
         role="progressbar"
         style={{
           width:
-            timer >= 0
-              ? `${(timer / serverTime.durationSec) * 100}%`
-              : "100%",
+            timer >= 0 ? `${(timer / serverTime.durationSec) * 100}%` : "100%",
         }}
         aria-label="Game timer"
       >

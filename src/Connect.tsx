@@ -8,7 +8,11 @@ import Parser from "html-react-parser";
 import { library, icon } from "@fortawesome/fontawesome-svg-core";
 import { faUser, faDice } from "@fortawesome/free-solid-svg-icons";
 import { retrieveCurrentLobby } from "./utils/lobbyHelper";
-import { useLobbyStore, usePlayerNameStore, useSessionIdStore } from "./utils/store";
+import {
+  useLobbyStore,
+  usePlayerNameStore,
+  useSessionIdStore,
+} from "./utils/store";
 
 library.add(faUser, faDice);
 const userIcon = icon({ prefix: "fas", iconName: faUser.iconName });
@@ -22,7 +26,7 @@ interface ConnectProps {
 
 const Connect = function Connect(props: ConnectProps) {
   const [buttonText, setButtonText] = useState("🏠 Create Lobby");
-  
+
   const sessionId = useSessionIdStore((state) => state.sessionId);
   const playerName = usePlayerNameStore((state) => state.playerName);
   const setPlayerName = usePlayerNameStore((state) => state.setPlayerName);

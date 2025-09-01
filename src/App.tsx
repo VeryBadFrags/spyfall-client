@@ -39,11 +39,11 @@ function App() {
   const appendChat = useChatStore((state) => state.appendChat);
   const setServerTime = useTimerStore((state) => state.setServerTime);
   const setCrossedLocations = useCrossedStore(
-    (state) => state.setCrossedLocations
+    (state) => state.setCrossedLocations,
   );
   const setCrossedPeers = useCrossedStore((state) => state.setCrossedPeers);
   const setErrorMessage = useErrorMessageStore(
-    (state) => state.setErrorMessage
+    (state) => state.setErrorMessage,
   );
 
   useEffect(() => {
@@ -69,7 +69,7 @@ function App() {
       setLocations(data.locations.map((loc) => ({ name: loc })));
       setCurrentLocation(data.location);
       setCrossedLocations(new Set<number>());
-      setCrossedPeers(new Set<number>())
+      setCrossedPeers(new Set<number>());
       appendChat({ message: "Game started" });
       setGameStarted(true);
 
@@ -87,7 +87,7 @@ function App() {
 
       appendChat({ message: `First player: ${data.first}` });
     },
-    [appendChat]
+    [appendChat],
   );
 
   const onMessageCallback = useCallback(
@@ -114,14 +114,14 @@ function App() {
           break;
       }
     },
-    [appendChat, startGame]
+    [appendChat, startGame],
   );
 
   const sendChatCallBack = useCallback(
     (eventType: ClientEvent, message: string) => {
       connectionManager.send(eventType, { message: message });
     },
-    []
+    [],
   );
 
   function resetAll() {

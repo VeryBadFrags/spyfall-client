@@ -18,8 +18,8 @@ export const useSessionIdStore = create<sessionIdState>()(
     }),
     {
       name: "session-id-storage",
-    }
-  )
+    },
+  ),
 );
 
 interface playerNameState {
@@ -37,8 +37,8 @@ export const usePlayerNameStore = create<playerNameState>()(
     }),
     {
       name: "player-name-storage",
-    }
-  )
+    },
+  ),
 );
 
 interface LobbyState {
