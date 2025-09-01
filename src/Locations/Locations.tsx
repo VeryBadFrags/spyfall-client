@@ -1,13 +1,13 @@
 import Card from "../components/Card";
 import { LocationData } from "../types/locationData.type";
-import { useCrossedStore } from "../utils/store";
+import { useCrossedStore, useLobbyStore } from "../utils/store";
 
 const Locations = function Locations(props: {
   locations: Array<LocationData>;
-  currentLocation: string;
 }) {
   const crossedLocations = useCrossedStore((state) => state.crossedLocations);
   const setCrossedLocations = useCrossedStore((state) => state.setCrossedLocations);
+  const currentLocation = useLobbyStore((state) => state.currentLocation);
 
   function crossLocation(indexToCross: number) {
     const clonedSet = new Set(crossedLocations);
@@ -23,21 +23,21 @@ const Locations = function Locations(props: {
     return (
       <Card header="📍 Locations" hasBody={false}>
         <div className="list-group list-group-flush">
-          {props.locations.map((currentLocation, i) => {
+          {props.locations.map((loc, i) => {
             return (
               <button
                 type="button"
                 key={`loc-${i}-${crossedLocations.has(i)}`}
                 className={
                   "list-group-item list-group-item-action text-dark py-1 " +
-                  (props.currentLocation === currentLocation.name
+                  (currentLocation === loc.name
                     ? " bg-info"
                     : "") +
                   (crossedLocations.has(i) ? " strike" : "")
                 }
                 onClick={() => crossLocation(i)}
               >
-                {currentLocation.name}
+                {loc.name}
               </button>
             );
           })}

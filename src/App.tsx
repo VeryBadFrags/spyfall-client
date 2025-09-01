@@ -26,7 +26,6 @@ const chatSize = 8;
 function App() {
   const [chatContent, setChatContent] = useState([] as Array<ChatPayload>);
   const [locations, setLocations] = useState([] as Array<LocationData>);
-  const [currentLocation, setCurrentLocation] = useState("");
 
   const setSessionId = useSessionIdStore((state) => state.setSessionId);
   const setIsConnected = useLobbyStore((state) => state.setIsConnected);
@@ -36,6 +35,7 @@ function App() {
   const setIsPlayerReady = useLobbyStore((state) => state.setIsPlayerReady);
   const peers = useLobbyStore((state) => state.peers);
   const setPeers = useLobbyStore((state) => state.setPeers);
+  const setCurrentLocation = useLobbyStore((state) => state.setCurrentLocation);
   const setServerTime = useTimerStore((state) => state.setServerTime);
   const setCrossedLocations = useCrossedStore((state) => state.setCrossedLocations);
   const setErrorMessage = useErrorMessageStore((state) => state.setErrorMessage);
@@ -176,7 +176,6 @@ function App() {
             />
             <Locations
               locations={locations}
-              currentLocation={currentLocation}
             />
             <PlayersList
               crossPeer={crossPeerCallback}

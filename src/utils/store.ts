@@ -56,6 +56,9 @@ interface LobbyState {
   /** The list of players in the lobby */
   peers: Array<ClientData>;
   setPeers: (peers: Array<ClientData>) => void;
+  /** The current location for the active round */
+  currentLocation: string;
+  setCurrentLocation: (location: string) => void;
 }
 export const useLobbyStore = create<LobbyState>((set) => ({
   isConnected: false,
@@ -82,6 +85,11 @@ export const useLobbyStore = create<LobbyState>((set) => ({
   setPeers: (peers: Array<ClientData>) =>
     set((state) => {
       return { ...state, peers: peers };
+    }),
+  currentLocation: "",
+  setCurrentLocation: (location: string) =>
+    set((state) => {
+      return { ...state, currentLocation: location };
     }),
 }));
 
