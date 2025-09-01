@@ -1,4 +1,4 @@
-import Card from "../Card";
+import Card from "../components/Card.tsx";
 import ConnectionManager from "../utils/connectionManager";
 import LobbyCode from "./LobbyCode";
 import NewGameForm from "./NewGameForm";

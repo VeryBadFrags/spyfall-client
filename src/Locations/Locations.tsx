@@ -1,4 +1,4 @@
-import Card from "../Card";
+import Card from "../components/Card";
 import { LocationData } from "../types/locationData.type";
 import { useCrossedStore } from "../utils/store";
 

@@ -5,7 +5,7 @@ import Rules from "./Rules";
 import GameSettings from "./GameSettings/GameSettings";
 import ConnectionManager from "./utils/connectionManager";
 import Locations from "./Locations/Locations";
-import Error from "./Error";
+import ErrorBox, { useErrorMessageStore } from "./ErrorBox";
 import ConnectStatus from "./ConnectStatus";
 import PlayersList from "./PlayersList/PlayersList";
 import { ServerEvent } from "./types/serverEvent";
@@ -24,7 +24,6 @@ const connectionManager = new ConnectionManager();
 const chatSize = 8;
 
 function App() {
-  const [error, setError] = useState("");
   const [chatContent, setChatContent] = useState([] as Array<ChatPayload>);
   const [locations, setLocations] = useState([] as Array<LocationData>);
   const [currentLocation, setCurrentLocation] = useState("");
@@ -39,6 +38,7 @@ function App() {
   const setPeers = useLobbyStore((state) => state.setPeers);
   const setServerTime = useTimerStore((state) => state.setServerTime);
   const setCrossedLocations = useCrossedStore((state) => state.setCrossedLocations);
+  const setErrorMessage = useErrorMessageStore((state) => state.setErrorMessage);
   
 
   useEffect(() => {
@@ -66,7 +66,7 @@ function App() {
 
   const onDisconnectCallback = useCallback(() => {
     resetAll();
-    setError("Disconnected from Lobby");
+    setErrorMessage("Disconnected from Lobby");
   }, []);
 
   const appendText = useCallback((newRow: ChatPayload) => {
@@ -130,7 +130,7 @@ function App() {
           break;
         case ServerEvent.SessionCreated:
           setIsInLobby(true);
-          setError("");
+          setErrorMessage("");
           setSessionId((data as LobbyStatusPayload).sessionId);
           setCurrentLobby((data as LobbyStatusPayload).sessionId);
           break;
@@ -150,7 +150,7 @@ function App() {
   );
 
   function resetAll() {
-    setError("");
+    setErrorMessage("");
     setChatContent([]);
     setIsInLobby(false);
     setIsPlayerReady(false);
@@ -165,7 +165,7 @@ function App() {
     <main className="container-fluid h-100 pt-3">
       <ConnectStatus />
 
-      <Error error={error} />
+      <ErrorBox />
 
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gx-xl-5 gy-4">
         {isInLobby ? (
