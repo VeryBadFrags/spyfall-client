@@ -24,6 +24,8 @@ export const useSessionIdStore = create<sessionIdState>()(
 interface LobbyState {
   isConnected: boolean;
   setIsConnected: (connected: boolean) => void;
+  gameStarted: boolean;
+  setGameStarted: (started: boolean) => void;
   peers: Array<ClientData>;
   setPeers: (peers: Array<ClientData>) => void;
 }
@@ -33,10 +35,15 @@ export const useLobbyStore = create<LobbyState>((set) => ({
     set((state) => {
       return { ...state, isConnected: connected };
     }),
+  gameStarted: false,
+  setGameStarted: (started: boolean) =>
+    set((state) => {
+      return { ...state, gameStarted: started };
+    }),
   peers: new Array<ClientData>(),
   setPeers: (peers: Array<ClientData>) =>
     set((state) => {
-      return {...state, peers: peers };
+      return { ...state, peers: peers };
     }),
 }));
 

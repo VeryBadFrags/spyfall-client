@@ -9,18 +9,19 @@ import Parser from "html-react-parser";
 import { library, icon } from "@fortawesome/fontawesome-svg-core";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { ClientEvent } from "../types/clientEvent";
+import { useLobbyStore } from "../utils/store";
 library.add(faPaperPlane);
 const paperPlaneIcon = icon({ prefix: "fas", iconName: faPaperPlane.iconName });
 
 interface ChatProps {
   sendChatCallBack: (eventType: ClientEvent, message: string) => void;
   chatContent: Array<ChatPayload>;
-  gameStarted: boolean;
 }
 
 const Chat = memo(function Chat(props: ChatProps) {
   const [inputText, setInputText] = useState("");
   const inputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+  const gameStarted = useLobbyStore((state) => state.gameStarted);
 
   function handleChatSend(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -32,7 +33,7 @@ const Chat = memo(function Chat(props: ChatProps) {
 
   return (
     <Card header="💬 Chat">
-      {props.gameStarted ? <Timer /> : null}
+      {gameStarted ? <Timer /> : null}
       <div className="row g-0" id="chat-container">
         <div className="chat-box card border-bottom-0 rounded-0 rounded-top">
           <div className="list-group list-group-flush">

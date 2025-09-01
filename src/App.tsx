@@ -30,14 +30,15 @@ function App() {
   const [readyCheck, setReadyCheck] = useState(false);
   const [locations, setLocations] = useState([] as Array<LocationData>);
   const [currentLocation, setCurrentLocation] = useState("");
-  const [gameStarted, setGameStarted] = useState(false);
 
-  const setIsConnected = useLobbyStore((state) => state.setIsConnected);
   const setSessionId = useSessionIdStore((state) => state.setSessionId);
+  const setIsConnected = useLobbyStore((state) => state.setIsConnected);
+  const setGameStarted = useLobbyStore((state) => state.setGameStarted);
   const peers = useLobbyStore((state) => state.peers);
   const setPeers = useLobbyStore((state) => state.setPeers);
   const setServerTime = useTimerStore((state) => state.setServerTime);
   const setCrossedLocations = useCrossedStore((state) => state.setCrossedLocations);
+  
 
   useEffect(() => {
     connectionManager.initSocket(setIsConnected);
@@ -129,6 +130,7 @@ function App() {
         case ServerEvent.SessionCreated:
           setGameMode(true);
           setError("");
+          setSessionId((data as LobbyStatusPayload).sessionId);
           setCurrentLobby((data as LobbyStatusPayload).sessionId);
           break;
         case ServerEvent.Time:
@@ -170,7 +172,6 @@ function App() {
             <Chat
               sendChatCallBack={sendChatCallBack}
               chatContent={chatContent}
-              gameStarted={gameStarted}
             />
             <Locations
               locations={locations}
