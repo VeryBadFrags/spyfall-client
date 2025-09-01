@@ -1,4 +1,4 @@
-import { LobbyStatusPayload } from "../types/lobbyStatus.type";
+import { useLobbyStore } from "../utils/store";
 
 // Font Awesome
 import Parser from "html-react-parser";
@@ -7,9 +7,9 @@ import { faBuilding } from "@fortawesome/free-solid-svg-icons";
 library.add(faBuilding);
 const buildingIcon = icon({ prefix: "fas", iconName: faBuilding.iconName });
 
-const LobbyCode = function LobbyCode(props: {
-  lobbyStatus: LobbyStatusPayload;
-}) {
+const LobbyCode = function LobbyCode() {
+  const lobbyStatus = useLobbyStore((state) => state.lobbyStatus);
+
   return (
     <div className="mb-3">
       <label htmlFor="lobby-display mr-3" className="form-label">
@@ -23,10 +23,10 @@ const LobbyCode = function LobbyCode(props: {
         data-bs-content="Copy"
         onClick={(event) => {
           window?.getSelection()?.selectAllChildren(event.target as Node);
-          navigator.clipboard.writeText(props.lobbyStatus.sessionId).then();
+          navigator.clipboard.writeText(lobbyStatus.sessionId).then();
         }}
       >
-        {props.lobbyStatus?.sessionId ? props.lobbyStatus.sessionId : ""}
+        {lobbyStatus?.sessionId ? lobbyStatus.sessionId : ""}
       </span>
     </div>
   );

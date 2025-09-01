@@ -1,15 +1,15 @@
 import { memo } from "react";
 import Card from "../Card";
-import { LobbyStatusPayload } from "../types/lobbyStatus.type";
+import { useLobbyStore } from "../utils/store";
 
 const PlayersList = memo(function PlayersList(props: {
-  lobbyStatus: LobbyStatusPayload;
   crossPeer: (index: number) => void;
 }) {
+  const lobbyStatus = useLobbyStore((state) => state.lobbyStatus);
   return (
     <Card header="👤 Players" hasBody={false}>
       <div className="list-group list-group-flush">
-        {props.lobbyStatus?.peers?.map((client, index) => {
+        {lobbyStatus.peers?.map((client, index) => {
           return (
             <button
               type="button"

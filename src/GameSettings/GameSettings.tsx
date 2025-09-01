@@ -3,11 +3,9 @@ import Card from "../Card";
 import ConnectionManager from "../utils/connectionManager";
 import LobbyCode from "./LobbyCode";
 import NewGameForm from "./NewGameForm";
-import { LobbyStatusPayload } from "../types/lobbyStatus.type";
 import DisconnectButton from "./DisconnectButton.tsx";
 
 interface GameSettingsProps {
-  lobbyStatus: LobbyStatusPayload;
   readyCheck: boolean;
   setReadyCheck: React.Dispatch<React.SetStateAction<boolean>>;
   connectionManager: ConnectionManager;
@@ -17,7 +15,7 @@ interface GameSettingsProps {
 const GameSettings = memo(function GameSettings(props: GameSettingsProps) {
   return (
     <Card header="⚙️ Game">
-      <LobbyCode lobbyStatus={props.lobbyStatus} />
+      <LobbyCode />
       <NewGameForm
         readyCheck={props.readyCheck}
         setReadyCheck={props.setReadyCheck}
