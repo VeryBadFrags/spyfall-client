@@ -18,7 +18,7 @@ import { TimePayload } from "./types/timePayload.type";
 import { ClientEvent } from "./types/clientEvent";
 import { setCurrentLobby } from "./utils/lobbyHelper";
 import { useTimerStore } from "./Chat/Timer";
-import { useLobbyStore } from "./utils/store";
+import { useCrossedStore, useLobbyStore } from "./utils/store";
 
 const connectionManager = new ConnectionManager();
 const chatSize = 8;
@@ -33,11 +33,11 @@ function App() {
   const [locations, setLocations] = useState([] as Array<LocationData>);
   const [currentLocation, setCurrentLocation] = useState("");
   const [gameStarted, setGameStarted] = useState(false);
-  const [crossedLocations, setCrossedLocations] = useState(new Set<number>());
 
   const lobbyStatus = useLobbyStore((state) => state.lobbyStatus);
   const setLobbyStatus = useLobbyStore((state) => state.setLobbyStatus);
   const setServerTime = useTimerStore((state) => state.setServerTime);
+  const setCrossedLocations = useCrossedStore((state) => state.setCrossedLocations);
 
   useEffect(() => {
     connectionManager.initSocket(setConnectedToServer);
@@ -175,8 +175,6 @@ function App() {
             <Locations
               locations={locations}
               currentLocation={currentLocation}
-              crossedLocations={crossedLocations}
-              setCrossedLocations={setCrossedLocations}
             />
             <PlayersList
               crossPeer={crossPeerCallback}
