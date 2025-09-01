@@ -1,9 +1,8 @@
-import { memo } from "react";
+import { useLobbyStore } from "./utils/store";
 
-const ConnectStatus = memo(function ConnectStatus(props: {
-  connected: boolean;
-}) {
-  if (!props.connected) {
+const ConnectStatus = function ConnectStatus() {
+  const isConnected = useLobbyStore((state) => state.isConnected);
+  if (!isConnected) {
     return (
       <div id="connect-info" className="alert alert-info mb-3">
         <div
@@ -18,6 +17,6 @@ const ConnectStatus = memo(function ConnectStatus(props: {
   } else {
     return null;
   }
-});
+};
 
 export default ConnectStatus;

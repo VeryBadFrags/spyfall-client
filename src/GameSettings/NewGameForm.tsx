@@ -2,6 +2,7 @@ import React, { useCallback, useRef } from "react";
 import ConnectionManager from "../utils/connectionManager";
 import "./NewGameForm.scss";
 import { ClientEvent } from "../types/clientEvent";
+import { useLobbyStore } from "../utils/store";
 
 // Font Awesome
 import Parser from "html-react-parser";
@@ -15,17 +16,15 @@ const trafficLightIcon = icon({
 });
 
 interface NewGameFormProps {
-  readyCheck: boolean;
-  setReadyCheck: React.Dispatch<React.SetStateAction<boolean>>;
   connectionManager: ConnectionManager;
 }
 
 const NewGameForm = function NewGameForm({
-  readyCheck,
-  setReadyCheck,
   connectionManager,
 }: NewGameFormProps) {
   const readyRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+  const isPlayerReady = useLobbyStore((state) => state.isPlayerReady);
+  const setIsPlayerReady = useLobbyStore((state) => state.setIsPlayerReady);
 
   const handleStartGame = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {
@@ -46,14 +45,14 @@ const NewGameForm = function NewGameForm({
           <input
             id="ready-check"
             className={
-              "form-check-input " + (readyCheck ? " bg-success" : null)
+              "form-check-input " + (isPlayerReady ? " bg-success" : null)
             }
             type="checkbox"
             role="switch"
             name="ready-check"
             required
             autoComplete="off"
-            checked={readyCheck}
+            checked={isPlayerReady}
             ref={readyRef}
             onChange={() => {}}
             onClick={(event) => {
@@ -61,7 +60,7 @@ const NewGameForm = function NewGameForm({
               connectionManager?.send(ClientEvent.ClientReady, {
                 ready: target.checked,
               });
-              setReadyCheck(target.checked);
+              setIsPlayerReady(target.checked);
             }}
           />
           <label htmlFor="ready-check" className="clickable form-check-label">

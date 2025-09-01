@@ -1,13 +1,31 @@
-import { memo, useEffect, useState } from "react";
+import { create } from "zustand";
+import { useEffect, useState } from "react";
 import { TimePayload } from "../types/timePayload.type";
 import TimeDisplay from "./TimeDisplay.tsx";
 
-const Timer = memo(function Timer(props: { serverTime: TimePayload }) {
-  const [timer, setTimer] = useState(props.serverTime.timeLeftSec);
+interface TimerState {
+  serverTime: TimePayload;
+  setServerTime: (data: TimePayload) => void;
+}
+
+export const useTimerStore = create<TimerState>((set) => ({
+  serverTime: {
+    durationSec: 0,
+    timeLeftSec: 0,
+  },
+  setServerTime: (data: TimePayload) =>
+    set(() => {
+      return { serverTime: data };
+    }),
+}));
+
+const Timer = function Timer() {
+  const serverTime = useTimerStore((state) => state.serverTime);
+  const [timer, setTimer] = useState(serverTime.timeLeftSec);
 
   useEffect(() => {
-    setTimer(props.serverTime.timeLeftSec);
-  }, [props.serverTime]);
+    setTimer(serverTime.timeLeftSec);
+  }, [serverTime]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -26,9 +44,7 @@ const Timer = memo(function Timer(props: { serverTime: TimePayload }) {
         role="progressbar"
         style={{
           width:
-            timer >= 0
-              ? `${(timer / props.serverTime.durationSec) * 100}%`
-              : "100%",
+            timer >= 0 ? `${(timer / serverTime.durationSec) * 100}%` : "100%",
         }}
         aria-label="Game timer"
       >
@@ -36,6 +52,6 @@ const Timer = memo(function Timer(props: { serverTime: TimePayload }) {
       </div>
     </div>
   );
-});
+};
 
 export default Timer;

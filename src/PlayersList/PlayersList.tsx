@@ -1,32 +1,31 @@
-import { memo } from "react";
-import Card from "../Card";
-import { LobbyStatusPayload } from "../types/lobbyStatus.type";
+import Card from "../components/Card";
+import { useCrossedStore, useLobbyStore } from "../utils/store";
 
-const PlayersList = memo(function PlayersList(props: {
-  lobbyStatus: LobbyStatusPayload;
-  crossPeer: (index: number) => void;
-}) {
+const PlayersList = function PlayersList() {
+  const peers = useLobbyStore((state) => state.peers);
+  const crossedPeers = useCrossedStore((state) => state.crossedPeers);
+  const togglePeer = useCrossedStore((state) => state.togglePeer);
   return (
     <Card header="👤 Players" hasBody={false}>
       <div className="list-group list-group-flush">
-        {props.lobbyStatus?.peers?.map((client, index) => {
+        {peers.map((peer, index) => {
           return (
             <button
               type="button"
               className={
                 "list-group-item list-group-item-action" +
-                (client.crossed ? " strike" : "")
+                (crossedPeers.has(index) ? " strike" : "")
               }
-              key={client.name}
-              onClick={() => props.crossPeer(index)}
+              key={peer.name}
+              onClick={() => togglePeer(index)}
             >
-              {client.name} {client.ready ? " ✅" : null}
+              {peer.name} {peer.ready ? " ✅" : null}
             </button>
           );
         })}
       </div>
     </Card>
   );
-});
+};
 
 export default PlayersList;

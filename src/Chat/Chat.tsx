@@ -1,6 +1,7 @@
 import "./Chat.scss";
-import React, { memo, useRef, useState } from "react";
-import Card from "../Card";
+import React, { useRef, useState } from "react";
+import { create } from "zustand";
+import Card from "../components/Card";
 import Timer from "./Timer";
 import type { ChatPayload } from "../types/chatPayload.type";
 
@@ -8,22 +9,53 @@ import type { ChatPayload } from "../types/chatPayload.type";
 import Parser from "html-react-parser";
 import { library, icon } from "@fortawesome/fontawesome-svg-core";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
-import { TimePayload } from "../types/timePayload.type";
 import { ClientEvent } from "../types/clientEvent";
+import { useLobbyStore } from "../utils/store";
 library.add(faPaperPlane);
 const paperPlaneIcon = icon({ prefix: "fas", iconName: faPaperPlane.iconName });
 
+const chatSize = 8;
+
+interface CrossedState {
+  chatContent: Array<ChatPayload>;
+  setChatContent: (content: Array<ChatPayload>) => void;
+  appendChat: (newContent: ChatPayload) => void;
+}
+export const useChatStore = create<CrossedState>((set) => ({
+  chatContent: [],
+  setChatContent: (content: Array<ChatPayload>) =>
+    set(() => {
+      return { chatContent: content };
+    }),
+  appendChat: (newContent: ChatPayload) =>
+    set((state) => {
+      let updatedChat: Array<ChatPayload>;
+      if (state.chatContent.length >= chatSize) {
+        // Trim the chat if it's too long
+        updatedChat = [
+          ...state.chatContent.splice(
+            state.chatContent.length - chatSize + 1,
+            state.chatContent.length,
+          ),
+          newContent,
+        ];
+      } else {
+        updatedChat = [...state.chatContent, newContent];
+      }
+
+      return { chatContent: updatedChat };
+    }),
+}));
+
 interface ChatProps {
   sendChatCallBack: (eventType: ClientEvent, message: string) => void;
-  chatContent: Array<ChatPayload>;
-  gameStarted: boolean;
-  serverTime: TimePayload;
-  identity: string;
 }
 
-const Chat = memo(function Chat(props: ChatProps) {
+const Chat = function Chat(props: ChatProps) {
   const [inputText, setInputText] = useState("");
   const inputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+  const gameStarted = useLobbyStore((state) => state.gameStarted);
+  const chatContent = useChatStore((state) => state.chatContent);
 
   function handleChatSend(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -35,11 +67,11 @@ const Chat = memo(function Chat(props: ChatProps) {
 
   return (
     <Card header="💬 Chat">
-      {props.gameStarted ? <Timer serverTime={props.serverTime} /> : null}
+      {gameStarted ? <Timer /> : null}
       <div className="row g-0" id="chat-container">
         <div className="chat-box card border-bottom-0 rounded-0 rounded-top">
           <div className="list-group list-group-flush">
-            {props.chatContent.map((row, i) => (
+            {chatContent.map((row, i) => (
               <ChatLine row={row} key={i} />
             ))}
           </div>
@@ -77,15 +109,15 @@ const Chat = memo(function Chat(props: ChatProps) {
       </div>
     </Card>
   );
-});
+};
 
-const ChatLine = memo(function ChatLine(props: { row: ChatPayload }) {
+const ChatLine = function ChatLine(props: { row: ChatPayload }) {
   return (
     <span className="list-group-item border-0">
       {props.row.author ? <b>{props.row.author.name}:</b> : null}{" "}
       <span style={{ color: props.row.color }}>{props.row.message}</span>
     </span>
   );
-});
+};
 
 export default Chat;

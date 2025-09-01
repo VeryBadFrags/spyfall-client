@@ -1,42 +1,41 @@
-import { memo } from "react";
-import Card from "../Card";
-import { LocationData } from "../types/locationData.type";
+import Card from "../components/Card";
+import { useCrossedStore, useLobbyStore } from "../utils/store";
 
-const Locations = memo(function Locations(props: {
-  locations: Array<LocationData>;
-  currentLocation: string;
-  crossedLocations: Set<number>;
-  setCrossedLocations: (crossedLocations: Set<number>) => void;
-}) {
+const Locations = function Locations() {
+  const locations = useLobbyStore((state) => state.locations);
+  const currentLocation = useLobbyStore((state) => state.currentLocation);
+  const crossedLocations = useCrossedStore((state) => state.crossedLocations);
+  const setCrossedLocations = useCrossedStore(
+    (state) => state.setCrossedLocations,
+  );
+
   function crossLocation(indexToCross: number) {
-    const clonedSet = new Set(props.crossedLocations);
-    if (props.crossedLocations.has(indexToCross)) {
+    const clonedSet = new Set(crossedLocations);
+    if (crossedLocations.has(indexToCross)) {
       clonedSet.delete(indexToCross);
     } else {
       clonedSet.add(indexToCross);
     }
-    props.setCrossedLocations(clonedSet);
+    setCrossedLocations(clonedSet);
   }
 
-  if (props.locations && props.locations.length > 0) {
+  if (locations && locations.length > 0) {
     return (
       <Card header="📍 Locations" hasBody={false}>
         <div className="list-group list-group-flush">
-          {props.locations.map((currentLocation, i) => {
+          {locations.map((loc, i) => {
             return (
               <button
                 type="button"
-                key={`loc-${i}-${props.crossedLocations.has(i)}`}
+                key={`loc-${i}-${crossedLocations.has(i)}`}
                 className={
                   "list-group-item list-group-item-action text-dark py-1 " +
-                  (props.currentLocation === currentLocation.name
-                    ? " bg-info"
-                    : "") +
-                  (props.crossedLocations.has(i) ? " strike" : "")
+                  (currentLocation === loc.name ? " bg-info" : "") +
+                  (crossedLocations.has(i) ? " strike" : "")
                 }
                 onClick={() => crossLocation(i)}
               >
-                {currentLocation.name}
+                {loc.name}
               </button>
             );
           })}
@@ -46,6 +45,6 @@ const Locations = memo(function Locations(props: {
   } else {
     return null;
   }
-});
+};
 
 export default Locations;

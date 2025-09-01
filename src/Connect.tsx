@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Card from "./Card";
+import Card from "./components/Card";
 import ConnectionManager from "./utils/connectionManager";
 import type { AnyPayload } from "./types/anyPayload.type";
 
@@ -9,41 +9,40 @@ import { library, icon } from "@fortawesome/fontawesome-svg-core";
 import { faUser, faDice } from "@fortawesome/free-solid-svg-icons";
 import { retrieveCurrentLobby } from "./utils/lobbyHelper";
 import {
-  getLocalString,
-  playerNameStorageKey,
-  storeLocalString,
-} from "./utils/storage";
+  useLobbyStore,
+  usePlayerNameStore,
+  useSessionIdStore,
+} from "./utils/store";
 
 library.add(faUser, faDice);
 const userIcon = icon({ prefix: "fas", iconName: faUser.iconName });
 const diceIcon = icon({ prefix: "fas", iconName: faDice.iconName });
 
 interface ConnectProps {
-  setGameMode: React.Dispatch<React.SetStateAction<boolean>>;
   connectionManager: ConnectionManager;
   onDisconnect: () => void;
   onMessageCallback: (type: string, data: AnyPayload) => void;
-  setConnectedToServer: (connected: boolean) => void;
 }
 
 const Connect = function Connect(props: ConnectProps) {
-  const [playerName, setPlayerName] = useState(
-    // The replaceAll is used to remove quotes from the old storage format
-    getLocalString(playerNameStorageKey)?.replaceAll('"', "") || "",
-  );
-  const [lobbyID, setLobbyID] = useState("");
   const [buttonText, setButtonText] = useState("🏠 Create Lobby");
+
+  const sessionId = useSessionIdStore((state) => state.sessionId);
+  const playerName = usePlayerNameStore((state) => state.playerName);
+  const setPlayerName = usePlayerNameStore((state) => state.setPlayerName);
+  const setSessionId = useSessionIdStore((state) => state.setSessionId);
+  const setIsConnected = useLobbyStore((state) => state.setIsConnected);
+  const setIsInLobby = useLobbyStore((state) => state.setIsInLobby);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    storeLocalString(playerNameStorageKey, playerName);
-    props.setGameMode(true);
+    setIsInLobby(true);
     props.connectionManager.joinLobby(
       playerName,
-      lobbyID,
+      sessionId,
       props.onDisconnect,
       props.onMessageCallback,
-      props.setConnectedToServer,
+      setIsConnected,
     );
   };
 
@@ -54,19 +53,20 @@ const Connect = function Connect(props: ConnectProps) {
     const value = target.value;
     if (target.value) {
       setButtonText("🔌 Join Lobby");
-      setLobbyID(value.toUpperCase());
+      setSessionId(value.toUpperCase());
     } else {
       setButtonText("🏠 Create Lobby");
-      setLobbyID(value);
+      setSessionId(value);
     }
   };
 
   // Add Lobby ID to URL
   useEffect(() => {
     const lobbyCode = retrieveCurrentLobby();
+    console.log("Retrieved lobby code:", lobbyCode);
     if (lobbyCode) {
       setButtonText("🔌 Join Lobby");
-      setLobbyID(lobbyCode);
+      setSessionId(lobbyCode);
     }
   }, []);
 
@@ -104,7 +104,7 @@ const Connect = function Connect(props: ConnectProps) {
             minLength={0}
             maxLength={8}
             autoComplete="off"
-            value={lobbyID}
+            value={sessionId}
             onChange={handleLobbyCodeChange}
           />
         </div>
