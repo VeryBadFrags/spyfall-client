@@ -21,6 +21,25 @@ export const useSessionIdStore = create<sessionIdState>()(
   )
 );
 
+interface playerNameState {
+  playerName: string;
+  setPlayerName: (playerName: string) => void;
+}
+export const usePlayerNameStore = create<playerNameState>()(
+  persist(
+    (set) => ({
+      playerName: "",
+      setPlayerName: (playerName: string) =>
+        set(() => {
+          return { playerName: playerName };
+        }),
+    }),
+    {
+      name: "player-name-storage",
+    }
+  )
+);
+
 interface LobbyState {
   /** If the player is connected to the backend */
   isConnected: boolean;
