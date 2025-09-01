@@ -13,7 +13,7 @@ import {
   playerNameStorageKey,
   storeLocalString,
 } from "./utils/storage";
-import { useSessionIdStore } from "./utils/store";
+import { useLobbyStore, useSessionIdStore } from "./utils/store";
 
 library.add(faUser, faDice);
 const userIcon = icon({ prefix: "fas", iconName: faUser.iconName });
@@ -24,7 +24,6 @@ interface ConnectProps {
   connectionManager: ConnectionManager;
   onDisconnect: () => void;
   onMessageCallback: (type: string, data: AnyPayload) => void;
-  setConnectedToServer: (connected: boolean) => void;
 }
 
 const Connect = function Connect(props: ConnectProps) {
@@ -33,6 +32,7 @@ const Connect = function Connect(props: ConnectProps) {
     getLocalString(playerNameStorageKey)?.replaceAll('"', "") || "",
   );
   const [buttonText, setButtonText] = useState("🏠 Create Lobby");
+  const setIsConnected = useLobbyStore((state) => state.setIsConnected);
 
   const sessionId = useSessionIdStore((state) => state.sessionId);
   const setSessionId = useSessionIdStore((state) => state.setSessionId);
@@ -46,7 +46,7 @@ const Connect = function Connect(props: ConnectProps) {
       sessionId,
       props.onDisconnect,
       props.onMessageCallback,
-      props.setConnectedToServer,
+      setIsConnected,
     );
   };
 

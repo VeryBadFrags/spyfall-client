@@ -16,7 +16,6 @@ interface ChatProps {
   sendChatCallBack: (eventType: ClientEvent, message: string) => void;
   chatContent: Array<ChatPayload>;
   gameStarted: boolean;
-  identity: string;
 }
 
 const Chat = memo(function Chat(props: ChatProps) {

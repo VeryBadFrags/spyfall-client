@@ -24,16 +24,15 @@ const connectionManager = new ConnectionManager();
 const chatSize = 8;
 
 function App() {
-  const [connectedToServer, setConnectedToServer] = useState(false);
   const [gameMode, setGameMode] = useState(false);
   const [error, setError] = useState("");
   const [chatContent, setChatContent] = useState([] as Array<ChatPayload>);
   const [readyCheck, setReadyCheck] = useState(false);
-  const [identity, setIdentity] = useState("");
   const [locations, setLocations] = useState([] as Array<LocationData>);
   const [currentLocation, setCurrentLocation] = useState("");
   const [gameStarted, setGameStarted] = useState(false);
 
+  const setIsConnected = useLobbyStore((state) => state.setIsConnected);
   const setSessionId = useSessionIdStore((state) => state.setSessionId);
   const peers = useLobbyStore((state) => state.peers);
   const setPeers = useLobbyStore((state) => state.setPeers);
@@ -41,7 +40,7 @@ function App() {
   const setCrossedLocations = useCrossedStore((state) => state.setCrossedLocations);
 
   useEffect(() => {
-    connectionManager.initSocket(setConnectedToServer);
+    connectionManager.initSocket(setIsConnected);
   }, []);
 
   // TODO replace with store
@@ -130,7 +129,6 @@ function App() {
         case ServerEvent.SessionCreated:
           setGameMode(true);
           setError("");
-          setIdentity((data as LobbyStatusPayload).identity || "");
           setCurrentLobby((data as LobbyStatusPayload).sessionId);
           break;
         case ServerEvent.Time:
@@ -162,7 +160,7 @@ function App() {
 
   return (
     <main className="container-fluid h-100 pt-3">
-      <ConnectStatus connected={connectedToServer} />
+      <ConnectStatus />
 
       <Error error={error} />
 
@@ -173,7 +171,6 @@ function App() {
               sendChatCallBack={sendChatCallBack}
               chatContent={chatContent}
               gameStarted={gameStarted}
-              identity={identity}
             />
             <Locations
               locations={locations}
@@ -195,7 +192,6 @@ function App() {
             connectionManager={connectionManager}
             onDisconnect={onDisconnectCallback}
             onMessageCallback={onMessageCallback}
-            setConnectedToServer={setConnectedToServer}
           />
         )}
         <Rules />

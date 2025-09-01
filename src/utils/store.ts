@@ -22,10 +22,17 @@ export const useSessionIdStore = create<sessionIdState>()(
 );
 
 interface LobbyState {
+  isConnected: boolean;
+  setIsConnected: (connected: boolean) => void;
   peers: Array<ClientData>;
   setPeers: (peers: Array<ClientData>) => void;
 }
 export const useLobbyStore = create<LobbyState>((set) => ({
+  isConnected: false,
+  setIsConnected: (connected: boolean) =>
+    set((state) => {
+      return { ...state, isConnected: connected };
+    }),
   peers: new Array<ClientData>(),
   setPeers: (peers: Array<ClientData>) =>
     set((state) => {
