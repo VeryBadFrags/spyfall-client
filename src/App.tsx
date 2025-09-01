@@ -32,7 +32,6 @@ function App() {
   const setIsInLobby = useLobbyStore((state) => state.setIsInLobby);
   const setGameStarted = useLobbyStore((state) => state.setGameStarted);
   const setIsPlayerReady = useLobbyStore((state) => state.setIsPlayerReady);
-  const peers = useLobbyStore((state) => state.peers);
   const setPeers = useLobbyStore((state) => state.setPeers);
   const setLocations = useLobbyStore((state) => state.setLocations);
   const setCurrentLocation = useLobbyStore((state) => state.setCurrentLocation);
@@ -42,6 +41,7 @@ function App() {
   const setCrossedLocations = useCrossedStore(
     (state) => state.setCrossedLocations
   );
+  const setCrossedPeers = useCrossedStore((state) => state.setCrossedPeers);
   const setErrorMessage = useErrorMessageStore(
     (state) => state.setErrorMessage
   );
@@ -49,20 +49,6 @@ function App() {
   useEffect(() => {
     connectionManager.initSocket(setIsConnected);
   }, []);
-
-  // TODO replace with store
-  const crossPeerCallback = useCallback(
-    (index: number) =>
-      setPeers(
-        peers.map((peer, i) => {
-          if (i === index) {
-            peer.crossed = !peer.crossed;
-          }
-          return peer;
-        })
-      ),
-    [peers]
-  );
 
   const disconnectCallback = useCallback(() => {
     resetAll();
@@ -76,13 +62,14 @@ function App() {
 
   const startGame = useCallback(
     (data: GamePayload) => {
-      // TODO consolidate with resetAll
+      // TODO consolidate with resetAll?
       window.scrollTo(0, 0);
       setChatContent([]);
       setIsPlayerReady(false);
       setLocations(data.locations.map((loc) => ({ name: loc })));
       setCurrentLocation(data.location);
       setCrossedLocations(new Set<number>());
+      setCrossedPeers(new Set<number>())
       appendChat({ message: "Game started" });
       setGameStarted(true);
 
@@ -145,6 +132,7 @@ function App() {
     setSessionId("");
     setPeers([]); // TODO is it necessary?
     setCrossedLocations(new Set<number>());
+    setCrossedPeers(new Set<number>());
     setGameStarted(false);
     window.scrollTo(0, 0);
   }
@@ -160,7 +148,7 @@ function App() {
           <>
             <Chat sendChatCallBack={sendChatCallBack} />
             <Locations />
-            <PlayersList crossPeer={crossPeerCallback} />
+            <PlayersList />
             <GameSettings
               connectionManager={connectionManager}
               disconnectCallback={disconnectCallback}

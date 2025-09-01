@@ -1,25 +1,25 @@
 import Card from "../components/Card";
-import { useLobbyStore } from "../utils/store";
+import { useCrossedStore, useLobbyStore } from "../utils/store";
 
-const PlayersList = function PlayersList(props: {
-  crossPeer: (index: number) => void;
-}) {
+const PlayersList = function PlayersList() {
   const peers = useLobbyStore((state) => state.peers);
+  const crossedPeers = useCrossedStore((state) => state.crossedPeers);
+  const togglePeer = useCrossedStore((state) => state.togglePeer);
   return (
     <Card header="👤 Players" hasBody={false}>
       <div className="list-group list-group-flush">
-        {peers.map((client, index) => {
+        {peers.map((peer, index) => {
           return (
             <button
               type="button"
               className={
                 "list-group-item list-group-item-action" +
-                (client.crossed ? " strike" : "")
+                (crossedPeers.has(index) ? " strike" : "")
               }
-              key={client.name}
-              onClick={() => props.crossPeer(index)}
+              key={peer.name}
+              onClick={() => togglePeer(index)}
             >
-              {client.name} {client.ready ? " ✅" : null}
+              {peer.name} {peer.ready ? " ✅" : null}
             </button>
           );
         })}

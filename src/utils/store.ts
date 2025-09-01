@@ -104,11 +104,30 @@ export const useLobbyStore = create<LobbyState>((set) => ({
 interface CrossedState {
   crossedLocations: Set<number>;
   setCrossedLocations: (locations: Set<number>) => void;
+  crossedPeers: Set<number>;
+  setCrossedPeers: (peers: Set<number>) => void;
+  togglePeer: (peer: number) => void;
 }
 export const useCrossedStore = create<CrossedState>((set) => ({
   crossedLocations: new Set<number>(),
   setCrossedLocations: (locations: Set<number>) =>
     set((state) => {
       return { ...state, crossedLocations: locations };
+    }),
+  crossedPeers: new Set<number>(),
+  setCrossedPeers: (peers: Set<number>) =>
+    set((state) => {
+      return { ...state, crossedPeers: peers };
+    }),
+  togglePeer: (peer: number) =>
+    set((state) => {
+      const isCrossed = state.crossedPeers.has(peer);
+      const newPeers = new Set(state.crossedPeers);
+      if (isCrossed) {
+        newPeers.delete(peer);
+      } else {
+        newPeers.add(peer);
+      }
+      return { ...state, crossedPeers: newPeers };
     }),
 }));
