@@ -1,13 +1,11 @@
 import Card from "../components/Card";
-import { LocationData } from "../types/locationData.type";
 import { useCrossedStore, useLobbyStore } from "../utils/store";
 
-const Locations = function Locations(props: {
-  locations: Array<LocationData>;
-}) {
+const Locations = function Locations() {
+  const locations = useLobbyStore((state) => state.locations);
+  const currentLocation = useLobbyStore((state) => state.currentLocation);
   const crossedLocations = useCrossedStore((state) => state.crossedLocations);
   const setCrossedLocations = useCrossedStore((state) => state.setCrossedLocations);
-  const currentLocation = useLobbyStore((state) => state.currentLocation);
 
   function crossLocation(indexToCross: number) {
     const clonedSet = new Set(crossedLocations);
@@ -19,11 +17,11 @@ const Locations = function Locations(props: {
     setCrossedLocations(clonedSet);
   }
 
-  if (props.locations && props.locations.length > 0) {
+  if (locations && locations.length > 0) {
     return (
       <Card header="📍 Locations" hasBody={false}>
         <div className="list-group list-group-flush">
-          {props.locations.map((loc, i) => {
+          {locations.map((loc, i) => {
             return (
               <button
                 type="button"

@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { ClientData } from "../types/clientData.type";
+import { LocationData } from "../types/locationData.type";
 
 interface sessionIdState {
   sessionId: string;
@@ -56,6 +57,8 @@ interface LobbyState {
   /** The list of players in the lobby */
   peers: Array<ClientData>;
   setPeers: (peers: Array<ClientData>) => void;
+  locations: Array<LocationData>;
+  setLocations: (locations: Array<LocationData>) => void;
   /** The current location for the active round */
   currentLocation: string;
   setCurrentLocation: (location: string) => void;
@@ -81,10 +84,15 @@ export const useLobbyStore = create<LobbyState>((set) => ({
     set((state) => {
       return { ...state, isPlayerReady: ready };
     }),
-  peers: new Array<ClientData>(),
+  peers: [],
   setPeers: (peers: Array<ClientData>) =>
     set((state) => {
       return { ...state, peers: peers };
+    }),
+  locations: [],
+  setLocations: (locations: Array<LocationData>) =>
+    set((state) => {
+      return { ...state, locations: locations };
     }),
   currentLocation: "",
   setCurrentLocation: (location: string) =>

@@ -12,20 +12,22 @@ import { ServerEvent } from "./types/serverEvent";
 import type { LobbyStatusPayload } from "./types/lobbyStatus.type";
 import type { ChatPayload } from "./types/chatPayload.type";
 import type { GamePayload } from "./types/gamePayload.type";
-import type { LocationData } from "./types/locationData.type";
 import type { AnyPayload } from "./types/anyPayload.type";
 import { TimePayload } from "./types/timePayload.type";
 import { ClientEvent } from "./types/clientEvent";
 import { setCurrentLobby } from "./utils/lobbyHelper";
 import { useTimerStore } from "./Chat/Timer";
-import { useCrossedStore, useLobbyStore, useSessionIdStore } from "./utils/store";
+import {
+  useCrossedStore,
+  useLobbyStore,
+  useSessionIdStore,
+} from "./utils/store";
 
 const connectionManager = new ConnectionManager();
 const chatSize = 8;
 
 function App() {
   const [chatContent, setChatContent] = useState([] as Array<ChatPayload>);
-  const [locations, setLocations] = useState([] as Array<LocationData>);
 
   const setSessionId = useSessionIdStore((state) => state.setSessionId);
   const setIsConnected = useLobbyStore((state) => state.setIsConnected);
@@ -35,11 +37,15 @@ function App() {
   const setIsPlayerReady = useLobbyStore((state) => state.setIsPlayerReady);
   const peers = useLobbyStore((state) => state.peers);
   const setPeers = useLobbyStore((state) => state.setPeers);
+  const setLocations = useLobbyStore((state) => state.setLocations);
   const setCurrentLocation = useLobbyStore((state) => state.setCurrentLocation);
   const setServerTime = useTimerStore((state) => state.setServerTime);
-  const setCrossedLocations = useCrossedStore((state) => state.setCrossedLocations);
-  const setErrorMessage = useErrorMessageStore((state) => state.setErrorMessage);
-  
+  const setCrossedLocations = useCrossedStore(
+    (state) => state.setCrossedLocations
+  );
+  const setErrorMessage = useErrorMessageStore(
+    (state) => state.setErrorMessage
+  );
 
   useEffect(() => {
     connectionManager.initSocket(setIsConnected);
@@ -54,9 +60,9 @@ function App() {
             peer.crossed = !peer.crossed;
           }
           return peer;
-        }),
+        })
       ),
-    [peers],
+    [peers]
   );
 
   const disconnectCallback = useCallback(() => {
@@ -76,7 +82,7 @@ function App() {
         return [
           ...previousContent.splice(
             previousContent.length - chatSize + 1,
-            previousContent.length,
+            previousContent.length
           ),
           newRow,
         ];
@@ -112,7 +118,7 @@ function App() {
 
       appendText({ message: `First player: ${data.first}` });
     },
-    [appendText],
+    [appendText]
   );
 
   const onMessageCallback = useCallback(
@@ -139,14 +145,14 @@ function App() {
           break;
       }
     },
-    [appendText, startGame],
+    [appendText, startGame]
   );
 
   const sendChatCallBack = useCallback(
     (eventType: ClientEvent, message: string) => {
       connectionManager.send(eventType, { message: message });
     },
-    [],
+    []
   );
 
   function resetAll() {
@@ -174,12 +180,8 @@ function App() {
               sendChatCallBack={sendChatCallBack}
               chatContent={chatContent}
             />
-            <Locations
-              locations={locations}
-            />
-            <PlayersList
-              crossPeer={crossPeerCallback}
-            />
+            <Locations />
+            <PlayersList crossPeer={crossPeerCallback} />
             <GameSettings
               connectionManager={connectionManager}
               disconnectCallback={disconnectCallback}
