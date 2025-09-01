@@ -13,6 +13,7 @@ import {
   playerNameStorageKey,
   storeLocalString,
 } from "./utils/storage";
+import { useSessionIdStore } from "./utils/store";
 
 library.add(faUser, faDice);
 const userIcon = icon({ prefix: "fas", iconName: faUser.iconName });
@@ -31,8 +32,10 @@ const Connect = function Connect(props: ConnectProps) {
     // The replaceAll is used to remove quotes from the old storage format
     getLocalString(playerNameStorageKey)?.replaceAll('"', "") || "",
   );
-  const [lobbyID, setLobbyID] = useState("");
   const [buttonText, setButtonText] = useState("🏠 Create Lobby");
+
+  const sessionId = useSessionIdStore((state) => state.sessionId);
+  const setSessionId = useSessionIdStore((state) => state.setSessionId);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -40,7 +43,7 @@ const Connect = function Connect(props: ConnectProps) {
     props.setGameMode(true);
     props.connectionManager.joinLobby(
       playerName,
-      lobbyID,
+      sessionId,
       props.onDisconnect,
       props.onMessageCallback,
       props.setConnectedToServer,
@@ -54,10 +57,10 @@ const Connect = function Connect(props: ConnectProps) {
     const value = target.value;
     if (target.value) {
       setButtonText("🔌 Join Lobby");
-      setLobbyID(value.toUpperCase());
+      setSessionId(value.toUpperCase());
     } else {
       setButtonText("🏠 Create Lobby");
-      setLobbyID(value);
+      setSessionId(value);
     }
   };
 
@@ -66,7 +69,7 @@ const Connect = function Connect(props: ConnectProps) {
     const lobbyCode = retrieveCurrentLobby();
     if (lobbyCode) {
       setButtonText("🔌 Join Lobby");
-      setLobbyID(lobbyCode);
+      setSessionId(lobbyCode);
     }
   }, []);
 
@@ -104,7 +107,7 @@ const Connect = function Connect(props: ConnectProps) {
             minLength={0}
             maxLength={8}
             autoComplete="off"
-            value={lobbyID}
+            value={sessionId}
             onChange={handleLobbyCodeChange}
           />
         </div>

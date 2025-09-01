@@ -1,13 +1,6 @@
-import {
-  currentLobbyCodeStorageKey,
-  getLocalString,
-  storeLocalString,
-} from "./storage";
-
 export function setCurrentLobby(sessionId: string) {
   // TODO replace window.location.hash with ?code=
   window.location.hash = sessionId;
-  storeLocalString(currentLobbyCodeStorageKey, sessionId);
 }
 
 export function retrieveCurrentLobby(): string | null {
@@ -17,12 +10,6 @@ export function retrieveCurrentLobby(): string | null {
       windowHash = windowHash.substring(0, 8);
     }
     return windowHash.toUpperCase();
-  } else {
-    const storedLobbyCode = getLocalString(currentLobbyCodeStorageKey);
-    if (storedLobbyCode) {
-      window.location.hash = storedLobbyCode;
-      return storedLobbyCode;
-    }
   }
   return null;
 }
