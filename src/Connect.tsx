@@ -20,7 +20,6 @@ const userIcon = icon({ prefix: "fas", iconName: faUser.iconName });
 const diceIcon = icon({ prefix: "fas", iconName: faDice.iconName });
 
 interface ConnectProps {
-  setGameMode: React.Dispatch<React.SetStateAction<boolean>>;
   connectionManager: ConnectionManager;
   onDisconnect: () => void;
   onMessageCallback: (type: string, data: AnyPayload) => void;
@@ -32,15 +31,16 @@ const Connect = function Connect(props: ConnectProps) {
     getLocalString(playerNameStorageKey)?.replaceAll('"', "") || "",
   );
   const [buttonText, setButtonText] = useState("🏠 Create Lobby");
-  const setIsConnected = useLobbyStore((state) => state.setIsConnected);
-
+  
   const sessionId = useSessionIdStore((state) => state.sessionId);
   const setSessionId = useSessionIdStore((state) => state.setSessionId);
+  const setIsConnected = useLobbyStore((state) => state.setIsConnected);
+  const setIsInLobby = useLobbyStore((state) => state.setIsInLobby);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     storeLocalString(playerNameStorageKey, playerName);
-    props.setGameMode(true);
+    setIsInLobby(true);
     props.connectionManager.joinLobby(
       playerName,
       sessionId,

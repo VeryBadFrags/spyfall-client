@@ -22,12 +22,19 @@ export const useSessionIdStore = create<sessionIdState>()(
 );
 
 interface LobbyState {
+  /** If the player is connected to the backend */
   isConnected: boolean;
   setIsConnected: (connected: boolean) => void;
+  /** If the player has joined a lobby */
+  isInLobby: boolean;
+  setIsInLobby: (inLobby: boolean) => void;
+  /** If the game has started */
   gameStarted: boolean;
   setGameStarted: (started: boolean) => void;
+  /** If the current player is ready to start a new game */
   isPlayerReady: boolean;
   setIsPlayerReady: (ready: boolean) => void;
+  /** The list of players in the lobby */
   peers: Array<ClientData>;
   setPeers: (peers: Array<ClientData>) => void;
 }
@@ -36,6 +43,11 @@ export const useLobbyStore = create<LobbyState>((set) => ({
   setIsConnected: (connected: boolean) =>
     set((state) => {
       return { ...state, isConnected: connected };
+    }),
+  isInLobby: false,
+  setIsInLobby: (inLobby: boolean) =>
+    set((state) => {
+      return { ...state, isInLobby: inLobby };
     }),
   gameStarted: false,
   setGameStarted: (started: boolean) =>

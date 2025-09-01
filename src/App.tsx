@@ -24,7 +24,6 @@ const connectionManager = new ConnectionManager();
 const chatSize = 8;
 
 function App() {
-  const [gameMode, setGameMode] = useState(false);
   const [error, setError] = useState("");
   const [chatContent, setChatContent] = useState([] as Array<ChatPayload>);
   const [locations, setLocations] = useState([] as Array<LocationData>);
@@ -32,6 +31,8 @@ function App() {
 
   const setSessionId = useSessionIdStore((state) => state.setSessionId);
   const setIsConnected = useLobbyStore((state) => state.setIsConnected);
+  const isInLobby = useLobbyStore((state) => state.isInLobby);
+  const setIsInLobby = useLobbyStore((state) => state.setIsInLobby);
   const setGameStarted = useLobbyStore((state) => state.setGameStarted);
   const setIsPlayerReady = useLobbyStore((state) => state.setIsPlayerReady);
   const peers = useLobbyStore((state) => state.peers);
@@ -128,7 +129,7 @@ function App() {
           startGame(data as GamePayload);
           break;
         case ServerEvent.SessionCreated:
-          setGameMode(true);
+          setIsInLobby(true);
           setError("");
           setSessionId((data as LobbyStatusPayload).sessionId);
           setCurrentLobby((data as LobbyStatusPayload).sessionId);
@@ -151,7 +152,7 @@ function App() {
   function resetAll() {
     setError("");
     setChatContent([]);
-    setGameMode(false);
+    setIsInLobby(false);
     setIsPlayerReady(false);
     setSessionId("");
     setPeers([]); // TODO is it necessary?
@@ -167,7 +168,7 @@ function App() {
       <Error error={error} />
 
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gx-xl-5 gy-4">
-        {gameMode ? (
+        {isInLobby ? (
           <>
             <Chat
               sendChatCallBack={sendChatCallBack}
@@ -187,7 +188,6 @@ function App() {
           </>
         ) : (
           <Connect
-            setGameMode={setGameMode}
             connectionManager={connectionManager}
             onDisconnect={onDisconnectCallback}
             onMessageCallback={onMessageCallback}
