@@ -1,27 +1,37 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { LobbyStatusPayload } from "../types/lobbyStatus.type";
+import { ClientData } from "../types/clientData.type";
 
-interface LobbyState {
-  lobbyStatus: LobbyStatusPayload;
-  setLobbyStatus: (data: LobbyStatusPayload) => void;
+interface sessionIdState {
+  sessionId: string;
+  setSessionId: (id: string) => void;
 }
-
-// TODO split session id away and persist only that
-export const useLobbyStore = create<LobbyState>()(
+export const useSessionIdStore = create<sessionIdState>()(
   persist(
     (set) => ({
-      lobbyStatus: { sessionId: "" },
-      setLobbyStatus: (data: LobbyStatusPayload) =>
+      sessionId: "",
+      setSessionId: (id: string) =>
         set(() => {
-          return { lobbyStatus: data };
+          return { sessionId: id };
         }),
     }),
     {
-      name: "lobby-storage",
+      name: "session-id-storage",
     }
   )
 );
+
+interface LobbyState {
+  peers: Array<ClientData>;
+  setPeers: (peers: Array<ClientData>) => void;
+}
+export const useLobbyStore = create<LobbyState>((set) => ({
+  peers: new Array<ClientData>(),
+  setPeers: (peers: Array<ClientData>) =>
+    set((state) => {
+      return {...state, peers: peers };
+    }),
+}));
 
 interface CrossedState {
   crossedLocations: Set<number>;

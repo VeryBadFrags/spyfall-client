@@ -18,7 +18,7 @@ import { TimePayload } from "./types/timePayload.type";
 import { ClientEvent } from "./types/clientEvent";
 import { setCurrentLobby } from "./utils/lobbyHelper";
 import { useTimerStore } from "./Chat/Timer";
-import { useCrossedStore, useLobbyStore } from "./utils/store";
+import { useCrossedStore, useLobbyStore, useSessionIdStore } from "./utils/store";
 
 const connectionManager = new ConnectionManager();
 const chatSize = 8;
@@ -34,8 +34,9 @@ function App() {
   const [currentLocation, setCurrentLocation] = useState("");
   const [gameStarted, setGameStarted] = useState(false);
 
-  const lobbyStatus = useLobbyStore((state) => state.lobbyStatus);
-  const setLobbyStatus = useLobbyStore((state) => state.setLobbyStatus);
+  const setSessionId = useSessionIdStore((state) => state.setSessionId);
+  const peers = useLobbyStore((state) => state.peers);
+  const setPeers = useLobbyStore((state) => state.setPeers);
   const setServerTime = useTimerStore((state) => state.setServerTime);
   const setCrossedLocations = useCrossedStore((state) => state.setCrossedLocations);
 
@@ -43,18 +44,18 @@ function App() {
     connectionManager.initSocket(setConnectedToServer);
   }, []);
 
+  // TODO replace with store
   const crossPeerCallback = useCallback(
     (index: number) =>
-      setLobbyStatus({
-        sessionId: lobbyStatus.sessionId,
-        peers: lobbyStatus.peers?.map((peer, i) => {
+      setPeers(
+        peers.map((peer, i) => {
           if (i === index) {
             peer.crossed = !peer.crossed;
           }
           return peer;
         }),
-      }),
-    [lobbyStatus],
+      ),
+    [peers],
   );
 
   const disconnectCallback = useCallback(() => {
@@ -120,7 +121,8 @@ function App() {
           appendText(data as ChatPayload);
           break;
         case ServerEvent.SessionBroadcast: // TODO using a wrapper will simplify type casting
-          setLobbyStatus(data as LobbyStatusPayload);
+          setSessionId((data as LobbyStatusPayload).sessionId);
+          setPeers((data as LobbyStatusPayload).peers || []);
           break;
         case ServerEvent.StartGame:
           startGame(data as GamePayload);
@@ -151,7 +153,8 @@ function App() {
     setChatContent([]);
     setGameMode(false);
     setReadyCheck(false);
-    setLobbyStatus({ sessionId: "" });
+    setSessionId("");
+    setPeers([]); // TODO is it necessary?
     setCrossedLocations(new Set<number>());
     setGameStarted(false);
     window.scrollTo(0, 0);

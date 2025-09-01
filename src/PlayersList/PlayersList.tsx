@@ -5,11 +5,11 @@ import { useLobbyStore } from "../utils/store";
 const PlayersList = memo(function PlayersList(props: {
   crossPeer: (index: number) => void;
 }) {
-  const lobbyStatus = useLobbyStore((state) => state.lobbyStatus);
+  const peers = useLobbyStore((state) => state.peers);
   return (
     <Card header="👤 Players" hasBody={false}>
       <div className="list-group list-group-flush">
-        {lobbyStatus.peers?.map((client, index) => {
+        {peers.map((client, index) => {
           return (
             <button
               type="button"

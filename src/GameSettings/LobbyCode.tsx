@@ -1,4 +1,4 @@
-import { useLobbyStore } from "../utils/store";
+import { useSessionIdStore } from "../utils/store";
 
 // Font Awesome
 import Parser from "html-react-parser";
@@ -8,7 +8,7 @@ library.add(faBuilding);
 const buildingIcon = icon({ prefix: "fas", iconName: faBuilding.iconName });
 
 const LobbyCode = function LobbyCode() {
-  const lobbyStatus = useLobbyStore((state) => state.lobbyStatus);
+  const sessionId = useSessionIdStore((state) => state.sessionId);
 
   return (
     <div className="mb-3">
@@ -23,10 +23,10 @@ const LobbyCode = function LobbyCode() {
         data-bs-content="Copy"
         onClick={(event) => {
           window?.getSelection()?.selectAllChildren(event.target as Node);
-          navigator.clipboard.writeText(lobbyStatus.sessionId).then();
+          navigator.clipboard.writeText(sessionId).then();
         }}
       >
-        {lobbyStatus?.sessionId ? lobbyStatus.sessionId : ""}
+        {sessionId}
       </span>
     </div>
   );
