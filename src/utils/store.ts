@@ -26,6 +26,8 @@ interface LobbyState {
   setIsConnected: (connected: boolean) => void;
   gameStarted: boolean;
   setGameStarted: (started: boolean) => void;
+  isPlayerReady: boolean;
+  setIsPlayerReady: (ready: boolean) => void;
   peers: Array<ClientData>;
   setPeers: (peers: Array<ClientData>) => void;
 }
@@ -39,6 +41,11 @@ export const useLobbyStore = create<LobbyState>((set) => ({
   setGameStarted: (started: boolean) =>
     set((state) => {
       return { ...state, gameStarted: started };
+    }),
+  isPlayerReady: false,
+  setIsPlayerReady: (ready: boolean) =>
+    set((state) => {
+      return { ...state, isPlayerReady: ready };
     }),
   peers: new Array<ClientData>(),
   setPeers: (peers: Array<ClientData>) =>

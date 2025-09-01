@@ -27,13 +27,13 @@ function App() {
   const [gameMode, setGameMode] = useState(false);
   const [error, setError] = useState("");
   const [chatContent, setChatContent] = useState([] as Array<ChatPayload>);
-  const [readyCheck, setReadyCheck] = useState(false);
   const [locations, setLocations] = useState([] as Array<LocationData>);
   const [currentLocation, setCurrentLocation] = useState("");
 
   const setSessionId = useSessionIdStore((state) => state.setSessionId);
   const setIsConnected = useLobbyStore((state) => state.setIsConnected);
   const setGameStarted = useLobbyStore((state) => state.setGameStarted);
+  const setIsPlayerReady = useLobbyStore((state) => state.setIsPlayerReady);
   const peers = useLobbyStore((state) => state.peers);
   const setPeers = useLobbyStore((state) => state.setPeers);
   const setServerTime = useTimerStore((state) => state.setServerTime);
@@ -90,7 +90,7 @@ function App() {
       // TODO consolidate with resetAll
       window.scrollTo(0, 0);
       setChatContent([]);
-      setReadyCheck(false);
+      setIsPlayerReady(false);
       setLocations(data.locations.map((loc) => ({ name: loc })));
       setCurrentLocation(data.location);
       setCrossedLocations(new Set<number>());
@@ -152,7 +152,7 @@ function App() {
     setError("");
     setChatContent([]);
     setGameMode(false);
-    setReadyCheck(false);
+    setIsPlayerReady(false);
     setSessionId("");
     setPeers([]); // TODO is it necessary?
     setCrossedLocations(new Set<number>());
@@ -183,8 +183,6 @@ function App() {
             <GameSettings
               connectionManager={connectionManager}
               disconnectCallback={disconnectCallback}
-              readyCheck={readyCheck}
-              setReadyCheck={setReadyCheck}
             />
           </>
         ) : (
