@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import Connect from "./Connect";
-import Chat from "./Chat/Chat";
+import Chat, { useChatStore } from "./Chat/Chat";
 import Rules from "./Rules";
 import GameSettings from "./GameSettings/GameSettings";
 import ConnectionManager from "./utils/connectionManager";
@@ -24,11 +24,8 @@ import {
 } from "./utils/store";
 
 const connectionManager = new ConnectionManager();
-const chatSize = 8;
 
 function App() {
-  const [chatContent, setChatContent] = useState([] as Array<ChatPayload>);
-
   const setSessionId = useSessionIdStore((state) => state.setSessionId);
   const setIsConnected = useLobbyStore((state) => state.setIsConnected);
   const isInLobby = useLobbyStore((state) => state.isInLobby);
@@ -39,6 +36,8 @@ function App() {
   const setPeers = useLobbyStore((state) => state.setPeers);
   const setLocations = useLobbyStore((state) => state.setLocations);
   const setCurrentLocation = useLobbyStore((state) => state.setCurrentLocation);
+  const setChatContent = useChatStore((state) => state.setChatContent);
+  const appendChat = useChatStore((state) => state.appendChat);
   const setServerTime = useTimerStore((state) => state.setServerTime);
   const setCrossedLocations = useCrossedStore(
     (state) => state.setCrossedLocations
@@ -75,23 +74,6 @@ function App() {
     setErrorMessage("Disconnected from Lobby");
   }, []);
 
-  const appendText = useCallback((newRow: ChatPayload) => {
-    setChatContent((previousContent) => {
-      if (previousContent.length >= chatSize) {
-        // Trim the chat if it's too long
-        return [
-          ...previousContent.splice(
-            previousContent.length - chatSize + 1,
-            previousContent.length
-          ),
-          newRow,
-        ];
-      } else {
-        return [...previousContent, newRow];
-      }
-    });
-  }, []);
-
   const startGame = useCallback(
     (data: GamePayload) => {
       // TODO consolidate with resetAll
@@ -101,31 +83,31 @@ function App() {
       setLocations(data.locations.map((loc) => ({ name: loc })));
       setCurrentLocation(data.location);
       setCrossedLocations(new Set<number>());
-      appendText({ message: "Game started" });
+      appendChat({ message: "Game started" });
       setGameStarted(true);
 
       if (data.spy) {
-        appendText({
+        appendChat({
           message: "🕵️ You are the spy, try to guess the current location",
           color: "red",
         });
       } else {
-        appendText({
+        appendChat({
           message: `😇 You are not the spy, the location is ${data.location}`,
           color: "blue",
         });
       }
 
-      appendText({ message: `First player: ${data.first}` });
+      appendChat({ message: `First player: ${data.first}` });
     },
-    [appendText]
+    [appendChat]
   );
 
   const onMessageCallback = useCallback(
     (type: string, data: AnyPayload) => {
       switch (type) {
         case ServerEvent.ChatEvent:
-          appendText(data as ChatPayload);
+          appendChat(data as ChatPayload);
           break;
         case ServerEvent.SessionBroadcast: // TODO using a wrapper will simplify type casting
           setSessionId((data as LobbyStatusPayload).sessionId);
@@ -145,7 +127,7 @@ function App() {
           break;
       }
     },
-    [appendText, startGame]
+    [appendChat, startGame]
   );
 
   const sendChatCallBack = useCallback(
@@ -176,10 +158,7 @@ function App() {
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gx-xl-5 gy-4">
         {isInLobby ? (
           <>
-            <Chat
-              sendChatCallBack={sendChatCallBack}
-              chatContent={chatContent}
-            />
+            <Chat sendChatCallBack={sendChatCallBack} />
             <Locations />
             <PlayersList crossPeer={crossPeerCallback} />
             <GameSettings
