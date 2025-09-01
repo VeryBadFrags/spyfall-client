@@ -8,7 +8,6 @@ import type { ChatPayload } from "../types/chatPayload.type";
 import Parser from "html-react-parser";
 import { library, icon } from "@fortawesome/fontawesome-svg-core";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
-import { TimePayload } from "../types/timePayload.type";
 import { ClientEvent } from "../types/clientEvent";
 library.add(faPaperPlane);
 const paperPlaneIcon = icon({ prefix: "fas", iconName: faPaperPlane.iconName });
@@ -17,7 +16,6 @@ interface ChatProps {
   sendChatCallBack: (eventType: ClientEvent, message: string) => void;
   chatContent: Array<ChatPayload>;
   gameStarted: boolean;
-  serverTime: TimePayload;
   identity: string;
 }
 
@@ -35,7 +33,7 @@ const Chat = memo(function Chat(props: ChatProps) {
 
   return (
     <Card header="💬 Chat">
-      {props.gameStarted ? <Timer serverTime={props.serverTime} /> : null}
+      {props.gameStarted ? <Timer /> : null}
       <div className="row g-0" id="chat-container">
         <div className="chat-box card border-bottom-0 rounded-0 rounded-top">
           <div className="list-group list-group-flush">
