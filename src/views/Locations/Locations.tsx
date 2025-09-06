@@ -1,5 +1,5 @@
 import Card from "../components/Card";
-import { useCrossedStore, useLobbyStore } from "../utils/store";
+import { useCrossedStore, useLobbyStore } from "../store/store";
 
 const Locations = function Locations() {
   const locations = useLobbyStore((state) => state.locations);

@@ -1,13 +1,13 @@
 import { useEffect, useCallback } from "react";
-import Connect from "./Connect";
-import Chat, { useChatStore } from "./Chat/Chat";
-import Rules from "./Rules";
-import GameSettings from "./GameSettings/GameSettings";
+import Connect from "./views/Connect";
+import Chat, { useChatStore } from "./views/Chat/Chat";
+import Rules from "./views/Rules";
+import GameSettings from "./views/GameSettings/GameSettings";
 import ConnectionManager from "./utils/connectionManager";
 import Locations from "./Locations/Locations";
-import ErrorBox, { useErrorMessageStore } from "./ErrorBox";
-import ConnectStatus from "./ConnectStatus";
-import PlayersList from "./PlayersList/PlayersList";
+import ErrorBox, { useErrorMessageStore } from "./views/ErrorBox";
+import ConnectStatus from "./views/ConnectStatus";
+import PlayersList from "./views/PlayersList/PlayersList";
 import { ServerEvent } from "./types/serverEvent";
 import type { LobbyStatusPayload } from "./types/lobbyStatus.type";
 import type { ChatPayload } from "./types/chatPayload.type";
@@ -16,12 +16,12 @@ import type { AnyPayload } from "./types/anyPayload.type";
 import { TimePayload } from "./types/timePayload.type";
 import { ClientEvent } from "./types/clientEvent";
 import { setCurrentLobby } from "./utils/lobbyHelper";
-import { useTimerStore } from "./Chat/Timer";
+import { useTimerStore } from "./views/Chat/Timer";
 import {
   useCrossedStore,
   useLobbyStore,
   useSessionIdStore,
-} from "./utils/store";
+} from "./store/store";
 
 const connectionManager = new ConnectionManager();
 

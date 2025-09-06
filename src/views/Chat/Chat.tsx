@@ -10,7 +10,7 @@ import Parser from "html-react-parser";
 import { library, icon } from "@fortawesome/fontawesome-svg-core";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { ClientEvent } from "../types/clientEvent";
-import { useLobbyStore } from "../utils/store";
+import { useLobbyStore } from "../store/store";
 library.add(faPaperPlane);
 const paperPlaneIcon = icon({ prefix: "fas", iconName: faPaperPlane.iconName });
 

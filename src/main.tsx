@@ -7,8 +7,8 @@ import "@fontsource/atkinson-hyperlegible";
 import "@fontsource/atkinson-hyperlegible/700.css";
 
 import Plausible from "plausible-tracker";
-import Header from "./Header/Header.tsx";
-import Footer from "./Footer/Footer.tsx";
+import Header from "./components/Header/Header.tsx";
+import Footer from "./components/Footer/Footer.tsx";
 const plausible = Plausible({
   domain: "spyfall.verybadfrags.com",
   apiHost: "/ps",
