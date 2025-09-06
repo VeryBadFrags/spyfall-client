@@ -1,9 +1,4 @@
-// Font Awesome
-import Parser from "html-react-parser";
-import { library, icon } from "@fortawesome/fontawesome-svg-core";
-import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
-library.add(faSignOutAlt);
-const signOutAltIcon = icon({ prefix: "fas", iconName: faSignOutAlt.iconName });
+import { FaSignOutAlt } from "react-icons/fa";
 
 export default function DisconnectButton(props: {
   disconnectCallback: () => void;
@@ -14,7 +9,7 @@ export default function DisconnectButton(props: {
         className="btn btn-sm btn-danger"
         onClick={() => props.disconnectCallback()}
       >
-        {Parser(signOutAltIcon.html.toString())} Leave lobby
+        <FaSignOutAlt /> Leave lobby
       </button>
     </div>
   );

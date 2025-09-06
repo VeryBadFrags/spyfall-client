@@ -1,10 +1,4 @@
-// Font Awesome
-import Parser from "html-react-parser";
-import { library, icon } from "@fortawesome/fontawesome-svg-core";
-import { faStopwatch, faBell } from "@fortawesome/free-solid-svg-icons";
-library.add(faStopwatch, faBell);
-const stopwatchIcon = icon({ prefix: "fas", iconName: faStopwatch.iconName });
-const bellIcon = icon({ prefix: "fas", iconName: faBell.iconName });
+import { FaBell, FaStopwatch } from "react-icons/fa";
 
 function getMinutes(timer: number): string {
   const minutes = Math.floor(timer / 60);
@@ -21,15 +15,14 @@ export default function TimeDisplay(props: { timer: number }) {
     return (
       <div>
         <>
-          {Parser(stopwatchIcon.html.toString())} {getMinutes(props.timer)}:
-          {getSeconds(props.timer)}
+          <FaStopwatch /> {getMinutes(props.timer)}:{getSeconds(props.timer)}
         </>
       </div>
     );
   } else {
     return (
       <span>
-        {Parser(bellIcon.html.toString())} Time&apos;s up! Who is the Spy?
+        <FaBell /> Time&apos;s up! Who is the Spy?
       </span>
     );
   }

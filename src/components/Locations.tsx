@@ -1,5 +1,6 @@
 import Card from "@components/Card";
 import { useCrossedStore, useLobbyStore } from "@store/store";
+import { FaMapPin } from "react-icons/fa";
 
 export default function Locations() {
   const locations = useLobbyStore((state) => state.locations);
@@ -21,7 +22,7 @@ export default function Locations() {
 
   if (locations && locations.length > 0) {
     return (
-      <Card header="📍 Locations" hasBody={false}>
+      <Card header="Locations" hasBody={false} icon={<FaMapPin />}>
         <div className="list-group list-group-flush">
           {locations.map((loc, i) => {
             return (

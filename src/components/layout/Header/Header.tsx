@@ -1,19 +1,13 @@
 import "./Header.scss";
 
-// Font Awesome
-import Parser from "html-react-parser";
-import { library, icon } from "@fortawesome/fontawesome-svg-core";
-import { faUserSecret, faGamepad } from "@fortawesome/free-solid-svg-icons";
-library.add(faUserSecret, faGamepad);
-const userSecretIcon = icon({ prefix: "fas", iconName: faUserSecret.iconName });
-const gamePadIcon = icon({ prefix: "fas", iconName: faGamepad.iconName });
+import { FaGamepad, FaUserSecret } from "react-icons/fa";
 
 export default function Header() {
   return (
     <nav className="navbar navbar-expand navbar-dark shadow-sm">
       <div className="container-fluid">
         <span className="navbar-brand mb-0 h1">
-          {Parser(userSecretIcon.html.toString())} Spyfall
+          <FaUserSecret /> Spyfall
         </span>
         <div className="collapse navbar-collapse" id="navbarText">
           <ul className="navbar-nav mr-auto">
@@ -23,7 +17,7 @@ export default function Header() {
                 href="https://blog.verybadfrags.com/games/"
                 target="_blank"
               >
-                {Parser(gamePadIcon.html.toString())} More games
+                <FaGamepad /> More games
               </a>
             </li>
           </ul>

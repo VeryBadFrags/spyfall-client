@@ -5,14 +5,9 @@ import Card from "@components/Card";
 import type { ChatPayload } from "../../../types/chatPayload.type";
 import { ClientEvent } from "../../../types/clientEvent";
 import { useLobbyStore } from "@store/store";
-
-// Font Awesome
-import Parser from "html-react-parser";
-import { library, icon } from "@fortawesome/fontawesome-svg-core";
-import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import Timer from "./Timer";
-library.add(faPaperPlane);
-const paperPlaneIcon = icon({ prefix: "fas", iconName: faPaperPlane.iconName });
+import { HiChatBubbleOvalLeftEllipsis } from "react-icons/hi2";
+import { FaPaperPlane } from "react-icons/fa";
 
 const chatSize = 8;
 
@@ -66,7 +61,7 @@ export default function Chat(props: ChatProps) {
   }
 
   return (
-    <Card header="💬 Chat">
+    <Card header="Chat" icon={<HiChatBubbleOvalLeftEllipsis />}>
       {gameStarted ? <Timer /> : null}
       <div className="row g-0" id="chat-container">
         <div className="chat-box card border-bottom-0 rounded-0 rounded-top">
@@ -102,7 +97,7 @@ export default function Chat(props: ChatProps) {
               type="submit"
               className="btn btn-primary rounded rounded-top-0 rounded-start-0"
             >
-              {Parser(paperPlaneIcon.html.toString())} Send
+              <FaPaperPlane /> Send
             </button>
           </div>
         </form>

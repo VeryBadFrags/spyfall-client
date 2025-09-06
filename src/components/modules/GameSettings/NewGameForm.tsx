@@ -4,16 +4,7 @@ import type ConnectionManager from "@utils/connectionManager";
 import { useLobbyStore } from "@store/store";
 import { ClientEvent } from "../../../types/clientEvent";
 
-// Font Awesome
-import Parser from "html-react-parser";
-import { library, icon } from "@fortawesome/fontawesome-svg-core";
-import { faTrafficLight } from "@fortawesome/free-solid-svg-icons";
-
-library.add(faTrafficLight);
-const trafficLightIcon = icon({
-  prefix: "fas",
-  iconName: faTrafficLight.iconName,
-});
+import { FaTrafficLight } from "react-icons/fa";
 
 interface NewGameFormProps {
   connectionManager: ConnectionManager;
@@ -66,7 +57,7 @@ export default function NewGameForm({ connectionManager }: NewGameFormProps) {
           </label>
         </div>
         <button type="submit" className="btn btn-primary shadow">
-          {Parser(trafficLightIcon.html.toString())} Start new round
+          <FaTrafficLight /> Start new round
         </button>
       </form>
     </div>
