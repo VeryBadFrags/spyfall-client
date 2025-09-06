@@ -25,7 +25,7 @@ import {
 
 const connectionManager = new ConnectionManager();
 
-function App() {
+export default function App() {
   const setSessionId = useSessionIdStore((state) => state.setSessionId);
   const setIsConnected = useLobbyStore((state) => state.setIsConnected);
   const isInLobby = useLobbyStore((state) => state.isInLobby);
@@ -166,5 +166,3 @@ function App() {
     </main>
   );
 }
-
-export default App;

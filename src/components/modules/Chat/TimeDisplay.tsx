@@ -16,7 +16,7 @@ function getSeconds(timer: number): string {
   return seconds < 10 ? "0" + seconds : seconds.toString();
 }
 
-const TimeDisplay = function TimeDisplay(props: { timer: number }) {
+export default function TimeDisplay(props: { timer: number }) {
   if (props.timer > 0) {
     return (
       <div>
@@ -33,6 +33,4 @@ const TimeDisplay = function TimeDisplay(props: { timer: number }) {
       </span>
     );
   }
-};
-
-export default TimeDisplay;
+}

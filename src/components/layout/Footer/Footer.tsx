@@ -11,7 +11,7 @@ const commentsIcon = icon({ prefix: "fas", iconName: faComments.iconName });
 const githubIcon = icon({ prefix: "fab", iconName: faGithub.iconName });
 const iconsIcon = icon({ prefix: "fas", iconName: faIcons.iconName });
 
-const Footer = function Footer() {
+export default function Footer() {
   return (
     <footer className="pt-5">
       <nav className="navbar navbar-expand-lg sticky-bottom">
@@ -61,6 +61,4 @@ const Footer = function Footer() {
       </nav>
     </footer>
   );
-};
-
-export default Footer;
+}

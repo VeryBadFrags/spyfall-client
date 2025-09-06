@@ -8,7 +8,7 @@ library.add(faUserSecret, faGamepad);
 const userSecretIcon = icon({ prefix: "fas", iconName: faUserSecret.iconName });
 const gamePadIcon = icon({ prefix: "fas", iconName: faGamepad.iconName });
 
-const Header = function Header() {
+export default function Header() {
   return (
     <nav className="navbar navbar-expand navbar-dark shadow-sm">
       <div className="container-fluid">
@@ -31,6 +31,4 @@ const Header = function Header() {
       </div>
     </nav>
   );
-};
-
-export default Header;
+}

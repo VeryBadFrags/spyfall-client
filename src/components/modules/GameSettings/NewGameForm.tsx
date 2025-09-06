@@ -19,9 +19,7 @@ interface NewGameFormProps {
   connectionManager: ConnectionManager;
 }
 
-const NewGameForm = function NewGameForm({
-  connectionManager,
-}: NewGameFormProps) {
+export default function NewGameForm({ connectionManager }: NewGameFormProps) {
   const readyRef = useRef() as React.MutableRefObject<HTMLInputElement>;
   const isPlayerReady = useLobbyStore((state) => state.isPlayerReady);
   const setIsPlayerReady = useLobbyStore((state) => state.setIsPlayerReady);
@@ -73,6 +71,4 @@ const NewGameForm = function NewGameForm({
       </form>
     </div>
   );
-};
-
-export default NewGameForm;
+}

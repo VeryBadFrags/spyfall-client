@@ -19,7 +19,7 @@ export const useTimerStore = create<TimerState>((set) => ({
     }),
 }));
 
-const Timer = function Timer() {
+export default function Timer() {
   const serverTime = useTimerStore((state) => state.serverTime);
   const [timer, setTimer] = useState(serverTime.timeLeftSec);
 
@@ -52,6 +52,4 @@ const Timer = function Timer() {
       </div>
     </div>
   );
-};
-
-export default Timer;
+}

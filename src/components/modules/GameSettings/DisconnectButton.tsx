@@ -5,7 +5,7 @@ import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 library.add(faSignOutAlt);
 const signOutAltIcon = icon({ prefix: "fas", iconName: faSignOutAlt.iconName });
 
-const DisconnectButton = function DisconnectButton(props: {
+export default function DisconnectButton(props: {
   disconnectCallback: () => void;
 }) {
   return (
@@ -18,6 +18,4 @@ const DisconnectButton = function DisconnectButton(props: {
       </button>
     </div>
   );
-};
-
-export default DisconnectButton;
+}

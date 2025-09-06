@@ -51,7 +51,7 @@ interface ChatProps {
   sendChatCallBack: (eventType: ClientEvent, message: string) => void;
 }
 
-const Chat = function Chat(props: ChatProps) {
+export default function Chat(props: ChatProps) {
   const [inputText, setInputText] = useState("");
   const inputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
   const gameStarted = useLobbyStore((state) => state.gameStarted);
@@ -109,7 +109,7 @@ const Chat = function Chat(props: ChatProps) {
       </div>
     </Card>
   );
-};
+}
 
 const ChatLine = function ChatLine(props: { row: ChatPayload }) {
   return (
@@ -119,5 +119,3 @@ const ChatLine = function ChatLine(props: { row: ChatPayload }) {
     </span>
   );
 };
-
-export default Chat;
