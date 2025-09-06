@@ -1,5 +1,4 @@
 import "./Header.scss";
-
 import { FaGamepad, FaUserSecret } from "react-icons/fa";
 
 export default function Header() {

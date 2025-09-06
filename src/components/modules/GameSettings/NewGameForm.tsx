@@ -3,7 +3,6 @@ import "./NewGameForm.scss";
 import type ConnectionManager from "@utils/connectionManager";
 import { useLobbyStore } from "@store/store";
 import { ClientEvent } from "../../../types/clientEvent";
-
 import { FaTrafficLight } from "react-icons/fa";
 
 interface NewGameFormProps {

@@ -12,6 +12,10 @@ export default defineConfig([
     languageOptions: { globals: globals.browser },
     rules: {
       "@typescript-eslint/consistent-type-imports": "error",
+      "sort-imports": [
+        "warn",
+        { ignoreCase: true, ignoreDeclarationSort: true },
+      ],
     },
   },
   tseslint.configs.recommended,
