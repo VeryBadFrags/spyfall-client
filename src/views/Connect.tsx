@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Card from "../components/Card";
-import ConnectionManager from "../utils/connectionManager";
+import ConnectionManager from "@utils/connectionManager";
 import type { AnyPayload } from "../types/anyPayload.type";
 
 // Font Awesome
 import Parser from "html-react-parser";
 import { library, icon } from "@fortawesome/fontawesome-svg-core";
 import { faUser, faDice } from "@fortawesome/free-solid-svg-icons";
-import { retrieveCurrentLobby } from "../utils/lobbyHelper";
+import { retrieveCurrentLobby } from "@utils/lobbyHelper";
 import {
   useLobbyStore,
   usePlayerNameStore,
