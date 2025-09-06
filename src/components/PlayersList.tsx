@@ -26,4 +26,4 @@ export default function PlayersList() {
       </div>
     </Card>
   );
-};
+}

@@ -45,4 +45,4 @@ export default function Locations() {
   } else {
     return null;
   }
-};
+}

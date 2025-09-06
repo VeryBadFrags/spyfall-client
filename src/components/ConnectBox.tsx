@@ -116,4 +116,4 @@ export default function ConnectBox(props: ConnectProps) {
       </form>
     </Card>
   );
-};
+}

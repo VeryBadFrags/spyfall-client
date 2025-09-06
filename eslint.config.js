@@ -16,5 +16,5 @@ export default defineConfig([
   },
   tseslint.configs.recommended,
   pluginReact.configs.flat["jsx-runtime"],
-  globalIgnores(["dist/"])
+  globalIgnores(["dist/"]),
 ]);
