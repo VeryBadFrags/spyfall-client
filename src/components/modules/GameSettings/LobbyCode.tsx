@@ -7,7 +7,7 @@ import { faBuilding } from "@fortawesome/free-solid-svg-icons";
 library.add(faBuilding);
 const buildingIcon = icon({ prefix: "fas", iconName: faBuilding.iconName });
 
-const LobbyCode = function LobbyCode() {
+export default function LobbyCode() {
   const sessionId = useSessionIdStore((state) => state.sessionId);
 
   return (
@@ -30,6 +30,4 @@ const LobbyCode = function LobbyCode() {
       </span>
     </div>
   );
-};
-
-export default LobbyCode;
+}

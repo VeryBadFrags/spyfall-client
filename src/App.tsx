@@ -1,15 +1,15 @@
 import { useEffect, useCallback } from "react";
-import Connect from "@views/Connect";
-import Chat, { useChatStore } from "@views/Chat/Chat";
-import Rules from "@views/Rules";
-import GameSettings from "@views/GameSettings/GameSettings";
+import ConnectBox from "@components/ConnectBox";
+import Chat, { useChatStore } from "@components/modules/Chat/Chat";
+import Rules from "@components/Rules";
+import GameSettings from "@components/modules/GameSettings/GameSettings";
 import ConnectionManager from "@utils/connectionManager";
 import { setCurrentLobby } from "@utils/lobbyHelper";
-import Locations from "@views/Locations/Locations";
-import ErrorBox, { useErrorMessageStore } from "@views/ErrorBox";
-import ConnectStatus from "@views/ConnectStatus";
-import PlayersList from "@views/PlayersList/PlayersList";
-import { useTimerStore } from "@views/Chat/Timer";
+import Locations from "@components/Locations";
+import ErrorBox, { useErrorMessageStore } from "@components/ErrorBox";
+import ConnectionInfo from "@components/ConnectionInfo";
+import PlayersList from "@components/PlayersList";
+import { useTimerStore } from "@components/modules/Chat/Timer";
 import { ServerEvent } from "./types/serverEvent";
 import type { LobbyStatusPayload } from "./types/lobbyStatus.type";
 import type { ChatPayload } from "./types/chatPayload.type";
@@ -25,7 +25,7 @@ import {
 
 const connectionManager = new ConnectionManager();
 
-function App() {
+export default function App() {
   const setSessionId = useSessionIdStore((state) => state.setSessionId);
   const setIsConnected = useLobbyStore((state) => state.setIsConnected);
   const isInLobby = useLobbyStore((state) => state.isInLobby);
@@ -139,7 +139,7 @@ function App() {
 
   return (
     <main className="container-fluid h-100 pt-3">
-      <ConnectStatus />
+      <ConnectionInfo />
 
       <ErrorBox />
 
@@ -155,7 +155,7 @@ function App() {
             />
           </>
         ) : (
-          <Connect
+          <ConnectBox
             connectionManager={connectionManager}
             onDisconnect={onDisconnectCallback}
             onMessageCallback={onMessageCallback}
@@ -166,5 +166,3 @@ function App() {
     </main>
   );
 }
-
-export default App;

@@ -1,6 +1,6 @@
 import { useLobbyStore } from "@store/store";
 
-const ConnectStatus = function ConnectStatus() {
+export default function ConnectionInfo() {
   const isConnected = useLobbyStore((state) => state.isConnected);
   if (!isConnected) {
     return (
@@ -17,6 +17,4 @@ const ConnectStatus = function ConnectStatus() {
   } else {
     return null;
   }
-};
-
-export default ConnectStatus;
+}

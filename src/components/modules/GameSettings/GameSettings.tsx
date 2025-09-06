@@ -9,7 +9,7 @@ interface GameSettingsProps {
   disconnectCallback: () => void;
 }
 
-const GameSettings = function GameSettings(props: GameSettingsProps) {
+export default function GameSettings(props: GameSettingsProps) {
   return (
     <Card header="⚙️ Game">
       <LobbyCode />
@@ -18,6 +18,4 @@ const GameSettings = function GameSettings(props: GameSettingsProps) {
       <DisconnectButton disconnectCallback={props.disconnectCallback} />
     </Card>
   );
-};
-
-export default GameSettings;
+}

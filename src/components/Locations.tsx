@@ -1,7 +1,7 @@
 import Card from "@components/Card";
 import { useCrossedStore, useLobbyStore } from "@store/store";
 
-const Locations = function Locations() {
+export default function Locations() {
   const locations = useLobbyStore((state) => state.locations);
   const currentLocation = useLobbyStore((state) => state.currentLocation);
   const crossedLocations = useCrossedStore((state) => state.crossedLocations);
@@ -45,6 +45,4 @@ const Locations = function Locations() {
   } else {
     return null;
   }
-};
-
-export default Locations;
+}

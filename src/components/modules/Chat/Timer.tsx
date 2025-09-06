@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { useEffect, useState } from "react";
-import type { TimePayload } from "../../types/timePayload.type";
+import type { TimePayload } from "../../../types/timePayload.type";
 import TimeDisplay from "./TimeDisplay";
 
 interface TimerState {
@@ -19,7 +19,7 @@ export const useTimerStore = create<TimerState>((set) => ({
     }),
 }));
 
-const Timer = function Timer() {
+export default function Timer() {
   const serverTime = useTimerStore((state) => state.serverTime);
   const [timer, setTimer] = useState(serverTime.timeLeftSec);
 
@@ -52,6 +52,4 @@ const Timer = function Timer() {
       </div>
     </div>
   );
-};
-
-export default Timer;
+}

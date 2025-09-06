@@ -24,7 +24,7 @@ interface ConnectProps {
   onMessageCallback: (type: string, data: AnyPayload) => void;
 }
 
-const Connect = function Connect(props: ConnectProps) {
+export default function ConnectBox(props: ConnectProps) {
   const [buttonText, setButtonText] = useState("🏠 Create Lobby");
 
   const sessionId = useSessionIdStore((state) => state.sessionId);
@@ -116,6 +116,4 @@ const Connect = function Connect(props: ConnectProps) {
       </form>
     </Card>
   );
-};
-
-export default Connect;
+}
