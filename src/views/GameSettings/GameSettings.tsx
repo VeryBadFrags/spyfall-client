@@ -1,5 +1,5 @@
-import Card from "../components/Card.tsx";
-import ConnectionManager from "../utils/connectionManager";
+import Card from "@components/Card.tsx";
+import ConnectionManager from "@utils/connectionManager";
 import LobbyCode from "./LobbyCode";
 import NewGameForm from "./NewGameForm";
 import DisconnectButton from "./DisconnectButton.tsx";

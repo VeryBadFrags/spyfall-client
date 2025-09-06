@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Card from "./components/Card";
+import Card from "@components/Card";
 
 // Font Awesome
 import Parser from "html-react-parser";

@@ -1,4 +1,4 @@
-import { useSessionIdStore } from "../store/store";
+import { useSessionIdStore } from "@store/store";
 
 // Font Awesome
 import Parser from "html-react-parser";

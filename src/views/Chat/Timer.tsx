@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { useEffect, useState } from "react";
-import { TimePayload } from "../types/timePayload.type";
+import type { TimePayload } from "../../types/timePayload.type.ts";
 import TimeDisplay from "./TimeDisplay.tsx";
 
 interface TimerState {

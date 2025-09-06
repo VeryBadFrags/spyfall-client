@@ -1,13 +1,13 @@
 import React, { useCallback, useRef } from "react";
-import ConnectionManager from "../utils/connectionManager";
 import "./NewGameForm.scss";
-import { ClientEvent } from "../types/clientEvent";
-import { useLobbyStore } from "../store/store";
+import ConnectionManager from "@utils/connectionManager";
+import { useLobbyStore } from "@store/store";
 
 // Font Awesome
 import Parser from "html-react-parser";
 import { library, icon } from "@fortawesome/fontawesome-svg-core";
 import { faTrafficLight } from "@fortawesome/free-solid-svg-icons";
+import { ClientEvent } from "../../types/clientEvent";
 
 library.add(faTrafficLight);
 const trafficLightIcon = icon({
