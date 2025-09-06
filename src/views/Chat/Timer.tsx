@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { useEffect, useState } from "react";
-import { TimePayload } from "../types/timePayload.type";
-import TimeDisplay from "./TimeDisplay.tsx";
+import type { TimePayload } from "../../types/timePayload.type";
+import TimeDisplay from "./TimeDisplay";
 
 interface TimerState {
   serverTime: TimePayload;

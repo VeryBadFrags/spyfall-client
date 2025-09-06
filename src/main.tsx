@@ -1,14 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
+import App from "./App";
 
 import "./styles/index.scss";
 import "@fontsource/atkinson-hyperlegible";
 import "@fontsource/atkinson-hyperlegible/700.css";
 
 import Plausible from "plausible-tracker";
-import Header from "./Header/Header.tsx";
-import Footer from "./Footer/Footer.tsx";
+import Header from "@components/Header/Header";
+import Footer from "@components/Footer/Footer";
 const plausible = Plausible({
   domain: "spyfall.verybadfrags.com",
   apiHost: "/ps",

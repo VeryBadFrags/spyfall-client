@@ -1,4 +1,4 @@
-import { useLobbyStore } from "./utils/store";
+import { useLobbyStore } from "@store/store";
 
 const ConnectStatus = function ConnectStatus() {
   const isConnected = useLobbyStore((state) => state.isConnected);
