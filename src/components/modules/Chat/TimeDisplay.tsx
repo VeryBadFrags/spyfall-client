@@ -15,8 +15,7 @@ export default function TimeDisplay(props: { timer: number }) {
     return (
       <div>
         <>
-          <FaStopwatch /> {getMinutes(props.timer)}:
-          {getSeconds(props.timer)}
+          <FaStopwatch /> {getMinutes(props.timer)}:{getSeconds(props.timer)}
         </>
       </div>
     );

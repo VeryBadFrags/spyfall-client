@@ -1,6 +1,15 @@
 import { useState } from "react";
 import Card from "@components/Card";
-import { FaBook, FaEye, FaHandPointRight, FaHourglassEnd, FaMobileAlt, FaStopwatch, FaUsers, FaUserSecret } from "react-icons/fa";
+import {
+  FaBook,
+  FaEye,
+  FaHandPointRight,
+  FaHourglassEnd,
+  FaMobileAlt,
+  FaStopwatch,
+  FaUsers,
+  FaUserSecret,
+} from "react-icons/fa";
 
 export default function Rules() {
   const [showRules, setShowRules] = useState(false);
@@ -29,12 +38,18 @@ function RulesDetails(props: RulesDetailsProps) {
     return (
       <div>
         <ul className="mt-3">
-          <li><FaUsers /> 3-10 Players</li>
-          <li><FaStopwatch /> 5 Minutes Rounds</li>
-          <li><FaMobileAlt /> 1 Device per player</li>
           <li>
-            <FaUserSecret /> There is a 1/1000 chance that
-            every player is a spy!
+            <FaUsers /> 3-10 Players
+          </li>
+          <li>
+            <FaStopwatch /> 5 Minutes Rounds
+          </li>
+          <li>
+            <FaMobileAlt /> 1 Device per player
+          </li>
+          <li>
+            <FaUserSecret /> There is a 1/1000 chance that every player is a
+            spy!
           </li>
         </ul>
         <hr />
@@ -52,7 +67,9 @@ function RulesDetails(props: RulesDetailsProps) {
             another person
           </li>
         </ul>
-        <h6><FaHourglassEnd /> When the timer ends</h6>
+        <h6>
+          <FaHourglassEnd /> When the timer ends
+        </h6>
         <ul>
           <li>
             Players vote to designate the spy
@@ -65,7 +82,9 @@ function RulesDetails(props: RulesDetailsProps) {
             </ul>
           </li>
         </ul>
-        <h6><FaHandPointRight /> At any time</h6>
+        <h6>
+          <FaHandPointRight /> At any time
+        </h6>
         <ul>
           <li>The players can vote for a spy if they have a majority</li>
           <li>

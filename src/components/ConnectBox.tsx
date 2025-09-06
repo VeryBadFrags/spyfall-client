@@ -34,12 +34,12 @@ export default function ConnectBox(props: ConnectProps) {
       sessionId,
       props.onDisconnect,
       props.onMessageCallback,
-      setIsConnected
+      setIsConnected,
     );
   };
 
   const handleLobbyCodeChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const target = event.target as HTMLInputElement;
     const value = target.value;
