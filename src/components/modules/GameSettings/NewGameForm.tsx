@@ -2,7 +2,7 @@ import { useCallback, useRef } from "react";
 import "./NewGameForm.scss";
 import type ConnectionManager from "@utils/connectionManager";
 import { useLobbyStore } from "@store/store";
-import { ClientEvent } from "../../types/clientEvent";
+import { ClientEvent } from "../../../types/clientEvent";
 
 // Font Awesome
 import Parser from "html-react-parser";

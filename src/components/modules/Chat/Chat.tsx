@@ -2,8 +2,8 @@ import "./Chat.scss";
 import { useRef, useState } from "react";
 import { create } from "zustand";
 import Card from "@components/Card";
-import type { ChatPayload } from "../../types/chatPayload.type";
-import { ClientEvent } from "../../types/clientEvent";
+import type { ChatPayload } from "../../../types/chatPayload.type";
+import { ClientEvent } from "../../../types/clientEvent";
 import { useLobbyStore } from "@store/store";
 
 // Font Awesome

@@ -1,7 +1,7 @@
 import Card from "@components/Card";
 import { useCrossedStore, useLobbyStore } from "@store/store";
 
-const PlayersList = function PlayersList() {
+export default function PlayersList() {
   const peers = useLobbyStore((state) => state.peers);
   const crossedPeers = useCrossedStore((state) => state.crossedPeers);
   const togglePeer = useCrossedStore((state) => state.togglePeer);
@@ -27,5 +27,3 @@ const PlayersList = function PlayersList() {
     </Card>
   );
 };
-
-export default PlayersList;

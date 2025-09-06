@@ -7,7 +7,7 @@ interface CardProps {
   children: ReactNode;
 }
 
-const Card = function Card({
+export default function Card({
   header,
   hasBody = true,
   className,
@@ -26,5 +26,3 @@ const Card = function Card({
     </div>
   );
 };
-
-export default Card;
