@@ -2,12 +2,12 @@ import React, { useCallback, useRef } from "react";
 import "./NewGameForm.scss";
 import ConnectionManager from "@utils/connectionManager";
 import { useLobbyStore } from "@store/store";
+import { ClientEvent } from "../../types/clientEvent";
 
 // Font Awesome
 import Parser from "html-react-parser";
 import { library, icon } from "@fortawesome/fontawesome-svg-core";
 import { faTrafficLight } from "@fortawesome/free-solid-svg-icons";
-import { ClientEvent } from "../../types/clientEvent";
 
 library.add(faTrafficLight);
 const trafficLightIcon = icon({
