@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "@components/Card";
-import ConnectionManager from "@utils/connectionManager";
+import type ConnectionManager from "@utils/connectionManager";
 import type { AnyPayload } from "../types/anyPayload.type";
 import {
   useLobbyStore,

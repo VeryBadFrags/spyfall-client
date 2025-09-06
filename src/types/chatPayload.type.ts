@@ -1,4 +1,4 @@
-import { ClientData } from "./clientData.type";
+import type { ClientData } from "./clientData.type";
 
 export type ChatPayload = {
   /** The message to send */

@@ -1,5 +1,5 @@
 import Card from "@components/Card";
-import ConnectionManager from "@utils/connectionManager";
+import type ConnectionManager from "@utils/connectionManager";
 import LobbyCode from "./LobbyCode";
 import NewGameForm from "./NewGameForm";
 import DisconnectButton from "./DisconnectButton";

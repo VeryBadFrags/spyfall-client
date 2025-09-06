@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { ClientData } from "../types/clientData.type";
-import { LocationData } from "../types/locationData.type";
+import type { ClientData } from "../types/clientData.type";
+import type { LocationData } from "../types/locationData.type";
 
 interface sessionIdState {
   sessionId: string;

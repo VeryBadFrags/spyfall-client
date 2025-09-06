@@ -1,6 +1,6 @@
-import React, { useCallback, useRef } from "react";
+import { useCallback, useRef } from "react";
 import "./NewGameForm.scss";
-import ConnectionManager from "@utils/connectionManager";
+import type ConnectionManager from "@utils/connectionManager";
 import { useLobbyStore } from "@store/store";
 import { ClientEvent } from "../../types/clientEvent";
 

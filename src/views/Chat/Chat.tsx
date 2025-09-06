@@ -1,5 +1,5 @@
 import "./Chat.scss";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { create } from "zustand";
 import Card from "@components/Card";
 import type { ChatPayload } from "../../types/chatPayload.type";

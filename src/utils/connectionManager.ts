@@ -1,10 +1,11 @@
-import io, { Socket } from "socket.io-client";
+import io from "socket.io-client";
+import type { Socket } from "socket.io-client";
 import { ServerEvent } from "../types/serverEvent";
 import type { LobbyStatusPayload } from "../types/lobbyStatus.type";
 import type { ChatPayload } from "../types/chatPayload.type";
 import type { GamePayload } from "../types/gamePayload.type";
 import type { AnyPayload } from "../types/anyPayload.type";
-import { TimePayload } from "../types/timePayload.type";
+import type { TimePayload } from "../types/timePayload.type";
 import { ClientEvent } from "../types/clientEvent";
 
 export default class ConnectionManager {
