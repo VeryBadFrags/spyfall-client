@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import Card from "@components/Card";
 import type ConnectionManager from "@utils/connectionManager";
+import { retrieveCurrentLobby } from "@utils/lobbyHelper";
 import type { AnyPayload } from "../types/anyPayload.type";
 import {
   useLobbyStore,
   usePlayerNameStore,
   useSessionIdStore,
 } from "@store/store";
-import { retrieveCurrentLobby } from "@utils/lobbyHelper";
 import { FaDice, FaUser } from "react-icons/fa";
 
 interface ConnectProps {

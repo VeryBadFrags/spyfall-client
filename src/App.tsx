@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import ConnectBox from "@components/ConnectBox";
 import Chat, { useChatStore } from "@components/modules/Chat/Chat";
 import Rules from "@components/Rules";
