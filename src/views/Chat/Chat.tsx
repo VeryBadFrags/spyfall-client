@@ -2,7 +2,6 @@ import "./Chat.scss";
 import React, { useRef, useState } from "react";
 import { create } from "zustand";
 import Card from "@components/Card";
-import Timer from "./Timer";
 import type { ChatPayload } from "../../types/chatPayload.type";
 import { ClientEvent } from "../../types/clientEvent";
 import { useLobbyStore } from "@store/store";
@@ -11,6 +10,7 @@ import { useLobbyStore } from "@store/store";
 import Parser from "html-react-parser";
 import { library, icon } from "@fortawesome/fontawesome-svg-core";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import Timer from "./Timer";
 library.add(faPaperPlane);
 const paperPlaneIcon = icon({ prefix: "fas", iconName: faPaperPlane.iconName });
 
