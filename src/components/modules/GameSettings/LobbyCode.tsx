@@ -1,19 +1,13 @@
 import { useSessionIdStore } from "@store/store";
-
-// Font Awesome
-import Parser from "html-react-parser";
-import { library, icon } from "@fortawesome/fontawesome-svg-core";
-import { faBuilding } from "@fortawesome/free-solid-svg-icons";
-library.add(faBuilding);
-const buildingIcon = icon({ prefix: "fas", iconName: faBuilding.iconName });
+import { FaBuilding } from "react-icons/fa";
 
 export default function LobbyCode() {
   const sessionId = useSessionIdStore((state) => state.sessionId);
 
   return (
-    <div className="mb-3">
-      <label htmlFor="lobby-display mr-3" className="form-label">
-        {Parser(buildingIcon.html.toString())} Lobby&nbsp;
+    <div className="mb-2">
+      <label htmlFor="lobby-display" className="form-label">
+        <FaBuilding /> Lobby&nbsp;
       </label>
       <span
         id="lobby-code-badge"

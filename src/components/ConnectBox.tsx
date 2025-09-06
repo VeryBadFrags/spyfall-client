@@ -8,15 +8,7 @@ import {
   useSessionIdStore,
 } from "@store/store";
 import { retrieveCurrentLobby } from "@utils/lobbyHelper";
-
-// Font Awesome
-import Parser from "html-react-parser";
-import { library, icon } from "@fortawesome/fontawesome-svg-core";
-import { faUser, faDice } from "@fortawesome/free-solid-svg-icons";
-
-library.add(faUser, faDice);
-const userIcon = icon({ prefix: "fas", iconName: faUser.iconName });
-const diceIcon = icon({ prefix: "fas", iconName: faDice.iconName });
+import { FaDice, FaUser } from "react-icons/fa";
 
 interface ConnectProps {
   connectionManager: ConnectionManager;
@@ -42,12 +34,12 @@ export default function ConnectBox(props: ConnectProps) {
       sessionId,
       props.onDisconnect,
       props.onMessageCallback,
-      setIsConnected,
+      setIsConnected
     );
   };
 
   const handleLobbyCodeChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const target = event.target as HTMLInputElement;
     const value = target.value;
@@ -75,7 +67,7 @@ export default function ConnectBox(props: ConnectProps) {
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="player-name" className="form-label">
-            {Parser(userIcon.html.toString())} Player name
+            <FaUser /> <span>Player name</span>
           </label>
           <input
             id="player-name"
@@ -92,7 +84,7 @@ export default function ConnectBox(props: ConnectProps) {
         {/* Lobby input */}
         <div className="mb-3">
           <label htmlFor="lobby-input" className="form-label">
-            {Parser(diceIcon.html.toString())} Lobby code
+            <FaDice /> <span>Lobby code</span>
           </label>
           <input
             id="lobby-input"
