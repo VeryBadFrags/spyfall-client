@@ -14,6 +14,9 @@ importers:
       '@fontsource/atkinson-hyperlegible':
         specifier: ^5.0.20
         version: 5.0.20
+      '@fontsource/space-grotesk':
+        specifier: ^5.2.10
+        version: 5.2.10
       '@popperjs/core':
         specifier: ^2.11.8
         version: 2.11.8
@@ -370,6 +373,9 @@ packages:
 
   '@fontsource/atkinson-hyperlegible@5.0.20':
     resolution: {integrity: sha512-YczGmDvJ23lheBaEJGNdUDTUwl1uG6xrU1rG+ftOVCdkmOaXtuZI/zq1KW+02d1eGsqKCrtaabHQMrtLjCYQbg==}
+
+  '@fontsource/space-grotesk@5.2.10':
+    resolution: {integrity: sha512-XNXEbT74OIITPqw2H6HXwPDp85fy43uxfBwFR5PU+9sLnjuLj12KlhVM9nZVN6q6dlKjkuN8JisW/OBxwxgUew==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -1963,6 +1969,8 @@ snapshots:
       levn: 0.4.1
 
   '@fontsource/atkinson-hyperlegible@5.0.20': {}
+
+  '@fontsource/space-grotesk@5.2.10': {}
 
   '@humanfs/core@0.19.1': {}
 
