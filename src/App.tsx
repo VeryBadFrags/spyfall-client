@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import ConnectBox from "@components/ConnectBox";
 import Chat, { useChatStore } from "@components/modules/Chat/Chat";
 import Rules from "@components/Rules";
@@ -10,6 +10,7 @@ import ErrorBox, { useErrorMessageStore } from "@components/ErrorBox";
 import ConnectionInfo from "@components/ConnectionInfo";
 import PlayersList from "@components/PlayersList";
 import { useTimerStore } from "@components/modules/Chat/Timer";
+import Hero from "@components/Hero";
 import { ServerEvent } from "./types/serverEvent";
 import type { LobbyStatusPayload } from "./types/lobbyStatus.type";
 import type { ChatPayload } from "./types/chatPayload.type";
@@ -26,6 +27,7 @@ import {
 const connectionManager = new ConnectionManager();
 
 export default function App() {
+  const connectBoxRef = useRef<HTMLDivElement>(null);
   const setSessionId = useSessionIdStore((state) => state.setSessionId);
   const setIsConnected = useLobbyStore((state) => state.setIsConnected);
   const isInLobby = useLobbyStore((state) => state.isInLobby);
@@ -45,6 +47,14 @@ export default function App() {
   const setErrorMessage = useErrorMessageStore(
     (state) => state.setErrorMessage,
   );
+
+  const handlePlayNowClick = useCallback(() => {
+    connectBoxRef.current?.scrollIntoView({ behavior: "smooth" });
+    // Focus on the player name input after scrolling
+    setTimeout(() => {
+      document.getElementById("player-name")?.focus();
+    }, 500);
+  }, []);
 
   useEffect(() => {
     connectionManager.initSocket(setIsConnected);
@@ -143,6 +153,8 @@ export default function App() {
 
       <ErrorBox />
 
+      {!isInLobby && <Hero onPlayNowClick={handlePlayNowClick} />}
+
       <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gx-xl-5 gy-4">
         {isInLobby ? (
           <>
@@ -155,11 +167,13 @@ export default function App() {
             />
           </>
         ) : (
-          <ConnectBox
-            connectionManager={connectionManager}
-            onDisconnect={onDisconnectCallback}
-            onMessageCallback={onMessageCallback}
-          />
+          <div ref={connectBoxRef}>
+            <ConnectBox
+              connectionManager={connectionManager}
+              onDisconnect={onDisconnectCallback}
+              onMessageCallback={onMessageCallback}
+            />
+          </div>
         )}
         <Rules />
       </div>
