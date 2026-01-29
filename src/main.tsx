@@ -5,6 +5,7 @@ import App from "./App";
 import "./styles/index.scss";
 import "@fontsource/atkinson-hyperlegible";
 import "@fontsource/atkinson-hyperlegible/700.css";
+import "@fontsource/space-grotesk/600.css";
 
 import Plausible from "plausible-tracker";
 import Header from "@components/layout/Header/Header";
