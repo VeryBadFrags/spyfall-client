@@ -14,13 +14,11 @@ interface HeroProps {
 
 export default function Hero(props: HeroProps) {
   return (
-    <div className="row mb-4">
-      <div className="col-12">
-        <div className="card shadow-sm">
-          <div className="card-header">
-            <h1 className="text-center">Play Spyfall Online</h1>
-          </div>
-          <div className="card-body text-center">
+    <div className="card border-0 rounded-0 mb-4">
+      <div className="card-header border-0 rounded-0">
+        <h1 className="text-center">Play Spyfall Online</h1>
+      </div>
+      <div className="card-body text-center">
             <p className="lead mb-4">
               A multiplayer social deduction game. Can you find the spy before
               time runs out?
@@ -112,8 +110,6 @@ export default function Hero(props: HeroProps) {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
