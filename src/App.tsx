@@ -50,9 +50,15 @@ export default function App() {
 
   const handlePlayNowClick = useCallback(() => {
     connectBoxRef.current?.scrollIntoView({ behavior: "smooth" });
-    // Focus on the player name input after scrolling
+    // Focus on the player name input after scrolling and add highlight
     setTimeout(() => {
-      document.getElementById("player-name")?.focus();
+      const input = document.getElementById("player-name");
+      if (input) {
+        input.focus();
+        input.classList.add("highlight-input");
+        // Remove the class after animation completes
+        setTimeout(() => input.classList.remove("highlight-input"), 1600);
+      }
     }, 500);
   }, []);
 
