@@ -44,7 +44,7 @@ export default function LobbyCode() {
         </label>
         <span
           id="lobby-code-badge"
-          className="border border-secondary-subtle rounded-1 p-1 fs-5"
+          className="border border-secondary-subtle rounded-1 p-1 fs-5 clickable"
           title="Click to copy code"
           onClick={(event) => {
             window?.getSelection()?.selectAllChildren(event.target as Node);
