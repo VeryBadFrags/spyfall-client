@@ -131,3 +131,33 @@ export const useCrossedStore = create<CrossedState>((set) => ({
       return { ...state, crossedPeers: newPeers };
     }),
 }));
+
+interface ToastState {
+  message: string;
+  show: boolean;
+  timerId: number | null;
+  showToast: (message: string) => void;
+  hideToast: () => void;
+}
+export const useToastStore = create<ToastState>((set, get) => ({
+  message: "",
+  show: false,
+  timerId: null,
+  showToast: (message: string) => {
+    const { timerId } = get();
+    if (timerId) {
+      clearTimeout(timerId);
+    }
+    const newTimerId = setTimeout(() => {
+      set({ show: false, timerId: null });
+    }, 3000);
+    set({ message, show: true, timerId: newTimerId });
+  },
+  hideToast: () => {
+    const { timerId } = get();
+    if (timerId) {
+      clearTimeout(timerId);
+    }
+    set({ show: false, timerId: null });
+  },
+}));

@@ -1,10 +1,8 @@
-interface ToastProps {
-  message: string;
-  show: boolean;
-  onClose: () => void;
-}
+import { useToastStore } from "@store/store";
 
-export default function Toast({ message, show, onClose }: ToastProps) {
+export default function Toast() {
+  const { message, show, hideToast } = useToastStore();
+
   return (
     <div
       className="toast-container position-fixed bottom-0 end-0 p-3"
@@ -19,7 +17,7 @@ export default function Toast({ message, show, onClose }: ToastProps) {
           <button
             type="button"
             className="btn-close btn-close-white me-2 m-auto"
-            onClick={onClose}
+            onClick={hideToast}
           />
         </div>
       </div>

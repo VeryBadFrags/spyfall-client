@@ -11,6 +11,7 @@ import ConnectionInfo from "@components/ConnectionInfo";
 import PlayersList from "@components/PlayersList";
 import { useTimerStore } from "@components/modules/Chat/Timer";
 import Hero from "@components/Hero";
+import Toast from "@components/Toast";
 import { ServerEvent } from "./types/serverEvent";
 import type { LobbyStatusPayload } from "./types/lobbyStatus.type";
 import type { ChatPayload } from "./types/chatPayload.type";
@@ -185,6 +186,8 @@ export default function App() {
         <Rules />
       </div>
       </main>
+
+      <Toast />
     </>
   );
 }

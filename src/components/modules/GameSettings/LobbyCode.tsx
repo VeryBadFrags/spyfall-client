@@ -1,21 +1,23 @@
-import { useState } from "react";
-import { useSessionIdStore } from "@store/store";
+import { useSessionIdStore, useToastStore } from "@store/store";
 import { FaBuilding, FaCopy, FaShareAlt } from "react-icons/fa";
-import Toast from "@components/Toast";
 
 const canShare = typeof navigator !== "undefined" && !!navigator.share;
 
 export default function LobbyCode() {
   const sessionId = useSessionIdStore((state) => state.sessionId);
-  const [showToast, setShowToast] = useState(false);
+  const showToast = useToastStore((state) => state.showToast);
 
   const getLobbyUrl = () =>
     `${window.location.origin}${window.location.pathname}#${sessionId}`;
 
+  const handleCopyCode = async () => {
+    await navigator.clipboard.writeText(sessionId);
+    showToast("Code copied to clipboard!");
+  };
+
   const handleCopyLink = async () => {
     await navigator.clipboard.writeText(getLobbyUrl());
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 3000);
+    showToast("Link copied to clipboard!");
   };
 
   const handleShare = async () => {
@@ -46,7 +48,7 @@ export default function LobbyCode() {
           title="Click to copy code"
           onClick={(event) => {
             window?.getSelection()?.selectAllChildren(event.target as Node);
-            navigator.clipboard.writeText(sessionId).then();
+            handleCopyCode();
           }}
         >
           {sessionId}
@@ -72,12 +74,6 @@ export default function LobbyCode() {
           </button>
         )}
       </div>
-
-      <Toast
-        message="Link copied to clipboard!"
-        show={showToast}
-        onClose={() => setShowToast(false)}
-      />
     </div>
   );
 }
