@@ -1,7 +1,7 @@
 import { useToastStore } from "@store/store";
 
 export default function Toast() {
-  const { message, show, hideToast } = useToastStore();
+  const { message, show, variant, hideToast } = useToastStore();
 
   return (
     <div
@@ -9,14 +9,14 @@ export default function Toast() {
       style={{ zIndex: 1055 }}
     >
       <div
-        className={`toast align-items-center text-bg-success ${show ? "show" : ""}`}
+        className={`toast align-items-center text-bg-${variant} ${show ? "show" : ""}`}
         role="alert"
       >
         <div className="d-flex">
           <div className="toast-body">{message}</div>
           <button
             type="button"
-            className="btn-close btn-close-white me-2 m-auto"
+            className={`btn-close me-2 m-auto ${variant === "success" ? "btn-close-white" : ""}`}
             onClick={hideToast}
           />
         </div>
