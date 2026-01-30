@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { useEffect, useState } from "react";
 import type { TimePayload } from "../../../types/timePayload.type";
 import TimeDisplay from "./TimeDisplay";
+import { useToastStore } from "@store/store";
 
 interface TimerState {
   serverTime: TimePayload;
@@ -22,6 +23,7 @@ export const useTimerStore = create<TimerState>((set) => ({
 export default function Timer() {
   const serverTime = useTimerStore((state) => state.serverTime);
   const [timer, setTimer] = useState(serverTime.timeLeftSec);
+  const showToast = useToastStore((state) => state.showToast);
 
   useEffect(() => {
     setTimer(serverTime.timeLeftSec);
@@ -36,6 +38,12 @@ export default function Timer() {
     }, 1000);
     return () => clearInterval(interval);
   }, [timer]);
+
+  useEffect(() => {
+    if (timer === 30) {
+      showToast("⏰ 30 seconds left! Time to vote!", "warning");
+    }
+  }, [timer, showToast]);
 
   return (
     <div className="progress mb-2">
