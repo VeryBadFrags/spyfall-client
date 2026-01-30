@@ -70,7 +70,7 @@ export default function LobbyCode() {
             onClick={handleShare}
             title="Share lobby"
           >
-            <FaShareAlt /> Share
+            <FaShareAlt /> Invite
           </button>
         )}
       </div>
