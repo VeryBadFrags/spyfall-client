@@ -9,7 +9,7 @@ export default function ConnectionInfo() {
           className="spinner-border spinner-border-sm text-primary"
           role="status"
         >
-          <span className="sr-only">Loading...</span>
+          <span className="visually-hidden">Loading...</span>
         </div>{" "}
         Connecting to server, please wait
       </div>
