@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { useEffect, useState } from "react";
 import type { TimePayload } from "../../../types/timePayload.type";
 import TimeDisplay from "./TimeDisplay";
+import { useToastStore } from "@store/store";
 
 interface TimerState {
   serverTime: TimePayload;
@@ -22,6 +23,7 @@ export const useTimerStore = create<TimerState>((set) => ({
 export default function Timer() {
   const serverTime = useTimerStore((state) => state.serverTime);
   const [timer, setTimer] = useState(serverTime.timeLeftSec);
+  const showToast = useToastStore((state) => state.showToast);
 
   useEffect(() => {
     setTimer(serverTime.timeLeftSec);
@@ -37,10 +39,19 @@ export default function Timer() {
     return () => clearInterval(interval);
   }, [timer]);
 
+  useEffect(() => {
+    if (timer === 30) {
+      showToast("⏰ 30 seconds left! Time to vote!", "warning");
+    }
+    if (timer === 0 && serverTime.timeLeftSec > 0) {
+      showToast("⏰ Time's up! Vote now!", "danger");
+    }
+  }, [timer, serverTime.timeLeftSec, showToast]);
+
   return (
     <div className="progress mb-2">
       <div
-        className="progress-bar bg-info text-dark"
+        className={`progress-bar ${timer <= 0 ? "bg-danger text-light" : "bg-info text-dark"}`}
         role="progressbar"
         style={{
           width:

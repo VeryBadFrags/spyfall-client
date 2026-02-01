@@ -23,6 +23,7 @@ import {
   useCrossedStore,
   useLobbyStore,
   useSessionIdStore,
+  useToastStore,
 } from "@store/store";
 
 const connectionManager = new ConnectionManager();
@@ -48,6 +49,7 @@ export default function App() {
   const setErrorMessage = useErrorMessageStore(
     (state) => state.setErrorMessage,
   );
+  const showToast = useToastStore((state) => state.showToast);
 
   const handlePlayNowClick = useCallback(() => {
     connectBoxRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -89,6 +91,7 @@ export default function App() {
       setCrossedPeers(new Set<number>());
       appendChat({ message: "Game started" });
       setGameStarted(true);
+      showToast("🕵 New round started!");
 
       if (data.spy) {
         appendChat({

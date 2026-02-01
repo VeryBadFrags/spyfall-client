@@ -55,7 +55,6 @@ export default function ConnectBox(props: ConnectProps) {
   // Add Lobby ID to URL
   useEffect(() => {
     const lobbyCode = retrieveCurrentLobby();
-    console.log("Retrieved lobby code:", lobbyCode);
     if (lobbyCode) {
       setButtonText("🔌 Join Lobby");
       setSessionId(lobbyCode);

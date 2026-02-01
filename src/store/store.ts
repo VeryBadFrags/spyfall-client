@@ -132,18 +132,22 @@ export const useCrossedStore = create<CrossedState>((set) => ({
     }),
 }));
 
+type ToastVariant = "success" | "warning" | "danger";
+
 interface ToastState {
   message: string;
   show: boolean;
+  variant: ToastVariant;
   timerId: number | null;
-  showToast: (message: string) => void;
+  showToast: (message: string, variant?: ToastVariant) => void;
   hideToast: () => void;
 }
 export const useToastStore = create<ToastState>((set, get) => ({
   message: "",
   show: false,
+  variant: "success",
   timerId: null,
-  showToast: (message: string) => {
+  showToast: (message: string, variant: ToastVariant = "success") => {
     const { timerId } = get();
     if (timerId) {
       clearTimeout(timerId);
@@ -151,7 +155,7 @@ export const useToastStore = create<ToastState>((set, get) => ({
     const newTimerId = setTimeout(() => {
       set({ show: false, timerId: null });
     }, 3000);
-    set({ message, show: true, timerId: newTimerId });
+    set({ message, show: true, variant, timerId: newTimerId });
   },
   hideToast: () => {
     const { timerId } = get();
