@@ -30,3 +30,6 @@ dist-ssr
 
 # pnpm
 .pnpm-store/
+
+*storybook.log
+storybook-static
