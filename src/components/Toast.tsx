@@ -17,7 +17,7 @@ export default function Toast() {
           <div className="toast-body">{message}</div>
           <button
             type="button"
-            className={`btn-close me-2 m-auto ${variant === "success" ? "btn-close-white" : ""}`}
+            className={`btn-close me-2 m-auto ${variant !== "warning" ? "btn-close-white" : ""}`}
             onClick={hideToast}
           />
         </div>

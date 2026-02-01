@@ -132,7 +132,7 @@ export const useCrossedStore = create<CrossedState>((set) => ({
     }),
 }));
 
-type ToastVariant = "success" | "warning";
+type ToastVariant = "success" | "warning" | "danger";
 
 interface ToastState {
   message: string;

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { TimePayload } from "../../../types/timePayload.type";
 import TimeDisplay from "./TimeDisplay";
 import { useToastStore } from "@store/store";
@@ -43,7 +43,10 @@ export default function Timer() {
     if (timer === 30) {
       showToast("⏰ 30 seconds left! Time to vote!", "warning");
     }
-  }, [timer, showToast]);
+    if (timer === 0 && serverTime.timeLeftSec > 0) {
+      showToast("⏰ Time's up! Vote now!", "danger");
+    }
+  }, [timer, serverTime.timeLeftSec, showToast]);
 
   return (
     <div className="progress mb-2">
