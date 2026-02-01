@@ -52,12 +52,24 @@ export default function ConnectBox(props: ConnectProps) {
     }
   };
 
-  // Add Lobby ID to URL
+  // Auto-connect if lobby code is in URL and player name exists
   useEffect(() => {
     const lobbyCode = retrieveCurrentLobby();
     if (lobbyCode) {
       setButtonText("🔌 Join Lobby");
       setSessionId(lobbyCode);
+
+      // Auto-join if player name is already set
+      if (playerName) {
+        setIsInLobby(true);
+        props.connectionManager.joinLobby(
+          playerName,
+          lobbyCode,
+          props.onDisconnect,
+          props.onMessageCallback,
+          setIsConnected,
+        );
+      }
     }
   }, []);
 
