@@ -61,7 +61,7 @@ export default function Chat(props: ChatProps) {
   }
 
   return (
-    <Card header="Chat" icon={<HiChatBubbleOvalLeftEllipsis />}>
+    <Card header="Game" icon={<HiChatBubbleOvalLeftEllipsis />}>
       {gameStarted ? <Timer /> : null}
       <div className="row g-0" id="chat-container">
         <div className="chat-box card border-bottom-0 rounded-0 rounded-top">

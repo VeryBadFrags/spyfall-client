@@ -12,7 +12,7 @@ interface GameSettingsProps {
 
 export default function GameSettings(props: GameSettingsProps) {
   return (
-    <Card header="Game" icon={<FaGear />}>
+    <Card header="Settings" icon={<FaGear />}>
       <LobbyCode />
       <NewGameForm connectionManager={props.connectionManager} />
       <hr />
