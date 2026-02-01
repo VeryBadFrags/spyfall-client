@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import type { TimePayload } from "../../../types/timePayload.type";
 import TimeDisplay from "./TimeDisplay";
 import { useToastStore } from "@store/store";
