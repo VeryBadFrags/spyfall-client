@@ -12,14 +12,7 @@ import {
 } from "react-icons/fa";
 
 export default function Rules() {
-  // Show rules by default for first-time visitors
-  const isFirstVisit = !localStorage.getItem("hasVisited");
-  const [showRules, setShowRules] = useState(isFirstVisit);
-
-  // Mark as visited after component mounts
-  if (isFirstVisit) {
-    localStorage.setItem("hasVisited", "true");
-  }
+  const [showRules, setShowRules] = useState(false);
 
   return (
     <Card header="Rules" icon={<FaBook />}>
