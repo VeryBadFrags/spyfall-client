@@ -48,7 +48,7 @@ export default function Timer() {
   return (
     <div className="progress mb-2">
       <div
-        className="progress-bar bg-info text-dark"
+        className={`progress-bar ${timer <= 0 ? "bg-danger text-light" : "bg-info text-dark"}`}
         role="progressbar"
         style={{
           width:
