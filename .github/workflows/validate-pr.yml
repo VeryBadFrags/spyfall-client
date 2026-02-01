@@ -25,8 +25,8 @@ jobs:
           pnpm install
 
       - name: Run Lint
-        run: make lint
+        run: pnpm run lint
         continue-on-error: true
 
       - name: Run Build
-        run: make build
+        run: pnpm run build

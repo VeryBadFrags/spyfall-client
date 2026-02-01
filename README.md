@@ -48,10 +48,15 @@ corepack enable
 You'll need to run the server locally too. See <https://github.com/VeryBadFrags/spyfall-server#run-locally>.
 
 ```sh
-make dev
+mise dev
 ```
 
-Run `make` to view all available commands.
+### Without mise
+
+```sh
+pnpm install
+pnpm run dev
+```
 
 ## Deploy to production
 
