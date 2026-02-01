@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { TimePayload } from "../../../types/timePayload.type";
 import TimeDisplay from "./TimeDisplay";
 import { useToastStore } from "@store/store";
@@ -24,17 +24,18 @@ export default function Timer() {
   const serverTime = useTimerStore((state) => state.serverTime);
   const [timer, setTimer] = useState(serverTime.timeLeftSec);
   const showToast = useToastStore((state) => state.showToast);
+  const wasRunning = useRef(false);
 
   useEffect(() => {
     setTimer(serverTime.timeLeftSec);
   }, [serverTime]);
 
   useEffect(() => {
+    if (timer <= 0) return;
+
+    wasRunning.current = true;
     const interval = setInterval(() => {
       setTimer((seconds: number) => seconds - 1);
-      if (timer <= 0) {
-        clearInterval(interval);
-      }
     }, 1000);
     return () => clearInterval(interval);
   }, [timer]);
@@ -43,10 +44,11 @@ export default function Timer() {
     if (timer === 30) {
       showToast("⏰ 30 seconds left! Time to vote!", "warning");
     }
-    if (timer === 0 && serverTime.timeLeftSec > 0) {
+    if (timer === 0 && wasRunning.current) {
       showToast("⏰ Time's up! Vote now!", "danger");
+      wasRunning.current = false;
     }
-  }, [timer, serverTime.timeLeftSec, showToast]);
+  }, [timer, showToast]);
 
   return (
     <div className="progress mb-2">
