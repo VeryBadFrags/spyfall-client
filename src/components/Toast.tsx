@@ -1,4 +1,5 @@
 import { useToastStore } from "@store/store";
+import "./Toast.scss";
 
 export default function Toast() {
   const { message, show, variant, hideToast } = useToastStore();
