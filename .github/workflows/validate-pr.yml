@@ -28,5 +28,9 @@ jobs:
         run: pnpm run lint
         continue-on-error: true
 
+      - name: Run Storybook Smoke Test
+        run: pnpm run storybook --ci --smoke-test
+        continue-on-error: true
+
       - name: Run Build
         run: pnpm run build
