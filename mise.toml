@@ -7,6 +7,16 @@ description = 'Calls your dev script in `package.json`'
 run = 'pnpm run dev -- --open'
 depends = ['pnpm-install']
 
+[tasks.storybook]
+description = 'Run Storybook'
+run = 'pnpm run storybook'
+depends = ['pnpm-install']
+
+[tasks.build]
+description = 'Build the project'
+run = 'pnpm run build'
+depends = ['pnpm-install']
+
 [tasks.pnpm-install]
 description = 'Installs dependencies with pnpm'
 run = 'pnpm install'
