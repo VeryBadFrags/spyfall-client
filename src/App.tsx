@@ -167,27 +167,27 @@ export default function App() {
         <ErrorBox />
 
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 gx-xl-5 gy-4">
-        {isInLobby ? (
-          <>
-            <Chat sendChatCallBack={sendChatCallBack} />
-            <Locations />
-            <PlayersList />
-            <GameSettings
-              connectionManager={connectionManager}
-              disconnectCallback={disconnectCallback}
-            />
-          </>
-        ) : (
-          <div ref={connectBoxRef}>
-            <ConnectBox
-              connectionManager={connectionManager}
-              onDisconnect={onDisconnectCallback}
-              onMessageCallback={onMessageCallback}
-            />
-          </div>
-        )}
-        <Rules />
-      </div>
+          {isInLobby ? (
+            <>
+              <Chat sendChatCallBack={sendChatCallBack} />
+              <Locations />
+              <PlayersList />
+              <GameSettings
+                connectionManager={connectionManager}
+                disconnectCallback={disconnectCallback}
+              />
+            </>
+          ) : (
+            <div ref={connectBoxRef}>
+              <ConnectBox
+                connectionManager={connectionManager}
+                onDisconnect={onDisconnectCallback}
+                onMessageCallback={onMessageCallback}
+              />
+            </div>
+          )}
+          <Rules />
+        </div>
       </main>
 
       <Toast />
