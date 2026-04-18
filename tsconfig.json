@@ -5,11 +5,10 @@
     "lib": ["ES2021", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
-    "baseUrl": "./src",
     "paths": {
-      "@components/*": ["components/*"],
-      "@store/*": ["store/*"],
-      "@utils/*": ["utils/*"]
+      "@components/*": ["./src/components/*"],
+      "@store/*": ["./src/store/*"],
+      "@utils/*": ["./src/utils/*"]
     },
 
     /* Bundler mode */
