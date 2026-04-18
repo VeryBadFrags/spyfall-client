@@ -3,6 +3,8 @@ import Card from "@components/Card";
 import type ConnectionManager from "@utils/connectionManager";
 import { retrieveCurrentLobby } from "@utils/lobbyHelper";
 import type { AnyPayload } from "../types/anyPayload.type";
+import type { LobbyStatusPayload } from "../types/lobbyStatus.type";
+import { ServerEvent } from "../types/serverEvent";
 import {
   useLobbyStore,
   usePlayerNameStore,
@@ -29,11 +31,22 @@ export default function ConnectBox(props: ConnectProps) {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsInLobby(true);
+
+    const wrappedCallback = (type: string, data: AnyPayload) => {
+      if (type === ServerEvent.SessionCreated) {
+        window.umami?.identify({
+          name: playerName,
+          lobbyId: (data as LobbyStatusPayload).sessionId,
+        });
+      }
+      props.onMessageCallback(type, data);
+    };
+
     props.connectionManager.joinLobby(
       playerName,
       sessionId,
       props.onDisconnect,
-      props.onMessageCallback,
+      wrappedCallback,
       setIsConnected,
     );
   };
