@@ -5,6 +5,7 @@ import { retrieveCurrentLobby } from "@utils/lobbyHelper";
 import type { AnyPayload } from "../types/anyPayload.type";
 import type { LobbyStatusPayload } from "../types/lobbyStatus.type";
 import { ServerEvent } from "../types/serverEvent";
+import { umamiIdentify } from "@utils/umami";
 import {
   useLobbyStore,
   usePlayerNameStore,
@@ -34,10 +35,7 @@ export default function ConnectBox(props: ConnectProps) {
 
     const wrappedCallback = (type: string, data: AnyPayload) => {
       if (type === ServerEvent.SessionCreated) {
-        window.umami?.identify({
-          name: playerName,
-          lobbyId: (data as LobbyStatusPayload).sessionId,
-        });
+        umamiIdentify(playerName, (data as LobbyStatusPayload).sessionId);
       }
       props.onMessageCallback(type, data);
     };

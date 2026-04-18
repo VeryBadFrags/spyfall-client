@@ -5,6 +5,7 @@ import Rules from "@components/Rules";
 import GameSettings from "@components/modules/GameSettings/GameSettings";
 import ConnectionManager from "@utils/connectionManager";
 import { setCurrentLobby } from "@utils/lobbyHelper";
+import { umamiTrackRoundStarted } from "@utils/umami";
 import Locations from "@components/Locations";
 import ErrorBox, { useErrorMessageStore } from "@components/ErrorBox";
 import ConnectionInfo from "@components/ConnectionInfo";
@@ -92,6 +93,7 @@ export default function App() {
       appendChat({ message: "Game started" });
       setGameStarted(true);
       showToast("🕵 New round started!");
+      umamiTrackRoundStarted();
 
       if (data.spy) {
         appendChat({
