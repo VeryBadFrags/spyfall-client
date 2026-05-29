@@ -25,6 +25,7 @@ export default function Hero(props: HeroProps) {
 				</p>
 
 				<button
+					type="button"
 					className="btn btn-primary btn-lg px-5 py-3 mb-4"
 					onClick={props.onPlayNowClick}
 				>

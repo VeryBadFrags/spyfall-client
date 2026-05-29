@@ -33,10 +33,11 @@ export default function NewGameForm({ connectionManager }: NewGameFormProps) {
 					<input
 						id="ready-check"
 						className={
-							"form-check-input " + (isPlayerReady ? " bg-success" : null)
+							`form-check-input${isPlayerReady ? " bg-success" : ""}`
 						}
 						type="checkbox"
 						role="switch"
+						aria-checked={isPlayerReady}
 						name="ready-check"
 						required
 						autoComplete="off"

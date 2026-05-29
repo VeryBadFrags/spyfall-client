@@ -18,6 +18,7 @@ export default function Rules() {
 		<Card header="Rules" icon={<FaBook />}>
 			<div className="d-grid">
 				<button
+					type="button"
 					className="btn btn-outline-primary"
 					onClick={() => setShowRules(!showRules)}
 				>

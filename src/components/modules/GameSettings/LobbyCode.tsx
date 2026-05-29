@@ -42,19 +42,20 @@ export default function LobbyCode() {
 				<label htmlFor="lobby-display" className="form-label mb-0">
 					<FaBuilding /> Lobby&nbsp;
 				</label>
-				<span
+				<button
 					id="lobby-code-badge"
-					className="border border-secondary-subtle rounded-1 p-1 fs-5 clickable"
+					type="button"
+					className="border border-secondary-subtle rounded-1 p-1 fs-5 clickable bg-transparent"
 					title="Click to copy code"
 					onClick={(event) => {
-						window?.getSelection()?.selectAllChildren(event.target as Node);
+						window?.getSelection()?.selectAllChildren(event.currentTarget);
 						handleCopyCode();
 					}}
 				>
 					{sessionId}
-				</span>
+				</button>
 			</div>
-			<div className="btn-group" role="group">
+			<fieldset className="btn-group border-0 p-0 m-0">
 				<button
 					type="button"
 					className="btn btn-outline-secondary btn-sm"
@@ -73,7 +74,7 @@ export default function LobbyCode() {
 						<FaShareAlt /> Invite
 					</button>
 				)}
-			</div>
+			</fieldset>
 		</div>
 	);
 }

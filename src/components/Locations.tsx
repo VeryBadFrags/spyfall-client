@@ -28,12 +28,8 @@ export default function Locations() {
 						return (
 							<button
 								type="button"
-								key={`loc-${i}-${crossedLocations.has(i)}`}
-								className={
-									"list-group-item list-group-item-action text-dark py-1 " +
-									(currentLocation === loc.name ? " bg-info" : "") +
-									(crossedLocations.has(i) ? " strike" : "")
-								}
+								key={loc.name}
+								className={`list-group-item list-group-item-action text-dark py-1${currentLocation === loc.name ? " bg-info" : ""}${crossedLocations.has(i) ? " strike" : ""}`}
 								onClick={() => crossLocation(i)}
 							>
 								{loc.name}

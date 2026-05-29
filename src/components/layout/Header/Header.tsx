@@ -14,7 +14,8 @@ export default function Header() {
 							<a
 								className="nav-link icon-link"
 								href="https://blog.verybadfrags.com/games/"
-								target="_blank" rel="noopener"
+								target="_blank"
+								rel="noopener"
 							>
 								<FaGamepad /> More games
 							</a>

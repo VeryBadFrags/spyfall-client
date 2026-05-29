@@ -11,20 +11,23 @@ import { FaPaperPlane } from "react-icons/fa";
 
 const chatSize = 8;
 
+type ChatEntry = ChatPayload & { id: string };
+
 interface CrossedState {
-	chatContent: Array<ChatPayload>;
+	chatContent: Array<ChatEntry>;
 	setChatContent: (content: Array<ChatPayload>) => void;
 	appendChat: (newContent: ChatPayload) => void;
 }
 export const useChatStore = create<CrossedState>((set) => ({
 	chatContent: [],
 	setChatContent: (content: Array<ChatPayload>) =>
-		set(() => {
-			return { chatContent: content };
-		}),
+		set(() => ({
+			chatContent: content.map((m) => ({ ...m, id: crypto.randomUUID() })),
+		})),
 	appendChat: (newContent: ChatPayload) =>
 		set((state) => {
-			let updatedChat: Array<ChatPayload>;
+			const entry: ChatEntry = { ...newContent, id: crypto.randomUUID() };
+			let updatedChat: Array<ChatEntry>;
 			if (state.chatContent.length >= chatSize) {
 				// Trim the chat if it's too long
 				updatedChat = [
@@ -32,10 +35,10 @@ export const useChatStore = create<CrossedState>((set) => ({
 						state.chatContent.length - chatSize + 1,
 						state.chatContent.length,
 					),
-					newContent,
+					entry,
 				];
 			} else {
-				updatedChat = [...state.chatContent, newContent];
+				updatedChat = [...state.chatContent, entry];
 			}
 
 			return { chatContent: updatedChat };
@@ -66,8 +69,8 @@ export default function Chat(props: ChatProps) {
 			<div className="row g-0" id="chat-container">
 				<div className="chat-box card border-bottom-0 rounded-0 rounded-top">
 					<div className="list-group list-group-flush">
-						{chatContent.map((row, i) => (
-							<ChatLine row={row} key={i} />
+						{chatContent.map((row) => (
+							<ChatLine row={row} key={row.id} />
 						))}
 					</div>
 				</div>

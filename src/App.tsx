@@ -68,17 +68,30 @@ export default function App() {
 
 	useEffect(() => {
 		connectionManager.initSocket(setIsConnected);
-	}, []);
+	}, [setIsConnected]);
+
+	const resetAll = useCallback(() => {
+		setErrorMessage("");
+		setChatContent([]);
+		setIsInLobby(false);
+		setIsPlayerReady(false);
+		setSessionId("");
+		setPeers([]);
+		setCrossedLocations(new Set<number>());
+		setCrossedPeers(new Set<number>());
+		setGameStarted(false);
+		window.scrollTo(0, 0);
+	}, [setErrorMessage, setChatContent, setIsInLobby, setIsPlayerReady, setSessionId, setPeers, setCrossedLocations, setCrossedPeers, setGameStarted]);
 
 	const disconnectCallback = useCallback(() => {
 		resetAll();
 		connectionManager.disconnect();
-	}, []);
+	}, [resetAll]);
 
 	const onDisconnectCallback = useCallback(() => {
 		resetAll();
 		setErrorMessage("Disconnected from Lobby");
-	}, []);
+	}, [resetAll, setErrorMessage]);
 
 	const startGame = useCallback(
 		(data: GamePayload) => {
@@ -109,7 +122,7 @@ export default function App() {
 
 			appendChat({ message: `First player: ${data.first}` });
 		},
-		[appendChat],
+		[appendChat, setChatContent, setIsPlayerReady, setLocations, setCurrentLocation, setCrossedLocations, setCrossedPeers, setGameStarted, showToast],
 	);
 
 	const onMessageCallback = useCallback(
@@ -136,7 +149,7 @@ export default function App() {
 					break;
 			}
 		},
-		[appendChat, startGame],
+		[appendChat, startGame, setSessionId, setPeers, setIsInLobby, setErrorMessage, setServerTime],
 	);
 
 	const sendChatCallBack = useCallback(
@@ -145,19 +158,6 @@ export default function App() {
 		},
 		[],
 	);
-
-	function resetAll() {
-		setErrorMessage("");
-		setChatContent([]);
-		setIsInLobby(false);
-		setIsPlayerReady(false);
-		setSessionId("");
-		setPeers([]); // TODO is it necessary?
-		setCrossedLocations(new Set<number>());
-		setCrossedPeers(new Set<number>());
-		setGameStarted(false);
-		window.scrollTo(0, 0);
-	}
 
 	return (
 		<>

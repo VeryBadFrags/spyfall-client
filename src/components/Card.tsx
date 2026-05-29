@@ -19,7 +19,7 @@ export default function Card({
 		<div className="col">
 			<div
 				className={
-					"card shadow border border-dark " + (className ? className : "")
+					`card shadow border border-dark ${className ?? ""}`
 				}
 			>
 				{header ? (

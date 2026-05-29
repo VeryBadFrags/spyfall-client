@@ -70,7 +70,7 @@ export default function ConnectBox(props: ConnectProps) {
 			setButtonText("🔌 Join Lobby");
 			setSessionId(lobbyCode);
 		}
-	}, []);
+	}, [setSessionId]);
 
 	return (
 		<Card>
@@ -84,7 +84,6 @@ export default function ConnectBox(props: ConnectProps) {
 						type="text"
 						className="form-control"
 						required
-						autoFocus
 						autoComplete="on"
 						maxLength={16}
 						value={playerName}

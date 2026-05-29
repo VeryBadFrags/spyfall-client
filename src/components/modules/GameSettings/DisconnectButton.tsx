@@ -6,6 +6,7 @@ export default function DisconnectButton(props: {
 	return (
 		<div className="d-grid">
 			<button
+				type="button"
 				className="btn btn-sm btn-danger"
 				onClick={() => props.disconnectCallback()}
 			>
