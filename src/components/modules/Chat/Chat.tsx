@@ -1,13 +1,13 @@
 import "./Chat.scss";
-import { useRef, useState } from "react";
-import { create } from "zustand";
 import Card from "@components/Card";
+import { useLobbyStore } from "@store/store";
+import { useRef, useState } from "react";
+import { FaPaperPlane } from "react-icons/fa";
+import { HiChatBubbleOvalLeftEllipsis } from "react-icons/hi2";
+import { create } from "zustand";
 import type { ChatPayload } from "../../../types/chatPayload.type";
 import { ClientEvent } from "../../../types/clientEvent";
-import { useLobbyStore } from "@store/store";
 import Timer from "./Timer";
-import { HiChatBubbleOvalLeftEllipsis } from "react-icons/hi2";
-import { FaPaperPlane } from "react-icons/fa";
 
 const chatSize = 8;
 

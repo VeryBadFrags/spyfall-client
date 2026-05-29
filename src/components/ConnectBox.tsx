@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
 import Card from "@components/Card";
-import type ConnectionManager from "@utils/connectionManager";
-import { retrieveCurrentLobby } from "@utils/lobbyHelper";
-import type { AnyPayload } from "../types/anyPayload.type";
-import type { LobbyStatusPayload } from "../types/lobbyStatus.type";
-import { ServerEvent } from "../types/serverEvent";
-import { umamiIdentify } from "@utils/umami";
 import {
 	useLobbyStore,
 	usePlayerNameStore,
 	useSessionIdStore,
 } from "@store/store";
+import type ConnectionManager from "@utils/connectionManager";
+import { retrieveCurrentLobby } from "@utils/lobbyHelper";
+import { umamiIdentify } from "@utils/umami";
+import { useEffect, useState } from "react";
 import { FaDice, FaUser } from "react-icons/fa";
+import type { AnyPayload } from "../types/anyPayload.type";
+import type { LobbyStatusPayload } from "../types/lobbyStatus.type";
+import { ServerEvent } from "../types/serverEvent";
 
 interface ConnectProps {
 	connectionManager: ConnectionManager;

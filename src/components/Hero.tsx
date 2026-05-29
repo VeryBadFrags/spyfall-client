@@ -1,11 +1,11 @@
-import { FaPlay } from "react-icons/fa";
 import {
 	FaGamepad,
 	FaMapMarkerAlt,
+	FaPlay,
 	FaQuestion,
 	FaStopwatch,
-	FaUsers,
 	FaUserSecret,
+	FaUsers,
 } from "react-icons/fa";
 
 interface HeroProps {

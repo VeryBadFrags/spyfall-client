@@ -1,5 +1,5 @@
-import { useState } from "react";
 import Card from "@components/Card";
+import { useState } from "react";
 import {
 	FaBook,
 	FaEye,
@@ -7,8 +7,8 @@ import {
 	FaHourglassEnd,
 	FaMobileAlt,
 	FaStopwatch,
-	FaUsers,
 	FaUserSecret,
+	FaUsers,
 } from "react-icons/fa";
 
 export default function Rules() {

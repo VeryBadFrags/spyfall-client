@@ -1,9 +1,9 @@
 import { useCallback, useRef } from "react";
 import "./NewGameForm.scss";
-import type ConnectionManager from "@utils/connectionManager";
 import { useLobbyStore } from "@store/store";
-import { ClientEvent } from "../../../types/clientEvent";
+import type ConnectionManager from "@utils/connectionManager";
 import { FaTrafficLight } from "react-icons/fa";
+import { ClientEvent } from "../../../types/clientEvent";
 
 interface NewGameFormProps {
 	connectionManager: ConnectionManager;
@@ -32,9 +32,7 @@ export default function NewGameForm({ connectionManager }: NewGameFormProps) {
 				<div className="form-check form-switch fs-5 mb-3">
 					<input
 						id="ready-check"
-						className={
-							`form-check-input${isPlayerReady ? " bg-success" : ""}`
-						}
+						className={`form-check-input${isPlayerReady ? " bg-success" : ""}`}
 						type="checkbox"
 						role="switch"
 						aria-checked={isPlayerReady}

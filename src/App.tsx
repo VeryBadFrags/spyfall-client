@@ -1,31 +1,31 @@
-import { useCallback, useEffect, useRef } from "react";
 import ConnectBox from "@components/ConnectBox";
-import Chat, { useChatStore } from "@components/modules/Chat/Chat";
-import Rules from "@components/Rules";
-import GameSettings from "@components/modules/GameSettings/GameSettings";
-import ConnectionManager from "@utils/connectionManager";
-import { setCurrentLobby } from "@utils/lobbyHelper";
-import { umamiTrackRoundStarted } from "@utils/umami";
-import Locations from "@components/Locations";
-import ErrorBox, { useErrorMessageStore } from "@components/ErrorBox";
 import ConnectionInfo from "@components/ConnectionInfo";
-import PlayersList from "@components/PlayersList";
-import { useTimerStore } from "@components/modules/Chat/Timer";
+import ErrorBox, { useErrorMessageStore } from "@components/ErrorBox";
 import Hero from "@components/Hero";
+import Locations from "@components/Locations";
+import Chat, { useChatStore } from "@components/modules/Chat/Chat";
+import { useTimerStore } from "@components/modules/Chat/Timer";
+import GameSettings from "@components/modules/GameSettings/GameSettings";
+import PlayersList from "@components/PlayersList";
+import Rules from "@components/Rules";
 import Toast from "@components/Toast";
-import { ServerEvent } from "./types/serverEvent";
-import type { LobbyStatusPayload } from "./types/lobbyStatus.type";
-import type { ChatPayload } from "./types/chatPayload.type";
-import type { GamePayload } from "./types/gamePayload.type";
-import type { AnyPayload } from "./types/anyPayload.type";
-import type { TimePayload } from "./types/timePayload.type";
-import type { ClientEvent } from "./types/clientEvent";
 import {
 	useCrossedStore,
 	useLobbyStore,
 	useSessionIdStore,
 	useToastStore,
 } from "@store/store";
+import ConnectionManager from "@utils/connectionManager";
+import { setCurrentLobby } from "@utils/lobbyHelper";
+import { umamiTrackRoundStarted } from "@utils/umami";
+import { useCallback, useEffect, useRef } from "react";
+import type { AnyPayload } from "./types/anyPayload.type";
+import type { ChatPayload } from "./types/chatPayload.type";
+import type { ClientEvent } from "./types/clientEvent";
+import type { GamePayload } from "./types/gamePayload.type";
+import type { LobbyStatusPayload } from "./types/lobbyStatus.type";
+import { ServerEvent } from "./types/serverEvent";
+import type { TimePayload } from "./types/timePayload.type";
 
 const connectionManager = new ConnectionManager();
 
@@ -81,7 +81,17 @@ export default function App() {
 		setCrossedPeers(new Set<number>());
 		setGameStarted(false);
 		window.scrollTo(0, 0);
-	}, [setErrorMessage, setChatContent, setIsInLobby, setIsPlayerReady, setSessionId, setPeers, setCrossedLocations, setCrossedPeers, setGameStarted]);
+	}, [
+		setErrorMessage,
+		setChatContent,
+		setIsInLobby,
+		setIsPlayerReady,
+		setSessionId,
+		setPeers,
+		setCrossedLocations,
+		setCrossedPeers,
+		setGameStarted,
+	]);
 
 	const disconnectCallback = useCallback(() => {
 		resetAll();
@@ -122,7 +132,17 @@ export default function App() {
 
 			appendChat({ message: `First player: ${data.first}` });
 		},
-		[appendChat, setChatContent, setIsPlayerReady, setLocations, setCurrentLocation, setCrossedLocations, setCrossedPeers, setGameStarted, showToast],
+		[
+			appendChat,
+			setChatContent,
+			setIsPlayerReady,
+			setLocations,
+			setCurrentLocation,
+			setCrossedLocations,
+			setCrossedPeers,
+			setGameStarted,
+			showToast,
+		],
 	);
 
 	const onMessageCallback = useCallback(
@@ -149,7 +169,15 @@ export default function App() {
 					break;
 			}
 		},
-		[appendChat, startGame, setSessionId, setPeers, setIsInLobby, setErrorMessage, setServerTime],
+		[
+			appendChat,
+			startGame,
+			setSessionId,
+			setPeers,
+			setIsInLobby,
+			setErrorMessage,
+			setServerTime,
+		],
 	);
 
 	const sendChatCallBack = useCallback(

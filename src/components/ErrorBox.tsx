@@ -1,4 +1,5 @@
 import { create } from "zustand";
+
 interface errorState {
 	errorMessage: string;
 	setErrorMessage: (error: string) => void;

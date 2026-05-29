@@ -1,8 +1,8 @@
+import Footer from "@components/layout/Footer/Footer";
+import Header from "@components/layout/Header/Header";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import Header from "@components/layout/Header/Header";
-import Footer from "@components/layout/Footer/Footer";
 
 import "./styles/index.scss";
 import "@fontsource/atkinson-hyperlegible";

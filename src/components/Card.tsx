@@ -17,11 +17,7 @@ export default function Card({
 }: CardProps) {
 	return (
 		<div className="col">
-			<div
-				className={
-					`card shadow border border-dark ${className ?? ""}`
-				}
-			>
+			<div className={`card shadow border border-dark ${className ?? ""}`}>
 				{header ? (
 					<div className="card-header">
 						{icon ? <span>{icon} </span> : null}

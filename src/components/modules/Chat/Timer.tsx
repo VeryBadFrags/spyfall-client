@@ -1,8 +1,8 @@
-import { create } from "zustand";
+import { useToastStore } from "@store/store";
 import { useEffect, useRef, useState } from "react";
+import { create } from "zustand";
 import type { TimePayload } from "../../../types/timePayload.type";
 import TimeDisplay from "./TimeDisplay";
-import { useToastStore } from "@store/store";
 
 interface TimerState {
 	serverTime: TimePayload;
