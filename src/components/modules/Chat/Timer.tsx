@@ -5,64 +5,64 @@ import TimeDisplay from "./TimeDisplay";
 import { useToastStore } from "@store/store";
 
 interface TimerState {
-  serverTime: TimePayload;
-  setServerTime: (data: TimePayload) => void;
+	serverTime: TimePayload;
+	setServerTime: (data: TimePayload) => void;
 }
 
 export const useTimerStore = create<TimerState>((set) => ({
-  serverTime: {
-    durationSec: 0,
-    timeLeftSec: 0,
-  },
-  setServerTime: (data: TimePayload) =>
-    set(() => {
-      return { serverTime: data };
-    }),
+	serverTime: {
+		durationSec: 0,
+		timeLeftSec: 0,
+	},
+	setServerTime: (data: TimePayload) =>
+		set(() => {
+			return { serverTime: data };
+		}),
 }));
 
 export default function Timer() {
-  const serverTime = useTimerStore((state) => state.serverTime);
-  const [timer, setTimer] = useState(serverTime.timeLeftSec);
-  const showToast = useToastStore((state) => state.showToast);
-  const wasRunning = useRef(false);
+	const serverTime = useTimerStore((state) => state.serverTime);
+	const [timer, setTimer] = useState(serverTime.timeLeftSec);
+	const showToast = useToastStore((state) => state.showToast);
+	const wasRunning = useRef(false);
 
-  useEffect(() => {
-    setTimer(serverTime.timeLeftSec);
-  }, [serverTime]);
+	useEffect(() => {
+		setTimer(serverTime.timeLeftSec);
+	}, [serverTime]);
 
-  useEffect(() => {
-    if (timer <= 0) return;
+	useEffect(() => {
+		if (timer <= 0) return;
 
-    wasRunning.current = true;
-    const interval = setInterval(() => {
-      setTimer((seconds: number) => seconds - 1);
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [timer]);
+		wasRunning.current = true;
+		const interval = setInterval(() => {
+			setTimer((seconds: number) => seconds - 1);
+		}, 1000);
+		return () => clearInterval(interval);
+	}, [timer]);
 
-  useEffect(() => {
-    if (timer === 30) {
-      showToast("⏰ 30 seconds left! Time to vote!", "warning");
-    }
-    if (timer === 0 && wasRunning.current) {
-      showToast("⏰ Time's up! Vote now!", "danger");
-      wasRunning.current = false;
-    }
-  }, [timer, showToast]);
+	useEffect(() => {
+		if (timer === 30) {
+			showToast("⏰ 30 seconds left! Time to vote!", "warning");
+		}
+		if (timer === 0 && wasRunning.current) {
+			showToast("⏰ Time's up! Vote now!", "danger");
+			wasRunning.current = false;
+		}
+	}, [timer, showToast]);
 
-  return (
-    <div className="progress mb-2">
-      <div
-        className={`progress-bar ${timer <= 0 ? "bg-danger text-light" : "bg-info text-dark"}`}
-        role="progressbar"
-        style={{
-          width:
-            timer >= 0 ? `${(timer / serverTime.durationSec) * 100}%` : "100%",
-        }}
-        aria-label="Game timer"
-      >
-        <TimeDisplay timer={timer} />
-      </div>
-    </div>
-  );
+	return (
+		<div className="progress mb-2">
+			<div
+				className={`progress-bar ${timer <= 0 ? "bg-danger text-light" : "bg-info text-dark"}`}
+				role="progressbar"
+				style={{
+					width:
+						timer >= 0 ? `${(timer / serverTime.durationSec) * 100}%` : "100%",
+				}}
+				aria-label="Game timer"
+			>
+				<TimeDisplay timer={timer} />
+			</div>
+		</div>
+	);
 }

@@ -6,17 +6,17 @@ import DisconnectButton from "./DisconnectButton";
 import { FaGear } from "react-icons/fa6";
 
 interface GameSettingsProps {
-  connectionManager: ConnectionManager;
-  disconnectCallback: () => void;
+	connectionManager: ConnectionManager;
+	disconnectCallback: () => void;
 }
 
 export default function GameSettings(props: GameSettingsProps) {
-  return (
-    <Card header="Settings" icon={<FaGear />}>
-      <LobbyCode />
-      <NewGameForm connectionManager={props.connectionManager} />
-      <hr />
-      <DisconnectButton disconnectCallback={props.disconnectCallback} />
-    </Card>
-  );
+	return (
+		<Card header="Settings" icon={<FaGear />}>
+			<LobbyCode />
+			<NewGameForm connectionManager={props.connectionManager} />
+			<hr />
+			<DisconnectButton disconnectCallback={props.disconnectCallback} />
+		</Card>
+	);
 }

@@ -10,9 +10,9 @@ import "@fontsource/atkinson-hyperlegible/700.css";
 import "@fontsource/space-grotesk/600.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <Header />
-    <App />
-    <Footer />
-  </React.StrictMode>,
+	<React.StrictMode>
+		<Header />
+		<App />
+		<Footer />
+	</React.StrictMode>,
 );
