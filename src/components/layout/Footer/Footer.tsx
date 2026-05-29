@@ -12,7 +12,7 @@ export default function Footer() {
 							<a
 								href="https://github.com/VeryBadFrags/spyfall/issues"
 								target="_blank"
-								className="link-dark icon-link link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+								className="link-dark icon-link link-underline link-underline-opacity-0 link-underline-opacity-75-hover" rel="noopener"
 							>
 								<FaComments /> Feedback
 							</a>
@@ -21,7 +21,7 @@ export default function Footer() {
 							<a
 								href="https://github.com/VeryBadFrags/spyfall"
 								target="_blank"
-								className="link-dark icon-link link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+								className="link-dark icon-link link-underline link-underline-opacity-0 link-underline-opacity-75-hover" rel="noopener"
 							>
 								<FaGithub /> MIT License
 							</a>
@@ -30,7 +30,7 @@ export default function Footer() {
 							<a
 								href="https://www.freepik.com/icon/security_10442065#fromView=search&page=1&position=45&uuid=8ed7406c-1370-434f-b9e1-b24bd1a00d40"
 								target="_blank"
-								className="link-dark icon-link link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+								className="link-dark icon-link link-underline link-underline-opacity-0 link-underline-opacity-75-hover" rel="noopener"
 							>
 								<FaIcons /> Favicon by LAFS
 							</a>
@@ -38,7 +38,7 @@ export default function Footer() {
 						<div className="lead fs-6">
 							<a
 								href="https://www.buymeacoffee.com/verybadfrags"
-								target="_blank"
+								target="_blank" rel="noopener"
 							>
 								<img
 									className="coffee"
