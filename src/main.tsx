@@ -5,7 +5,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 
 import "./styles/index.scss";
-import "@fontsource/atkinson-hyperlegible";
+import "@fontsource/atkinson-hyperlegible/400.css";
 import "@fontsource/atkinson-hyperlegible/700.css";
 import "@fontsource/space-grotesk/600.css";
 
